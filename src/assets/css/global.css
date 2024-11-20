@@ -1,0 +1,149 @@
+:root {
+    --heading-large: 32.44px;
+    --heading-large-weight: 700;
+
+    --heading-medium: 28.83px;
+    --heading-medium-weight: 700;
+
+    --heading-small: 25.63px;
+    --heading-small-weight: 700;
+
+    --heading-xsmall: 22.78px;
+    --heading-xsmall-weight: 700;
+
+    --body-large: 16px;
+    --body-large-weight: 400;
+
+    --body-medium: 14px;
+    --body-medium-weight: 400;
+
+    --body-small: 12px;
+    --body-small-weight: 400;
+
+    --clr-primary: oklch(from var(--themeColor) l c h);
+    --clr-primary-darker: oklch(from var(--themeColor) 25% c h);
+    --clr-primary-light: oklch(from var(--themeColor) calc(l - .40) c h);
+
+    --clr-neutral-light: #fafafa;
+    --clr-neutral: #d9d9d9;
+    --clr-neutral-dark: #a6a6a6;
+    --clr-neutral-darker: #0a0a0a;
+
+    --size-000: -.5rem;
+    --size-00: -.25rem;
+    --size-1: .25rem;
+    --size-2: .5rem;
+    --size-3: 1rem;
+    --size-4: 1.25rem;
+    --size-5: 1.5rem;
+    --size-6: 1.75rem;
+    --size-7: 2rem;
+    --size-8: 3rem;
+    --size-9: 4rem;
+    --size-10: 5rem;
+    --size-11: 7.5rem;
+    --size-12: 10rem;
+    --size-13: 15rem;
+    --size-14: 20rem;
+    --size-15: 30rem;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.65;
+    background-color: var(--clr-neutral-light);
+    min-height: 100dvh;
+}
+
+p {
+    font-size: 1em;
+    max-width: 65ch;
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.1;
+
+    text-wrap: balance;
+    max-width: 50ch;
+}
+
+h1 {
+    font-size: var(--heading-large);
+}
+
+.content-grid {
+    --padding-inline: 1rem;
+    --content-max-width: 1100px;
+    --breakout-max-width: 85ch;
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+    display: grid;
+    grid-template-columns: [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.content-grid> :not(.breakout, .full-width) {
+    grid-column: content;
+}
+
+.content-grid>.breakout {
+    grid-column: breakout;
+}
+
+.content-grid>.full-width {
+    grid-column: full-width;
+}
+
+button {
+    background-color: var(--clr-primary);
+    /* Primary color */
+    color: white;
+    /* Text color */
+    border: none;
+    /* Remove default border */
+    border-radius: var(--size-1);
+    /* Rounded corners */
+    padding: 0.5em 1em;
+    /* Padding */
+    font-size: 1rem;
+    /* Font size */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;
+    /* Smooth transition */
+}
+
+button:hover {
+    background-color: var(--clr-primary-darker);
+    /* Darker shade on hover */
+}
+
+button:disabled {
+    background-color: #c0c0c0;
+    /* Grey background for disabled state */
+    cursor: not-allowed;
+    /* Not allowed cursor */
+}
+
+button.button__icon {
+    display: grid;
+    place-content: center;
+
+    aspect-ratio: 1 / 1;
+}
+
+button.button__icon>* {
+    grid-area: 1 / -1 / 1 / -1;
+    width: 100%;
+    height: 100%;
+    font-size: var(--icon-size, 1.2em);
+}

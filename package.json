@@ -10,8 +10,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.16.13",
     "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.13",
+    "astro-font": "^0.1.81",
+    "astro-icon": "^1.1.2",
+    "astro-navbar": "^2.3.7",
+    "astro-purgecss": "^4.8.0",
+    "astro-seo": "^0.8.4",
+    "astro-seo-schema": "^4.0.3",
+    "astro-svg-loaders": "^4.0.1",
+    "pocketbase": "^0.21.5",
+    "purgecss": "^6.0.0",
+    "schema-dts": "^1.1.2",
     "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.2.1"
   }
 }
