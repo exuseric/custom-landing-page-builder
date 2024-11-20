@@ -1,0 +1,13 @@
+---
+interface Props {
+    links: [string];
+    logo: string;
+    title: string;
+    collection: object;
+}
+
+import BasicFLoatingNav from "@components/PageNavigation/Navigation/BasicFloatingNav/Nav.astro";
+const props = Astro.props;
+---
+
+<BasicFLoatingNav data={props} />

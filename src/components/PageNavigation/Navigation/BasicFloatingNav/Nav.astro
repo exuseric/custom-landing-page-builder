@@ -1,0 +1,94 @@
+---
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+import { getImageUrl } from "@utils/pocketbase";
+
+import "./nav.css";
+interface Props {
+    [key: string]: {
+        links: [string];
+        logo: string;
+        title: string;
+        collection: object;
+    };
+}
+
+const { links, logo, title, collection } = Astro.props.data;
+---
+
+<header class="nav" data-is-active="false">
+    <Container>
+        <div class="nav__wrapper">
+            <a href="/" class="nav__logo">
+                <img
+                    src={getImageUrl({
+                        collection: collection,
+                        filename: logo,
+                    })}
+                    alt="logo"
+                    width={150}
+                    height={60}
+                />
+                <!-- {title.split("|")[0].trim()} -->
+            </a>
+
+            <menu class="nav__menu" data-is-active="false">
+                {
+                    links.map((item, index) => (
+                        <li>
+                            <a href={`#${item}`} class="nav__link">
+                                {item}
+                            </a>
+                        </li>
+                    ))
+                }
+            </menu>
+
+            <button class="nav__toggle button__icon" data-is-active="false">
+                <Icon
+                    name="mdi:menu"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-icon-type="hamburger"
+                />
+                <Icon
+                    name="mdi:close"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-icon-type="close"
+                />
+            </button>
+        </div>
+    </Container>
+</header>
+
+<script>
+    const toggleAttribute = (element: HTMLElement) => {
+        element.getAttribute("data-is-active") === "false"
+            ? element.setAttribute("data-is-active", "true")
+            : element.setAttribute("data-is-active", "false");
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector(".nav");
+        const menu = document.querySelector(".nav__menu");
+        const navToggle = document.querySelector(".nav__toggle");
+
+        if (navToggle) {
+            navToggle.addEventListener("click", () => {
+                toggleAttribute(navToggle as HTMLElement);
+                toggleAttribute(menu as HTMLElement);
+            });
+        }
+
+        if (nav) {
+            document.addEventListener("scroll", () => {
+                const scrollPosition = window.scrollY;
+                if (scrollPosition > nav.getBoundingClientRect().height * 0.5) {
+                    nav.setAttribute("data-is-active", "true");
+                } else {
+                    nav.setAttribute("data-is-active", "false");
+                }
+            });
+        }
+    });
+</script>
