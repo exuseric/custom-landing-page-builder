@@ -27,7 +27,6 @@ async function getPage(): Promise<LandingPage> {
 async function getSiteDetails() {
     await authenticate();
     const site_details = await pb.collection("landing_page").getOne<LandingPage>(landingPageId, { expand: 'site_details' });
-    console.log(site_details.expand);
     return site_details.expand.site_details;
 }
 
@@ -37,4 +36,10 @@ async function getHero() {
     return hero.expand.hero;
 }
 
-export { getImageUrl, getPage, getSiteDetails, getHero }
+async function getPages() {
+    await authenticate();
+    const pages = await pb.collection("landing_page").getOne<LandingPage>(landingPageId, { expand: 'pages, pages.page_image, pages.card_grid, pages.card_grid.image, pages.multiple_content,pages.multiple_content.image,pages.multiple_content.card_grid,pages.multiple_content.card_grid.image' });
+    return pages.expand.pages;
+}
+
+export { getImageUrl, getPage, getSiteDetails, getHero, getPages }
