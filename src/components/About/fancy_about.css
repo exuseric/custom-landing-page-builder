@@ -1,0 +1,95 @@
+.fancy-about {
+    /* background-color: var(--clr-primary-darker); */
+    padding-block: var(--container-padding-block);
+}
+
+.fancy_about__content--top {
+    /* color: oklch(from var(--clr-primary-darker) calc(l + .90) c h); */
+}
+
+.fancy_about__image {
+    justify-self: end;
+    object-fit: contain;
+    object-position: center;
+
+    height: 100%;
+}
+
+.fancy_about__content--bottom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+
+    /* color: oklch(from var(--clr-primary-darker) calc(l + .90) c h); */
+}
+
+.fancy_about_grid .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+    height: 100%;
+
+    padding: var(--size-4);
+
+    border: 2px solid transparent;
+    border-radius: var(--size-3);
+
+    color: oklch(from var(--clr-primary-darker) calc(l + .90) c h);
+    background-color: oklch(from var(--clr-primary-darker) calc(l + .90) c h / .05);
+    border-color: oklch(from var(--clr-primary-darker) calc(l + .90) c h / .15);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+}
+
+@media (max-width: 768px) {
+    .fancy_about__content--top {
+        display: grid;
+        grid-template-rows: 1fr 300px;
+        gap: var(--size-3);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fancy_about_grid {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        gap: var(--size-3);
+        align-items: center;
+        justify-content: start;
+        padding-block: var(--size-8);
+    }
+}
+
+@media (min-width: 768px) {
+
+    .fancy_about__content--top {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: var(--size-2);
+        align-items: center;
+        justify-content: center;
+        color: oklch(from var(--clr-primary-darker) calc(l + .90) c h);
+    }
+
+    .fancy_about__content--top h2 {
+        justify-self: start;
+        max-width: 35ch;
+    }
+
+    .fancy_about_grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--size-3);
+        align-items: center;
+        justify-content: start;
+        padding-top: var(--size-8);
+    }
+
+    .fancy_about_grid .wrapper {
+        padding: var(--size-8);
+    }
+}
