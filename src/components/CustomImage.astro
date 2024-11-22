@@ -1,0 +1,29 @@
+---
+import { getImageUrl } from "@utils/pocketbase";
+import { inferRemoteSize, Picture } from "astro:assets";
+const { image, classlist } = Astro.props;
+const { width, height } = await inferRemoteSize(
+    getImageUrl({
+        collection: image,
+        filename: image.image,
+    }),
+);
+const src = getImageUrl({
+    collection: image,
+    filename: image.image,
+});
+---
+
+<Picture
+    src={src}
+    alt={image.alt}
+    width={width}
+    height={height}
+    formats={["avif", "webp"]}
+    widths={[350, width]}
+    sizes={`(max-width: 1280px) 350px, ${width}px`}
+    quality={80}
+    class={classlist}
+    loading="lazy"
+    decoding="async"
+/>
