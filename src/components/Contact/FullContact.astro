@@ -1,0 +1,57 @@
+---
+import Container from "@components/Container.astro";
+import "./full_contact.css";
+import { Icon } from "astro-icon/components";
+interface Content {
+    title: string;
+    iconify_icon_name: string;
+    content: string;
+}
+interface Card {
+    [key: string]: {
+        [key: string]: any;
+    };
+}
+const { page } = Astro.props;
+---
+
+<section id="contact-us" class="contact full-width" data-highlight="true">
+    <Container>
+        <article>
+            <h2 class="contact__title">{page.title}</h2>
+            <div class="contact__info">
+                {
+                    page.expand.multiple_content.map((content: Content) => (
+                        <div class="info--location">
+                            <Icon
+                                name={content.iconify_icon_name}
+                                aria-hidden="true"
+                                focusable="false"
+                                focusable="false"
+                            />
+                            <slot set:html={content.content} />
+                        </div>
+                    ))
+                }
+            </div>
+            <div class="location__info">
+                {
+                    page.expand.card_grid.map((card: Card) => (
+                        <div class="info--map">
+                            <h3>
+                                {/* <Icon
+                                    name="mdi:location"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    focusable="false"
+                                /> */}
+                                {card.title}
+                            </h3>
+                            <slot set:html={card.cta_text} />
+                        </div>
+                    ))
+                }
+            </div>
+        </article>
+    </Container>
+</section>
