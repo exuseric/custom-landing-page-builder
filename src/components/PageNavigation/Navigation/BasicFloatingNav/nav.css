@@ -1,6 +1,7 @@
 .nav {
     position: fixed;
     inset: 0;
+    z-index: 99;
     width: 100%;
     height: max-content;
     transition: all 250ms ease;
@@ -18,16 +19,22 @@
 }
 
 .nav[data-is-active="false"] .nav__wrapper {
-    border-color: oklch(from var(--clr-primary-darker) calc(l + .60) c h);
+    border-color: oklch(from var(--clr-primary-darker) calc(l + .20) c h);
 }
 
 .nav[data-is-active="true"] .nav__wrapper {
     border-color: transparent;
 }
 
+.nav__wrapper {
+    padding: var(--size-3) 0;
+}
+
 .nav__logo img {
     object-fit: contain;
     object-position: center;
+    max-width: 150px;
+    height: auto;
 }
 
 .nav__link {
@@ -44,7 +51,7 @@
 }
 
 .nav__link:hover {
-    color: oklch(from var(--clr-primary-darker) calc(l + .60) c h);
+    color: oklch(from var(--clr-primary-darker) calc(l + .40) c calc(h + 180));
     border-bottom-color: currentColor;
 }
 
@@ -116,7 +123,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: var(--size-1) 0;
+        padding: var(--size-3) 0;
         border-bottom: 2px solid transparent;
     }
 

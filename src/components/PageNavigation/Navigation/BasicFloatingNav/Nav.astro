@@ -2,8 +2,8 @@
 import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
 import { getImageUrl } from "@utils/pocketbase";
-
 import "./nav.css";
+import { inferRemoteSize, Picture } from "astro:assets";
 interface Props {
     [key: string]: {
         links: [string];
@@ -14,20 +14,29 @@ interface Props {
 }
 
 const { links, logo, title, collection } = Astro.props.data;
+const { width, height } = await inferRemoteSize(
+    getImageUrl({
+        collection: collection,
+        filename: logo,
+    }),
+);
 ---
 
 <header class="nav" data-is-active="false">
     <Container>
         <div class="nav__wrapper">
             <a href="/" class="nav__logo">
-                <img
+                <Picture
                     src={getImageUrl({
                         collection: collection,
                         filename: logo,
                     })}
                     alt="logo"
-                    width={150}
-                    height={60}
+                    width={width}
+                    height={height}
+                    formats={["avif", "webp"]}
+                    widths={[150, width]}
+                    sizes={`(max-width: 1366px) 150px, ${width}px`}
                 />
                 <!-- {title.split("|")[0].trim()} -->
             </a>
@@ -36,7 +45,14 @@ const { links, logo, title, collection } = Astro.props.data;
                 {
                     links.map((item, index) => (
                         <li>
-                            <a href={`#${item}`} class="nav__link">
+                            <a
+                                href={
+                                    index > 0
+                                        ? `#${item.split(" ").join("-")}`
+                                        : "/"
+                                }
+                                class="nav__link"
+                            >
                                 {item}
                             </a>
                         </li>
@@ -63,32 +79,7 @@ const { links, logo, title, collection } = Astro.props.data;
 </header>
 
 <script>
-    const toggleAttribute = (element: HTMLElement) => {
-        element.getAttribute("data-is-active") === "false"
-            ? element.setAttribute("data-is-active", "true")
-            : element.setAttribute("data-is-active", "false");
-    };
-    document.addEventListener("DOMContentLoaded", () => {
-        const nav = document.querySelector(".nav");
-        const menu = document.querySelector(".nav__menu");
-        const navToggle = document.querySelector(".nav__toggle");
+    import navigationActions from "@components/PageNavigation/navigation.ts";
 
-        if (navToggle) {
-            navToggle.addEventListener("click", () => {
-                toggleAttribute(navToggle as HTMLElement);
-                toggleAttribute(menu as HTMLElement);
-            });
-        }
-
-        if (nav) {
-            document.addEventListener("scroll", () => {
-                const scrollPosition = window.scrollY;
-                if (scrollPosition > nav.getBoundingClientRect().height * 0.5) {
-                    nav.setAttribute("data-is-active", "true");
-                } else {
-                    nav.setAttribute("data-is-active", "false");
-                }
-            });
-        }
-    });
+    navigationActions();
 </script>
