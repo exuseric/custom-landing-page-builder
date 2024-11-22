@@ -1,0 +1,9 @@
+.services {
+    padding-block: var(--container-padding-block);
+}
+
+.services__grid {
+    padding-top: var(--size-8);
+}
+
+@media (max-width: 768px) {}
