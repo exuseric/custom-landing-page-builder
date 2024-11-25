@@ -1,0 +1,13 @@
+---
+interface Props {
+    card_type: string;
+    cards: [];
+}
+import Basic from "./Basic/Basic.astro";
+import BlockyCards from "./Blocky/BlockyCards.astro";
+
+const { card_type, cards } = Astro.props;
+---
+
+{card_type === "blocky" && <BlockyCards cards={cards} />}
+{card_type === "basic" && <Basic cards={cards} />}

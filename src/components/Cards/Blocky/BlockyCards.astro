@@ -1,0 +1,39 @@
+---
+interface Card {
+    [key: string]: {
+        [key: string]: any;
+    };
+}
+import { Picture } from "astro:assets";
+import style from "./card.module.css";
+import { getImageUrl } from "@utils/pocketbase";
+import CustomImage from "@components/CustomImage.astro";
+const { cards } = Astro.props;
+
+const url = ({ collection, image }: { collection: object; image: string }) =>
+    getImageUrl({ collection, filename: image });
+const cleanCards = cards.map(({ title, body, expand: { image } }: Card) => ({
+    title,
+    body,
+    image,
+}));
+
+console.log(cleanCards);
+---
+
+<div class={style.card_grid}>
+    {
+        cards.map((card: Card) => (
+            <article>
+                <CustomImage
+                    image={card.expand.image}
+                    classlist={style.image_component__image}
+                />
+                <div>
+                    <h3>{card.title}</h3>
+                    <slot set:html={card.body} />
+                </div>
+            </article>
+        ))
+    }
+</div>

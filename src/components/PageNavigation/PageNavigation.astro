@@ -4,10 +4,13 @@ interface Props {
     logo: string;
     title: string;
     collection: object;
+    style: string;
 }
 
 import BasicFLoatingNav from "@components/PageNavigation/Navigation/BasicFloatingNav/Nav.astro";
+import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
 const props = Astro.props;
 ---
 
-<BasicFLoatingNav data={props} />
+{props.style === "floating" && <BasicFLoatingNav data={props} />}
+{props.style === "pill" && <FloatingPill data={props} />}

@@ -1,0 +1,85 @@
+---
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+import { getImageUrl } from "@utils/pocketbase";
+import "./nav.css";
+import { inferRemoteSize, Picture } from "astro:assets";
+interface Props {
+    [key: string]: {
+        links: [string];
+        logo: string;
+        title: string;
+        collection: object;
+    };
+}
+
+const { links, logo, title, collection } = Astro.props.data;
+const { width, height } = await inferRemoteSize(
+    getImageUrl({
+        collection: collection,
+        filename: logo,
+    }),
+);
+---
+
+<header class="nav" data-is-active="false">
+    <Container>
+        <div class="nav__wrapper">
+            <a href="/" class="nav__logo">
+                <Picture
+                    src={getImageUrl({
+                        collection: collection,
+                        filename: logo,
+                    })}
+                    alt="logo"
+                    width={width}
+                    height={height}
+                    formats={["avif", "webp"]}
+                    widths={[150, width]}
+                    sizes={`(max-width: 1366px) 150px, ${width}px`}
+                />
+                <!-- {title.split("|")[0].trim()} -->
+            </a>
+
+            <menu class="nav__menu" data-is-active="false">
+                {
+                    links.map((item, index) => (
+                        <li>
+                            <a
+                                href={
+                                    index > 0
+                                        ? `#${item.split(" ").join("-")}`
+                                        : "/"
+                                }
+                                class="nav__link"
+                            >
+                                {item}
+                            </a>
+                        </li>
+                    ))
+                }
+            </menu>
+
+            <button class="nav__toggle button__icon" data-is-active="false">
+                <Icon
+                    name="mdi:menu"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-icon-type="hamburger"
+                />
+                <Icon
+                    name="mdi:close"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-icon-type="close"
+                />
+            </button>
+        </div>
+    </Container>
+</header>
+
+<script>
+    import navigationActions from "@components/PageNavigation/navigation.ts";
+
+    navigationActions();
+</script>
