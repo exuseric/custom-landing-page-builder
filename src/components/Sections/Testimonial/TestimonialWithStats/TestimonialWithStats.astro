@@ -1,0 +1,64 @@
+---
+interface TestimonialData {
+  logo: string;
+  quote: string;
+  author: string;
+  position: string;
+}
+
+const testimonials: TestimonialData[] = [
+  {
+    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968827.png",
+    quote: "Creative, innovative and strategic. We have great achievements made together and looking to more",
+    author: "Henry Arthur",
+    position: "Head of Engineering, Loom"
+  },
+  {
+    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968885.png",
+    quote: "Incredible group of people and talented professionals. Focused on the development of flexible ideas",
+    author: "Jerome Bell",
+    position: "Product Analyst, Intercom"
+  },
+  {
+    logo: "https://cdn-icons-png.flaticon.com/512/5968/5968863.png",
+    quote: "A truly innovative approach to gameplay that sets this agency apart from its peers within the broader industry",
+    author: "Eleanor Pena",
+    position: "Head of Product Design, Abstract"
+  }
+];
+
+const stats = [
+  { value: "45+", label: "Happy customers" },
+  { value: "5k+", label: "Hours spent on craft" },
+  { value: "4.8", label: "Review rate" }
+];
+
+import './testimonial.css';
+---
+
+<section class="testimonials">
+  <div class="testimonials-grid">
+    {testimonials.map((testimonial) => (
+      <div class="testimonial-card">
+        <img src={testimonial.logo} alt="Company Logo" class="company-logo" />
+        <p class="quote">{testimonial.quote}</p>
+        <div class="rating">
+          {[...Array(5)].map(() => (
+            <i class="fas fa-star"></i>
+          ))}
+        </div>
+        <h3 class="author">{testimonial.author}</h3>
+        <p class="position">{testimonial.position}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="stats-grid">
+    {stats.map((stat) => (
+      <div class="stat-item">
+        <h2>{stat.value}</h2>
+        <p>{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>

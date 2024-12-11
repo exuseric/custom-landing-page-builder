@@ -1,0 +1,23 @@
+---
+interface Card {
+    [key: string]: {
+        [key: string]: any;
+    };
+}
+import { Picture } from "astro:assets";
+import  "./card.css";
+import { getImageUrl } from "@utils/pocketbase";
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+const { cards } = Astro.props;
+---
+<ul class="info_card">
+   {cards.map((card: Card) => (
+      <li>
+         <Icon name={card.icon_name} aria-hidden="true" focusable="false" />
+         <div>
+             <slot set:html={card.content} />
+         </div>
+      </li>
+   ))}
+</ul>  

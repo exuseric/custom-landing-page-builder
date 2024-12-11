@@ -1,0 +1,7 @@
+---
+import TinyFooter from "./TinyFooter/TinyFooter.astro";
+
+const {company, title} = Astro.props
+---
+
+<TinyFooter title={title} parent_site_title={company.name} parent_site_url={company.url} />

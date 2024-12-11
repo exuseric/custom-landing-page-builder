@@ -1,0 +1,38 @@
+---
+import Container from "@components/Container.astro";
+import "./hero.css";
+import { inferRemoteSize, Picture } from "astro:assets";
+import { getImageUrl } from "@utils/pocketbase";
+import CustomImage from "@components/CustomImage.astro";
+
+interface Props {
+    title: string;
+    excerpt: string;
+    image: {
+        [key: string]: string;
+    };
+}
+const { title, excerpt, image } = Astro.props;
+
+const url = getImageUrl({
+    collection: image,
+    filename: image.file,
+});
+
+const { width, height } = await inferRemoteSize(url);
+---
+
+<header class="two_column_hero full-width">
+    <Container>
+        <div class="two_column_hero__wrapper">
+            <article class="two_column_hero__content">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+            </article>
+
+            <div class="two_column_hero__image_wrapper">
+                <CustomImage image={image} classlist="two_column_hero__image" size="large" fit={image.fit} position={image.position} />
+            </div>
+        </div>
+    </Container>
+</header>

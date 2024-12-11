@@ -1,29 +1,54 @@
 ---
+interface Props {
+    image: {
+        [key: string]: string;
+    };
+    classlist: string;
+    fit: string;
+    position: string;
+    size: 'small' | 'medium' | 'large';
+}
+
 import { getImageUrl } from "@utils/pocketbase";
-import { inferRemoteSize, Picture } from "astro:assets";
-const { image, classlist } = Astro.props;
+import { Image, inferRemoteSize, Picture } from "astro:assets";
+const { image, classlist, fit = "cover", position = "center", size } = Astro.props;
 const { width, height } = await inferRemoteSize(
     getImageUrl({
         collection: image,
-        filename: image.image,
+        filename: image.file,
     }),
 );
 const src = getImageUrl({
     collection: image,
-    filename: image.image,
+    filename: image.file,
 });
+const widths = size === 'small' ? [350, 500] : size === 'medium' ? [500, 750] : [750, 1000];
+const sizes = size === 'small' ? `(max-width: 1366px) 350px, 500px` : size === 'medium' ? `(max-width: 1366px) 500px, 750px` : `(max-width: 1366px) 750px, 1000px`;
+
 ---
 
-<Picture
+<!-- <Picture
     src={src}
-    alt={image.alt}
-    width={width}
-    height={height}
+    alt={image.title}
+    inferSize
     formats={["avif", "webp"]}
-    widths={[350, width]}
-    sizes={`(max-width: 1280px) 350px, ${width}px`}
+    widths={widths}
+    sizes={sizes}
     quality={80}
     class={classlist}
     loading="lazy"
     decoding="async"
+    style={`object-position: ${position ? position : "center"}; object-fit: ${fit ? fit : "cover"}`}
+/> -->
+<Image
+    src={src}
+    alt={image.title}
+    inferSize
+    widths={widths}
+    sizes={sizes}
+    quality={80}
+    class={classlist}
+    loading="lazy"
+    decoding="async"
+    style={`object-position: ${position ? position : "center"}; object-fit: ${fit ? fit : "cover"}`}
 />

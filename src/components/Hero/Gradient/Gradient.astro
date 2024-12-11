@@ -1,0 +1,73 @@
+---
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+import CustomImage from "@components/CustomImage.astro";
+import "./styles.css";
+
+interface Props {
+    title: string;
+    excerpt: string;
+    core_values: string;
+    image: {
+        [key: string]: string;
+    };
+}
+
+const {title, excerpt, core_values, image} = Astro.props;
+
+const cards = [
+    {
+        title: "Quality",
+        icon: "mdi:coins",
+    },
+    {
+        title: "Excellence",
+        icon: "mdi:sparkles",
+    },
+    {
+        title: "Reliability",
+        icon: "mdi:magnet",
+    },
+];
+
+---
+
+<header class="gg-hero">
+    <Container>
+        <div class="gg-hero__wrapper">
+            <div class="gg-hero__content">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+
+                <div class="gg-hero__cards">
+                    {
+                        cards.map((card) => (
+                            <div class="gg-hero__card">
+                                <div class="gg-hero__card__content">
+                                    <div class="gg-hero__icon-wrapper">
+                                        <Icon
+                                            name={card.icon}
+                                            class="gg-hero__icon"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                    </div>
+                                    <span>{card.title}</span>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <div class="gg-hero__image">
+                <CustomImage 
+                    image={image}
+                    classlist="hero-image"
+                    fit="contain"
+                    position="center"
+                    size="medium"
+                />
+            </div>
+        </div>
+    </Container>
+</header>

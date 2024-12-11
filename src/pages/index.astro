@@ -1,41 +1,57 @@
 ---
-import { getSiteDetails, getHero, getPages } from "@src/utils/pocketbase";
+import { getData } from "@src/utils/pocketbase";
 import { SEO } from "astro-seo";
-import { join } from "node:path";
 import { AstroFont } from "astro-font";
-
-interface Page {
-	[key: string]: any;
-}
+import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
 
 import "@assets/css/reset.css";
 import "@assets/css/global.css";
-import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
 import PageHero from "@components/Hero/PageHero.astro";
-import Partners from "@components/Partners/Partners.astro";
-import FancyAbout from "@components/About/FancyAbout.astro";
-import Services from "@components/Services/Services.astro";
-import FullContact from "@components/Contact/FullContact.astro";
-import TinyFooter from "@components/Footer/TinyFooter.astro";
+import Sections from "@components/Sections/Sections.astro";
+import ContactSection from "@components/Sections/Contact Sections/ContactSection.astro";
+import Footer from "@components/Footer/Footer.astro";
 
-const site = await getSiteDetails();
-const {
-	title,
-	excerpt,
-	expand: { image },
-} = await getHero();
-const pages = await getPages();
+const languages: Record<string, string> = {
+	ke: "en-KE",
+	cv: "pt-CV",
+	mz: "pt-MZ",
+	tz: "en-TZ",
+	st: "pt-ST",
+};
 
-const themeColor = site.theme_color;
+const fonts: Record<string, string> = {
+	regular:
+		"https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
+	bold: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
+};
+
+const record = await getData();
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang={languages[record.country]}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="color-scheme" content="light" />
-		<meta name="theme-color" content={site.theme_color} />
+		<meta name="theme-color" content={record.theme_color} />
 		<meta name="robots" content="index, follow" />
+		<slot set:html={record.analytics_id} />
+		<slot set:html={record.search_console} />
+
+		<link rel="sitemap" href="/sitemap.xml" />
+
+		<link rel="preconnect" href={record.url} />
+		<link rel="dns-prefetch" href={record.url} />
+		<link rel="preconnect" href={`${record.url}/assets`} />
+		<link rel="dns-prefetch" href={`${record.url}/assets`} />
+
+		<link
+			rel="alternate"
+			href={record.url}
+			hreflang={languages[record.country]}
+		/>
+		<link rel="alternate" href={record.url} hreflang="x-default" />
 
 		<link
 			rel="icon"
@@ -56,79 +72,54 @@ const themeColor = site.theme_color;
 		/>
 		<link rel="icon" href="/favicon/favicon.ico" />
 		<link rel="manifest" href="/favicon/manifest.json" />
-		<link rel="sitemap" href="/sitemap.xml" />
-
-		<link rel="preconnect" href={site.url} />
-		<link rel="dns-prefetch" href={site.url} />
-		<link rel="alternate" href={site.url} hreflang="en" />
-		<link rel="alternate" href={site.url} hreflang="x-default" />
-
-		<slot set:html={site.analytics_id} />
-		<slot set:html={site.search_console} />
 
 		<SEO
-			title={site.title}
-			description={site.description}
+			title={record.meta_title}
+			description={record.meta_description}
 			openGraph={{
 				basic: {
-					title: site.title,
+					title: record.title,
 					image: "/favicon/android-chrome-512x512.png",
 					type: "website",
-					url: site.url,
+					url: record.url,
 				},
 			}}
 			twitter={{
+				site: record.url,
+				card: "summary_large_image",
 				creator: "@yellowpages254",
-				title: site.title,
-				description: site.description,
+				title: record.title,
+				description: record.meta_description,
 				image: "/favicon/android-chrome-512x512.png",
 			}}
 		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://www.google-analytics.com">
+		<link rel="dns-prefetch" href="https://www.google-analytics.com">
+		<link rel="preconnect" href="https://www.googletagmanager.com">
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+		<link rel="preconnect" href="/assets/">
+		<link rel="dns-prefetch" href="/assets/">
+	
+		<link rel="preload" as="style" href="/assets/index.min.css">
+		<link rel="preload" as="font" type="font/woff2" href={fonts.regular}>
+		<link rel="preload" as="font" type="font/woff2" href={fonts.bold}>
 
 		<AstroFont
 			config={[
 				{
-					name: "Lato",
+					name: "Atkinson Hyperlegible",
 					src: [
 						{
 							style: "normal",
 							weight: "400",
-							path: join(
-								process.cwd(),
-								"public",
-								"fonts",
-								"Lato_400_latin.woff2",
-							),
+							path: fonts.regular,
 						},
 						{
-							style: "normal",
-							weight: "400",
-							path: join(
-								process.cwd(),
-								"public",
-								"fonts",
-								"Lato_400_latin_ext.woff2",
-							),
-						},
-						{
-							style: "normal",
+							style: "bold",
 							weight: "700",
-							path: join(
-								process.cwd(),
-								"public",
-								"fonts",
-								"Lato_700_latin.woff2",
-							),
-						},
-						{
-							style: "normal",
-							weight: "700",
-							path: join(
-								process.cwd(),
-								"public",
-								"fonts",
-								"Lato_700_latin_ext.woff2",
-							),
+							path: fonts.bold,
 						},
 					],
 					preload: false,
@@ -141,35 +132,31 @@ const themeColor = site.theme_color;
 	</head>
 	<body>
 		<PageNavigation
-			links={site.nav_links}
-			logo={site.logo}
-			title={site.title}
-			collection={site}
-			style={site.nav_style}
+			links={record.links}
+			logo={record.expand.logo}
+			title={record.title}
+			style={record.nav_style}
+		/>
+		<PageHero
+			image={record.expand.hero_image}
+			title={record.hero_title}
+			excerpt={record.hero_excerpt}
+			type={record.hero_style}
+			core_values={record.core_values}
 		/>
 		<main>
-			<PageHero title={title} excerpt={excerpt} image={image} />
-			{
-				pages.map((page: Page) =>
-					page.page_type === "partner" ? (
-						<Partners page={page} />
-					) : page.page_type === "about us" ? (
-						<FancyAbout page={page} />
-					) : page.page_type === "services" ? (
-						<Services page={page} />
-					) : page.page_type.includes("contact") ? (
-						<FullContact page={page} />
-					) : null,
-				)
-			}
+			<Sections
+				sections={record.expand.sections}
+				core_values={record.core_values}
+			/>
+			<ContactSection
+				title={record.contact_title}
+				info={record.expand.contact_info}
+				location={record.expand.contact_location}
+				style={record.contact_style}
+			/>
 		</main>
-
-		<TinyFooter
-			title={site.title}
-			parent_site_title={site.parent_site_title}
-			parent_site_url={site.parent_site_url}
-		/>
+		<Footer company={record.company} title={record.title} />
 	</body>
 </html>
-
-<style define:vars={{ themeColor }} is:global></style>
+<style define:vars={{ themeColor: record.theme_color }} is:global></style>

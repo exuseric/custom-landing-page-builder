@@ -1,9 +1,10 @@
 ---
 interface Props {
     links: [string];
-    logo: string;
+    logo: {
+        [key: string]: string;
+    };
     title: string;
-    collection: object;
     style: string;
 }
 

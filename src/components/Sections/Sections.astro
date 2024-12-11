@@ -1,0 +1,32 @@
+---
+import PartnersGrid from "./Partners/PartnersGrid/PartnersGrid.astro";
+import CtaSection from "./CtaSection/CtaSection.astro";
+import Section from "./Section/Section.astro";
+import ColorfulStats from "./Stats/ColorfulStats/ColorfulStats.astro";
+import StatsGrid from "./Stats/StatsGrid/StatsGrid.astro";
+import TestimonialDefault from "./Testimonial/TestimonialDefault.astro";
+import TestimonialWithStats from "./Testimonial/TestimonialWithStats/TestimonialWithStats.astro";
+const { sections, core_values } = Astro.props;
+---
+
+
+{
+    sections && sections.map((section: any) => {
+        switch (section.type) {
+            case "cta":
+                return <CtaSection data={section} core_values={core_values} />;
+            case "testimonial":
+                return <TestimonialDefault data={section} />;
+            case "stats grid":
+                return <StatsGrid data={section} cards={section.expand.section_grid}/>;
+            case "colorful stats":
+                return <ColorfulStats data={section} cards={section.expand.section_grid}/>;
+            case "testimonial with stats":
+                return <TestimonialWithStats data={section} />;
+            case "partners":
+                return <PartnersGrid data={section} />;
+            default:
+                return <Section data={section} />;
+        }
+    })
+}

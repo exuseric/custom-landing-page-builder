@@ -1,0 +1,49 @@
+.overflow_hero {
+    position: relative;
+    
+    display: grid;
+    grid-template-areas: "stack";
+    min-height: 100vh;
+}
+
+.overflow_hero > * {
+    grid-area: stack;
+}
+
+.overflow_hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.overflow_hero__overlay {
+    z-index: 2;
+    background: linear-gradient(
+        180deg,
+        var(--clr-primary) 0%,
+        rgba(0, 0, 0, 0.4) 35%,
+        rgba(0, 0, 0, 0.6) 65%,
+        var(--clr-primary-darker) 100%
+    );
+}
+
+.overflow_hero__wrapper {
+    align-self: end;
+    justify-self: start;
+    padding-block: clamp(2rem, 5vw, 4rem);
+    width: min(100% - 2rem, 65ch);
+    margin-inline: auto;
+    z-index: 3;
+}
+
+.overflow_hero__content {
+    color: white;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .overflow_hero__wrapper {
+        padding-block: clamp(1.5rem, 3vw, 2rem);
+    }
+}

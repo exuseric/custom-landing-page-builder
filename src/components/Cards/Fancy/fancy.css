@@ -8,7 +8,7 @@
     grid-row: 1 / 3;
     grid-column: 3 / -1;
 
-    outline: 2px solid red;
+    outline: 2px solid var(--clr-tertiary);
 }
 
 .fancy-card__grid .image-component__image {

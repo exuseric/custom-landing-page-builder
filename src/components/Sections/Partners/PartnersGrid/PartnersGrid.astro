@@ -1,0 +1,187 @@
+---
+import Container from '@components/Container.astro';
+import { Icon } from "astro-icon/components";
+const { data } = Astro.props;
+
+const {
+  title = "Our certifications say it all.",
+  description = "No one takes security more seriously than G-P. That's why we work hard to achieve and maintain the highest security standards in the industry.",
+  certifications = [
+    {
+      name: 'ISO',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=ISO',
+      alt: 'ISO Certification'
+    },
+    {
+      name: 'SOC',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=SOC',
+      alt: 'SOC Certification'
+    },
+    {
+      name: 'SOC 2',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=SOC+2',
+      alt: 'SOC 2 Certification'
+    },
+    {
+      name: 'SOC 2 Type II',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=SOC+2+Type+II',
+      alt: 'SOC 2 Type II Certification'
+    },
+    {
+      name: 'GDPR',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=GDPR',
+      alt: 'GDPR Compliance'
+    },
+    {
+      name: 'CCPA',
+      image: 'https://placehold.co/200x100/e9ecef/495057?text=CCPA',
+      alt: 'CCPA Compliance'
+    }
+  ]
+} = Astro.props;
+---
+
+<Container>
+  <section class="certifications">
+    <div class="container">
+      <div class="certification-wrapper">
+        <div class="content">
+          <h2>{title}</h2>
+          <p>{description}</p>
+        </div>
+        <div class="certification-grid">
+          <!-- {
+            certifications.map((cert) => (
+              <div class="certification-item">
+                <img src={cert.image} alt={cert.alt} loading="lazy" />
+              </div>
+            ))
+          } -->
+        </div>
+      </div>
+    </div>
+  </section>
+</Container>
+
+<style>
+  .certifications {
+    padding: var(--container-padding-block) var(--container-padding-inline);
+    background-color: var(--clr-neutral-50);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .certification-wrapper {
+    background-color: white;
+    border: 1px solid var(--clr-neutral-300);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .content {
+    text-align: left;
+    padding: var(--size-7);
+    border-bottom: 1px solid var(--clr-neutral-300);
+  }
+
+  h2 {
+    font-size: var(--heading-large);
+    font-weight: var(--heading-large-weight);
+    color: var(--clr-neutral-900);
+    margin-bottom: var(--size-4);
+  }
+
+  p {
+    font-size: var(--body-large);
+    color: var(--clr-neutral-700);
+    max-width: 600px;
+    margin-bottom: var(--size-5);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--clr-primary);
+    color: white;
+    padding: var(--size-3) var(--size-5);
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--clr-primary-dark);
+  }
+
+  .certification-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .certification-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--size-4);
+    border-right: 1px solid var(--clr-neutral-300);
+    border-bottom: 1px solid var(--clr-neutral-300);
+  }
+
+  .certification-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .certification-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .certification-item:last-child {
+    border-right: none;
+  }
+
+  .certification-item img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (min-width: 768px) {
+    .certification-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .certification-item {
+      border-right: 1px solid var(--clr-neutral-300);
+    }
+
+    .certification-item:nth-child(2n) {
+      border-right: 1px solid var(--clr-neutral-300);
+    }
+
+    .certification-item:nth-child(3n) {
+      border-right: none;
+    }
+
+    .certification-item:nth-last-child(-n+3) {
+      border-bottom: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .certification-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .content {
+      border-bottom: 0;
+      border-right: 1px solid var(--clr-neutral-300);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--size-8);
+    }
+  }
+</style>

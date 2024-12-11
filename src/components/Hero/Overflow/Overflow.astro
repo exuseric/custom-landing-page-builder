@@ -1,0 +1,45 @@
+---
+import Container from "@components/Container.astro";
+import "./hero.css";
+import { inferRemoteSize, Picture } from "astro:assets";
+import { getImageUrl } from "@utils/pocketbase";
+
+interface Props {
+    title: string;
+    excerpt: string;
+    image: {
+        [key: string]: string;
+    };
+}
+const { title, excerpt, image } = Astro.props;
+
+const url = getImageUrl({
+    collection: image,
+    filename: image.file,
+});
+
+const { width, height } = await inferRemoteSize(url);
+---
+<header class='overflow_hero'>
+    <Picture
+        src={url}
+        alt={image.title}
+        width={width}
+        height={height}
+        formats={["avif", "webp"]}
+        widths={[300, 400, 500, width]}
+        sizes={`(max-width: 360px) 300px, (max-width: 768px) 400px, (max-width: 1280px) 500px, ${width}px`}
+        class="overflow_hero__image"
+        loading="eager"
+        decoding="sync"
+    />
+    <div class="overflow_hero__overlay"></div>
+    <Container>
+        <div class="overflow_hero__wrapper">
+            <article class="overflow_hero__content">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+            </article>
+        </div>
+    </Container>
+</header>

@@ -1,0 +1,47 @@
+---
+import './testimonial.css';
+
+const testimonials = [
+  {
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    author: "John Doe",
+    position: "CEO, Company Name"
+  },
+  {
+    content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    author: "Jane Smith",
+    position: "CTO, Tech Corp"
+  },
+  {
+    content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    author: "Mike Johnson",
+    position: "Founder, Startup Inc"
+  },
+  {
+    content: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    author: "Sarah Williams",
+    position: "Director, Design Studio"
+  }
+];
+---
+
+<section class="testimonial-section">
+  <div class="testimonial-container">
+    <h2 class="testimonial-title">What Our Clients Say</h2>
+    <div class="testimonial-grid">
+      {testimonials.map((testimonial) => (
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>"{testimonial.content}"</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-info">
+              <h4>{testimonial.author}</h4>
+              <p>{testimonial.position}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

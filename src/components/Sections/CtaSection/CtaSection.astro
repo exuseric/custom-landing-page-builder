@@ -1,0 +1,49 @@
+---
+import Container from "@components/Container.astro";
+import "./cta.css"
+import { Icon } from "astro-icon/components";
+import { Picture } from "astro:assets";
+import {getImageUrl} from "@utils/pocketbase";
+import CustomImage from "@components/CustomImage.astro";
+const { data, core_values } = Astro.props;
+
+const hasImage = data.expand?.image?.file;
+
+---
+
+<div class="cta full-width">
+    <Container>
+        <div class="cta__wrapper" data-highlight={data.highlight}>
+            <div class="cta__content">
+                <div class="cta__heading">
+                    {
+                        core_values && (
+                            <ul class="cta__core_values">
+                                {core_values.split(",").map((value: any) => (
+                                    <li>
+                                        <Icon
+                                            name="mdi:check-bold"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        {value.trim()}
+                                    </li>
+                                ))}
+                            </ul>
+                        )
+                    }
+                    <h2>{data.title}</h2>
+                    <slot set:html={data.content} />
+                </div>
+            </div>
+
+            {
+                hasImage && (
+                    <div class="cta__image">
+                        <CustomImage image={data.expand.image} classlist="content_section__image" size="medium" fit={data.expand.image.fit} position={data.expand.image.position}/>
+                    </div>
+                )
+            }
+        </div>
+    </Container>
+</div>

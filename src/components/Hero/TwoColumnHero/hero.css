@@ -1,0 +1,89 @@
+.two_column_hero {
+    color: var(--clr-neutral-50);
+    padding-block: calc(var(--container-padding-block) * 1.5);
+}
+
+.two_column_hero h1 {
+    font-size: var(--heading-large);
+    font-weight: var(--heading-large-weight);
+    line-height: 1;
+    margin-bottom: var(--size-3);
+}
+
+.two_column_hero p {
+    font-size: var(--body-large);
+    font-weight: var(--body-large-weight);
+}
+
+.two_column_hero__wrapper {
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    grid-template-rows: 450px;
+    align-items: center;
+    gap: var(--size-1);
+    background-color: var(--clr-primary);
+}
+
+.two_column_hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+    padding: var(--size-3) var(--size-8);
+}
+
+.two_column_hero__image_wrapper {
+    height: 100%;
+    transform: skew(5deg, 5deg);
+    background: radial-gradient(at 50% 50%, var(--clr-primary-darker), var(--clr-primary-light));
+    border-radius: var(--size-3);
+    border: 2px solid var(--clr-primary);
+    overflow: hidden;
+}
+
+.two_column_hero__image_wrapper :global(picture) {
+    width: 100%;
+    height: 100%;
+}
+
+.two_column_hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: skew(-5deg, -5deg);
+    border: 2px solid var(--clr-primary);
+    border-radius: var(--size-3);
+}
+
+@media (max-width: 768px) {
+    .two_column_hero {
+        padding-block: calc(var(--container-padding-block) * 3);
+    }
+
+    .two_column_hero__wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(300px, 40dvh);
+    }
+    
+    .two_column_hero__content {
+        align-self: start;
+        padding-block: var(--size-8);
+    }
+
+    .two_column_hero h1 {
+        font-size: var(--heading-medium);
+    }
+
+    .two_column_hero p {
+        font-size: var(--body-medium);
+    }
+
+    .two_column_hero__image_wrapper {
+        transform: skew(3deg, 3deg);
+    }
+
+    .two_column_hero__image {
+        transform: skew(-3deg, -3deg);
+    }
+}

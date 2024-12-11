@@ -7,29 +7,28 @@ import { inferRemoteSize, Picture } from "astro:assets";
 interface Props {
     [key: string]: {
         links: [string];
-        logo: string;
+        logo: {
+            [key: string]: string;
+        };
         title: string;
-        collection: object;
     };
 }
 
-const { links, logo, title, collection } = Astro.props.data;
-const { width, height } = await inferRemoteSize(
-    getImageUrl({
-        collection: collection,
-        filename: logo,
-    }),
-);
+const { links, logo, title } = Astro.props.data;
+const { width, height } = await inferRemoteSize(getImageUrl({
+    collection: logo,
+    filename: logo && logo.file,
+}));
 ---
 
-<header class="nav" data-is-active="false">
+<header class="floating_nav" data-is-active="false">
     <Container>
-        <div class="nav__wrapper">
-            <a href="/" class="nav__logo">
-                <Picture
+        <div class="floating_nav__wrapper">
+            <a href="/" class="floating_nav__logo" aria-label={title.split("|")[0].trim()}>
+                {typeof logo === "object" ? (<Picture
                     src={getImageUrl({
-                        collection: collection,
-                        filename: logo,
+                        collection: logo,
+                        filename: logo.file,
                     })}
                     alt="logo"
                     width={width}
@@ -37,11 +36,11 @@ const { width, height } = await inferRemoteSize(
                     formats={["avif", "webp"]}
                     widths={[150, width]}
                     sizes={`(max-width: 1366px) 150px, ${width}px`}
-                />
-                <!-- {title.split("|")[0].trim()} -->
+                />) : (<span>{title.split("|")[0].trim()}</span>)}
+                <span>{title.split("|")[0].trim()}</span>
             </a>
 
-            <menu class="nav__menu" data-is-active="false">
+            <menu id="floating_nav__menu" class="floating_nav__menu" data-is-active="false">
                 {
                     links.map((item, index) => (
                         <li>
@@ -51,7 +50,7 @@ const { width, height } = await inferRemoteSize(
                                         ? `#${item.split(" ").join("-")}`
                                         : "/"
                                 }
-                                class="nav__link"
+                                class="floating_nav__link"
                             >
                                 {item}
                             </a>
@@ -60,7 +59,7 @@ const { width, height } = await inferRemoteSize(
                 }
             </menu>
 
-            <button class="nav__toggle button__icon" data-is-active="false">
+            <button id="floating_nav__toggle" class="floating_nav__toggle button__icon" data-is-active="false" aria-label="toggle navigation">
                 <Icon
                     name="mdi:menu"
                     aria-hidden="true"
@@ -79,7 +78,42 @@ const { width, height } = await inferRemoteSize(
 </header>
 
 <script>
-    import navigationActions from "@components/PageNavigation/navigation.ts";
+const toggleAttributes = (elements: Array<HTMLElement>) => {
+    elements.forEach((element) => {
+        const currentAttribute = element.getAttribute("data-is-active");
 
-    navigationActions();
+        if(currentAttribute) {
+            currentAttribute === "false"
+                ? element.setAttribute("data-is-active", "true")
+                : element.setAttribute("data-is-active", "false");
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.querySelector(".floating_nav");
+    const navToggle = document.querySelector(".floating_nav__toggle");
+    const menu = document.querySelector(".floating_nav__menu");
+    
+    if (navToggle) {
+        navToggle.addEventListener("click", function(this: HTMLElement) {
+            // toggleAttribute(navToggle as HTMLElement);
+            // toggleAttribute(menu as HTMLElement);
+            toggleAttributes([menu as HTMLElement, navToggle as HTMLElement]);
+        });
+    }
+
+    if (nav) {
+        document.addEventListener("scroll", () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > nav.getBoundingClientRect().height * 0.5) {
+                nav.setAttribute("data-is-active", "true");
+            } else {
+                nav.setAttribute("data-is-active", "false");
+            }
+        });
+    }
+});
 </script>
+
+

@@ -1,0 +1,116 @@
+.testimonials {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--container-padding-block) var(--container-padding-inline);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--size-7);
+  margin-bottom: var(--size-8);
+}
+
+.testimonial-card {
+  background-color: var(--clr-neutral-900);
+  padding: var(--size-7);
+  border-radius: var(--size-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s var(--snappy-bounce-ease);
+}
+
+.testimonial-card:hover {
+  transform: translateY(var(--size-2));
+}
+
+.company-logo {
+  width: var(--size-9);
+  height: var(--size-9);
+  margin-bottom: var(--size-5);
+  filter: brightness(0) invert(1);
+}
+
+.quote {
+  font-size: var(--body-large);
+  color: var(--clr-neutral-300);
+  margin-bottom: var(--size-5);
+  min-height: var(--size-13);
+}
+
+.rating {
+  color: var(--clr-secondary);
+  margin-bottom: var(--size-3);
+}
+
+.rating i {
+  margin: 0 var(--size-1);
+}
+
+.author {
+  color: var(--clr-neutral-50);
+  font-size: var(--heading-xsmall);
+  font-weight: var(--heading-xsmall-weight);
+  margin-bottom: var(--size-2);
+}
+
+.position {
+  color: var(--clr-neutral-500);
+  font-size: var(--body-medium);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--size-7);
+  text-align: center;
+  margin-top: var(--size-8);
+}
+
+.stat-item h2 {
+  font-size: var(--heading-large);
+  font-weight: var(--heading-large-weight);
+  margin-bottom: var(--size-2);
+  background: linear-gradient(45deg, var(--clr-neutral-50), var(--clr-neutral-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item p {
+  color: var(--clr-neutral-500);
+  font-size: var(--body-large);
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    padding: var(--size-5);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote {
+    font-size: var(--body-medium);
+  }
+
+  .stat-item h2 {
+    font-size: var(--heading-medium);
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    padding: var(--size-5);
+  }
+
+  .stat-item h2 {
+    font-size: var(--heading-small);
+  }
+
+  .stat-item p {
+    font-size: var(--body-medium);
+  }
+}

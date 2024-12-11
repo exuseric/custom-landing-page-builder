@@ -1,7 +1,16 @@
 ---
-import LeftRightWithTransparentImage from "./left_right_with_transparent_image/LeftRightWithTransparentImage.astro";
+import BlackModern from "./BlackModern/BlackModern.astro";
+import Gradient from "./Gradient/Gradient.astro";
+import HorizontalWithImage from "./HorizontalWithImage/HorizontalWithImage.astro";
+import Overflow from "./Overflow/Overflow.astro";
+import TwoColumnHero from "./TwoColumnHero/TwoColumnHero.astro";
+import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 
-const { title, excerpt, image } = Astro.props;
+const { title, excerpt, image, type, core_values } = Astro.props;
 ---
-
-<LeftRightWithTransparentImage title={title} excerpt={excerpt} image={image} />
+{type === "gradient" && (<Gradient title={title} excerpt={excerpt} image={image} core_values={core_values} />)}
+{type === "black modern" && <BlackModern title={title} excerpt={excerpt} image={image} />}
+{type === "horizontal with image" && <HorizontalWithImage title={title} excerpt={excerpt} image={image} />}
+{type === "vertical with image" && <VerticalWithImage title={title} excerpt={excerpt} image={image} />}
+{type === "two column" && <TwoColumnHero title={title} excerpt={excerpt} image={image} />}
+{(!type || type === "default") && <Overflow title={title} excerpt={excerpt} image={image} />}

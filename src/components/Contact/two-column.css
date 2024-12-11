@@ -75,7 +75,7 @@
   }
   .two-column-hero__image-wrapper .image-component__image {
     object-fit: cover;
-    object-position: center;
+    object-position: top;
   }
 
   .two-column__content a {

@@ -7,17 +7,18 @@ import { inferRemoteSize, Picture } from "astro:assets";
 interface Props {
     [key: string]: {
         links: [string];
-        logo: string;
+        logo: {
+            [key: string]: string;
+        };
         title: string;
-        collection: object;
     };
 }
 
-const { links, logo, title, collection } = Astro.props.data;
+const { links, logo, title } = Astro.props.data;
 const { width, height } = await inferRemoteSize(
     getImageUrl({
-        collection: collection,
-        filename: logo,
+        collection: logo,
+        filename: logo.file,
     }),
 );
 ---
@@ -28,8 +29,8 @@ const { width, height } = await inferRemoteSize(
             <a href="/" class="nav__logo">
                 <Picture
                     src={getImageUrl({
-                        collection: collection,
-                        filename: logo,
+                        collection: logo,
+                        filename: logo.file,
                     })}
                     alt="logo"
                     width={width}
@@ -79,7 +80,33 @@ const { width, height } = await inferRemoteSize(
 </header>
 
 <script>
-    import navigationActions from "@components/PageNavigation/navigation.ts";
+const toggleAttribute = (element: HTMLElement) => {
+    element.getAttribute("data-is-active") === "false"
+        ? element.setAttribute("data-is-active", "true")
+        : element.setAttribute("data-is-active", "false");
+};
 
-    navigationActions();
+document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.querySelector(".nav");
+    const menu = document.querySelector(".nav__menu");
+    const navToggle = document.querySelector(".nav__toggle");
+
+    if (navToggle) {
+        navToggle.addEventListener("click", () => {
+            toggleAttribute(navToggle as HTMLElement);
+            toggleAttribute(menu as HTMLElement);
+        });
+    }
+
+    if (nav) {
+        document.addEventListener("scroll", () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > nav.getBoundingClientRect().height * 0.5) {
+                nav.setAttribute("data-is-active", "true");
+            } else {
+                nav.setAttribute("data-is-active", "false");
+            }
+        });
+    }
+});
 </script>

@@ -1,7 +1,3 @@
-.services {
-    padding-block: var(--container-padding-block);
-}
-
 .services__grid {
     padding-top: var(--size-8);
 }

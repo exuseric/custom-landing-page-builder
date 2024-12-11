@@ -1,0 +1,7 @@
+---
+import DefaultContact from "./DefaultContact/DefaultContact.astro"
+
+const {title, info, location, style} = Astro.props
+---
+
+{style === "default" && <DefaultContact title={title} info={info} location={location} />}

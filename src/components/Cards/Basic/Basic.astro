@@ -5,33 +5,39 @@ interface Card {
     };
 }
 import { Picture } from "astro:assets";
-import style from "./basic.module.css";
+import "./basic.css";
 import { getImageUrl } from "@utils/pocketbase";
+import CustomImage from "@components/CustomImage.astro";
 const { cards } = Astro.props;
 ---
 
-<div class={style.card_grid}>
+<div class="basic_card">
     {
         cards.map((card: Card) => (
             <article>
-                <Picture
-                    src={getImageUrl({
-                        collection: card.expand.image,
-                        filename: card.expand.image.image,
-                    })}
-                    alt={card.expand.image.alt}
-                    inferSize
-                    formats={["avif", "webp"]}
-                    widths={[350, 500]}
-                    sizes={`(max-width: 1366px) 350px, 500px`}
-                    quality={80}
-                    class={style.image_component__image}
-                    loading="lazy"
-                    decoding="async"
-                />
+                {card.expand.image && (
+
+                    // <Picture
+                    // src={getImageUrl({
+                    //     collection: card.expand.image,
+                    //     filename: card.expand.image.file,
+                    // })}
+                    // alt={card.expand.image.title}
+                    // inferSize
+                    // formats={["avif", "webp"]}
+                    // widths={[350, 500]}
+                    // sizes={`(max-width: 1366px) 350px, 500px`}
+                    // quality={80}
+                    // class="basic_card__image_component"
+                    // loading="lazy"
+                    // decoding="async"
+                    // style={`object-position: ${card.expand.image.position ? card.expand.image.position : "center"}; object-fit: ${card.expand.image.fit ? card.expand.image.fit : "cover"}`}
+                    // />
+                    <CustomImage image={card.expand.image} size="small" fit={card.expand.image.fit} position={card.expand.image.position} classlist="basic_card__image_component" />
+                )}
                 <div>
                     <h3>{card.title}</h3>
-                    <slot set:html={card.body} />
+                    <slot set:html={card.content} />
                 </div>
             </article>
         ))
