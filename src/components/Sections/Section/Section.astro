@@ -17,7 +17,9 @@ const { data } = Astro.props;
                     <slot set:html={data.content} />
                 </div>
 
-                {data.expand.image && (<CustomImage image={data.expand.image} classlist="content_section__image" size="medium" fit={data.expand.image.fit} position={data.expand.image.position}/>)}
+                {data.expand.image && (data.expand.image.map((image: any)=>(
+                    <CustomImage image={image} classlist="content_section__image" size="large" fit={image.fit} position={image.position}/>
+                )))}
             </div>
         )}
         {data.expand.section_grid && (

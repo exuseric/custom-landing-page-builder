@@ -1,4 +1,5 @@
 ---
+import Partners from "./Partners/Partners.astro";
 import PartnersGrid from "./Partners/PartnersGrid/PartnersGrid.astro";
 import CtaSection from "./CtaSection/CtaSection.astro";
 import Section from "./Section/Section.astro";
@@ -6,9 +7,9 @@ import ColorfulStats from "./Stats/ColorfulStats/ColorfulStats.astro";
 import StatsGrid from "./Stats/StatsGrid/StatsGrid.astro";
 import TestimonialDefault from "./Testimonial/TestimonialDefault.astro";
 import TestimonialWithStats from "./Testimonial/TestimonialWithStats/TestimonialWithStats.astro";
+import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.astro";
 const { sections, core_values } = Astro.props;
 ---
-
 
 {
     sections && sections.map((section: any) => {
@@ -24,7 +25,11 @@ const { sections, core_values } = Astro.props;
             case "testimonial with stats":
                 return <TestimonialWithStats data={section} />;
             case "partners":
-                return <PartnersGrid data={section} />;
+                return <Partners data={section}  cards={section.expand.section_grid}/>;
+            case "partners grid":
+                return <PartnersGrid data={section} cards={section.expand.section_grid} />;
+            case "vertical image cta":
+                return <VerticalImageCta data={section} core_values={core_values} />
             default:
                 return <Section data={section} />;
         }

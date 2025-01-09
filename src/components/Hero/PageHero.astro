@@ -5,6 +5,7 @@ import HorizontalWithImage from "./HorizontalWithImage/HorizontalWithImage.astro
 import Overflow from "./Overflow/Overflow.astro";
 import TwoColumnHero from "./TwoColumnHero/TwoColumnHero.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
+import TwoSquares from "./TwoSquares/TwoSquares.astro";
 
 const { title, excerpt, image, type, core_values } = Astro.props;
 ---
@@ -13,4 +14,5 @@ const { title, excerpt, image, type, core_values } = Astro.props;
 {type === "horizontal with image" && <HorizontalWithImage title={title} excerpt={excerpt} image={image} />}
 {type === "vertical with image" && <VerticalWithImage title={title} excerpt={excerpt} image={image} />}
 {type === "two column" && <TwoColumnHero title={title} excerpt={excerpt} image={image} />}
+{type === "two square" && <TwoSquares title={title} excerpt={excerpt} image={image} />}
 {(!type || type === "default") && <Overflow title={title} excerpt={excerpt} image={image} />}

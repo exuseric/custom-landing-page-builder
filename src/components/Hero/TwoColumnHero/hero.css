@@ -22,7 +22,7 @@
     grid-template-rows: 450px;
     align-items: center;
     gap: var(--size-1);
-    background-color: var(--clr-primary);
+    background-color: var(--clr-primary-dark);
 }
 
 .two_column_hero__content {

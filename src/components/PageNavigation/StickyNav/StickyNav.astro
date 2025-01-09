@@ -1,0 +1,114 @@
+---
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+import { getImageUrl } from "@utils/pocketbase";
+import "./nav.css";
+import { inferRemoteSize, Picture } from "astro:assets";
+import CustomImage from "@components/CustomImage.astro";
+interface Props {
+    [key: string]: {
+        links: [string];
+        logo: {
+            [key: string]: string;
+        };
+        title: string;
+    };
+}
+
+const { links, logo, title } = Astro.props.data;
+const { width, height } = await inferRemoteSize(
+    getImageUrl({
+        collection: logo,
+        filename: logo && logo.file,
+    }),
+);
+---
+
+<nav class="sticky-nav" data-nav data-is-active="false">
+    <Container>
+        <div class="sticky-nav__wrapper">
+            <a class="sticky-nav__logo">
+                <CustomImage
+                    eager={true}
+                    image={logo}
+                    classlist="sticky-nav__logo-image"
+                    size="small"
+                />
+                <span class="sticky-nav__logo-text">{title}</span>
+            </a>
+            <menu class="sticky-nav__menu" data-menu data-is-active="false">
+                {
+                    links.map((item, index) => (
+                        <li>
+                            <a
+                                href={
+                                    index > 0
+                                        ? `#${item.split(" ").join("-")}`
+                                        : "/"
+                                }
+                                class={
+                                    index === links.length - 1
+                                        ? "btn btn-secondary btn-md"
+                                        : "sticky-nav__link"
+                                }
+                            >
+                                <span>{item}</span>
+                            </a>
+                        </li>
+                    ))
+                }
+            </menu>
+            <div class="sticky-nav__actions">
+                <button
+                    id="sticky_nav__toggle"
+                    class="sticky_nav__toggle btn btn-primary btn-icon"
+                    data-menu-toggle
+                    data-is-active="false"
+                    aria-label="toggle navigation"
+                    aria-expanded="false"
+                >
+                    <Icon
+                        name="mdi:menu"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-toggle-icon
+                        data-is-active="true"
+                    />
+                    <Icon
+                        name="mdi:close"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-toggle-icon
+                        data-is-active="false"
+                    />
+                </button>
+            </div>
+        </div>
+    </Container>
+</nav>
+
+<script>
+    const toggleActive = (el: HTMLElement) => {
+        el.dataset.isActive = String(!(el.dataset.isActive === "true"));
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggle = document.querySelector(
+            "[data-menu-toggle]",
+        ) as HTMLButtonElement;
+        const toggleIcons = document.querySelectorAll(
+            "[data-icon]",
+        ) as NodeListOf<HTMLElement>;
+        const menu = document.querySelector("[data-menu]") as HTMLElement;
+
+        toggle.addEventListener("click", function () {
+            toggleActive(menu); // Toggle Menu
+            this.ariaExpanded = String(!(this.ariaExpanded === "true")); // Toggle Aria
+            toggleActive(this); // Toggle Active
+
+            for (const icon of toggleIcons) {
+                toggleActive(icon); // Toggle Icons
+            }
+        });
+    });
+</script>

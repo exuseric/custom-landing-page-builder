@@ -1,0 +1,55 @@
+---
+import Container from "@components/Container.astro";
+import "./vertical_cta.css";
+import { Icon } from "astro-icon/components";
+import CustomImage from "@components/CustomImage.astro";
+const { data, core_values } = Astro.props;
+
+const hasImage = data.expand?.image?.file;
+console.log(data.expand.image)
+---
+
+<div class="vertical_cta" >
+    <Container>
+        <div class="vertical_cta__wrapper">
+            <div class="vertical_cta__images">
+                {data.expand.image.map((image: any, idx: number) => (
+                    <CustomImage
+                        image={image}
+                        classlist={`vertical_cta__image_${idx}`}
+                        size="large"
+                        fit={image.fit}
+                        position={image.position}
+                    />
+                ))}
+                <!-- <CustomImage
+                    image={data.expand.image}
+                    classlist="vertical_cta__image_2"
+                    size="large"
+                    fit={data.expand.image.fit}
+                    position={data.expand.image.position}
+                /> -->
+            </div>
+            <div class="vertical_cta__content">
+                {
+                    core_values && (
+                        <ul class="vertical_cta__core_values">
+                            {core_values.split(",").map((value: any) => (
+                                <li>
+                                    <Icon
+                                        name="mdi:check-bold"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    />
+                                    {value.trim()}
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
+                <h2>{data.title}</h2>
+                <slot set:html={data.content} />
+            </div>
+        </div>
+    </Container>
+</div>

@@ -22,21 +22,20 @@ const url = getImageUrl({
 const { width, height } = await inferRemoteSize(url);
 ---
 
-<header class="overflow_hero">
-    <CustomImage
-        image={image}
-        classlist="overflow_hero__image"
-        size="large"
-        fit={image.fit}
-        position="bottom"
-    />
-    <div class="overflow_hero__overlay"></div>
-    <Container>
-        <div class="overflow_hero__wrapper">
-            <article class="overflow_hero__content">
-                <h1>{title}</h1>
-                <p>{excerpt}</p>
-            </article>
+<Container>
+    <header class="two-square">
+        <article class="two-square__content">
+            <h1>{title}</h1>
+            <p>{excerpt}</p>
+        </article>
+        <div class="two-square__image-wrapper">
+            <CustomImage
+                image={image}
+                classlist="two-square__image"
+                size="large"
+                eager={true}
+            />
         </div>
-    </Container>
-</header>
+    </header>
+</Container>
+

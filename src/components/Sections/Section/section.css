@@ -7,6 +7,9 @@
     text-align: left;
 }
 
+.content_section__header h2 {
+    font-size: var(--heading-medium);
+}
 .content_section__wrapper {
     display: grid;
     gap: var(--size-8);
@@ -37,6 +40,6 @@
     .content_section__wrapper {
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
-        gap: var(--size-16);
+        gap: var(--size-8);
     }
 }

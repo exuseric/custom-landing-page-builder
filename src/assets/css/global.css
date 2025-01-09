@@ -20,45 +20,6 @@
     --body-small: 10px;
     --body-small-weight: 400;
 
-    --clr-primary: hsl(0, 70%, 26%);
-    --clr-primary-lighter: hsl(0, 65%, 75%);
-    --clr-primary-light: hsl(0, 60%, 60%);
-    --clr-primary-dark: hsl(0, 50%, 35%);
-    --clr-primary-darker: hsl(0, 45%, 25%);
-
-    --clr-secondary: hsl(40, 70%, 26%);
-    /* Similar brightness to primary */
-    --clr-secondary-lighter: hsl(40, 65%, 75%);
-    --clr-secondary-light: hsl(40, 60%, 60%);
-    --clr-secondary-dark: hsl(40, 50%, 35%);
-    --clr-secondary-darker: hsl(40, 45%, 25%);
-
-    --clr-tertiary: hsl(220, 70%, 26%);
-    /* Similar brightness to primary */
-    --clr-tertiary-lighter: hsl(220, 65%, 75%);
-    --clr-tertiary-light: hsl(220, 60%, 60%);
-    --clr-tertiary-dark: hsl(220, 50%, 35%);
-    --clr-tertiary-darker: hsl(220, 45%, 25%);
-
-    /* Neutral Colors */
-    --clr-neutral-light: hsl(0, 15%, 98%);
-    --clr-neutral: hsl(0, 15%, 95%);
-    --clr-neutral-dark: hsl(0, 15%, 25%);
-    --clr-neutral-darker: hsl(0, 15%, 15%);
-
-    /* Neutral Shades */
-    --clr-neutral-50: hsl(0, 15%, 100%);
-    --clr-neutral-100: hsl(0, 15%, 98%);
-    --clr-neutral-200: hsl(0, 15%, 95%);
-    --clr-neutral-300: hsl(0, 15%, 90%);
-    --clr-neutral-400: hsl(0, 15%, 80%);
-    --clr-neutral-500: hsl(0, 15%, 70%);
-    --clr-neutral-600: hsl(0, 15%, 50%);
-    --clr-neutral-700: hsl(0, 15%, 35%);
-    --clr-neutral-800: hsl(0, 15%, 25%);
-    --clr-neutral-900: hsl(0, 15%, 15%);
-
-
     --size-000: -.5rem;
     --size-00: -.25rem;
     --size-1: .25rem;
@@ -81,6 +42,52 @@
     --container-padding-inline: var(--size-3);
 
     --snappy-bounce-ease: cubic-bezier(.6, -0.38, .37, 1.36);
+
+    --clr-primary-hsl: 197, 72%, 32%;
+    --clr-secondary-hsl: 17, 90%, 50%;
+    --clr-tertiary-hsl: 127, 50%, 40%;
+
+    /* Primary Color */
+    --clr-primary: hsl(197, 72%, 32%);
+    --clr-primary-lighter: hsl(197, 72%, 50%);
+    --clr-primary-light: hsl(197, 72%, 40%);
+    --clr-primary-dark: hsl(197, 72%, 25%);
+    --clr-primary-darker: hsl(197, 72%, 20%);
+
+    /* Secondary Color - Complementary Contrast */
+    --clr-secondary: hsl(17, 90%, 50%);
+    --clr-secondary-lighter: hsl(17, 90%, 75%);
+    --clr-secondary-light: hsl(17, 90%, 60%);
+    --clr-secondary-dark: hsl(17, 90%, 40%);
+    --clr-secondary-darker: hsl(17, 90%, 30%);
+
+    /* Tertiary Color - Analogous Harmony */
+    --clr-tertiary: hsl(127, 50%, 40%);
+    --clr-tertiary-lighter: hsl(127, 50%, 60%);
+    --clr-tertiary-light: hsl(127, 50%, 50%);
+    --clr-tertiary-dark: hsl(127, 50%, 30%);
+    --clr-tertiary-darker: hsl(127, 50%, 25%);
+
+    /* Neutral Colors - Tinted */
+    --clr-neutral-light: hsl(197, 15%, 98%);
+    /* Soft blue tint */
+    --clr-neutral: hsl(197, 15%, 95%);
+    --clr-neutral-dark: hsl(197, 15%, 35%);
+    --clr-neutral-darker: hsl(197, 15%, 25%);
+
+    /* Neutral Shades - Tinted */
+    --clr-neutral-50: hsl(197, 15%, 100%);
+    /* Subtle blue tint */
+    --clr-neutral-100: hsl(197, 15%, 98%);
+    --clr-neutral-200: hsl(197, 15%, 95%);
+    --clr-neutral-300: hsl(197, 15%, 90%);
+    --clr-neutral-400: hsl(197, 15%, 80%);
+    --clr-neutral-500: hsl(197, 15%, 70%);
+    --clr-neutral-600: hsl(197, 15%, 50%);
+    --clr-neutral-700: hsl(197, 15%, 35%);
+    --clr-neutral-800: hsl(197, 15%, 25%);
+    --clr-neutral-900: hsl(197, 15%, 15%);
+
 }
 
 @media (min-width: 768px) {
@@ -162,12 +169,12 @@ h1 {
 
 [data-highlight] {
     color: var(--clr-neutral-50);
-    background-color: var(--clr-primary);
+    background-color: var(--clr-primary-darker);
 }
 
 button {
     background-color: var(--clr-primary);
-    color: white;
+    color: var(--clr-neutral-900);
     border: none;
     border-radius: var(--size-1);
     padding: 0.5em 1em;
@@ -182,11 +189,11 @@ button:hover {
 
 [data-highlight] button:hover {
     color: var(--clr-neutral-900);
-    background-color: var(--clr-secondary-light);
+    background-color: var(--clr-secondary-lighter);
 }
 
 button:disabled {
-    background-color: var(--clr-neutral-400);
+    background-color: var(--clr-neutral-300);
     cursor: not-allowed;
 }
 
@@ -245,7 +252,146 @@ a:not([class]) {
     color: inherit;
 }
 
+/* Base Button Styles */
+/* button {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+} */
 
+.btn {
+    display: grid;
+    place-content: center;
+
+    width: fit-content;
+    height: fit-content;
+
+    text-decoration: none;
+}
+
+.btn-md {
+    padding: var(--size-1) var(--size-3);
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--clr-primary);
+    color: var(--clr-neutral);
+}
+
+.btn-primary:hover {
+    background-color: var(--clr-secondary);
+}
+
+.btn-primary:active {
+    background-color: var(--clr-primary-darker);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: var(--clr-secondary);
+    color: var(--clr-neutral);
+}
+
+.btn-secondary:hover {
+    background-color: var(--clr-tertiary);
+}
+
+.btn-secondary:active {
+    background-color: var(--clr-secondary-darker);
+}
+
+/* Tertiary Button */
+.btn-tertiary {
+    background-color: var(--clr-tertiary);
+    color: var(--clr-neutral);
+}
+
+.btn-tertiary:hover {
+    background-color: var(--clr-secondary);
+}
+
+.btn-tertiary:active {
+    background-color: var(--clr-tertiary-darker);
+}
+
+/* Outline Button */
+.btn-outline {
+    background-color: transparent;
+    color: var(--clr-primary);
+    border: 2px solid currentColor;
+}
+
+.btn-outline:hover {
+    color: var(--clr-neutral);
+    background-color: var(--clr-secondary);
+}
+
+.btn-outline:active {
+    background-color: var(--clr-primary-darker);
+    color: var(--clr-neutral);
+}
+
+/* Disabled Button */
+button:disabled,
+.btn-disabled {
+    background-color: hsl(197, 15%, 90%);
+    color: hsl(197, 15%, 50%);
+    cursor: not-allowed;
+}
+
+/* Text Button */
+.btn-text {
+    background-color: transparent;
+    color: var(--clr-primary-dark);
+    padding: 0.5em 1em;
+    text-decoration: underline;
+}
+
+.btn-text:hover {
+    color: var(--clr-secondary-dark);
+}
+
+.btn-text:active {
+    color: var(--clr-primary-darker);
+}
+
+.btn-icon {
+    display: grid;
+    place-content: center;
+
+    width: 48px;
+    height: 48px;
+}
+
+.btn-icon svg {
+    font-size: 1.5em;
+}
+
+[data-toggle-icon][data-is-active="true"] {
+    display: block;
+    visibility: visible;
+}
+
+[data-toggle-icon][data-is-active="false"] {
+    display: none;
+    visibility: none;
+}
+
+[data-menu-toggle] {
+    visibility: visible;
+}
+
+@media (min-width: 768px) {
+    [data-menu-toggle] {
+        visibility: hidden;
+        display: none;
+    }
+}
 @media (prefers-reduced-motion: reduce) {
     :root {
         --snappy-bounce-ease: linear;

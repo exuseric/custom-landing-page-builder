@@ -93,18 +93,18 @@ const record = await getData();
 				image: "/favicon/android-chrome-512x512.png",
 			}}
 		/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="preconnect" href="https://www.google-analytics.com">
-		<link rel="dns-prefetch" href="https://www.google-analytics.com">
-		<link rel="preconnect" href="https://www.googletagmanager.com">
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-		<link rel="preconnect" href="/assets/">
-		<link rel="dns-prefetch" href="/assets/">
-	
-		<link rel="preload" as="style" href="/assets/index.min.css">
-		<link rel="preload" as="font" type="font/woff2" href={fonts.regular}>
-		<link rel="preload" as="font" type="font/woff2" href={fonts.bold}>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://www.google-analytics.com" />
+		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+		<link rel="preconnect" href="https://www.googletagmanager.com" />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+		<link rel="preconnect" href="/assets/" />
+		<link rel="dns-prefetch" href="/assets/" />
+
+		<link rel="preload" as="style" href="/assets/index.min.css" />
+		<link rel="preload" as="font" type="font/woff2" href={fonts.regular} />
+		<link rel="preload" as="font" type="font/woff2" href={fonts.bold} />
 
 		<AstroFont
 			config={[
@@ -132,30 +132,33 @@ const record = await getData();
 	</head>
 	<body>
 		<PageNavigation
-			links={record.links}
-			logo={record.expand.logo}
-			title={record.title}
-			style={record.nav_style}
+		links={record.links}
+		logo={record.expand.logo}
+		title={record.title}
+		style={record.nav_style}
+		hero_style={record.hero_style}
 		/>
 		<PageHero
-			image={record.expand.hero_image}
-			title={record.hero_title}
-			excerpt={record.hero_excerpt}
-			type={record.hero_style}
-			core_values={record.core_values}
+		image={record.expand.hero_image}
+		title={record.hero_title}
+		excerpt={record.hero_excerpt}
+		type={record.hero_style}
+		core_values={record.core_values}
 		/>
 		<main>
 			<Sections
-				sections={record.expand.sections}
-				core_values={record.core_values}
+			sections={record.expand.sections}
+			core_values={record.core_values}
 			/>
+			<!-- 
+			-->
 			<ContactSection
 				title={record.contact_title}
 				info={record.expand.contact_info}
 				location={record.expand.contact_location}
 				style={record.contact_style}
 			/>
-		</main>
+		</main> 
 		<Footer company={record.company} title={record.title} />
 	</body>
 </html>

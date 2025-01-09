@@ -3,41 +3,39 @@ import Container from "@components/Container.astro";
 import "./partners.css";
 import { Picture, inferRemoteSize } from "astro:assets";
 import { getImageUrl } from "@utils/pocketbase";
-const { page } = Astro.props;
+import CustomImage from "@components/CustomImage.astro";
+const { page, data } = Astro.props;
 
 interface Card {
     expand: {
         image: {
             image: string;
-            alt: string;
+            title: string;
+            fit: string;
+            position: string;
         };
     };
 }
 
-const cards = page.expand.card_grid;
+const cards = data.expand.section_grid;
+
 ---
 
-<div class="partners containerfull-width">
-    <Container>
-        <h2 class="partners__title">{page.title}</h2>
+<div class="partners container">
+    <Container> 
+        <!-- <h2 class="partners__title">{data.title}</h2> -->
         <div class="partners-scroll-wrapper">
             <div class="partners-scroll-content">
                 <div class="partners-row">
                     {
                         cards?.map((card: Card) => (
                             <div class="partner">
-                                <Picture
-                                    src={getImageUrl({
-                                        collection: card.expand.image,
-                                        filename: card.expand.image.image,
-                                    })}
-                                    inferSize
-                                    formats={["avif", "webp"]}
-                                    widths={[150]}
-                                    sizes={`150px`}
-                                    alt={card.expand.image.alt}
-                                    class="partner__image"
-                                    alt={card.expand.image.alt}
+                                <CustomImage
+                                    image={card.expand.image}
+                                    classlist="partner__image_component"
+                                    size="small"
+                                    fit={card.expand.image.fit}
+                                    position={card.expand.image.position}
                                 />
                             </div>
                         ))
@@ -47,18 +45,12 @@ const cards = page.expand.card_grid;
                     {
                         cards?.map((card: Card) => (
                             <div class="partner">
-                                <Picture
-                                    src={getImageUrl({
-                                        collection: card.expand.image,
-                                        filename: card.expand.image.image,
-                                    })}
-                                    inferSize
-                                    formats={["avif", "webp"]}
-                                    widths={[150]}
-                                    sizes={`150px`}
-                                    alt={card.expand.image.alt}
-                                    class="partner__image"
-                                    alt={card.expand.image.alt}
+                                <CustomImage
+                                    image={card.expand.image}
+                                    classlist="partner__image_component"
+                                    size="small"
+                                    fit={card.expand.image.fit}
+                                    position={card.expand.image.position}
                                 />
                             </div>
                         ))

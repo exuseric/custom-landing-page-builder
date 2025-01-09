@@ -16,24 +16,7 @@ const { cards } = Astro.props;
         cards.map((card: Card) => (
             <article>
                 {card.expand.image && (
-
-                    // <Picture
-                    // src={getImageUrl({
-                    //     collection: card.expand.image,
-                    //     filename: card.expand.image.file,
-                    // })}
-                    // alt={card.expand.image.title}
-                    // inferSize
-                    // formats={["avif", "webp"]}
-                    // widths={[350, 500]}
-                    // sizes={`(max-width: 1366px) 350px, 500px`}
-                    // quality={80}
-                    // class="basic_card__image_component"
-                    // loading="lazy"
-                    // decoding="async"
-                    // style={`object-position: ${card.expand.image.position ? card.expand.image.position : "center"}; object-fit: ${card.expand.image.fit ? card.expand.image.fit : "cover"}`}
-                    // />
-                    <CustomImage image={card.expand.image} size="small" fit={card.expand.image.fit} position={card.expand.image.position} classlist="basic_card__image_component" />
+                    <CustomImage image={card.expand.image} size="medium" fit={card.expand.image.fit} position={card.expand.image.position} classlist="basic_card__image_component" />
                 )}
                 <div>
                     <h3>{card.title}</h3>

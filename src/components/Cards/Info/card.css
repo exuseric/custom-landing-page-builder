@@ -3,7 +3,7 @@
     margin: 0;
     list-style: none;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
     align-items: flex-start;
     justify-content: start;
     gap: var(--size-4);

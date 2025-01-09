@@ -8,7 +8,8 @@
     
     padding: var(--size-8) var(--size-8);
     border-radius: var(--size-4);
-    border: 2px solid var(--clr-neutral-200);
+    border: 2px solid hsl(var(--clr-secondary-hsl) / 0.15);
+    background-color: hsl(var(--clr-secondary-hsl) / 0.05);
 }
 
 .cta__content {
@@ -26,6 +27,7 @@
 
 .cta__heading h2 {
     font-size: var(--heading-medium);
+    color: var(--clr-primary);
 }
 
 .cta__heading p {
@@ -54,9 +56,13 @@
     margin-bottom: var(--size-2);
 }
 
+.cta__content .info_card svg,
+.cta__core_values li svg {
+    color: var(--clr-secondary);
+}
 .cta__core_values li {
     gap: var(--size-2);
-    color: var(--clr-tertiary);
+    color: var(--clr-neutral-900);
 }
 
 [data-highlight] .cta__core_values li {

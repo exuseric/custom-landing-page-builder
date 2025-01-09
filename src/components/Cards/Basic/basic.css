@@ -54,6 +54,7 @@
     width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    color: var(--clr-neutral-900);
 }
 
 .basic_card article h3 {

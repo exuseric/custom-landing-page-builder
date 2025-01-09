@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import { getImageUrl } from "@utils/pocketbase";
 import "./nav.css";
 import { inferRemoteSize, Picture } from "astro:assets";
+import CustomImage from "@components/CustomImage.astro";
 interface Props {
     [key: string]: {
         links: [string];
@@ -25,18 +26,9 @@ const { width, height } = await inferRemoteSize(getImageUrl({
     <Container>
         <div class="floating_nav__wrapper">
             <a href="/" class="floating_nav__logo" aria-label={title.split("|")[0].trim()}>
-                {typeof logo === "object" ? (<Picture
-                    src={getImageUrl({
-                        collection: logo,
-                        filename: logo.file,
-                    })}
-                    alt="logo"
-                    width={width}
-                    height={height}
-                    formats={["avif", "webp"]}
-                    widths={[150, width]}
-                    sizes={`(max-width: 1366px) 150px, ${width}px`}
-                />) : (<span>{title.split("|")[0].trim()}</span>)}
+                {typeof logo === "object" ? (
+                <CustomImage eager={true} image={logo} classlist="floating_nav__logo" size="small"/>
+                ) : (<span>{title.split("|")[0].trim()}</span>)}
                 <span>{title.split("|")[0].trim()}</span>
             </a>
 
@@ -97,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (navToggle) {
         navToggle.addEventListener("click", function(this: HTMLElement) {
-            // toggleAttribute(navToggle as HTMLElement);
-            // toggleAttribute(menu as HTMLElement);
             toggleAttributes([menu as HTMLElement, navToggle as HTMLElement]);
         });
     }

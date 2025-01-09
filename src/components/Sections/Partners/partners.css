@@ -5,9 +5,10 @@
 .partners-scroll-wrapper {
     position: relative;
     width: 100%;
-    height: 100px;
+    height: 150px;
     overflow: hidden;
-    margin-top: 2rem;
+
+    mask: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
 }
 
 .partners-scroll-content {
@@ -19,29 +20,27 @@
 .partners-row {
     display: flex;
     align-items: center;
-    gap: 4rem;
-    padding: 1rem;
+    gap: var(--size-8);
 }
 
 .partner {
     flex-shrink: 0;
-    width: 120px;
-    height: 60px;
+    width: 150px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.partner img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    object-position: center;
+.partner__image_component {
+    width: 100%;
+    height: 100%;
+
     filter: grayscale(1) opacity(1);
     transition: filter 250ms ease;
 }
 
-.partner img:hover {
+.partner__image_component:hover {
     filter: grayscale(0) opacity(1);
 }
 

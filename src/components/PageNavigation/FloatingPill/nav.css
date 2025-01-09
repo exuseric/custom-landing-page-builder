@@ -64,10 +64,12 @@
 
 .floating_nav__link:hover {
     color: var(--clr-neutral-50);
-    background-color: var(--clr-neutral-600);
+    background-color: var(--clr-secondary-dark);
     border-bottom-color: transparent;
 }
-
+.floating_nav__logo:hover span {
+    color: var(--clr-secondary-dark);
+}
 @supports (backdrop-filter: blur(8px)) {
     .floating_nav[data-is-active="true"] .floating_nav__wrapper {
         backdrop-filter: blur(8px);
@@ -77,11 +79,14 @@
 }
 
 .floating_nav[data-is-active="false"] .floating_nav__wrapper {
+    color: var(--clr-neutral-50);
     background-color: transparent;
     box-shadow: none;
     border: none;
 }
-
+.floating_nav[data-is-active="false"] .floating_nav__logo span {
+    color: var(--clr-neutral-50);
+}
 .floating_nav[data-is-active="true"] .floating_nav__logo span {
     color: var(--clr-neutral-900);
 }

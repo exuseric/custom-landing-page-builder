@@ -6,12 +6,14 @@ interface Props {
     };
     title: string;
     style: string;
+    hero_style: string;
 }
 
-import BasicFLoatingNav from "@components/PageNavigation/Navigation/BasicFloatingNav/Nav.astro";
+import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";
 import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
+import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
 const props = Astro.props;
 ---
-
-{props.style === "floating" && <BasicFLoatingNav data={props} />}
-{props.style === "pill" && <FloatingPill data={props} />}
+{props.hero_style === "floating" && <BasicFLoatingNav data={props} />}
+{props.hero_style === "two square" && <StickyNav data={props} />}
+{props.hero_style === "pill" && <FloatingPill data={props} />}

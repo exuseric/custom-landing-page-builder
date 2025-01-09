@@ -3,7 +3,7 @@ import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
 import { getImageUrl } from "@utils/pocketbase";
 import "./nav.css";
-import { inferRemoteSize, Picture } from "astro:assets";
+import { Image, inferRemoteSize } from "astro:assets";
 interface Props {
     [key: string]: {
         links: [string];
@@ -27,7 +27,7 @@ const { width, height } = await inferRemoteSize(
     <Container>
         <div class="nav__wrapper">
             <a href="/" class="nav__logo">
-                <Picture
+                <Image
                     src={getImageUrl({
                         collection: logo,
                         filename: logo.file,
@@ -35,7 +35,6 @@ const { width, height } = await inferRemoteSize(
                     alt="logo"
                     width={width}
                     height={height}
-                    formats={["avif", "webp"]}
                     widths={[150, width]}
                     sizes={`(max-width: 1366px) 150px, ${width}px`}
                 />

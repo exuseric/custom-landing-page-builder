@@ -36,7 +36,7 @@ interface LandingPage {
     }
 }
 const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = 'obyz8w86c22teel'
+const pageId = 'rep3542j7b9862r'
 
 const parentUrls: Record<string, string> = {
     ke: 'https://www.yellowpageskenya.com/',
