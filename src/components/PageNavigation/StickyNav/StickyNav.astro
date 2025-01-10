@@ -6,7 +6,8 @@ import "./nav.css";
 import { inferRemoteSize, Picture } from "astro:assets";
 import CustomImage from "@components/CustomImage.astro";
 interface Props {
-    [key: string]: {
+    fixedMenu: boolean;
+    data: {
         links: [string];
         logo: {
             [key: string]: string;
@@ -15,16 +16,19 @@ interface Props {
     };
 }
 
-const { links, logo, title } = Astro.props.data;
-const { width, height } = await inferRemoteSize(
-    getImageUrl({
-        collection: logo,
-        filename: logo && logo.file,
-    }),
-);
+const {
+    data: { links, logo, title },
+    fixedMenu,
+} = Astro.props;
 ---
 
-<nav class="sticky-nav" data-nav data-is-active="false">
+<nav
+    class="sticky-nav"
+    data-nav-bar
+    data-nav
+    data-is-active="false"
+    data-fixed-menu={fixedMenu}
+>
     <Container>
         <div class="sticky-nav__wrapper">
             <a class="sticky-nav__logo">
@@ -92,7 +96,16 @@ const { width, height } = await inferRemoteSize(
         el.dataset.isActive = String(!(el.dataset.isActive === "true"));
     };
 
-    document.addEventListener("DOMContentLoaded", () => {
+    const toggleScroll = (el: HTMLElement) => {
+        if (window.scrollY > el.getBoundingClientRect().height * 0.5) {
+                el.dataset.isActive = "true";
+            } else {
+                el.dataset.isActive = "false";
+            }
+    }
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+        const nav = document.querySelector("[data-nav-bar]") as HTMLElement;
         const toggle = document.querySelector(
             "[data-menu-toggle]",
         ) as HTMLButtonElement;
@@ -101,6 +114,7 @@ const { width, height } = await inferRemoteSize(
         ) as NodeListOf<HTMLElement>;
         const menu = document.querySelector("[data-menu]") as HTMLElement;
 
+        // Click Listener
         toggle.addEventListener("click", function () {
             toggleActive(menu); // Toggle Menu
             this.ariaExpanded = String(!(this.ariaExpanded === "true")); // Toggle Aria
@@ -108,6 +122,17 @@ const { width, height } = await inferRemoteSize(
 
             for (const icon of toggleIcons) {
                 toggleActive(icon); // Toggle Icons
+            }
+        });
+
+        toggleScroll(nav);
+
+        // Scroll Listener
+        document.addEventListener("scroll", () => {
+            if (window.scrollY > nav.getBoundingClientRect().height * 0.5) {
+                toggleScroll(nav)
+            } else {
+                toggleScroll(nav)
             }
         });
     });

@@ -6,6 +6,34 @@
     height: 100%;
     padding: var(--size-3) 0;
     background-color: var(--clr-neutral-50);
+    transition: all 250ms var(--snappy-bounce-ease);
+}
+
+.sticky-nav[data-fixed-menu="true"] {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: max-content;
+
+    color: var(--clr-neutral-light);
+    background-color: transparent;
+}
+
+.sticky-nav[data-is-active="true"] {
+    padding: var(--size-2) 0;
+    color: var(--clr-neutral-900);
+    background-color: var(--clr-neutral-50);
+}
+
+.sticky-nav[data-is-active="true"] {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.sticky-nav[data-fixed-menu="true"][data-is-active="true"] .sticky-nav__menu,
+.sticky-nav[data-fixed-menu="true"][data-is-active="false"] .sticky-nav__menu {
+    color: var(--clr-neutral-900);
+    background-color: var(--clr-neutral-50);
+    padding: var(--size-2);
 }
 
 .sticky-nav__logo-image {
@@ -15,8 +43,8 @@
 
 .sticky-nav__logo {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-flow: row wrap;
+    align-items: center;
     justify-content: center;
     gap: var(--size-1);
     width: fit-content;
@@ -38,8 +66,9 @@
 
 .sticky-nav__wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
+    gap: var(--size-2);
 }
 
 .sticky-nav__menu a {
@@ -51,7 +80,7 @@
     text-decoration: none;
     text-transform: capitalize;
 
-    color: var(--clr-neutral-900);
+    color: currentColor;
     font-weight: var(--heading-large-weight);
 }
 
@@ -85,6 +114,16 @@
 
         padding: var(--size-3) 0;
         background-color: var(--clr-neutral-50);
+    }
+    .sticky-nav[data-fixed-menu="true"][data-is-active="true"] .sticky-nav__menu {
+        color: var(--clr-neutral-900);
+        background-color: transparent;
+        padding: var(--size-0);
+    }
+    .sticky-nav[data-fixed-menu="true"][data-is-active="false"] .sticky-nav__menu {
+        color: var(--clr-neutral-50);
+        background-color: transparent;
+        padding: var(--size-0);
     }
 
     .sticky-nav__actions,

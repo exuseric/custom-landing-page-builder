@@ -13,7 +13,13 @@ import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/Fix
 import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
 import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
 const props = Astro.props;
+let fixedMenu = false;
+if (props.hero_style !== "two square") {
+    fixedMenu = true;
+}
 ---
-{props.hero_style === "floating" && <BasicFLoatingNav data={props} />}
+<!-- {props.hero_style === "floating" && <BasicFLoatingNav data={props} />}
 {props.hero_style === "two square" && <StickyNav data={props} />}
 {props.hero_style === "pill" && <FloatingPill data={props} />}
+{props.hero_style !== "two square" && <BasicFLoatingNav data={props} />} -->
+<StickyNav data={props} fixedMenu={props.hero_style !== "two square" ? true : false} />
