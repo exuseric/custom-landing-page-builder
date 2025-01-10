@@ -21,8 +21,8 @@ const src = getImageUrl({
     collection: image,
     filename: image.file,
 });
-const widths = size === 'small' ? [350, 500] : size === 'medium' ? [500, 750] : [750, 1000];
-const sizes = size === 'small' ? `(max-width: 1366px) 350px, 500px` : size === 'medium' ? `(max-width: 1366px) 500px, 750px` : `(max-width: 1366px) 750px, 1000px`;
+const widths = size === 'small' ? [350, 500] : size === 'medium' ? [500, 750] : size === 'large' ? [1000, width] : [width];
+const sizes = size === 'small' ? `(max-width: 1366px) 350px, 500px` : size === 'medium' ? `(max-width: 1366px) 500px, 750px` : size === 'large' ? `(max-width: 1366px) 1000px, ${width}px` : `${width}px`;
 
 ---
 <Image
