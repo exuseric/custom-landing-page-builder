@@ -4,9 +4,7 @@ interface Card {
         [key: string]: any;
     };
 }
-import { Picture } from "astro:assets";
 import "./basic.css";
-import { getImageUrl } from "@utils/pocketbase";
 import CustomImage from "@components/CustomImage.astro";
 const { cards } = Astro.props;
 ---
@@ -14,9 +12,9 @@ const { cards } = Astro.props;
 <div class="basic_card">
     {
         cards.map((card: Card) => (
-            <article>
+            <article data-animate-on-scroll>
                 {card.expand.image && (
-                    <CustomImage image={card.expand.image} size="medium" fit={card.expand.image.fit} position={card.expand.image.position} classlist="basic_card__image_component" />
+                    <CustomImage eager={false} image={card.expand.image} size="medium" classlist="basic_card__image_component" />
                 )}
                 <div>
                     <h3>{card.title}</h3>

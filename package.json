@@ -19,6 +19,7 @@
     "astro-icon": "^1.1.4",
     "astro-loader-pocketbase": "^1.0.2",
     "astro-seo": "^0.8.4",
+    "motion": "^11.18.0",
     "pocketbase": "^0.21.5",
     "typescript": "^5.7.2"
   },

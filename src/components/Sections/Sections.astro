@@ -12,26 +12,54 @@ const { sections, core_values } = Astro.props;
 ---
 
 {
-    sections && sections.map((section: any) => {
-        switch (section.type) {
-            case "cta":
-                return <CtaSection data={section} core_values={core_values} />;
-            case "testimonial":
-                return <TestimonialDefault data={section} />;
-            case "stats grid":
-                return <StatsGrid data={section} cards={section.expand.section_grid}/>;
-            case "colorful stats":
-                return <ColorfulStats data={section} cards={section.expand.section_grid}/>;
-            case "testimonial with stats":
-                return <TestimonialWithStats data={section} />;
-            case "partners":
-                return <Partners data={section}  cards={section.expand.section_grid}/>;
-            case "partners grid":
-                return <PartnersGrid data={section} cards={section.expand.section_grid} />;
-            case "vertical image cta":
-                return <VerticalImageCta data={section} core_values={core_values} />
-            default:
-                return <Section data={section} />;
-        }
-    })
+    sections &&
+        sections.map((section: any) => {
+            switch (section.type) {
+                case "cta":
+                    return (
+                        <CtaSection data={section} core_values={core_values} />
+                    );
+                case "testimonial":
+                    return <TestimonialDefault data={section} />;
+                case "stats grid":
+                    return (
+                        <StatsGrid
+                            data={section}
+                            cards={section.expand.section_grid}
+                        />
+                    );
+                case "colorful stats":
+                    return (
+                        <ColorfulStats
+                            data={section}
+                            cards={section.expand.section_grid}
+                        />
+                    );
+                case "testimonial with stats":
+                    return <TestimonialWithStats data={section} />;
+                case "partners":
+                    return (
+                        <Partners
+                            data={section}
+                            cards={section.expand.section_grid}
+                        />
+                    );
+                case "partners grid":
+                    return (
+                        <PartnersGrid
+                            data={section}
+                            cards={section.expand.section_grid}
+                        />
+                    );
+                case "vertical image cta":
+                    return (
+                        <VerticalImageCta
+                            data={section}
+                            core_values={core_values}
+                        />
+                    );
+                default:
+                    return <Section data={section} />;
+            }
+        })
 }

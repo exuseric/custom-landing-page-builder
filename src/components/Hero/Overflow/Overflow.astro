@@ -27,8 +27,7 @@ const { width, height } = await inferRemoteSize(url);
         image={image}
         classlist="overflow_hero__image"
         size="large"
-        fit={image.fit}
-        position="bottom"
+        eager={true}
     />
     <div class="overflow_hero__overlay"></div>
     <Container>

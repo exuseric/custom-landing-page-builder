@@ -1,0 +1,18 @@
+---
+import './hero.css';
+import Container from "@components/Container.astro";
+import CustomImage from "@components/CustomImage.astro";
+const { title, excerpt, image } = Astro.props;
+---
+<header class="blocky-hero">
+    <Container>
+        <div class="blocky-hero__wrapper">
+            <div class="blocky-hero__content">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+            </div>
+            <div class="blocky-hero__image">
+                <CustomImage image={image} classlist="blocky-hero__image-image" size="large" eager={false} />
+            </div>
+        </div>
+</header>

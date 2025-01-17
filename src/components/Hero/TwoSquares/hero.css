@@ -5,8 +5,7 @@
     grid-template-rows: repeat(2, auto);
     align-items: center;
     padding: calc(var(--container-padding-block) / 1.618) 0;
-    /* border-top: 1px solid var(--clr-neutral-400); */
-    border-bottom: 1px solid var(--clr-neutral-400);
+
 }
 
 .two-square__content {

@@ -1,0 +1,33 @@
+---
+interface Card {
+    [key: string]: {
+        [key: string]: any;
+    };
+}
+import "./alternating.css";
+import CustomImage from "@components/CustomImage.astro";
+const { cards } = Astro.props;
+---
+
+<div class="alternating-card-grid">
+    {
+        cards.map((card: Card) => (
+            <div class="alternating-card" data-animate-on-scroll>
+                <div class="alternating-card__image-wrapper">
+                    {card.expand.image && (
+                        <CustomImage
+                            eager={false}
+                            image={card.expand.image}
+                            size="large"
+                            classlist="alternating-card-grid__image_component"
+                        />
+                    )}
+                </div>
+                <article>
+                    <h3>{card.title}</h3>
+                    <slot set:html={card.content} />
+                </article>
+            </div>
+        ))
+    }
+</div>

@@ -17,6 +17,7 @@ interface LandingPage {
     contact_title: string;
     contact_style: string;
     core_values: string;
+    footer_style: string;
     expand: {
         logo: {
             [key: string]: string;
@@ -36,7 +37,7 @@ interface LandingPage {
     }
 }
 const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = 'rep3542j7b9862r'
+const pageId = 's6n7u3a5qv021qy'
 
 const parentUrls: Record<string, string> = {
     ke: 'https://www.yellowpageskenya.com/',

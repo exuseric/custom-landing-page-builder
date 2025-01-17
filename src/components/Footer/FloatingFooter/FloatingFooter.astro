@@ -1,0 +1,38 @@
+---
+interface Props {
+    title: string;
+    parent_site_title: string;
+    parent_site_url: string;
+}
+import Container from "@components/Container.astro";
+import "./footer.css";
+import { Image } from "astro:assets";
+const { title, parent_site_title, parent_site_url } = Astro.props;
+---
+
+<footer class="floating_footer">
+    <Container>
+        <div class="breakout floating_footer__content">
+            <p>
+                &copy; {new Date().getFullYear()} {title.split("|")[0].trim()}. All Rights Reserved.
+            </p>
+            <a
+                href={parent_site_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="floating_footer__logo"
+            >
+                <Image
+                    src="/yellow-pages-logo.webp"
+                    alt="yellow pages logo"
+                    width={512}
+                    height={512}
+                    class="floating_footer__logo-image"
+                />
+                <span class="floating_footer__logo-text"
+                    >Designed by {parent_site_title}</span
+                >
+            </a>
+        </div>
+    </Container>
+</footer>

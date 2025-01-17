@@ -1,4 +1,5 @@
 ---
+import {spring} from "motion";
 import { getData } from "@src/utils/pocketbase";
 import { SEO } from "astro-seo";
 import { AstroFont } from "astro-font";
@@ -122,7 +123,7 @@ const record = await getData();
 							path: fonts.bold,
 						},
 					],
-					preload: false,
+					preload: true,
 					display: "swap",
 					selector: "body",
 					fallback: "sans-serif",
@@ -150,8 +151,6 @@ const record = await getData();
 			sections={record.expand.sections}
 			core_values={record.core_values}
 			/>
-			<!-- 
-			-->
 			<ContactSection
 				title={record.contact_title}
 				info={record.expand.contact_info}
@@ -159,7 +158,17 @@ const record = await getData();
 				style={record.contact_style}
 			/>
 		</main> 
-		<Footer company={record.company} title={record.title} />
+		<Footer company={record.company} title={record.title} style={record.footer_style} />
 	</body>
 </html>
-<style define:vars={{ themeColor: record.theme_color }} is:global></style>
+<style define:vars={{ themeColor: record.theme_color, spring: spring(0.5, 0.8)}} is:global></style>
+<script>
+    import { animate, scroll, stagger } from "motion";
+    const animateOnScrollItems = document.querySelectorAll("[data-animate-on-scroll]");
+    animateOnScrollItems.forEach((item) => {
+        scroll(animate(item, { opacity: [0, 1, 1, 0] }, {ease: "linear", duration: 0.75, delay: stagger(0.5)}), {
+            target: item,
+            offset: ["start end", "end end", "start start", "end start"],
+        })
+    })
+</script>

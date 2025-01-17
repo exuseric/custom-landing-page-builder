@@ -14,21 +14,13 @@ console.log(data.expand.image)
         <div class="vertical_cta__wrapper">
             <div class="vertical_cta__images">
                 {data.expand.image.map((image: any, idx: number) => (
-                    <CustomImage
-                        image={image}
-                        classlist={`vertical_cta__image_${idx}`}
-                        size="large"
-                        fit={image.fit}
-                        position={image.position}
-                    />
+                        <CustomImage
+                            image={image}
+                            classlist={`vertical_cta__image_${idx}`}
+                            size="large"
+                            eager={true}
+                        />
                 ))}
-                <!-- <CustomImage
-                    image={data.expand.image}
-                    classlist="vertical_cta__image_2"
-                    size="large"
-                    fit={data.expand.image.fit}
-                    position={data.expand.image.position}
-                /> -->
             </div>
             <div class="vertical_cta__content">
                 {

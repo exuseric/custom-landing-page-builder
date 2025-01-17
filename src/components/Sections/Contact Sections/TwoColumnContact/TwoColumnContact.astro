@@ -2,28 +2,27 @@
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
 import Container from "@components/Container.astro";
 import "./contact.css";
+import TopRightAnimatedSvg from "@components/TopRightAnimatedSvg.astro";
 
 const { title, info, location } = Astro.props;
-const loc = ""
-location.length <= 1 && location.map((loc: any) => loc=loc)
+// const loc = ""
+// location.length <= 1 && location.map((loc: any) => loc=loc)
 ---
 
-<div class="default_contact container" id="contact-us" data-highlight="true">
+<div class="two_column_contact container" id="contact-us" data-highlight="true">
+    <TopRightAnimatedSvg />
     <Container>
-        <div
-            class="default_contact__content"
-            data-two-column={location.length <= 1 ? "true" : "false"}
-        >
+        <div class="two_column_contact__content">
             <article>
-                <h2>{title}</h2>
-                <InfoCard cards={info} />
+                <slot set:html={location[0].content} />
+                <InfoCard cards={info} direction="column" />
             </article>
-            
-            <div class="default_contact__location">
+
+            <div class="two_column_contact__location">
                 {
                     location.map((location: any) => (
                         <div class="location">
-                            <slot set:html={location.content} />
+                            {/* <slot set:html={location.content} /> */}
                             <slot set:html={location.title} />
                         </div>
                     ))

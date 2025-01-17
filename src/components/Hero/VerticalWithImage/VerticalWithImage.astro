@@ -22,19 +22,29 @@ const url = getImageUrl({
 const { width, height } = await inferRemoteSize(url);
 ---
 
-<header class='vertical_hero'>
+<header class="vertical_hero">
+    <Container>
     <div class="vertical_hero__wrapper">
-        <Container>
             <article class="vertical_hero__content">
                 <h1>{title}</h1>
                 <div>
                     <p>{excerpt}</p>
-                    <a class="btn btn-secondary btn-md" href="#contact-us" style="margin-top: var(--size-3);">Let's Work Together</a>
+                    <a
+                        class="btn btn-secondary btn-md"
+                        href="#contact-us"
+                        style="margin-top: var(--size-3);"
+                        >Let's Work Together</a
+                    >
                 </div>
             </article>
-        </Container>
-        <div class="vertical_hero__image_wrapper full-width">
-            <CustomImage classlist="vertical_hero__image" eager={true} image={image} size="large" />
+            <div class="vertical_hero__image_wrapper breakout">
+                <CustomImage
+                    classlist="vertical_hero__image"
+                    eager={true}
+                    image={image}
+                    size="large"
+                />
+            </div>
         </div>
-    </div>
+    </Container>
 </header>

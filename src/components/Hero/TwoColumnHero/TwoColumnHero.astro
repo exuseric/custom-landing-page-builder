@@ -31,7 +31,7 @@ const { width, height } = await inferRemoteSize(url);
             </article>
 
             <div class="two_column_hero__image_wrapper">
-                <CustomImage image={image} classlist="two_column_hero__image" size="large" fit={image.fit} position={image.position} />
+                <CustomImage image={image} classlist="two_column_hero__image" size="large" eager={true} />
             </div>
         </div>
     </Container>

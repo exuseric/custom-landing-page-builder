@@ -1,7 +1,9 @@
 ---
 import DefaultContact from "./DefaultContact/DefaultContact.astro"
+import TwoColumnContact from "./TwoColumnContact/TwoColumnContact.astro"
 
 const {title, info, location, style} = Astro.props
 ---
 
+{style === "two column" && <TwoColumnContact title={title} info={info} location={location} />}
 {style === "default" && <DefaultContact title={title} info={info} location={location} />}

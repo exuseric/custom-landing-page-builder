@@ -1,0 +1,99 @@
+---
+import Container from "@components/Container.astro";
+import { Icon } from "astro-icon/components";
+import "./nav.css";
+import CustomImage from "@components/CustomImage.astro";
+
+interface Props {
+    fixedMenu?: boolean;
+    data: {
+        links: [string];
+        logo: {
+            [key: string]: string;
+        };
+        title: string;
+    };
+}
+
+const {
+    data: { links, logo, title },
+    fixedMenu,
+} = Astro.props;
+
+const pageLinks = links.map((link) =>
+    link === "home"
+        ? { name: "Home", href: "/" }
+        : { name: link, href: `#${link.split(" ").join("-")}` },
+);
+---
+
+<nav
+    class="blocky-nav"
+    data-nav-bar
+    data-nav
+    data-is-active="false"
+    data-fixed-menu={fixedMenu}
+>
+    <Container>
+        <div class="blocky-nav__wrapper">
+            <a class="blocky-nav__logo">
+                <CustomImage
+                    eager={true}
+                    image={logo}
+                    classlist="blocky-nav__logo-image"
+                    size="small"
+                />
+                <span class="blocky-nav__logo-text">{title}</span>
+            </a>
+            <menu class="blocky-nav__menu" data-menu data-is-active="false">
+                {
+                    pageLinks.map((link, index) => (
+                        <li>
+                            <a
+                                title={link.href}
+                                href={link.href}
+                                class={
+                                    index === pageLinks.length - 1
+                                        ? "blocky-nav__link blocky-nav__link--cta"
+                                        : "blocky-nav__link"
+                                }
+                            >
+                                <div />
+                                <span>{link.name}</span>
+                            </a>
+                        </li>
+                    ))
+                }
+            </menu>
+            <div class="blocky-nav__actions">
+                <button
+                    id="sticky_nav__toggle"
+                    class="sticky_nav__toggle btn btn-primary btn-icon"
+                    data-menu-toggle
+                    data-is-active="false"
+                    aria-label="toggle navigation"
+                    aria-expanded="false"
+                >
+                    <Icon
+                        name="mdi:menu"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-toggle-icon
+                        data-is-active="true"
+                    />
+                    <Icon
+                        name="mdi:close"
+                        aria-hidden="true"
+                        focusable="false"
+                        data-toggle-icon
+                        data-is-active="false"
+                    />
+                </button>
+            </div>
+        </div>
+    </Container>
+</nav>
+
+<script>
+    import "@src/utils/navigationEvents";
+</script>

@@ -20,6 +20,10 @@ const {
     data: { links, logo, title },
     fixedMenu,
 } = Astro.props;
+
+const pageLinks = links.map(link => 
+    link === "home" ? {name: "Home", href: "/"} : {name: link, href:`#${link.split(" ").join("-")}`}
+);
 ---
 
 <nav
@@ -42,21 +46,19 @@ const {
             </a>
             <menu class="sticky-nav__menu" data-menu data-is-active="false">
                 {
-                    links.map((item, index) => (
+                    pageLinks.map((link, index) => (
                         <li>
                             <a
-                                href={
-                                    index > 0
-                                        ? `#${item.split(" ").join("-")}`
-                                        : "/"
-                                }
+                                title={link.href}
+                                href={link.href}
                                 class={
-                                    index === links.length - 1
-                                        ? "btn btn-secondary btn-md"
+                                    index === pageLinks.length - 1
+                                        ? "sticky-nav__link sticky-nav__link--cta"
                                         : "sticky-nav__link"
                                 }
                             >
-                                <span>{item}</span>
+                                <div />
+                                <span>{link.name}</span>
                             </a>
                         </li>
                     ))
@@ -98,11 +100,11 @@ const {
 
     const toggleScroll = (el: HTMLElement) => {
         if (window.scrollY > el.getBoundingClientRect().height * 0.5) {
-                el.dataset.isActive = "true";
-            } else {
-                el.dataset.isActive = "false";
-            }
-    }
+            el.dataset.isActive = "true";
+        } else {
+            el.dataset.isActive = "false";
+        }
+    };
 
     document.addEventListener("DOMContentLoaded", (event) => {
         const nav = document.querySelector("[data-nav-bar]") as HTMLElement;
@@ -130,9 +132,9 @@ const {
         // Scroll Listener
         document.addEventListener("scroll", () => {
             if (window.scrollY > nav.getBoundingClientRect().height * 0.5) {
-                toggleScroll(nav)
+                toggleScroll(nav);
             } else {
-                toggleScroll(nav)
+                toggleScroll(nav);
             }
         });
     });

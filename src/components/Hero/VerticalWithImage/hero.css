@@ -30,12 +30,11 @@
     width: 100%;
 }
 
-.vertical_hero__image,
-picture {
+.vertical_hero__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
 
     /* border-radius: var(--size-8); */
     overflow: hidden;

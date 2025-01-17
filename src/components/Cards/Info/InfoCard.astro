@@ -4,14 +4,15 @@ interface Card {
         [key: string]: any;
     };
 }
-import { Picture } from "astro:assets";
+interface Props {
+    cards: Card[];
+    direction: "column" | "row";
+}
 import  "./card.css";
-import { getImageUrl } from "@utils/pocketbase";
-import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
-const { cards } = Astro.props;
+const { cards, direction } = Astro.props;
 ---
-<ul class="info_card">
+<ul class="info_card" style={`--direction: ${direction};`}>
    {cards.map((card: Card) => (
       <li>
          <Icon name={card.icon_name} aria-hidden="true" focusable="false" />

@@ -43,50 +43,58 @@
 
     --snappy-bounce-ease: cubic-bezier(.6, -0.38, .37, 1.36);
 
-    --clr-primary-hsl: 197, 72%, 32%;
-    --clr-secondary-hsl: 17, 90%, 50%;
-    --clr-tertiary-hsl: 127, 50%, 40%;
-
     /* Primary Color */
-    --clr-primary: hsl(197, 72%, 32%);
-    --clr-primary-lighter: hsl(197, 72%, 50%);
-    --clr-primary-light: hsl(197, 72%, 40%);
-    --clr-primary-dark: hsl(197, 72%, 25%);
-    --clr-primary-darker: hsl(197, 72%, 20%);
+    --clr-primary-hsl: 0 73% 32%;
+    --clr-primary: var(--themeColor);
+    --clr-primary-text: oklch(from var(--clr-primary) calc(l + .99) c h);
 
-    /* Secondary Color - Complementary Contrast */
-    --clr-secondary: hsl(17, 90%, 50%);
-    --clr-secondary-lighter: hsl(17, 90%, 75%);
-    --clr-secondary-light: hsl(17, 90%, 60%);
-    --clr-secondary-dark: hsl(17, 90%, 40%);
-    --clr-secondary-darker: hsl(17, 90%, 30%);
+    --clr-primary-lighter: oklch(from var(--clr-primary) 95% c h);
+    --clr-primary-lighter-text: oklch(from var(--clr-primary-lighter) calc(l - .60) c h);
 
-    /* Tertiary Color - Analogous Harmony */
-    --clr-tertiary: hsl(127, 50%, 40%);
-    --clr-tertiary-lighter: hsl(127, 50%, 60%);
-    --clr-tertiary-light: hsl(127, 50%, 50%);
-    --clr-tertiary-dark: hsl(127, 50%, 30%);
-    --clr-tertiary-darker: hsl(127, 50%, 25%);
+    --clr-primary-light: oklch(from var(--clr-primary) 85% c h);
+    --clr-primary-light-text: oklch(from var(--clr-primary-light) calc(l - .60) c h);
 
-    /* Neutral Colors - Tinted */
-    --clr-neutral-light: hsl(197, 15%, 98%);
-    /* Soft blue tint */
-    --clr-neutral: hsl(197, 15%, 95%);
-    --clr-neutral-dark: hsl(197, 15%, 35%);
-    --clr-neutral-darker: hsl(197, 15%, 25%);
+    --clr-primary-dark: oklch(from var(--clr-primary) 45% c h);
+    --clr-primary-dark-text: oklch(from var(--clr-primary-dark) calc(l + .60) c h);
 
-    /* Neutral Shades - Tinted */
-    --clr-neutral-50: hsl(197, 15%, 100%);
-    /* Subtle blue tint */
-    --clr-neutral-100: hsl(197, 15%, 98%);
-    --clr-neutral-200: hsl(197, 15%, 95%);
-    --clr-neutral-300: hsl(197, 15%, 90%);
-    --clr-neutral-400: hsl(197, 15%, 80%);
-    --clr-neutral-500: hsl(197, 15%, 70%);
-    --clr-neutral-600: hsl(197, 15%, 50%);
-    --clr-neutral-700: hsl(197, 15%, 35%);
-    --clr-neutral-800: hsl(197, 15%, 25%);
-    --clr-neutral-900: hsl(197, 15%, 15%);
+    --clr-primary-darker: oklch(from var(--clr-primary) 35% c h);
+    --clr-primary-darker-text: oklch(from var(--clr-primary-darker) calc(l + .60) c h);
+
+    
+    /* Secondary Color - Complementary Contrast (Olive Green) */
+    --clr-secondary-hsl: 60 50% 40%;
+    --clr-secondary: oklch(from var(--themeColor) l c calc(h - 45));
+    --clr-secondary-lighter: oklch(from var(--clr-secodary) 75% c h);
+    --clr-secondary-light: oklch(from var(--clr-secodary) 65% c h);
+    --clr-secondary-dark: oklch(from var(--clr-secodary) 45% c h);
+    --clr-secondary-darker: oklch(from var(--clr-secodary) 35% c h);
+
+    /* Tertiary Color - Analogous Harmony (Dark Orange) */
+    --clr-tertiary-hsl: 30 90% 45%;
+    --clr-tertiary: oklch(from var(--themeColor) l c calc(h + 45));
+    --clr-tertiary-lighter: oklch(from var(--clr-tertiary) 75% c h);
+    --clr-tertiary-light: oklch(from var(--clr-tertiary) 65% c h);
+    --clr-tertiary-dark: oklch(from var(--clr-tertiary) 45% c h);
+    --clr-tertiary-darker: oklch(from var(--clr-tertiary) 35% c h);
+
+    /* Neutral Colors - Warm Tints */
+    --clr-neutral-light: hsl(0, 20%, 98%);
+    --clr-neutral: hsl(0, 20%, 95%);
+    --clr-neutral-dark: hsl(0, 20%, 35%);
+    --clr-neutral-darker: hsl(0, 20%, 25%);
+
+    /* Neutral Shades - Warm Tints */
+    --clr-neutral-50: hsl(0, 5%, 100%);
+    --clr-neutral-100: hsl(0, 5%, 98%);
+    --clr-neutral-200: hsl(0, 5%, 95%);
+    --clr-neutral-300: hsl(0, 5%, 90%);
+    --clr-neutral-400: hsl(0, 5%, 80%);
+    --clr-neutral-500: hsl(0, 5%, 70%);
+    --clr-neutral-600: hsl(0, 5%, 50%);
+    --clr-neutral-700: hsl(0, 5%, 35%);
+    --clr-neutral-800: hsl(0, 5%, 25%);
+    --clr-neutral-900: hsl(0, 5%, 15%);
+
 
 }
 
@@ -110,6 +118,9 @@ html {
 }
 
 body {
+    --dark: hsl(var(--clr-primary-hsl) / 0.1);
+    --light: hsl(var(--clr-primary-hsl) / 0.4);
+    
     font-family: 'Atkinson Hyperlegible', sans-serif;
     line-height: 1.5;
     color: var(--clr-neutral-900);
@@ -118,7 +129,11 @@ body {
 }
 
 .container {
-    /* scroll-snap-align: start center; */
+    position: relative;
+    isolation: isolate;
+    
+    scroll-snap-align: start center;
+    /* margin-block: var(--container-padding-block); */
     padding-block: var(--container-padding-block);
 }
 
@@ -148,11 +163,11 @@ h1 {
 .content-grid {
     --padding-inline: 1rem;
     --content-max-width: 1100px;
-    --breakout-max-width: 85ch;
+    --breakout-max-width: 40px;
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
     display: grid;
-    grid-template-columns: [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+    grid-template-columns: [full-width-start] minmax(var(--padding-inline),1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
 }
 
 .content-grid> :not(.breakout, .full-width) {
@@ -167,7 +182,7 @@ h1 {
     grid-column: full-width;
 }
 
-[data-highlight] {
+[data-highlight="true"] {
     color: var(--clr-neutral-50);
     background-color: var(--clr-primary-darker);
 }
@@ -187,7 +202,7 @@ button:hover {
     background-color: var(--clr-secondary);
 }
 
-[data-highlight] button:hover {
+[data-highlight="true"] button:hover {
     color: var(--clr-neutral-900);
     background-color: var(--clr-secondary-lighter);
 }
@@ -213,12 +228,12 @@ button.button__icon>* {
 
 a:not([class]) {
     text-decoration: none;
-    color: var(--clr-neutral-900);
+    color: var(--clr-secondary-darker);
     font-weight: 500;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-[data-highlight] a:not([class]) {
+[data-highlight="true"] a:not([class]) {
     color: var(--clr-neutral-50);
 }
 
@@ -227,7 +242,7 @@ a:not([class]):hover {
     text-decoration: underline;
 }
 
-[data-highlight] * a:not([class]):hover {
+[data-highlight="true"] * a:not([class]):hover {
     color: var(--clr-secondary-lighter);
 }
 
@@ -238,11 +253,11 @@ a:focus {
 
 a:not([class]):visited,
 a:not([class]):active {
-    color: var(--clr-tertiary);
+    color: var(--clr-secondary-darker);
 }
 
-[data-highlight] a:not([class]):visited,
-[data-highlight] a:not([class]):active {
+[data-highlight="true"] a:not([class]):visited,
+[data-highlight="true"] a:not([class]):active {
     color: var(--clr-tertiary-lighter);
 }
 
@@ -385,13 +400,16 @@ button:disabled,
 [data-menu-toggle] {
     visibility: visible;
 }
-
+[data-animate-on-scroll] {
+    transition: all var(--spring);
+}
 @media (min-width: 768px) {
     [data-menu-toggle] {
         visibility: hidden;
         display: none;
     }
 }
+
 @media (prefers-reduced-motion: reduce) {
     :root {
         --snappy-bounce-ease: linear;

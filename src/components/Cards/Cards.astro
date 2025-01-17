@@ -6,6 +6,7 @@ interface Props {
         [key: string]: any
     }
 }
+import Alternating from "./Alternating/Alternating.astro";
 import Basic from "./Basic/Basic.astro";
 import BlockyCards from "./Blocky/BlockyCards.astro";
 import InfoCard from "./Info/InfoCard.astro";
@@ -17,4 +18,4 @@ const { card_type, cards, data } = Astro.props;
 {card_type === "blocky" && <BlockyCards cards={cards} />}
 {card_type === "basic" && <Basic cards={cards} />}
 {card_type === "info" && <InfoCard cards={cards} />}
-<!-- {card_type === "stats_grid" && <StatsGrid cards={cards} data={data} />} -->
+{card_type === "alternating" && <Alternating cards={cards} />}

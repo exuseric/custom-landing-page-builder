@@ -77,11 +77,54 @@
 }
 
 .sticky-nav__link {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
     text-decoration: none;
     text-transform: capitalize;
 
     color: currentColor;
     font-weight: var(--heading-large-weight);
+    overflow: hidden;
+
+    padding: var(--size-1) var(--size-3);
+}
+
+.sticky-nav__link--cta {
+    color: var(--clr-neutral-50);
+    background-color: var(--clr-primary);
+}
+
+.sticky-nav__link span {
+    position: relative;
+    transition: color 0.6s cubic-bezier(0.53, 0.21, 0, 1);
+}
+
+.sticky-nav__link::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background: var(--clr-secondary-dark);
+    transform: scaleX(0);
+    transform-origin: 100% 100%;
+    transition: transform 0.6s cubic-bezier(0.53, 0.21, 0, 1);
+}
+
+.sticky-nav[data-is-active="true"] .sticky-nav__link:hover::before,
+.sticky-nav[data-is-active="false"] .sticky-nav__link:hover::before {
+    transform-origin: 0 0;
+    transform: scaleX(1);
+}
+
+.sticky-nav[data-is-active="true"] .sticky-nav__link:hover span,
+.sticky-nav[data-is-active="false"] .sticky-nav__link:hover span {
+    color: var(--clr-neutral-50);
 }
 
 .sticky-nav__menu {
@@ -115,11 +158,13 @@
         padding: var(--size-3) 0;
         background-color: var(--clr-neutral-50);
     }
+
     .sticky-nav[data-fixed-menu="true"][data-is-active="true"] .sticky-nav__menu {
         color: var(--clr-neutral-900);
         background-color: transparent;
         padding: var(--size-0);
     }
+
     .sticky-nav[data-fixed-menu="true"][data-is-active="false"] .sticky-nav__menu {
         color: var(--clr-neutral-50);
         background-color: transparent;
@@ -162,7 +207,7 @@
         flex-flow: row wrap;
         align-items: center;
         justify-content: center;
-        gap: var(--size-3);
+        gap: var(--size-1);
 
         justify-self: end;
         width: fit-content;
@@ -173,8 +218,14 @@
         cursor: pointer;
     }
 
-    .sticky-nav__link:hover,
-    .sticky-nav__logo:hover {
+    /* .sticky-nav[data-is-active="true"] .sticky-nav__link:hover,
+    .sticky-nav[data-is-active="true"].sticky-nav__logo:hover {
         color: var(--clr-secondary-dark);
     }
+
+    .sticky-nav[data-is-active="false"] .sticky-nav__link:hover,
+    .sticky-nav[data-is-active="false"].sticky-nav__logo:hover {
+        color: var(--clr-secondary-lighter);
+    } */
+
 }
