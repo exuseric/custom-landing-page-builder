@@ -6,11 +6,11 @@ interface Card {
 }
 interface Props {
     cards: Card[];
-    direction: "column" | "row";
+    direction?: "column" | "row";
 }
 import  "./card.css";
 import { Icon } from "astro-icon/components";
-const { cards, direction } = Astro.props;
+const { cards, direction = "row" } = Astro.props;
 ---
 <ul class="info_card" style={`--direction: ${direction};`}>
    {cards.map((card: Card) => (

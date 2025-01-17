@@ -14,7 +14,7 @@ interface Props {
     };
 }
 
-const { links, logo, title } = Astro.props.data;
+const { links, logo } = Astro.props.data;
 const { width, height } = await inferRemoteSize(
     getImageUrl({
         collection: logo,
@@ -60,7 +60,7 @@ const { width, height } = await inferRemoteSize(
                 }
             </menu>
 
-            <button class="nav__toggle button__icon" data-is-active="false">
+            <button type="button" class="nav__toggle button__icon" data-is-active="false">
                 <Icon
                     name="mdi:menu"
                     aria-hidden="true"

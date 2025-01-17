@@ -64,10 +64,10 @@
     /* Secondary Color - Complementary Contrast (Olive Green) */
     --clr-secondary-hsl: 60 50% 40%;
     --clr-secondary: oklch(from var(--themeColor) l c calc(h - 45));
-    --clr-secondary-lighter: oklch(from var(--clr-secodary) 75% c h);
-    --clr-secondary-light: oklch(from var(--clr-secodary) 65% c h);
-    --clr-secondary-dark: oklch(from var(--clr-secodary) 45% c h);
-    --clr-secondary-darker: oklch(from var(--clr-secodary) 35% c h);
+    --clr-secondary-lighter: oklch(from var(--clr-secondary) 75% c h);
+    --clr-secondary-light: oklch(from var(--clr-secondary) 65% c h);
+    --clr-secondary-dark: oklch(from var(--clr-secondary) 45% c h);
+    --clr-secondary-darker: oklch(from var(--clr-secondary) 35% c h);
 
     /* Tertiary Color - Analogous Harmony (Dark Orange) */
     --clr-tertiary-hsl: 30 90% 45%;

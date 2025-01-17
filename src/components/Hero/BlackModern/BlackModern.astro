@@ -1,8 +1,6 @@
 ---
 import Container from "@components/Container.astro";
 import "./hero.css";
-import { inferRemoteSize, Picture } from "astro:assets";
-import { getImageUrl } from "@utils/pocketbase";
 
 interface Props {
     title: string;
@@ -11,14 +9,7 @@ interface Props {
         [key: string]: string;
     };
 }
-const { title, excerpt, image } = Astro.props;
-
-const url = getImageUrl({
-    collection: image,
-    filename: image.file,
-});
-
-const { width, height } = await inferRemoteSize(url);
+const { title, excerpt } = Astro.props;
 ---
 
 <header class="black_modern">
@@ -28,21 +19,6 @@ const { width, height } = await inferRemoteSize(url);
                 <h1>{title}</h1>
                 <p>{excerpt}</p>
             </article>
-            <!-- <div class="black_modern__image_wrapper full-width">
-                <Picture
-                src={url}
-                alt={image.title}
-                width={width}
-                height={height}
-                formats={["avif", "webp"]}
-                widths={[350, 800, width]}
-                sizes={`(max-width: 1280px) 350px, ${width}px`}
-                quality={80}
-                class="black_modern__image"
-                loading="eager"
-                decoding="sync"
-                />
-                </div> -->
         </div>
     </Container>
 </header>

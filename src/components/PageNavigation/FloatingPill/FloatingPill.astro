@@ -1,9 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
-import { getImageUrl } from "@utils/pocketbase";
 import "./nav.css";
-import { inferRemoteSize, Picture } from "astro:assets";
 import CustomImage from "@components/CustomImage.astro";
 interface Props {
     [key: string]: {
@@ -16,10 +14,6 @@ interface Props {
 }
 
 const { links, logo, title } = Astro.props.data;
-const { width, height } = await inferRemoteSize(getImageUrl({
-    collection: logo,
-    filename: logo && logo.file,
-}));
 ---
 
 <header class="floating_nav" data-is-active="false">
@@ -51,7 +45,7 @@ const { width, height } = await inferRemoteSize(getImageUrl({
                 }
             </menu>
 
-            <button id="floating_nav__toggle" class="floating_nav__toggle button__icon" data-is-active="false" aria-label="toggle navigation">
+            <button type="button" id="floating_nav__toggle" class="floating_nav__toggle button__icon" data-is-active="false" aria-label="toggle navigation">
                 <Icon
                     name="mdi:menu"
                     aria-hidden="true"

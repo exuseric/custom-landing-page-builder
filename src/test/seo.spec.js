@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom';
 import fs from 'fs';
 import path from 'path';
 
-const htmlPath = path.resolve(__dirname, '../../build/allsmilesdental.yellowpageskenya.com/index.html');
+const htmlPath = path.resolve(__dirname, '../../build/abdulrahmansaad.yellowpageskenya.com/index.html');
 const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
 const dom = new JSDOM(htmlContent);
 const document = dom.window.document;
@@ -19,6 +19,12 @@ describe('SEO Checklist Tests', () => {
         const metaDesc = document.querySelector('meta[name="description"]');
         expect(metaDesc).not.toBeNull();
         expect(metaDesc.content.length).toBeLessThanOrEqual(160);
+    });
+
+    it('Search console meta tag', () => {
+        const metaDesc = document.querySelector('meta[name="google-site-verification"]');
+        expect(metaDesc).not.toBeNull();
+        expect(metaDesc.content.length).not.toBeNull();
     });
 
     it('One H1 tag on the page', () => {

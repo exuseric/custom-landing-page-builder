@@ -8,15 +8,6 @@ import { Picture } from "astro:assets";
 import "../Basic/basic.css";
 import { getImageUrl } from "@utils/pocketbase";
 const { cards } = Astro.props;
-
-const url = ({ collection, image }: { collection: object; image: string }) =>
-    getImageUrl({ collection, filename: image });
-const cleanCards = cards.map(({ title, body, expand: { image } }: Card) => ({
-    title,
-    body,
-    image,
-}));
-
 ---
 
 <div class="basic_card">

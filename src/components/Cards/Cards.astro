@@ -12,7 +12,7 @@ import BlockyCards from "./Blocky/BlockyCards.astro";
 import InfoCard from "./Info/InfoCard.astro";
 // import StatsGrid from "./StatsGrid/StatsGrid.astro";
 
-const { card_type, cards, data } = Astro.props;
+const { card_type, cards } = Astro.props;
 ---
 
 {card_type === "blocky" && <BlockyCards cards={cards} />}

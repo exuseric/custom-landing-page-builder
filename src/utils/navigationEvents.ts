@@ -10,7 +10,11 @@ const toggleScroll = (el: HTMLElement) => {
     }
 };
 
-document.addEventListener("DOMContentLoaded", (event) => {
+const toggleAria = (el: HTMLElement) => {
+    el.ariaExpanded = String(!(el.ariaExpanded === "true"));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector("[data-nav-bar]") as HTMLElement;
     const toggle = document.querySelector(
         "[data-menu-toggle]",
@@ -23,7 +27,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Click Listener
     toggle.addEventListener("click", function () {
         toggleActive(menu); // Toggle Menu
-        this.ariaExpanded = String(!(this.ariaExpanded === "true")); // Toggle Aria
+        toggleAria(this); // Toggle Aria
         toggleActive(this); // Toggle Active
 
         for (const icon of toggleIcons) {

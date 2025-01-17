@@ -8,7 +8,7 @@ import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import TwoSquares from "./TwoSquares/TwoSquares.astro";
 import BlockyHero from "./BlockyHero/BlockyHero.astro";
 
-const { title, excerpt, image, type, core_values } = Astro.props;
+const { title, excerpt, image, type } = Astro.props;
 ---
 {type === "blocky" && <BlockyHero title={title} excerpt={excerpt} image={image} />}
 {type === "gradient" && (<Gradient title={title} excerpt={excerpt} image={image} />)}

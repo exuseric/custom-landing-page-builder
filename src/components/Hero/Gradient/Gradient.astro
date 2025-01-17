@@ -1,7 +1,6 @@
 ---
 import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
-import CustomImage from "@components/CustomImage.astro";
 import "./styles.css";
 
 interface Props {
@@ -12,7 +11,7 @@ interface Props {
     };
 }
 
-const { title, excerpt, image } = Astro.props;
+const { title, excerpt } = Astro.props;
 
 const cards = [
     {

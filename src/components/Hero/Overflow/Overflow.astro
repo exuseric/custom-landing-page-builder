@@ -1,8 +1,6 @@
 ---
 import Container from "@components/Container.astro";
 import "./hero.css";
-import { inferRemoteSize, Picture } from "astro:assets";
-import { getImageUrl } from "@utils/pocketbase";
 import CustomImage from "@components/CustomImage.astro";
 
 interface Props {
@@ -13,13 +11,6 @@ interface Props {
     };
 }
 const { title, excerpt, image } = Astro.props;
-
-const url = getImageUrl({
-    collection: image,
-    filename: image.file,
-});
-
-const { width, height } = await inferRemoteSize(url);
 ---
 
 <header class="overflow_hero">

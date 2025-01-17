@@ -1,10 +1,8 @@
 ---
 import Container from "@components/Container.astro";
 import "./partners.css";
-import { Picture, inferRemoteSize } from "astro:assets";
-import { getImageUrl } from "@utils/pocketbase";
 import CustomImage from "@components/CustomImage.astro";
-const { page, data } = Astro.props;
+const { data } = Astro.props;
 
 interface Card {
     expand: {

@@ -12,7 +12,8 @@ export default defineConfig({
   site: record.url,
   build: {
     assets: 'assets',
-    inlineStylesheets: 'never'
+    inlineStylesheets: 'never',
+    
   },
   image: {
     domains: ["127.0.0.1"]
