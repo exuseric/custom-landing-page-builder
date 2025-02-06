@@ -14,19 +14,13 @@ interface Props {
 import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
 import BlockyNav from "./BlockyNav/BlockyNav.astro";
 const props = Astro.props;
+
+const blackText =
+    props.hero_style === "two column" || props.hero_style === "two square" || props.hero_style === "blocky";
 ---
 
-{
-    props.hero_style === "blocky" && (
-        <BlockyNav data={props} />
-    )
-}
-
-{
-    props.hero_style !== "blocky" && (
-        <StickyNav
-            data={props}
-            fixedMenu={props.hero_style !== "two square" ? true : false}
-        />
-    )
-}
+<StickyNav
+    data={props}
+    fixedMenu={props.hero_style !== "two square" ? true : false}
+    blackText={blackText}
+/>

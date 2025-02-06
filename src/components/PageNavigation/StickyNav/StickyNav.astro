@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import "./nav.css";
 import CustomImage from "@components/CustomImage.astro";
 interface Props {
+    blackText: boolean;
     fixedMenu: boolean;
     data: {
         links: [string];
@@ -15,12 +16,15 @@ interface Props {
 }
 
 const {
-    data: { links, logo, title },
+    data: { links, logo, title},
     fixedMenu,
+    blackText
 } = Astro.props;
 
-const pageLinks = links.map(link => 
-    link === "home" ? {name: "Home", href: "/"} : {name: link, href:`#${link.split(" ").join("-")}`}
+const pageLinks = links.map((link) =>
+    link === "home"
+        ? { name: "Home", href: "/" }
+        : { name: link, href: `#${link.split(" ").join("-")}` },
 );
 ---
 
@@ -30,17 +34,18 @@ const pageLinks = links.map(link =>
     data-nav
     data-is-active="false"
     data-fixed-menu={fixedMenu}
+    data-black-text={blackText}
 >
     <Container>
         <div class="sticky-nav__wrapper">
-            <a class="sticky-nav__logo">
+            <a class="sticky-nav__logo" href="/">
                 <CustomImage
                     eager={true}
                     image={logo}
                     classlist="sticky-nav__logo-image"
                     size="small"
                 />
-                <span class="sticky-nav__logo-text">{title}</span>
+                <!-- <span class="sticky-nav__logo-text">{title}</span> -->
             </a>
             <menu class="sticky-nav__menu" data-menu data-is-active="false">
                 {
@@ -63,7 +68,8 @@ const pageLinks = links.map(link =>
                 }
             </menu>
             <div class="sticky-nav__actions">
-                <button type="button"
+                <button
+                    type="button"
                     id="sticky_nav__toggle"
                     class="sticky_nav__toggle btn btn-primary btn-icon"
                     data-menu-toggle
@@ -92,5 +98,52 @@ const pageLinks = links.map(link =>
 </nav>
 
 <script>
-    import "@utils/navigationEvents";
+    const toggleActive = (el: HTMLElement) => {
+        el.dataset.isActive = String(!(el.dataset.isActive === "true"));
+    };
+
+    const toggleScroll = (el: HTMLElement) => {
+        if (window.scrollY > el.getBoundingClientRect().height * 0.5) {
+            el.dataset.isActive = "true";
+        } else {
+            el.dataset.isActive = "false";
+        }
+    };
+
+    const toggleAria = (el: HTMLElement) => {
+        el.ariaExpanded = String(!(el.ariaExpanded === "true"));
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector("[data-nav-bar]") as HTMLElement;
+        const toggle = document.querySelector(
+            "[data-menu-toggle]",
+        ) as HTMLButtonElement;
+        const toggleIcons = document.querySelectorAll(
+            "[data-icon]",
+        ) as NodeListOf<HTMLElement>;
+        const menu = document.querySelector("[data-menu]") as HTMLElement;
+
+        // Click Listener
+        toggle.addEventListener("click", function () {
+            toggleActive(menu); // Toggle Menu
+            toggleAria(this); // Toggle Aria
+            toggleActive(this); // Toggle Active
+
+            for (const icon of toggleIcons) {
+                toggleActive(icon); // Toggle Icons
+            }
+        });
+
+        toggleScroll(nav);
+
+        // Scroll Listener
+        document.addEventListener("scroll", () => {
+            if (window.scrollY > nav.getBoundingClientRect().height * 0.5) {
+                toggleScroll(nav);
+            } else {
+                toggleScroll(nav);
+            }
+        });
+    });
 </script>
