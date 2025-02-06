@@ -8,7 +8,8 @@ const record = await getData();
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  outDir: process.cwd() + '\\build\\' + record.url.slice(8),
+  // outDir: process.cwd() + '\\build\\' + record.url.slice(8),
+  outDir: process.cwd() + '\\build\\' + record.finalUrl.slice(8),
   site: record.url,
   build: {
     assets: 'assets',
@@ -19,5 +20,8 @@ export default defineConfig({
     domains: ["127.0.0.1"]
   },
   compressHTML: false,
+  prefetch: {
+    prefetchAll: true
+  },
   integrations: [sitemap(), icon()]
 });
