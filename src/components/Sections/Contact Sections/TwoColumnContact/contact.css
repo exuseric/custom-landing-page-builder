@@ -1,14 +1,26 @@
+.two_column_contact__content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: var(--size-4);
+    padding: var(--container-padding-block) 0;
+}
+
 @media (min-width: 768px) {
     .two_column_contact__content {
         --col-count: 12;
-        --gutter: 12px;
-        --column-width: calc((var(--content-max-width) / var(--col-count)) - var(--gutter));
+        --gutter: 4px;
+        --column-width: calc((var(--content-max-width) - (var(--gutter) * (var(--col-count) - 1))) / var(--col-count));
         display: grid;
         grid-template-columns: repeat(var(--col-count), var(--column-width));
         grid-template-rows: calc(var(--content-max-width) / 2.5);
         gap: var(--gutter);
+        width: var(--content-max-width);
         height: calc(var(--content-max-width) / 2.5);
+        padding: 0;
+        margin: var(--container-padding-block) auto;
     }
+    
 
     .two_column_contact__content article {
         grid-column: 1 / calc(var(--col-count) / 2);
@@ -17,6 +29,10 @@
         flex-flow: column nowrap;
         justify-content: center;
         gap: var(--size-4);
+    }
+
+    .two_column_contact__content article h2 {
+        font-size: var(--heading-medium);
     }
 
     .two_column_contact__location {

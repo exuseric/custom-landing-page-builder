@@ -14,7 +14,7 @@
   display: flex;
   flex-flow: column nowrap;
   gap: var(--spacing-8);
-  padding: var(--spacing-8) var(--spacing-4);
+  padding: var(--container-padding-block) var(--spacing-4);
 
   color: var(--clr-neutral-50);
 }
@@ -66,6 +66,10 @@
 }
 
 @media (min-width: 50em) {
+  .two_column_contact {
+    padding: var(--container-padding-block) 0;
+  }
+  
   .two-column-wrapper {
     display: grid;
     grid-template-columns: 50ch 1fr;
