@@ -9,20 +9,24 @@ import CustomImage from "@components/CustomImage.astro";
 const { cards } = Astro.props;
 ---
 
-<div class="blocky-card">
+<div class="gallery-card__grid">
     {
         cards.map((card: Card) => (
-            <article>
+            <div>
                 {card.expand.image && (
-                    <div class="blocky-card__image">
-                        <CustomImage eager={false} image={card.expand.image} size="medium" classlist="blocky-card__image_component" />
-                    </div>
+                    <CustomImage
+                        eager={false}
+                        image={card.expand.image}
+                        size="medium"
+                        classlist="gallery-card__image"
+                    />
                 )}
-                <div class="blocky-card__content">
+
+                <article>
                     <h3>{card.title}</h3>
                     <slot set:html={card.body} />
-                </div>
-            </article>
+                </article>
+            </div>
         ))
     }
 </div>

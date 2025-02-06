@@ -15,7 +15,7 @@ const { cards, direction = "row" } = Astro.props;
 <ul class="info_card" style={`--direction: ${direction};`}>
    {cards.map((card: Card) => (
       <li>
-         <Icon name={card.icon_name} aria-hidden="true" focusable="false" />
+         {card.icon_name && <Icon name={card.icon_name} aria-hidden="true" focusable="false" />}
          <div>
              <slot set:html={card.content} />
          </div>

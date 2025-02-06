@@ -14,9 +14,11 @@ const { cards } = Astro.props;
         cards.map((card: Card) => (
             <article data-animate-on-scroll>
                 {card.expand.image && (
-                    <CustomImage eager={false} image={card.expand.image} size="medium" classlist="basic_card__image_component" />
+                    <div class="basic_card__image-wrapper">
+                        <CustomImage eager={false} image={card.expand.image} size="medium" classlist="basic_card__image_component" />
+                    </div>
                 )}
-                <div>
+                <div class="basic_card__content">
                     <h3>{card.title}</h3>
                     <slot set:html={card.content} />
                 </div>

@@ -4,7 +4,7 @@ interface Card {
         [key: string]: any;
     };
 }
-import "./alternating.css";
+// import "./alternating.css";
 import CustomImage from "@components/CustomImage.astro";
 const { cards } = Astro.props;
 ---
@@ -12,14 +12,14 @@ const { cards } = Astro.props;
 <div class="alternating-card-grid">
     {
         cards.map((card: Card) => (
-            <div class="alternating-card" data-animate-on-scroll>
+            <div class="alternating-card" data-has-background>
                 <div class="alternating-card__image-wrapper">
                     {card.expand.image && (
                         <CustomImage
                             eager={false}
                             image={card.expand.image}
-                            size="large"
-                            classlist="alternating-card-grid__image_component"
+                            size="medium"
+                            classlist="alternating-card__image"
                         />
                     )}
                 </div>

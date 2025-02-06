@@ -1,0 +1,25 @@
+@media (min-width: 768px) {
+    .three-column-card {
+        display: grid;
+        grid-template-columns: 15% 50% 30%;
+        grid-template-rows: 300px;
+    }
+
+    .three-column-card > * {
+        grid-row: 1 / -1;
+        width: 100%;
+        height: 100%;
+
+        outline: 2px solid red;
+    }
+
+    .three-column-card__image-wrapper--portrait {
+        grid-column: 1 / 2;
+    }
+    .three-column-card__image-wrapper--square {
+        grid-column: -2 / -1;
+    }
+    .three-column-card__content-wrapper {
+        grid-column: 2 / -2;
+    }
+}

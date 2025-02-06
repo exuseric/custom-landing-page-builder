@@ -10,7 +10,9 @@ import Alternating from "./Alternating/Alternating.astro";
 import Basic from "./Basic/Basic.astro";
 import BlockyCards from "./Blocky/BlockyCards.astro";
 import InfoCard from "./Info/InfoCard.astro";
-// import StatsGrid from "./StatsGrid/StatsGrid.astro";
+import Gallery from "./Fancy/Gallery.astro";
+import ContentCard from "./ContentCard/ContentCard.astro";
+import ThreeColumns from "./ThreeColumns/ThreeColumns.astro";
 
 const { card_type, cards } = Astro.props;
 ---
@@ -19,3 +21,6 @@ const { card_type, cards } = Astro.props;
 {card_type === "basic" && <Basic cards={cards} />}
 {card_type === "info" && <InfoCard cards={cards} />}
 {card_type === "alternating" && <Alternating cards={cards} />}
+{card_type === "gallery" && <Gallery cards={cards} /> }
+{card_type === "content" && <ContentCard cards={cards} />}
+<!-- <ThreeColumns cards={cards} /> -->
