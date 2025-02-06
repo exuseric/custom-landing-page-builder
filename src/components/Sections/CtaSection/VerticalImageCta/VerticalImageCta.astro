@@ -3,42 +3,12 @@ import Container from "@components/Container.astro";
 import "./vertical_cta.css";
 import { Icon } from "astro-icon/components";
 import CustomImage from "@components/CustomImage.astro";
+import VerticalImages from "@components/Sections/VerticalImages/VerticalImages.astro";
 const { data, core_values } = Astro.props;
 ---
 
 <div class="vertical_cta" >
     <Container>
-        <div class="vertical_cta__wrapper">
-            <div class="vertical_cta__images">
-                {data.expand.image.map((image: any, idx: number) => (
-                        <CustomImage
-                            image={image}
-                            classlist={`vertical_cta__image_${idx}`}
-                            size="large"
-                            eager={true}
-                        />
-                ))}
-            </div>
-            <div class="vertical_cta__content">
-                {
-                    core_values && (
-                        <ul class="vertical_cta__core_values">
-                            {core_values.split(",").map((value: any) => (
-                                <li>
-                                    <Icon
-                                        name="mdi:check-bold"
-                                        aria-hidden="true"
-                                        focusable="false"
-                                    />
-                                    {value.trim()}
-                                </li>
-                            ))}
-                        </ul>
-                    )
-                }
-                <h2>{data.title}</h2>
-                <slot set:html={data.content} />
-            </div>
-        </div>
+        <VerticalImages data={data} core_values={core_values} />
     </Container>
 </div>

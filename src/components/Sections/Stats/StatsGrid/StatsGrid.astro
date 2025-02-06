@@ -30,7 +30,7 @@ const {cards, data} = Astro.props
                 cards.map((card: Card) => (
                     <div class="stats_grid__card">
                         <div class="icon_wrapper">
-                            <Icon class="icon" name={card.icon_name} aria-hidden="true" focusable="false" />
+                            {card.icon_name && <Icon class="icon" name={card.icon_name} aria-hidden="true" focusable="false" />}
                         </div>
                         <div class="card_content">
                             <h3>{card.title}</h3>
