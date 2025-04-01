@@ -1,9 +1,9 @@
 import PocketBase from 'pocketbase';
 import type { ObjectType, PageType } from "@utils/types"
-import { usePageData } from '@src/store/store';
+// import { usePageData } from '../store/store';
 const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = 'd1yu92ds35z466b'
-const {setPageData} = usePageData()
+const pageId = 'x687a4000ap796b'
+// const {setPageData} = usePageData()
 
 const parentUrls: ObjectType = {
     ke: 'https://www.yellowpageskenya.com/',
@@ -43,7 +43,7 @@ const getData = async () => {
     const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`
     console.log(finalUrl)
     const record = { ...data, company, finalUrl }
-    setPageData(record)
+    // setPageData(record)
     return record
 }
 

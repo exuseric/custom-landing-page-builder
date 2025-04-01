@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "5.2.5",
+    "@astrojs/sitemap": "3.3.0",
+    "astro": "5.5.3",
     "astro-font": "^0.1.81",
     "astro-icon": "^1.1.4",
     "astro-loader-pocketbase": "^1.0.2",

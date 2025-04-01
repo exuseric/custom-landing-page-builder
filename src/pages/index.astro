@@ -79,7 +79,7 @@ const record = await getData();
 			openGraph={{
 				basic: {
 					title: record.title,
-					image: "/favicon/android-chrome-512x512.png",
+					image: `${record.url}/assets/logo.webp`,
 					type: "website",
 					url: record.url,
 				},
@@ -90,7 +90,13 @@ const record = await getData();
 				creator: "@yellowpages254",
 				title: record.title,
 				description: record.meta_description,
-				image: "/favicon/android-chrome-512x512.png",
+				image: `${record.url}/assets/logo.webp`,
+			}}
+			extend={{
+				meta:[
+					{name: "og:description", content: record.meta_description},
+					{name: "og:site_name", content: record.title},
+				]
 			}}
 		/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -20,7 +20,7 @@ describe('SEO Checklist Tests', () => {
     it('Meta description tag with maximum 160 characters', () => {
         const metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement;
         expect(metaDesc).not.toBeNull();
-        expect(metaDesc.content.length).toBeLessThanOrEqual(160);
+        expect(metaDesc.content.length).toBeLessThanOrEqual(150);
     });
 
     it('Search console meta tag', () => {
@@ -28,6 +28,20 @@ describe('SEO Checklist Tests', () => {
         expect(metaDesc).not.toBeNull();
         expect(metaDesc.content).not.toBe('');
     });
+
+    it('Check open graph meta tags', () => { 
+        const og_title = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
+        const og_desc = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
+        const og_type = document.querySelector('meta[property="og:type"]') as HTMLMetaElement;
+        const og_url = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
+        const og_image = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
+
+        expect(og_title).not.toBeNull();
+        expect(og_desc).not.toBeNull();
+        expect(og_type.content).toContain('website');
+        expect(og_url).not.toBeNull();
+        expect(og_image).toContain(`${record.finalUrl.slice(8)}/assets/logo.webp`);
+    })
 
     it('One H1 tag on the page', () => {
         const h1Tags = document.querySelectorAll('h1');
