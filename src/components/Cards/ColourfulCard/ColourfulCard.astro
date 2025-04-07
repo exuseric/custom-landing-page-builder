@@ -22,7 +22,7 @@ const cardStyles = [
 <div class="colourful-card__grid">
     {
         cards.map((card: Card, index: number) => {
-            const style = cardStyles[index % cardStyles.length];
+            const style = cardStyles[index % cardStyles?.length];
             return (
                 <div
                     class="colourful-card__item"

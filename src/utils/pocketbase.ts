@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import type { ObjectType, PageType } from "@utils/types"
 // import { usePageData } from '../store/store';
 const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = 'x687a4000ap796b'
+const pageId = '2029i9u899elh76'
 // const {setPageData} = usePageData()
 
 const parentUrls: ObjectType = {
@@ -21,14 +21,15 @@ const parentDomains: ObjectType = {
     st: 'paginasamarelas.st',
 }
 
-const parentSites: ObjectType = {
-    ke: 'Yellow Pages Kenya',
-    cv: 'Páginas Amarelas de Cabo Verde',
-    mz: 'Páginas Amarelas Moçambique',
-    tz: 'Yellow Tanzania',
-    st: 'Yellow Pages São Tomé',
+const designedBy: ObjectType = {
+    ke: 'Designed by Yellow Pages Kenya',
+    cv: 'Desenhado por Páginas Amarelas de Cabo Verde',
+    mz: 'Desenhado por Páginas Amarelas Moçambique',
+    tz: 'Designed by Yellow Tanzania',
+    st: 'Desenhado por Páginas Amarelas São Tomé',
 };
 
+const enLang = ["ke, tz"]
 
 const getImageUrl = ({ collection, filename }: { collection: any, filename: string }) => pb.files.getUrl(collection, filename)
 
@@ -38,7 +39,8 @@ const getData = async () => {
     
     const company = {
         url: parentUrls[data.country],
-        name: parentSites[data.country],
+        designedBy: designedBy[data.country],
+        rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
     }
     const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`
     console.log(finalUrl)

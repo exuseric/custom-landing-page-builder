@@ -7,6 +7,7 @@ import TwoColumnHero from "./TwoColumnHero/TwoColumnHero.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import TwoSquares from "./TwoSquares/TwoSquares.astro";
 import BlockyHero from "./BlockyHero/BlockyHero.astro";
+import BigName from "./BigName/BigName.astro";
 
 const { title, excerpt, image, type, grid } = Astro.props;
 ---
@@ -17,4 +18,6 @@ const { title, excerpt, image, type, grid } = Astro.props;
 {type === "vertical with image" && <VerticalWithImage title={title} excerpt={excerpt} image={image} />}
 {type === "two column" && <TwoColumnHero title={title} excerpt={excerpt} image={image} />}
 {type === "two square" && <TwoSquares title={title} excerpt={excerpt} image={image} />}
+{type === "big name" && <BigName title={title} excerpt={excerpt} image={image} />}
 {(!type || type === "default") && <Overflow title={title} excerpt={excerpt} image={image} />}
+

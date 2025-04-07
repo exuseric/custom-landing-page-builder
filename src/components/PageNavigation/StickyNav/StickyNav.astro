@@ -13,18 +13,32 @@ interface Props {
         };
         title: string;
     };
+    country: string;
 }
 
 const {
     data: { links, logo, title},
     fixedMenu,
-    blackText
+    blackText,
+    country
 } = Astro.props;
+
+const translatedLinks: Record<string, string> = {
+    home: "home",
+    about: "sobre",
+    services: "serviços",
+    products: "produtos", 
+    contact: "contato"
+};
+
+const translate = (link: string) => {
+    return translatedLinks[link] || link;
+};
 
 const pageLinks = links.map((link) =>
     link === "home"
         ? { name: "Home", href: "/" }
-        : { name: link, href: `#${link.split(" ").join("-")}` },
+        : { name: translate(link), href: `#${link.split(" ").join("-")}` },
 );
 ---
 
@@ -55,7 +69,7 @@ const pageLinks = links.map((link) =>
                                 title={link.href}
                                 href={link.href}
                                 class={
-                                    index === pageLinks.length - 1
+                                    index === pageLinks?.length - 1
                                         ? "sticky-nav__link sticky-nav__link--cta"
                                         : "sticky-nav__link"
                                 }

@@ -37,7 +37,7 @@ const cardStyles = [
             </div>
             {
                 cards.map((card: Card, index: number) => {
-                    const style = cardStyles[index % cardStyles.length];
+                    const style = cardStyles[index % cardStyles?.length];
                     return (
                         <div 
                             class="simple-stats__item"

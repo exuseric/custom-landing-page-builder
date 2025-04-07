@@ -1,13 +1,14 @@
 ---
 interface Props {
     title: string;
-    parent_site_title: string;
+    designedBy: string;
     parent_site_url: string;
+    rightsReserved: string;
 }
 import Container from "@components/Container.astro";
 import "./tiny_footer.css";
 import { Image } from "astro:assets";
-const { title, parent_site_title, parent_site_url } = Astro.props;
+const { title, designedBy, parent_site_url, rightsReserved } = Astro.props;
 ---
 
 <footer class="full-width footer">
@@ -15,7 +16,7 @@ const { title, parent_site_title, parent_site_url } = Astro.props;
         <div class="footer__content">
             <p>
                 &copy; {new Date().getFullYear()}
-                {title.split("|")[0].trim()}. All Rights Reserved.
+                {title.split("|")[0].trim()}. {rightsReserved}
             </p>
             <p class="footer__logo">
                 <Image
@@ -33,7 +34,7 @@ const { title, parent_site_title, parent_site_url } = Astro.props;
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Designed by {parent_site_title}
+                    {designedBy}
                 </a>
             </p>
         </div>

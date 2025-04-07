@@ -8,6 +8,7 @@ import StatsGrid from "./Stats/StatsGrid/StatsGrid.astro";
 import TestimonialDefault from "./Testimonial/TestimonialDefault.astro";
 import TestimonialWithStats from "./Testimonial/TestimonialWithStats/TestimonialWithStats.astro";
 import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.astro";
+import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro";
 const { sections, core_values } = Astro.props;
 ---
 
@@ -31,6 +32,13 @@ const { sections, core_values } = Astro.props;
                 case "colorful stats":
                     return (
                         <ColorfulStats
+                            data={section}
+                            cards={section.expand.section_grid}
+                        />
+                    );
+                case "two column stats":
+                    return (
+                        <TwoColumnStats
                             data={section}
                             cards={section.expand.section_grid}
                         />

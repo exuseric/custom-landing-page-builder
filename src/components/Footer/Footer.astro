@@ -4,5 +4,5 @@ import TinyFooter from "./TinyFooter/TinyFooter.astro";
 
 const {company, title, style} = Astro.props
 ---
-{style === 'floating' && <FloatingFooter title={title} parent_site_title={company.name} parent_site_url={company.url} />}
-{style === 'default' && <TinyFooter title={title} parent_site_title={company.name} parent_site_url={company.url} />}
+{style === 'floating' && <FloatingFooter rightsReserved={company.rightsReserved} title={title} designedBy={company.name} parent_site_url={company.url} />}
+{style === 'default' && <TinyFooter title={title} rightsReserved={company.rightsReserved} designedBy={company.designedBy} parent_site_url={company.url} />}

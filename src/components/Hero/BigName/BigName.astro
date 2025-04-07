@@ -1,0 +1,32 @@
+---
+import Container from "@components/Container.astro";
+import "./hero.css";
+import CustomImage from "@components/CustomImage.astro";
+
+interface Props {
+    title: string;
+    excerpt: string;
+    image: {
+        [key: string]: string;
+    };
+}
+const { title, excerpt, image } = Astro.props;
+---
+
+<header class="big_name_hero">
+    <Container>
+        <div class="big_name_hero__wrapper full-height">
+            <article class="big_name_hero__content">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+            </article>
+        </div>
+        <div class="big_name_hero__overlay full-width full-height"></div>
+        <CustomImage
+            image={image}
+            classlist="big_name_hero__image full-width full-height"
+            size="large"
+            eager={true}
+        />
+    </Container>
+</header>

@@ -7,6 +7,7 @@ interface Props {
     title: string;
     style: string;
     hero_style: string;
+    country: string;
 }
 
 // import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";
@@ -23,4 +24,5 @@ const blackText =
     data={props}
     fixedMenu={props.hero_style !== "two square" ? true : false}
     blackText={blackText}
+    country={props.country}
 />

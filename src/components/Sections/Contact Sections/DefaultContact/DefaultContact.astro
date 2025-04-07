@@ -7,11 +7,11 @@ const { title, info, location } = Astro.props;
 location.length <= 1 && location.map((loc: any) => loc=loc)
 ---
 
-<div class="default_contact container" id="contact-us" data-highlight="true">
+<div class="default_contact container" id="contact" data-highlight="true">
     <Container>
         <div
             class="default_contact__content"
-            data-two-column={location.length <= 1 ? "true" : "false"}
+            data-two-column={location?.length <= 1 ? "true" : "false"}
         >
             <article>
                 <h2>{title}</h2>

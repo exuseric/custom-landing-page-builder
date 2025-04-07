@@ -16,14 +16,17 @@ const { data } = Astro.props;
             data.type !== "stats" && (
                 <header class="content_section__header">
                     <h2>{data.title}</h2>
-                </header>
-                <div class="content_section__wrapper">
                     <div class="content_section__content">
                         <slot set:html={data.content} />
                     </div>
+                </header>
+                <div class="content_section__wrapper">
+                    {/* <div class="content_section__content">
+                        <slot set:html={data.content} />
+                    </div> */}
 
                 {data.expand.image &&
-                    <div class="content_section__image-wrapper" data-fancy-wrapper={data.expand.image.length > 1}>
+                    <div class="content_section__image-wrapper" data-fancy-wrapper={data.expand.image?.length > 1}>
                                  <CustomImage
                                     image={data.expand.image[0]}
                                     classlist="content_section__image"
