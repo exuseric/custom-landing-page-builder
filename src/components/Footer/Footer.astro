@@ -2,7 +2,7 @@
 import FloatingFooter from "./FloatingFooter/FloatingFooter.astro";
 import TinyFooter from "./TinyFooter/TinyFooter.astro";
 
-const {company, title, style} = Astro.props
+const {company, title, style, country} = Astro.props
 ---
 {style === 'floating' && <FloatingFooter rightsReserved={company.rightsReserved} title={title} designedBy={company.name} parent_site_url={company.url} />}
-{style === 'default' && <TinyFooter title={title} rightsReserved={company.rightsReserved} designedBy={company.designedBy} parent_site_url={company.url} />}
+{style === 'default' && <TinyFooter title={title} rightsReserved={company.rightsReserved} designedBy={company.designedBy} parent_site_url={company.url} country={country}/>}

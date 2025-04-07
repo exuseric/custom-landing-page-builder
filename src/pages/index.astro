@@ -94,8 +94,8 @@ const record = await getData();
 			}}
 			extend={{
 				meta:[
-					{name: "og:description", content: record.meta_description},
-					{name: "og:site_name", content: record.title},
+					{property: "og:description", content: record.meta_description},
+					{property: "og:site_name", content: record.title},
 				]
 			}}
 		/>
@@ -165,7 +165,7 @@ const record = await getData();
 				style={record.contact_style}
 			/>
 		</main> 
-		<Footer company={record.company} title={record.title} style={record.footer_style} />
+		<Footer company={record.company} title={record.title} style={record.footer_style} country={record.country}/>
 	</body>
 </html>
 <style define:vars={{ themeColor: record.theme_color}} is:global></style>
