@@ -1,6 +1,6 @@
 .floating_footer {
     color: var(--clr-neutral-50);
-    padding: var(--container-padding-block) 0;
+    padding: var(--size-4) 0;
     background-color: var(--clr-neutral-50);
 }
 .floating_footer__content {
@@ -10,8 +10,8 @@
     justify-content: space-between;
     gap: var(--size-4);
     
-    padding: var(--size-8) var(--size-6);
-    background-color: var(--clr-primary-dark);
+    padding: var(--size-4) var(--size-6);
+    background-color: var(--clr-primary-darker);
 }
 
 .floating_footer__logo-image {
@@ -31,9 +31,9 @@
 }
 @media (min-width: 768px) {
     .floating_footer {
-        padding: var(--container-padding-block) 0;
+        padding: var(--size-4) 0;
     }
     .floating_footer__content {
-        padding: var(--size-9) var(--size-8);
+        padding: var(--size-4) var(--size-8);
     }
 }

@@ -1,7 +1,7 @@
 .basic_card {
     display: grid;
     gap: var(--size-3);
-    padding-block: 0 var(--size-3);
+    padding: var(--size-8) 0;
     width: 100%;
     max-width: 100%;
 }
@@ -10,7 +10,6 @@
 @media (min-width: 640px) {
     .basic_card {
         gap: var(--size-6);
-        padding: 0;
         grid-template-columns: repeat(2, 1fr);
     }
 }

@@ -20,8 +20,5 @@ export default defineConfig({
     domains: ["127.0.0.1"]
   },
   compressHTML: false,
-  prefetch: {
-    prefetchAll: true
-  },
   integrations: [sitemap(), icon()]
 });

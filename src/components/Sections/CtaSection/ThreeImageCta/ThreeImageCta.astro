@@ -1,0 +1,64 @@
+---
+interface Props {
+    data: {
+        title: string;
+        content: string;
+        expand: {
+            image: [];
+        };
+        highlight: boolean;
+        core_values: string;
+    };
+}
+import "./style.css";
+import { Icon } from "astro-icon/components";
+import CustomImage from "@components/CustomImage.astro";
+import Container from "@components/Container.astro";
+import InfoCard from "@components/Cards/Info/InfoCard.astro";
+const { data } = Astro.props;
+// const info = data.core_values.split(",").map((value) => ({ icon_name: "mdi-check", content: value }))
+let info = data.core_values.split(",").map((value) => ({
+    icon_name: "mdi:check-circle",
+    content: value.trim(),
+}));
+// console.log(info);
+---
+
+<Container>
+    <div
+        class="three_image_cta__container "
+        data-highlight={data.highlight}
+    >
+        <div class="three_image_cta__content_wrapper">
+            <article class="three_image_cta__content">
+                <header class="content_section__header">
+                    <InfoCard
+                        cards={info as unknown as Array<{
+                            [key: string]: { [key: string]: any };
+                        }>}
+                    />
+                    <h2>{data.title}</h2>
+                </header>
+                <slot set:html={data.content} />
+
+                <div class="btn_wrapper">
+                    <a href="#contact" class="btn btn-md btn-secondary btn-outline"
+                        >Let's Talk</a
+                    >
+                </div>
+            </article>
+        </div>
+        <div class="three_image_cta__image_wrapper">
+            {
+                data.expand.image.map((image: any, idx: number) => (
+                    <CustomImage
+                        image={image}
+                        classlist={`three_image_cta___image three_image_cta___image_${idx}`}
+                        size="medium"
+                        eager={false}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</Container>

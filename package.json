@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build && vitest",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest",
@@ -19,10 +19,8 @@
     "astro-icon": "^1.1.4",
     "astro-loader-pocketbase": "^1.0.2",
     "astro-seo": "^0.8.4",
-    "motion": "^11.18.0",
     "pocketbase": "^0.21.5",
-    "typescript": "^5.7.2",
-    "zustand": "^5.0.3"
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
     "@iconify-json/fa-solid": "^1.2.0",

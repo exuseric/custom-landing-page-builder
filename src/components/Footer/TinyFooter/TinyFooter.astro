@@ -3,15 +3,15 @@ import { translateFooterItem } from '@utils/translations';
 
 interface Props {
     title: string;
-    designedBy: string;
+    company_name: string;
     parent_site_url: string;
-    rightsReserved: string;
     country: string;
 }
+
 import Container from "@components/Container.astro";
 import "./tiny_footer.css";
 import { Image } from "astro:assets";
-const { title, designedBy, parent_site_url, rightsReserved, country } = Astro.props;
+const { title, company_name, parent_site_url, country } = Astro.props;
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
 ---
@@ -35,7 +35,7 @@ const designedByText = translateFooterItem('designed_by', country);
                     decoding="async"
                 />
                 <a href={parent_site_url} target="_blank" rel="noopener noreferrer">
-                    {designedByText} {designedBy}
+                    {designedByText} {company_name}
                 </a>
             </p>
         </div>

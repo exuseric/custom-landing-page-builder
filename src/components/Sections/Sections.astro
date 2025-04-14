@@ -8,6 +8,7 @@ import StatsGrid from "./Stats/StatsGrid/StatsGrid.astro";
 import TestimonialDefault from "./Testimonial/TestimonialDefault.astro";
 import TestimonialWithStats from "./Testimonial/TestimonialWithStats/TestimonialWithStats.astro";
 import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.astro";
+import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro";
 import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro";
 const { sections, core_values } = Astro.props;
 ---
@@ -64,6 +65,12 @@ const { sections, core_values } = Astro.props;
                         <VerticalImageCta
                             data={section}
                             core_values={core_values}
+                        />
+                    );
+                case "three image cta":
+                    return (
+                        <ThreeImageCta
+                            data={section}
                         />
                     );
                 default:

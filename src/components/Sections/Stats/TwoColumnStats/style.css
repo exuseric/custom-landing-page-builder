@@ -3,8 +3,6 @@
 }
 
 .two_column_stat__header h2 {
-    color: var(--clr-primary);
-    font-size: var(--heading-xl);
     max-width: 50ch;
 }
 

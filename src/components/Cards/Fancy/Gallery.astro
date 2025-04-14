@@ -6,27 +6,156 @@ interface Card {
 }
 import "./card.css";
 import CustomImage from "@components/CustomImage.astro";
-const { cards } = Astro.props;
+import { Icon } from "astro-icon/components";
+import { getImageUrl } from "@utils/pocketbase";
+const { cards, isGallery } = Astro.props;
 ---
 
-<div class="gallery-card__grid">
+<div class="gallery-grid" id="gallery">
     {
         cards.map((card: Card) => (
-            <div>
-                {card.expand.image && (
-                    <CustomImage
-                        eager={false}
-                        image={card.expand.image}
-                        size="medium"
-                        classlist="gallery-card__image"
-                    />
-                )}
-
-                <article>
-                    <h3>{card.title}</h3>
-                    <slot set:html={card.body} />
-                </article>
+            <div class="gallery-item">
+                <CustomImage
+                    eager={false}
+                    image={card}
+                    size="medium"
+                    classlist="gallery-card__image"
+                />
             </div>
         ))
     }
 </div>
+
+<!-- Lightbox Container -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <!-- We'll move the caption above the image for better flow -->
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        
+        <img src="" alt="" class="lightbox-image" id="lightbox-image" />
+        
+        <!-- New controls container at the bottom -->
+        <div class="lightbox-controls">
+            <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">
+                <Icon name="mdi:chevron-left" class="icon" />
+            </button>
+            
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+                <Icon name="mdi:close" class="icon" />
+            </button>
+            
+            <button class="lightbox-next" id="lightbox-next" aria-label="Next">
+                <Icon name="mdi:chevron-right" class="icon" />
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script is:inline>
+// Initialize Gallery
+document.addEventListener("DOMContentLoaded", function () {
+    const gallery = document.getElementById("gallery");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const lightboxClose = document.getElementById("lightbox-close");
+    const lightboxPrev = document.getElementById("lightbox-prev");
+    const lightboxNext = document.getElementById("lightbox-next");
+    const lightboxPrevEdge = document.getElementById("lightbox-prev-edge");
+    const lightboxNextEdge = document.getElementById("lightbox-next-edge");
+
+    let currentImageIndex = 0;
+    const galleryImages = [];
+
+    // Create gallery items and add click event listeners
+    const imageElements = gallery.querySelectorAll('.gallery-card__image');
+    imageElements.forEach((imageElement, index) => {
+        const src = imageElement.dataset.src;
+        const alt = imageElement.dataset.alt;
+        const caption = imageElement.dataset.caption;
+
+        galleryImages.push({ src, alt, caption });
+
+        // Add click event listener to each image
+        imageElement.addEventListener('click', () => openLightbox(index));
+    });
+
+    // Open lightbox
+    function openLightbox(index) {
+        currentImageIndex = index;
+        updateLightboxContent();
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent scrolling when lightbox is open
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = ""; // Restore scrolling
+        
+        // Small delay to allow animation to complete
+        setTimeout(() => {
+            lightboxImage.src = "";
+        }, 300);
+    }
+
+    // Update lightbox content
+    function updateLightboxContent() {
+        const image = galleryImages[currentImageIndex];
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxCaption.textContent = image.caption || ''; // Handle empty captions
+    }
+
+    // Navigate to previous image
+    function prevImage() {
+        currentImageIndex = 
+            currentImageIndex > 0 
+                ? currentImageIndex - 1 
+                : galleryImages.length - 1;
+        updateLightboxContent();
+    }
+
+    // Navigate to next image
+    function nextImage() {
+        currentImageIndex = 
+            currentImageIndex < galleryImages.length - 1 
+                ? currentImageIndex + 1 
+                : 0;
+        updateLightboxContent();
+    }
+
+    // Event listeners with improved handling
+    if (lightboxClose) {
+        lightboxClose.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeLightbox();
+        });
+    }
+    
+    // Main navigation buttons
+    if (lightboxPrev) lightboxPrev.addEventListener("click", prevImage);
+    if (lightboxNext) lightboxNext.addEventListener("click", nextImage);
+    
+    // Edge navigation buttons (optional)
+    if (lightboxPrevEdge) lightboxPrevEdge.addEventListener("click", prevImage);
+    if (lightboxNextEdge) lightboxNextEdge.addEventListener("click", nextImage);
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("active")) return;
+
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") prevImage();
+        if (e.key === "ArrowRight") nextImage();
+    });
+
+    // Close lightbox when clicking outside the content
+    lightbox.addEventListener("click", (e) => {
+        // Only close if the click is directly on the lightbox background
+        if (e.target === lightbox) closeLightbox();
+    });
+});
+</script>

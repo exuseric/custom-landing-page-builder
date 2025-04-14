@@ -1,14 +1,8 @@
 ---
 import Container from "@components/Container.astro";
 import "./hero.css";
-
-interface Props {
-    title: string;
-    excerpt: string;
-    image: {
-        [key: string]: string;
-    };
-}
+import type { HeroProps } from "@utils/types";
+interface Props extends HeroProps {}
 const { title, excerpt } = Astro.props;
 ---
 

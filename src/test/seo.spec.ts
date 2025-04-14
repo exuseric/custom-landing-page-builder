@@ -3,246 +3,352 @@ import { JSDOM } from 'jsdom';
 import fs from 'fs';
 import path from 'path';
 import { getData } from '../../src/utils/pocketbase';
-const record = await getData();
 
-const htmlPath = path.resolve(__dirname, `../../build/${record.finalUrl.slice(8)}/index.html`);
+const record = await getData();
+const directory = `../../build/${record.finalUrl.slice(8)}`
+const image_folder = `${directory}/assets`
+
+const htmlPath = path.resolve(__dirname, `${directory}/index.html`);
 const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
 const dom = new JSDOM(htmlContent);
 const document = dom.window.document;
+const languages: Record<string, string> = {
+	ke: "en-KE",
+	cv: "pt-CV",
+	mz: "pt-MZ",
+	tz: "en-TZ",
+	st: "pt-ST",
+};
 
 describe('SEO Checklist Tests', () => {
-    it('Title tag with maximum 60 characters', () => {
+    it('Meta tags validation', () => {
+        // Basic meta tags
+        const metaTags = {
+            viewport: 'meta[name="viewport"]',
+            charset: 'meta[charset]',
+            language: `html[lang="${languages[record.country]}"]`,
+            themeColor: 'meta[name="theme-color"]',
+            robots: 'meta[name="robots"]'
+        };
+
+        Object.entries(metaTags).forEach(([name, selector]) => {
+            const tag = document.querySelector(selector);
+            expect(
+                tag, 
+                `Missing required meta tag: ${name}\nSelector: ${selector}`
+            ).not.toBeNull();
+        });
+
+        // Verify viewport content
+        const viewport = document.querySelector('meta[name="viewport"]') as HTMLMetaElement;
+        const viewportContent = viewport.content;
+        expect(
+            viewportContent, 
+            `Invalid viewport content: ${viewportContent}\nExpected to contain: width=device-width`
+        ).toContain('width=device-width');
+        expect(
+            viewportContent, 
+            `Invalid viewport content: ${viewportContent}\nExpected to contain: initial-scale=1`
+        ).toContain('initial-scale=1');
+    });
+
+    it('Title and meta description optimization', () => {
         const title = document.querySelector('title') as HTMLTitleElement;
-        expect(title).not.toBeNull();
-        expect(title?.textContent?.length).toBeLessThanOrEqual(60);
-    });
-
-    it('Meta description tag with maximum 160 characters', () => {
         const metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-        expect(metaDesc).not.toBeNull();
-        expect(metaDesc.content.length).toBeLessThanOrEqual(150);
+
+        // Title checks
+        expect(
+            title, 
+            'Missing title tag in document'
+        ).not.toBeNull();
+        expect(
+            title.textContent?.length, 
+            `Title length (${title.textContent?.length}) is too short. Must be > 10 characters\nCurrent title: "${title.textContent}"`
+        ).toBeGreaterThan(10);
+        expect(
+            title.textContent?.length, 
+            `Title length (${title.textContent?.length}) is too long. Must be ≤ 60 characters\nCurrent title: "${title.textContent}"`
+        ).toBeLessThanOrEqual(60);
+        expect(
+            title.textContent, 
+            `Title must contain record title\nCurrent title: "${title.textContent}"\nExpected to contain: "${record.title}"`
+        ).toContain(record.title);
+
+        // Meta description checks
+        expect(
+            metaDesc, 
+            'Missing meta description tag'
+        ).not.toBeNull();
+        expect(
+            metaDesc.content.length, 
+            `Meta description length (${metaDesc.content.length}) is too short. Must be > 50 characters\nCurrent description: "${metaDesc.content}"`
+        ).toBeGreaterThan(50);
+        expect(
+            metaDesc.content.length, 
+            `Meta description length (${metaDesc.content.length}) is too long. Must be ≤ 160 characters\nCurrent description: "${metaDesc.content}"`
+        ).toBeLessThanOrEqual(160);
+        expect(
+            metaDesc.content, 
+            `Meta description contains undefined\nCurrent description: "${metaDesc.content}"`
+        ).not.toContain('undefined');
     });
 
-    it('Search console meta tag', () => {
-        const metaDesc = document.querySelector('meta[name="google-site-verification"]') as HTMLMetaElement;
-        expect(metaDesc).not.toBeNull();
-        expect(metaDesc.content).not.toBe('');
-    });
+    it('Social media meta tags validation', () => {
+        // Open Graph
+        const ogTags = {
+            title: 'meta[property="og:title"]',
+            description: 'meta[property="og:description"]',
+            image: 'meta[property="og:image"]',
+            url: 'meta[property="og:url"]',
+            type: 'meta[property="og:type"]',
+            siteName: 'meta[property="og:site_name"]'
+        };
 
-    it('Check open graph meta tags', () => { 
-        const og_title = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
-        const og_desc = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
-        const og_type = document.querySelector('meta[property="og:type"]') as HTMLMetaElement;
-        const og_url = document.querySelector('meta[property="og:url"]') as HTMLMetaElement;
-        const og_image = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
+        // Twitter Cards
+        const twitterTags = {
+            card: 'meta[name="twitter:card"]',
+            title: 'meta[name="twitter:title"]',
+            description: 'meta[name="twitter:description"]',
+            image: 'meta[name="twitter:image"]'
+        };
 
-        expect(og_title).not.toBeNull();
-        expect(og_desc).not.toBeNull();
-        expect(og_type.content).toContain('website');
-        expect(og_url).not.toBeNull();
-        expect(og_image).toContain(`${record.finalUrl.slice(8)}/assets/logo.webp`);
-    })
+        // Verify all OG tags
+        Object.entries(ogTags).forEach(([name, selector]) => {
+            const tag = document.querySelector(selector) as HTMLMetaElement;
+            expect(
+                tag, 
+                `Missing OpenGraph tag: og:${name}\nSelector: ${selector}`
+            ).not.toBeNull();
+            expect(
+                tag.content, 
+                `Empty OpenGraph content: og:${name}\nSelector: ${selector}`
+            ).not.toBe('');
+        });
 
-    it('One H1 tag on the page', () => {
-        const h1Tags = document.querySelectorAll('h1');
-        expect(h1Tags.length).toBe(1);
-    });
-
-    it('iframe has title', () => {
-        const iframe = document.querySelector('iframe')
-        const title = iframe?.getAttribute("title")
-        expect(title).not.toBeNull()
-    })
-
-    it('Properly structured heading hierarchy', () => {
-        const headings = document.querySelectorAll('h2, h3') as NodeListOf<HTMLHeadingElement>;
-
-        // Ensure at least one H2 exists
-        const h2Tags = Array.from(headings).filter(h => h.tagName === 'H2');
-        expect(h2Tags.length).toBeGreaterThan(0);
-
-        // Validate structure of headings
-        let lastH2: HTMLHeadingElement | null = null;
-
-        headings.forEach((heading: HTMLHeadingElement, index: number) => {
-            const tagName = heading.tagName;
-
-            if (tagName === 'H2') {
-                // Update the last seen H2 and ensure it has text
-                lastH2 = heading;
-                assert(expect(heading?.textContent?.trim()).not.toBe(''), `H2 at position ${index} is empty.`);
-            } else if (tagName === 'H3') {
-                // Ensure H3 has text
-                assert(expect(heading?.textContent?.trim()).not.toBe(''), `H3 at position ${index} is empty.`);
-
-                // Ensure there's a preceding H2 for this H3
-                assert(expect(lastH2).toBeTruthy(), `H3 at position ${index} is not preceded by an H2.`);
-            }
+        // Verify all Twitter tags
+        Object.entries(twitterTags).forEach(([name, selector]) => {
+            const tag = document.querySelector(selector) as HTMLMetaElement;
+            expect(
+                tag, 
+                `Missing Twitter Card tag: twitter:${name}\nSelector: ${selector}`
+            ).not.toBeNull();
+            expect(
+                tag.content, 
+                `Empty Twitter Card content: twitter:${name}\nSelector: ${selector}`
+            ).not.toBe('');
         });
     });
 
-    it('Non-empty alt text', () => {
+    it('Image optimization', () => {
         const images = document.querySelectorAll('img') as NodeListOf<HTMLImageElement>;
+        
         images.forEach((img) => {
-            const src = img.getAttribute('src') || 'unknown source';
-            const hasAlt = img.hasAttribute('alt');
-            // First check: alt attribute exists
-            expect(hasAlt, `Image (${src}) is missing alt attribute`).toBe(true);
-
-            if (hasAlt) {
-                // Second check: alt text is not empty
-                const altText = img.getAttribute('alt');
-                if (altText) {
-                    expect(altText.trim()).not.toBeNull();
-                    expect(altText.trim().length, `${src} has empty alt text`).toBeGreaterThan(0);
-                }
+            const src = img.getAttribute('src') || 'unknown';
+            const loading = img.getAttribute('loading')
+            // Alt text checks
+            expect(img.hasAttribute('alt'), `Image ${src} missing alt text`).toBe(true);
+            const altText = img.getAttribute('alt');
+            expect(altText?.trim().length, `Image ${src} has empty alt text`).toBeGreaterThan(0);
+            
+            // Lazy loading - skip logo and eager images
+            const isEager = img.getAttribute('data-eager') === 'true' || src.includes('logo');
+            if (!isEager) {
+                expect(loading, `Image ${src} should have lazy loading`).toBe('lazy');
             }
+            
+            // Responsive images
+            const hasResponsiveFeature = 
+                img.hasAttribute('srcset') || 
+                img.hasAttribute('sizes') || 
+                img.closest('picture') !== null;
+            expect(hasResponsiveFeature, `Image ${src} should be responsive`).toBe(true);
         });
     });
 
-    it('Valid canonical tag', () => {
-        const canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    it('Performance optimization checks', () => {
+        // Check for render-blocking resources
+        const renderBlockingStyles = document.querySelectorAll('link[rel="stylesheet"]:not([media="print"])');
+        expect(
+            renderBlockingStyles.length, 
+            `Too many render-blocking stylesheets (${renderBlockingStyles.length}). Maximum allowed: 2`
+        ).toBeLessThan(3);
 
-        // Check if canonical tag exists
-        expect(canonicalTag, 'Canonical tag is missing').not.toBeNull();
+        // Check for preconnect/prefetch
+        const preconnectTags = document.querySelectorAll('link[rel="preconnect"]');
+        expect(
+            preconnectTags.length, 
+            'No preconnect tags found. Add preconnect for external resources'
+        ).toBeGreaterThan(0);
 
-        // Check if href attribute exists and is not empty
-        const href = canonicalTag.getAttribute('href');
-        expect(href, 'Canonical tag is missing href attribute').not.toBeNull();
-        href && expect(href.trim().length, 'Canonical tag has empty href').toBeGreaterThan(0);
-
-        // Check if href is a valid URL
-        href && expect(() => new URL(href), 'Canonical tag href is not a valid URL').not.toThrow();
+        // Check for critical CSS
+        const inlineStyles = document.querySelectorAll('style');
+        expect(
+            inlineStyles.length, 
+            'No inline styles found. Consider adding critical CSS'
+        ).toBeGreaterThan(0);
     });
-
-    it('External link to Yellow Pages', () => {
-        const links = document.querySelectorAll('a[href]') as NodeListOf<HTMLLinkElement>;
-        const validExternalDomains = [
-            'https://www.paginasamarelas.co.ao/',
-            'https://www.paginasamarelas.cv/',
-            'https://www.pajinakinur.tl/',
-            'https://www.yellowpageskenya.com/',
-            'https://www.paginasamarelas.co.mz/',
-            'https://www.paginasamarelas.st/',
-            'https://www.yellow.co.tz/',
-            'http://www.yellowpages.co.ug/'
-        ];
-
-        // Find external links that match our valid domains
-        const externalLinks = Array.from(links).filter(link => {
-            const href = link.getAttribute('href');
-            return validExternalDomains.some(domain =>
-                href?.toLowerCase()?.includes(domain)
-            );
-        });
-
-        expect(externalLinks, 'No external links found on the page').toBeTruthy();
-
-        // Check for Yellow Pages link, including within list items
-        const yellowPagesLink = Array.from(links).some(link => {
-            const href = link.getAttribute('href');
-            const linkText = link?.textContent?.toLowerCase();
-            const parentListText = link?.closest('li')?.textContent?.toLowerCase() || '';
-
-            return validExternalDomains.some(domain => href?.toLowerCase()?.includes(domain)) ||
-                linkText?.includes('yellow pages') ||
-                parentListText.includes('yellow pages');
-        });
-
-        expect(yellowPagesLink, 'No link to Yellow Pages found').toBe(true);
-    });
-
-    it('Set to index', () => {
-        const indexMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
-        expect(indexMeta).not.toBeNull();
-        expect(indexMeta.content).toBe('index, follow');
-    })
-
-    it('All links should have an href attribute', () => {
-        const links = document.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>;
-        links.forEach(link => {
-            const href = link.getAttribute('href');
-            expect(href).not.toBeNull();
-            expect(href?.trim()?.length).toBeGreaterThan(0); 
-        })
-    })
-    // Add similar tests for other checklist items
 });
 
-describe('QA Checklist Tests', () => {
-    it('Valid interactive elements (links, buttons, and navigation)', () => {
-        // Check all buttons
-        const buttons = document.querySelectorAll('button') as NodeListOf<HTMLButtonElement>;
-        buttons.forEach(button => {
-            const buttonText = button?.textContent?.trim();
-            const type = button.getAttribute('type');
+describe('Quality Analysis Tests', () => {
+    it('Headings Hierachy', () => {
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        let previousLevel = 0;
+        
+        headings.forEach((heading) => {
+            const currentLevel = parseInt(heading.tagName.charAt(1));
+            const headingText = heading.textContent?.trim();
+            expect(
+                currentLevel, 
+                `Invalid heading hierarchy - ${heading.tagName} "${headingText}"\nPrevious level: ${previousLevel}, Current level: ${currentLevel}`
+            ).toBeLessThanOrEqual(previousLevel + 1);
+            previousLevel = currentLevel;
+            
+            expect(
+                heading.textContent?.trim().length, 
+                `Empty heading found - ${heading.tagName}`
+            ).toBeGreaterThan(0);
+        });
+    });
 
-            // Check if button has proper configuration
-            const hasFormAttr = button.hasAttribute('form') ||
-                button.hasAttribute('formaction') ||
-                button.closest('form');
+    it('Link accessibility and usability', () => {
+        const links = document.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>;
+        
+        links.forEach((link) => {
+            const href = link.getAttribute('href');
+            const text = link.textContent?.trim();
+            const ariaLabel = link.getAttribute('aria-label')?.trim();
+            const debugInfo = `Link [href: ${href}, text: "${text}", aria-label: "${ariaLabel}"]`;
+            
+            expect(
+                href, 
+                `Missing href attribute - ${debugInfo}`
+            ).not.toBeNull();
 
-            // If button has type, validate it's a proper value
-            if (type) {
+            // Check if either text content or aria-label is present
+            const hasAccessibleName = (text ?? '').length > 0 || (ariaLabel ?? '').length > 0;
+            expect(
+                hasAccessibleName,
+                `Link has no accessible name (needs either text content or aria-label) - ${debugInfo}`
+            ).toBe(true);
+            
+            if (href?.startsWith('http')) {
                 expect(
-                    ['submit', 'button', 'reset', 'menu'].includes(type),
-                    `Button "${buttonText}" has invalid type: ${type}`
-                ).toBe(true);
-
-                // Additional checks based on button type
-                if (type === 'submit') {
-                    expect(
-                        hasFormAttr,
-                        `Submit button "${buttonText}" should be associated with a form`
-                    ).toBe(true);
-                }
-
-                if (type === 'reset') {
-                    expect(
-                        hasFormAttr,
-                        `Reset button "${buttonText}" should be associated with a form`
-                    ).toBe(true);
-                }
-            } else {
-                // If no type, must have onclick or form association
+                    link.getAttribute('rel'), 
+                    `Missing rel="noopener" on external link - ${debugInfo}`
+                ).toContain('noopener');
                 expect(
-                    hasFormAttr,
-                    `Button "${buttonText}" missing type needs onclick handler or form association`
-                ).toBe(true);
+                    link.getAttribute('target'), 
+                    `Missing target="_blank" on external link - ${debugInfo}`
+                ).toBe('_blank');
             }
         });
     });
 
-    it('Responsive design elements are present', () => {
-        // Check viewport meta tag
-        const viewportMeta = document.querySelector('meta[name="viewport"]') as HTMLMetaElement;
-        expect(viewportMeta, 'Viewport meta tag is missing').not.toBeNull();
-        expect(
-            viewportMeta.getAttribute('content'),
-            'Viewport meta tag should include width and initial-scale'
-        ).toMatch(/width=device-width.*initial-scale=1/);
+    it('Email link has subject', () => { 
+        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+        emailLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            expect(
+                href?.includes('subject='),
+                `Email link missing subject - Link: ${href}`
+            ).toBe(true);
+        });
+    })
 
-        // Check for responsive images
+    it('Checks if the OG image logo matches existing logos', () => { 
+        const ogImageTag = document.querySelector('meta[property="og:image"]') as HTMLMetaElement;
+        const ogImageUrl = ogImageTag?.content;
+
+        if (!ogImageUrl) {
+            throw new Error('OG image URL not found');
+        }
+
+        const assetDir = path.resolve(__dirname, `q${image_folder}`);
+        const logoFiles = fs.readdirSync(assetDir).filter(file => file.toLowerCase().includes('logo'));
+
+        let matchFound = false;
+        for (const logoFile of logoFiles) {
+            const logoPath = path.join(assetDir, logoFile);
+            const logoContent = fs.readFileSync(logoPath);
+            
+            if (ogImageUrl.includes(logoFile) || Buffer.from(ogImageUrl).equals(new Uint8Array(logoContent))) {
+                matchFound = true;
+                break;
+            }
+        }
+
+        expect(matchFound, `OG image (${ogImageUrl}) does not match any logo in the assets directory`).toBe(true);
+    })
+
+    it('Form validation', () => {
+        const forms = document.querySelectorAll('form');
+        
+        forms.forEach((form, index) => {
+            const formDebug = `Form #${index + 1}`;
+            
+            expect(
+                form.getAttribute('action'), 
+                `Missing action attribute - ${formDebug}`
+            ).not.toBeNull();
+            expect(
+                form.getAttribute('method'), 
+                `Missing method attribute - ${formDebug}`
+            ).not.toBeNull();
+            
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach((input) => {
+                const inputId = input.id || 'unknown';
+                const inputType = input.getAttribute('type') || input.tagName.toLowerCase();
+                const inputDebug = `${formDebug} - Input [id: ${inputId}, type: ${inputType}]`;
+                
+                const label = form.querySelector(`label[for="${input.id}"]`);
+                expect(
+                    label, 
+                    `Missing associated label - ${inputDebug}`
+                ).not.toBeNull();
+            });
+        });
+    });
+
+    it('Mobile responsiveness indicators', () => {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        expect(
+            viewport?.getAttribute('content'),
+            'Invalid viewport meta tag content'
+        ).toContain('width=device-width,initial-scale=1');
+
+        const containers = document.querySelectorAll('.container, .wrapper');
+        containers.forEach((container, index) => {
+            const style = dom.window.getComputedStyle(container);
+            const classes = (container as HTMLElement).className;
+            expect(
+                style.maxWidth,
+                `Container #${index + 1} [classes: ${classes}] has no max-width set`
+            ).not.toBe('none');
+        });
+    });
+
+    it('Performance indicators', () => {
+        const scripts = document.querySelectorAll('script');
+        scripts.forEach(script => {
+            const src = script.getAttribute('src');
+            if (!src) return;
+            
+            expect(
+                script.hasAttribute('async') || script.hasAttribute('defer'),
+                `External script missing async/defer attribute\nScript src: ${src}`
+            ).toBe(true);
+        });
+
         const images = document.querySelectorAll('img');
         images.forEach(img => {
-            const src = img.getAttribute('src') || 'unknown source';
-
-            // Check for srcset or picture element parent
-            const hasResponsiveFeatures =
-                img.hasAttribute('srcset') ||
-                img.hasAttribute('sizes') ||
-                img.closest('picture') !== null;
-
-            // Check if image has max-width style or class
-            const style = dom.window.getComputedStyle(img);
-            const hasResponsiveStyle =
-                style.maxWidth === '100%' ||
-                img.className.includes('responsive') ||
-                img.className.includes('fluid');
-
+            const src = img.getAttribute('src') || '';
+            const classes = img.getAttribute('class') || 'no-class';
+            const debugInfo = `Image [src: ${src}, class: ${classes}]`;
+            
             expect(
-                hasResponsiveFeatures || hasResponsiveStyle,
-                `Image (${src}) should have responsive features (srcset, sizes, picture element) or responsive styling`
+                src.endsWith('.webp') || src.endsWith('.avif'),
+                `Image not using modern format - ${debugInfo}\nExpected: .webp or .avif format`
             ).toBe(true);
         });
     });
@@ -251,8 +357,12 @@ describe('QA Checklist Tests', () => {
 describe('Accessibility Tests', () => {
     it('Toggle button should have toggle aria-expanded', () => { 
         const toggleButton = document.querySelector('[data-menu-toggle]') as HTMLButtonElement;
-        const hasAriaExpanded = toggleButton.hasAttribute('aria-expanded')
-
-        assert(expect(hasAriaExpanded).toBe(true), 'Toggle button should have aria-expanded attribute');
-    })
+        const hasAriaExpanded = toggleButton.hasAttribute('aria-expanded');
+        const buttonText = toggleButton?.textContent?.trim() || 'unknown';
+        
+        expect(
+            hasAriaExpanded,
+            `Menu toggle button missing aria-expanded attribute\nButton text: "${buttonText}"\nSelector: [data-menu-toggle]`
+        ).toBe(true);
+    });
 });

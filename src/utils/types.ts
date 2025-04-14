@@ -14,13 +14,16 @@ export type PageType = {
     hero_style: string;
     contact_title: string;
     contact_style: string;
-    core_values: string;
+    core_values?: string;
     footer_style: string;
     expand: {
         logo: {
             [key: string]: string;
         };
         hero_image: {
+            [key: string]: string;
+        };
+        hero_cover: {
             [key: string]: string;
         };
         sections: {
@@ -32,12 +35,30 @@ export type PageType = {
         contact_location: {
             [key: string]: string;
         };
-        hero_grid: {
-            [key: string]: string;
-        }
+        hero_grid?: {
+            icon: string;
+            title: string;
+        }[]
     }
 }
 
 export type ObjectType = {
     [key: string]: string;
+}
+
+export type HeroProps = {
+    title: string;
+    excerpt: string;
+    type?: string;
+    image: {
+        [key: string]: string;
+    };
+    cover?: {
+        [key: string]: string;
+    };
+    core_values?: string;
+    cards?: {
+        icon: string;
+        title: string;
+    }[];
 }

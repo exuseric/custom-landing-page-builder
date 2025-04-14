@@ -1,11 +1,12 @@
 ---
-interface Props {
-    card_type: string;
-    cards: [];
-    data: {
-        [key: string]: any
-    }
-}
+// interface Props {
+//     card_type: string;
+//     cards: [];
+//     data: {
+//         [key: string]: any
+//     };
+//     isGallery: boolean;
+// }
 import Alternating from "./Alternating/Alternating.astro";
 import Basic from "./Basic/Basic.astro";
 import BlockyCards from "./Blocky/BlockyCards.astro";
@@ -14,13 +15,18 @@ import Gallery from "./Fancy/Gallery.astro";
 import ContentCard from "./ContentCard/ContentCard.astro";
 import ThreeColumns from "./ThreeColumns/ThreeColumns.astro";
 
-const { card_type, cards } = Astro.props;
+const { card_type, cards, isGallery } = Astro.props;
+
+const cardProps = {
+    cards,
+    isGallery
+}
 ---
 
-{card_type === "blocky" && <BlockyCards cards={cards} />}
-{card_type === "basic" && <Basic cards={cards} />}
-{card_type === "info" && <InfoCard cards={cards} />}
-{card_type === "alternating" && <Alternating cards={cards} />}
-{card_type === "gallery" && <Gallery cards={cards} /> }
-{card_type === "content" && <ContentCard cards={cards} />}
-<!-- <ThreeColumns cards={cards} /> -->
+{card_type === "blocky" && <BlockyCards {...cardProps} />}
+{card_type === "basic" && <Basic {...cardProps} />}
+{card_type === "info" && <InfoCard {...cardProps} />}
+{card_type === "alternating" && <Alternating {...cardProps} />}
+{card_type === "gallery" && <Gallery {...cardProps} /> }
+{card_type === "content" && <ContentCard {...cardProps} />}
+<!-- <ThreeColumns {...cardProps} /> -->

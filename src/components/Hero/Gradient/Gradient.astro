@@ -2,31 +2,9 @@
 import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
 import "./styles.css";
-
-interface Props {
-    title: string;
-    excerpt: string;
-    image: {
-        [key: string]: string;
-    };
-}
-
-const { title, excerpt } = Astro.props;
-
-const cards = [
-    {
-        title: "Quality",
-        icon: "mdi:coins",
-    },
-    {
-        title: "Excellence",
-        icon: "mdi:sparkles",
-    },
-    {
-        title: "Reliability",
-        icon: "mdi:magnet",
-    },
-];
+import type { HeroProps } from "@utils/types";
+interface Props extends HeroProps {}
+const { title, excerpt, cards } = Astro.props;
 ---
 
 <header class="gg-hero">
@@ -37,7 +15,7 @@ const cards = [
 
             <div class="gg-hero__cards">
                 {
-                    cards.map((card) => (
+                    cards?.map((card) => (
                         <div class="gg-hero__card">
                             <div class="gg-hero__card__content">
                                 <div class="gg-hero__icon-wrapper">
@@ -57,3 +35,5 @@ const cards = [
         </div>
     </Container>
 </header>
+
+

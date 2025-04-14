@@ -4,15 +4,19 @@ import Container from "@components/Container.astro";
 import "./contact.css";
 import TopRightAnimatedSvg from "@components/TopRightAnimatedSvg.astro";
 
-const {info, location } = Astro.props;
+const {info, location, title } = Astro.props;
 ---
 
 <div class="two_column_contact container" id="contact" data-highlight="true">
-    <TopRightAnimatedSvg />
+    <!-- <TopRightAnimatedSvg /> -->
     <Container>
+        <header class="content_section__header">
+            <h2>{title}</h2>
+        </header>
         <div class="two_column_contact__content">
             <article>
-                <slot set:html={location[0].content} />
+                <!-- <slot set:html={location[0].content} /> -->
+                <InfoCard cards={location} direction="column" />
                 <InfoCard cards={info} direction="column" />
             </article>
 

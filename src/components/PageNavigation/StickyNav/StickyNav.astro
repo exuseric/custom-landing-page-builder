@@ -44,7 +44,7 @@ const pageLinks = links.map((link) =>
 >
     <Container>
         <div class="sticky-nav__wrapper">
-            <a class="sticky-nav__logo" href="/">
+            <a class="sticky-nav__logo" href="/" aria-label={title.trim()}>
                 <CustomImage
                     eager={true}
                     image={logo}
@@ -103,12 +103,12 @@ const pageLinks = links.map((link) =>
     </Container>
 </nav>
 
-<script>
-    const toggleActive = (el: HTMLElement) => {
+<script is:inline>
+    const toggleActive = (el) => {
         el.dataset.isActive = String(!(el.dataset.isActive === "true"));
     };
 
-    const toggleScroll = (el: HTMLElement) => {
+    const toggleScroll = (el) => {
         if (window.scrollY > el.getBoundingClientRect().height * 0.5) {
             el.dataset.isActive = "true";
         } else {
@@ -116,19 +116,19 @@ const pageLinks = links.map((link) =>
         }
     };
 
-    const toggleAria = (el: HTMLElement) => {
+    const toggleAria = (el) => {
         el.ariaExpanded = String(!(el.ariaExpanded === "true"));
     };
 
     document.addEventListener("DOMContentLoaded", () => {
-        const nav = document.querySelector("[data-nav-bar]") as HTMLElement;
+        const nav = document.querySelector("[data-nav-bar]");
         const toggle = document.querySelector(
             "[data-menu-toggle]",
-        ) as HTMLButtonElement;
+        );
         const toggleIcons = document.querySelectorAll(
             "[data-icon]",
-        ) as NodeListOf<HTMLElement>;
-        const menu = document.querySelector("[data-menu]") as HTMLElement;
+        )
+        const menu = document.querySelector("[data-menu]");
 
         // Click Listener
         toggle.addEventListener("click", function () {

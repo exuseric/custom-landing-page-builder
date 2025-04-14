@@ -4,9 +4,64 @@ import "./section.css";
 import CustomImage from "@components/CustomImage.astro";
 import Cards from "@components/Cards/Cards.astro";
 const { data } = Astro.props;
+
+const isGallery = data.expand.image?.length > 1;
 ---
 
 <div
+    class="content_section"
+    data-highlight={data.highlight}
+    id={data.type.split(" ").join("-")}
+>
+    <Container>
+        <div class="content_section__content_wrapper">
+            <article class="content_section__article">
+                <header class="content_section__header">
+                    <h2>{data.title}</h2>
+                </header>
+                <div class="content_section__content">
+                    <slot set:html={data.content} />
+                </div>
+            </article>
+            {
+                data.expand.image && !isGallery && (
+                    <div
+                        class="content_section__image_wrapper"
+                        data-fancy-wrapper={data.expand.image?.length > 1}
+                    >
+                        <CustomImage
+                            image={data.expand.image[0]}
+                            classlist="content_section__image"
+                            size="large"
+                            eager={false}
+                        />
+                    </div>
+                )
+            }
+        </div>
+        {
+            data.expand.section_grid && (
+                <Cards
+                    card_type={data.grid_type}
+                    cards={data.expand.section_grid}
+                    data={data}
+                    isGallery={isGallery}
+                />
+            )
+        }
+        {
+            isGallery && (
+                <Cards
+                    card_type={data.grid_type}
+                    cards={data.expand.image}
+                    data={data}
+                    isGallery={isGallery}
+                />
+            )
+        }
+    </Container>
+</div>
+<!-- <div
     class="content_section"
     data-highlight={data.highlight}
     id={data.type.split(" ").join("-")}
@@ -48,4 +103,4 @@ const { data } = Astro.props;
             )
         }
     </Container>
-</div>
+</div> -->

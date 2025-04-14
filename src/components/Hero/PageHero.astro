@@ -1,4 +1,5 @@
 ---
+import type { HeroProps } from "@utils/types";
 import BlackModern from "./BlackModern/BlackModern.astro";
 import Gradient from "./Gradient/Gradient.astro";
 import HorizontalWithImage from "./HorizontalWithImage/HorizontalWithImage.astro";
@@ -8,16 +9,25 @@ import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import TwoSquares from "./TwoSquares/TwoSquares.astro";
 import BlockyHero from "./BlockyHero/BlockyHero.astro";
 import BigName from "./BigName/BigName.astro";
-
-const { title, excerpt, image, type, grid } = Astro.props;
+import WavyHero from "./WavyHero/WavyHero.astro";
+interface Props extends HeroProps {}
+const { title, excerpt, image, cover, type, cards } = Astro.props;
+const heroProps: HeroProps = {
+    title,
+    excerpt,
+    image,
+    cover,
+    type
+}
 ---
-{type === "blocky" && <BlockyHero title={title} excerpt={excerpt} image={image} grid={grid}/>}
-{type === "gradient" && (<Gradient title={title} excerpt={excerpt} image={image} />)}
-{type === "black modern" && <BlackModern title={title} excerpt={excerpt} image={image} />}
-{type === "horizontal with image" && <HorizontalWithImage title={title} excerpt={excerpt} image={image} />}
-{type === "vertical with image" && <VerticalWithImage title={title} excerpt={excerpt} image={image} />}
-{type === "two column" && <TwoColumnHero title={title} excerpt={excerpt} image={image} />}
-{type === "two square" && <TwoSquares title={title} excerpt={excerpt} image={image} />}
-{type === "big name" && <BigName title={title} excerpt={excerpt} image={image} />}
-{(!type || type === "default") && <Overflow title={title} excerpt={excerpt} image={image} />}
+<WavyHero {...heroProps} />
+{type === "blocky" && <BlockyHero {...heroProps} grid={cards}/>}
+{type === "gradient" && (<Gradient {...heroProps} cards={cards} />)}
+{type === "black modern" && <BlackModern {...heroProps} />}
+{type === "horizontal with image" && <HorizontalWithImage {...heroProps} />}
+{type === "vertical with image" && <VerticalWithImage {...heroProps} />}
+{type === "two column" && <TwoColumnHero {...heroProps} />}
+{type === "two square" && <TwoSquares {...heroProps} />}
+{type === "big name" && <BigName {...heroProps} />}
+{(!type || type === "default") && <Overflow {...heroProps} />}
 

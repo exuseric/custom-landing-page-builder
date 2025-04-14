@@ -21,12 +21,12 @@ const parentDomains: ObjectType = {
     st: 'paginasamarelas.st',
 }
 
-const designedBy: ObjectType = {
-    ke: 'Designed by Yellow Pages Kenya',
-    cv: 'Desenhado por Páginas Amarelas de Cabo Verde',
-    mz: 'Desenhado por Páginas Amarelas Moçambique',
-    tz: 'Designed by Yellow Tanzania',
-    st: 'Desenhado por Páginas Amarelas São Tomé',
+const companyNames: ObjectType = {
+    ke: 'Yellow Pages Kenya',
+    cv: 'Páginas Amarelas de Cabo Verde',
+    mz: 'Páginas Amarelas Moçambique',
+    tz: 'Yellow Tanzania',
+    st: 'Páginas Amarelas São Tomé',
 };
 
 const enLang = ["ke, tz"]
@@ -35,11 +35,11 @@ const getImageUrl = ({ collection, filename }: { collection: any, filename: stri
 
 const getData = async () => {
     await pb.collection("_superusers").authWithPassword('eric.gathoni@yellowpageskenya.com', 'CDz5pFLmm3thaFZ');
-    const data = await pb.collection("landing_page").getOne<PageType>(pageId, {expand: 'logo,hero_image,hero_grid,sections, sections.image, sections.section_grid, sections.section_grid.image, contact_info, contact_location'})
+    const data = await pb.collection("landing_page").getOne<PageType>(pageId, {expand: 'logo,hero_image, hero_cover, hero_grid,sections, sections.image, sections.section_grid, sections.section_grid.image, contact_info, contact_location'})
     
     const company = {
         url: parentUrls[data.country],
-        designedBy: designedBy[data.country],
+        companyName: companyNames[data.country],
         rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
     }
     const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`

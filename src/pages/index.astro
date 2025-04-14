@@ -147,11 +147,12 @@ const record = await getData();
 		/>
 		<PageHero
 		image={record.expand.hero_image}
+		cover={record.expand?.hero_cover}
 		title={record.hero_title}
 		excerpt={record.hero_excerpt}
 		type={record.hero_style}
 		core_values={record.core_values}
-		grid={record.expand.hero_grid}
+		cards={record.expand.hero_grid}
 		/>
 		<main>
 			<Sections
@@ -169,3 +170,4 @@ const record = await getData();
 	</body>
 </html>
 <style define:vars={{ themeColor: record.theme_color}} is:global></style>
+
