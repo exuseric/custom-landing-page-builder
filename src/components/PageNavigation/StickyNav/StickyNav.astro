@@ -41,6 +41,7 @@ const pageLinks = links.map((link) =>
     data-is-active="false"
     data-fixed-menu={fixedMenu}
     data-black-text={blackText}
+    role="navigation"
 >
     <Container>
         <div class="sticky-nav__wrapper">
@@ -53,7 +54,7 @@ const pageLinks = links.map((link) =>
                 />
                 <!-- <span class="sticky-nav__logo-text">{title}</span> -->
             </a>
-            <menu class="sticky-nav__menu" data-menu data-is-active="false">
+            <menu class="sticky-nav__menu" data-menu data-is-active="false" role="menu" aria-haspopup="true" aria-expanded="false">
                 {
                     pageLinks.map((link, index) => (
                         <li>
@@ -133,7 +134,7 @@ const pageLinks = links.map((link) =>
         // Click Listener
         toggle.addEventListener("click", function () {
             toggleActive(menu); // Toggle Menu
-            toggleAria(this); // Toggle Aria
+            toggleAria(menu); // Toggle Aria
             toggleActive(this); // Toggle Active
 
             for (const icon of toggleIcons) {

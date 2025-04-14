@@ -339,6 +339,10 @@ a:not([class]) {
 } */
 
 .btn {
+    --bg-color: var(--clr-primary);
+    --text-color: var(--clr-neutral);
+    --outline-color: var(--bg-color);
+
     display: grid;
     place-content: center;
 
@@ -347,6 +351,10 @@ a:not([class]) {
 
     text-decoration: none;
     font-weight: var(--heading-medium-weight);
+
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    outline: 2px solid var(--outline-color);
 }
 
 .btn-md {
@@ -355,61 +363,62 @@ a:not([class]) {
 
 /* Primary Button */
 .btn-primary {
-    background-color: var(--clr-primary);
-    color: var(--clr-neutral);
+
 }
 
 .btn-primary:hover {
-    background-color: var(--clr-secondary);
+    --bg-color: var(--clr-secondary);
 }
 
 .btn-primary:active {
-    background-color: var(--clr-primary-darker);
+    --bg-color: var(--clr-primary-darker);
 }
 
 /* Secondary Button */
 .btn-secondary {
-    background-color: var(--clr-secondary);
-    color: var(--clr-neutral);
+    --bg-color: var(--clr-secondary);
+    --text-color: var(--clr-neutral);
 }
 
 .btn-secondary:hover {
-    background-color: var(--clr-tertiary);
+    --bg-color: var(--clr-tertiary);
 }
 
 .btn-secondary:active {
-    background-color: var(--clr-secondary-darker);
+    --bg-color: var(--clr-secondary-darker);
 }
 
 /* Tertiary Button */
 .btn-tertiary {
-    background-color: var(--clr-tertiary);
-    color: var(--clr-neutral);
+    --bg-color: var(--clr-tertiary);
+    --text-color: var(--clr-neutral);
 }
 
 .btn-tertiary:hover {
-    background-color: var(--clr-secondary);
+    --bg-color: var(--clr-secondary);
 }
 
 .btn-tertiary:active {
-    background-color: var(--clr-tertiary-darker);
+    --bg-color: var(--clr-tertiary-darker);
 }
 
 /* Outline Button */
 .btn-outline {
-    background-color: transparent;
-    color: var(--clr-primary-darker);
-    border: 2px solid currentColor;
+    --bg-color: transparent;
+    --text-color: var(--clr-primary-darker);
+    --outline-color: var(--text-color);
+    /* outline: 2px solid currentColor; */
 }
 
 .btn-outline:hover {
-    color: var(--clr-neutral);
-    background-color: var(--clr-secondary);
+    --bg-color: var(--clr-secondary);
+    --outline-color: var(--bg-color);
+    --text-color: var(--clr-neutral);
 }
 
 .btn-outline:active {
-    background-color: var(--clr-primary-darker);
-    color: var(--clr-neutral);
+    --bg-color: var(--clr-primary-darker);
+    --text-color: var(--clr-neutral);
 }
 
 /* Disabled Button */
