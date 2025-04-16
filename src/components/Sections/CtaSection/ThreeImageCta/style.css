@@ -98,7 +98,7 @@
     }
 
     .three_image_cta___image_2 {
-        grid-row: 2 / -2;
+        grid-row: 1 / -1;
         grid-column: 2 / -1;
     }
 }

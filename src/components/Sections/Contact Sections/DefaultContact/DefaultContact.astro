@@ -21,10 +21,10 @@ location.length <= 1 && location.map((loc: any) => loc=loc)
             <div class="default_contact__location">
                 {
                     location.map((location: any) => (
-                        <div class="location">
+                        <address class="location">
                             <slot set:html={location.content} />
                             <slot set:html={location.title} />
-                        </div>
+                        </address>
                     ))
                 }
             </div>

@@ -42,6 +42,7 @@ const pageLinks = links.map((link) =>
     data-fixed-menu={fixedMenu}
     data-black-text={blackText}
     role="navigation"
+    aria-label="page navigation"
 >
     <Container>
         <div class="sticky-nav__wrapper">
@@ -54,7 +55,7 @@ const pageLinks = links.map((link) =>
                 />
                 <!-- <span class="sticky-nav__logo-text">{title}</span> -->
             </a>
-            <menu class="sticky-nav__menu" data-menu data-is-active="false" role="menu" aria-haspopup="true" aria-expanded="false">
+            <menu class="sticky-nav__menu" data-menu data-is-active="false" aria-label="page menu" role="menu" aria-haspopup="true" aria-expanded="false">
                 {
                     pageLinks.map((link, index) => (
                         <li>
@@ -78,11 +79,10 @@ const pageLinks = links.map((link) =>
                 <button
                     type="button"
                     id="sticky_nav__toggle"
-                    class="sticky_nav__toggle btn btn-primary btn-icon"
+                    class="sticky_nav__toggle btn btn-primary btn--icon"
                     data-menu-toggle
                     data-is-active="false"
-                    aria-label="toggle navigation"
-                    aria-expanded="false"
+                    aria-label="toggle page menu"
                 >
                     <Icon
                         name="mdi:menu"
@@ -104,53 +104,4 @@ const pageLinks = links.map((link) =>
     </Container>
 </nav>
 
-<script is:inline>
-    const toggleActive = (el) => {
-        el.dataset.isActive = String(!(el.dataset.isActive === "true"));
-    };
-
-    const toggleScroll = (el) => {
-        if (window.scrollY > el.getBoundingClientRect().height * 0.5) {
-            el.dataset.isActive = "true";
-        } else {
-            el.dataset.isActive = "false";
-        }
-    };
-
-    const toggleAria = (el) => {
-        el.ariaExpanded = String(!(el.ariaExpanded === "true"));
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const nav = document.querySelector("[data-nav-bar]");
-        const toggle = document.querySelector(
-            "[data-menu-toggle]",
-        );
-        const toggleIcons = document.querySelectorAll(
-            "[data-icon]",
-        )
-        const menu = document.querySelector("[data-menu]");
-
-        // Click Listener
-        toggle.addEventListener("click", function () {
-            toggleActive(menu); // Toggle Menu
-            toggleAria(menu); // Toggle Aria
-            toggleActive(this); // Toggle Active
-
-            for (const icon of toggleIcons) {
-                toggleActive(icon); // Toggle Icons
-            }
-        });
-
-        toggleScroll(nav);
-
-        // Scroll Listener
-        document.addEventListener("scroll", () => {
-            if (window.scrollY > nav.getBoundingClientRect().height * 0.5) {
-                toggleScroll(nav);
-            } else {
-                toggleScroll(nav);
-            }
-        });
-    });
-</script>
+<script src="@utils/navigationEvents.ts"></script>

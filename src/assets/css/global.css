@@ -88,7 +88,7 @@
     --size-14: 20rem;
     --size-15: 30rem;
 
-    --container-padding-block: var(--size-8);
+    --container-padding-block: var(--size-5);
     --container-padding-inline: var(--size-3);
 
     --snappy-bounce-ease: cubic-bezier(0.6, -0.38, 0.37, 1.36);
@@ -155,7 +155,7 @@
 
 @media (min-width: 768px) {
     :root {
-        --container-padding-block: var(--size-9);
+        --container-padding-block: var(--size-7);
         --container-padding-inline: var(--size-4);
         --content-max-width: 1200px;
 
@@ -164,7 +164,7 @@
 
 @media (min-width: 1024px) {
     :root {
-        --container-padding-block: var(--size-10);
+        --container-padding-block: var(--size-8);
         --container-padding-inline: var(--size-5);
     }
 }
@@ -362,9 +362,7 @@ a:not([class]) {
 }
 
 /* Primary Button */
-.btn-primary {
-
-}
+.btn-primary {}
 
 .btn-primary:hover {
     --bg-color: var(--clr-secondary);
@@ -445,7 +443,7 @@ button:disabled,
     color: var(--clr-primary-darker);
 }
 
-.btn-icon {
+.btn--icon {
     display: grid;
     place-content: center;
 
@@ -453,7 +451,7 @@ button:disabled,
     height: 48px;
 }
 
-.btn-icon svg {
+.btn--icon svg {
     font-size: 1.5em;
 }
 

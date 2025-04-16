@@ -9,16 +9,15 @@ const {info, location, title } = Astro.props;
 
 <div class="two_column_contact container" id="contact" data-highlight="true">
     <!-- <TopRightAnimatedSvg /> -->
-    <Container>
+    <Container as="article">
         <header class="content_section__header">
             <h2>{title}</h2>
         </header>
         <div class="two_column_contact__content">
-            <article>
+            <adrress>
                 <!-- <slot set:html={location[0].content} /> -->
-                <InfoCard cards={location} direction="column" />
-                <InfoCard cards={info} direction="column" />
-            </article>
+                <InfoCard cards={[...location, ...info]} direction="column" />
+            </adrress>
 
             <div class="two_column_contact__location">
                 {

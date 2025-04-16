@@ -20,7 +20,7 @@ const heroProps: HeroProps = {
     type
 }
 ---
-<WavyHero {...heroProps} />
+{type === "wavy" && <WavyHero {...heroProps} />}
 {type === "blocky" && <BlockyHero {...heroProps} grid={cards}/>}
 {type === "gradient" && (<Gradient {...heroProps} cards={cards} />)}
 {type === "black modern" && <BlackModern {...heroProps} />}
