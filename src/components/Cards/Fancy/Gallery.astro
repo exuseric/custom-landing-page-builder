@@ -14,7 +14,7 @@ const { cards, isGallery } = Astro.props;
 <div class="gallery-grid" id="gallery">
     {
         cards.map((card: Card) => (
-            <div class="gallery-item">
+            <div class="gallery-item" data-type={card.type}>
                 <CustomImage
                     eager={false}
                     image={card}

@@ -1,5 +1,5 @@
 .content_section {
-    padding-block: var(--container-padding-block);
+    margin-block: var(--container-padding-block);
 }
 .content_section__content_wrapper {
     display: flex;
@@ -7,7 +7,7 @@
     gap: var(--size-4);
 }
 .content_section__header h2 {
-    font-size: var(--heading-large);
+    font-size: var(--heading-xl);
     color: var(--clr-primary-dark);
 }
 

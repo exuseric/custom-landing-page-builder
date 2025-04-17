@@ -4,27 +4,35 @@ interface Card {
     content: any;
     expand: {
         image: {
-        file: string;
-        title: string;
-        position: string;
-        fit: string;
-    }
-    }
+            file: string;
+            title: string;
+            position: string;
+            fit: string;
+        };
+    };
 }
 import "./card.css";
 import CustomImage from "@components/CustomImage.astro";
 const { cards } = Astro.props;
 ---
-<div class="alternating-card">
 
-    {cards.map((card: Card) => (
-        <div class="alternating-card__content-wrapper">
-            <h3>{card.title}</h3>
-            <slot set:html={card.content}/>
-        </div>
-
-        <div class="alternating-card__image-wrapper">
-                <CustomImage image={card.expand.image} eager={true} size="large" classlist="alternating-card__image"/>
-        </div>
-))}
+<div class="content_card__grid">
+    {
+        cards.map((card: Card) => (
+            <div class="content_card__content_wrapper">
+                <div class="content_card__content">
+                    <h3 class="content_card__content_title">{card.title}</h3>
+                    <slot set:html={card.content} />
+                </div>
+                <div class="content_card__image_wrapper">
+                    <CustomImage
+                        image={card.expand.image}
+                        eager={true}
+                        size="large"
+                        classlist="content_card__image"
+                    />
+                </div>
+            </div>
+        ))
+    }
 </div>

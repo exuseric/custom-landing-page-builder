@@ -10,11 +10,17 @@
 .gallery-item {
     position: relative;
     aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
     border-radius: var(--size-1);
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     outline: 2px solid var(--clr-neutral-200);
+}
+
+.gallery-item[data-type="portrait"] {
+    grid-row: span 2;
 }
 
 .gallery-item:hover {

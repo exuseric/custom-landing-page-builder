@@ -10,6 +10,7 @@ import TestimonialWithStats from "./Testimonial/TestimonialWithStats/Testimonial
 import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.astro";
 import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro";
 import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro";
+import SmallCta from "./CtaSection/SmallCta/SmallCta.astro";
 const { sections, core_values } = Astro.props;
 ---
 {
@@ -72,6 +73,8 @@ const { sections, core_values } = Astro.props;
                             data={section}
                         />
                     );
+                case "small cta":
+                    return (<SmallCta data={section} />)
                 default:
                     return <Section data={section} />;
             }

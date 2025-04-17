@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import type { ObjectType, PageType } from "@utils/types"
 // import { usePageData } from '../store/store';
 const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = 'c4514se2p5y6656'
+const pageId = '9b9712kf4vk27wt'
 // const {setPageData} = usePageData()
 
 const parentUrls: ObjectType = {

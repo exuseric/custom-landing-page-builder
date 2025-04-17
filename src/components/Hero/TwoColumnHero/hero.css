@@ -4,10 +4,9 @@
 }
 
 .two_column_hero h1 {
-    font-size: var(--heading-large);
+    font-size: var(--heading-4xl);
     font-weight: var(--heading-large-weight);
     line-height: 1;
-    margin-bottom: var(--size-3);
 }
 
 .two_column_hero p {
