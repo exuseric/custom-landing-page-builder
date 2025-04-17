@@ -1,10 +1,15 @@
+// Keep existing types but enhance with strict typing
+export type CountryCode = 'ke' | 'cv' | 'mz' | 'tz' | 'st';
+export type Language = 'en' | 'pt';
+
+// Enhance existing PageType
 export type PageType = {
     title: string;
     url: string;
     meta_title: string;
     meta_description: string;
     theme_color: string;
-    country: string;
+    country: CountryCode;
     analytics_id: string;
     search_console: string;
     links: [string];
@@ -62,3 +67,11 @@ export type HeroProps = {
         title: string;
     }[];
 }
+
+// Add new but compatible types
+export type SectionType = 
+    | 'cta'
+    | 'testimonial'
+    | 'stats grid'
+    | 'colorful stats'
+    | 'two column stats';

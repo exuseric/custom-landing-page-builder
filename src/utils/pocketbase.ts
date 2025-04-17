@@ -1,11 +1,10 @@
 import PocketBase from 'pocketbase';
-import type { ObjectType, PageType } from "@utils/types"
-// import { usePageData } from '../store/store';
-const pb = new PocketBase('http://127.0.0.1:8090');
-const pageId = '9b9712kf4vk27wt'
-// const {setPageData} = usePageData()
+import type { CountryCode, ObjectType, PageType } from "@utils/types"
 
-const parentUrls: ObjectType = {
+const pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090');
+const pageId = import.meta.env.PUBLIC_PAGE_ID || '9b9712kf4vk27wt';
+
+const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',
     cv: 'https://www.paginasamarelas.cv/',
     mz: 'https://www.paginasamarelas.co.mz/',
@@ -34,19 +33,36 @@ const enLang = ["ke, tz"]
 const getImageUrl = ({ collection, filename }: { collection: any, filename: string }) => pb.files.getUrl(collection, filename)
 
 const getData = async () => {
-    await pb.collection("_superusers").authWithPassword('eric.gathoni@yellowpageskenya.com', 'CDz5pFLmm3thaFZ');
-    const data = await pb.collection("landing_page").getOne<PageType>(pageId, {expand: 'logo,hero_image, hero_cover, hero_grid,sections, sections.image, sections.section_grid, sections.section_grid.image, contact_info, contact_location'})
-    
-    const company = {
-        url: parentUrls[data.country],
-        companyName: companyNames[data.country],
-        rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
+    try {
+        await pb.collection("_superusers").authWithPassword(
+            import.meta.env.POCKETBASE_EMAIL || 'eric.gathoni@yellowpageskenya.com',
+            import.meta.env.POCKETBASE_PASSWORD || 'CDz5pFLmm3thaFZ'
+        );
+        
+        const data = await pb.collection("landing_page").getOne<PageType>(pageId, {
+            expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location'
+        });
+        
+        const company = {
+            url: parentUrls[data.country],
+            companyName: companyNames[data.country],
+            rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
+        }
+        const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`
+        console.log(finalUrl)
+        const record = { ...data, company, finalUrl }
+        // setPageData(record)
+        return record;
+    } catch (error) {
+        console.error('Failed to fetch data:', error);
+        // Return a basic fallback structure that matches PageType
+        return {
+            title: 'Error',
+            url: '/',
+            country: 'ke' as CountryCode,
+            // ... minimum required fields
+        };
     }
-    const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`
-    console.log(finalUrl)
-    const record = { ...data, company, finalUrl }
-    // setPageData(record)
-    return record
 }
 
 export { getImageUrl, getData}
