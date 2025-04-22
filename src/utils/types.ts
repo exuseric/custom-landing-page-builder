@@ -68,8 +68,16 @@ export type HeroProps = {
     }[];
 }
 
+export type CompanyType = {
+    company: {
+        url: string;
+        companyName: string;
+        rightsReserved: string;
+    }
+}
+
 // Add new but compatible types
-export type SectionType = 
+export type SectionType =
     | 'cta'
     | 'testimonial'
     | 'stats grid'

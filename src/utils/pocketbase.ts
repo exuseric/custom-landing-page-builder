@@ -1,8 +1,8 @@
 import PocketBase from 'pocketbase';
-import type { CountryCode, ObjectType, PageType } from "@utils/types"
+import type { CompanyType, CountryCode, ObjectType, PageType } from "@utils/types"
 
 const pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090');
-const pageId = import.meta.env.PUBLIC_PAGE_ID || '9b9712kf4vk27wt';
+const pageId = import.meta.env.PUBLIC_PAGE_ID || '1fadl8crgdl262m';
 
 const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',
@@ -38,12 +38,12 @@ const getData = async () => {
             import.meta.env.POCKETBASE_EMAIL || 'eric.gathoni@yellowpageskenya.com',
             import.meta.env.POCKETBASE_PASSWORD || 'CDz5pFLmm3thaFZ'
         );
-        
+
         const data = await pb.collection("landing_page").getOne<PageType>(pageId, {
             expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location'
         });
-        
-        const company = {
+
+        const company: CompanyType['company'] = {
             url: parentUrls[data.country],
             companyName: companyNames[data.country],
             rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
@@ -56,13 +56,8 @@ const getData = async () => {
     } catch (error) {
         console.error('Failed to fetch data:', error);
         // Return a basic fallback structure that matches PageType
-        return {
-            title: 'Error',
-            url: '/',
-            country: 'ke' as CountryCode,
-            // ... minimum required fields
-        };
+        return {} as PageType & CompanyType;
     }
 }
 
-export { getImageUrl, getData}
+export { getImageUrl, getData }
