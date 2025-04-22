@@ -14,6 +14,7 @@ import InfoCard from "./Info/InfoCard.astro";
 import Gallery from "./Fancy/Gallery.astro";
 import ContentCard from "./ContentCard/ContentCard.astro";
 import ThreeColumns from "./ThreeColumns/ThreeColumns.astro";
+import IconCard from "./IconCard/IconCard.astro";
 
 const { card_type, cards, isGallery } = Astro.props;
 
@@ -29,4 +30,5 @@ const cardProps = {
 {card_type === "alternating" && <Alternating {...cardProps} />}
 {card_type === "gallery" && <Gallery {...cardProps} /> }
 {card_type === "content" && <ContentCard {...cardProps} />}
+{card_type === "icon card" && <IconCard {...cardProps} />}
 <!-- <ThreeColumns {...cardProps} /> -->

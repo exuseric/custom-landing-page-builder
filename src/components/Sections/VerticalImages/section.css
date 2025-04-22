@@ -26,7 +26,13 @@
     grid-column: 2 / -1;
     grid-row: 2 / -1;
 }
-
+.vertical-section__core_values {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--size-2);
+    margin-bottom: var(--size-2);
+    list-style: none;
+}
 @media (max-width: 768px) {
     .vertical-section__wrapper {
         grid-column: 1 / -1;

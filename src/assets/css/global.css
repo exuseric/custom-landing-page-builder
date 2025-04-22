@@ -243,6 +243,7 @@ h1 {
 }
 
 [data-highlight="true"] {
+    padding: var(--container-padding-block);
     color: var(--clr-neutral-50);
     background-color: var(--clr-primary-darker);
 }

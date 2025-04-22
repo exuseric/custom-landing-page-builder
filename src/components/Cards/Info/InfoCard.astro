@@ -11,8 +11,6 @@ interface Props {
 import  "./card.css";
 import { Icon } from "astro-icon/components";
 const { cards, direction = "row" } = Astro.props;
-
-// console.log(cards)
 ---
 <ul class="info_card" style={`--direction: ${direction};`}>
    {cards.map((card: Card) => (
