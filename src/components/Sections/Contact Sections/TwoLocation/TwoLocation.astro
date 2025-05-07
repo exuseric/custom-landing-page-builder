@@ -1,0 +1,16 @@
+---
+import InfoCard from "@components/Cards/Info/InfoCard.astro";
+import Container from "@components/Container.astro";
+const {title, info, location} = Astro.props;
+---
+
+<div class="two_location container" id="contact" data-highlight="true">
+    <Container>
+        <div class="two_location__content">
+            <article>
+                <h2>{title}</h2>
+                <InfoCard cards={info} />
+            </article>
+        </div>
+    </Container>
+</div>

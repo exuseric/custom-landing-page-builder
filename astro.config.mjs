@@ -9,6 +9,7 @@ const record = await getData();
 export default defineConfig({
   output: "static",
   // outDir: process.cwd() + '\\build\\' + record.url.slice(8),
+  //@ts-ignore
   outDir: process.cwd() + '\\build\\' + record.finalUrl.slice(8),
   site: record.url,
   build: {

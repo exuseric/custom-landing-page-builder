@@ -1,8 +1,8 @@
 import PocketBase from 'pocketbase';
 import type { CompanyType, CountryCode, ObjectType, PageType } from "@utils/types"
 
-const pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090');
-const pageId = import.meta.env.PUBLIC_PAGE_ID || '1fadl8crgdl262m';
+const pb = new PocketBase(import.meta.env.POCKETBASE_URL);
+const pageId = process.env.LANDING_PAGE_ID!;
 
 const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',
@@ -35,8 +35,8 @@ const getImageUrl = ({ collection, filename }: { collection: any, filename: stri
 const getData = async () => {
     try {
         await pb.collection("_superusers").authWithPassword(
-            import.meta.env.POCKETBASE_EMAIL || 'eric.gathoni@yellowpageskenya.com',
-            import.meta.env.POCKETBASE_PASSWORD || 'CDz5pFLmm3thaFZ'
+            import.meta.env.POCKETBASE_EMAIL,
+            import.meta.env.POCKETBASE_PASSWORD
         );
 
         const data = await pb.collection("landing_page").getOne<PageType>(pageId, {

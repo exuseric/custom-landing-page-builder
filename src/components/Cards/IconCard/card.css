@@ -12,6 +12,10 @@
     gap: var(--size-2);
     align-items: flex-start;
     justify-content: flex-start;
+
+    color: var(--clr-neutral-50);
+    background: var(--clr-primary-dark);
+    padding: var(--size-3);
 }
 .icon_card__header {
     display: flex;
@@ -31,7 +35,7 @@
     height: 42px;
     font-size: 1.5em;
 
-    color: var(--clr-primary);
-    background-color: var(--clr-primary-lighter);
+    color: var(--clr-neutral-50);
+    background-color: var(--clr-primary-darker);
     border-radius: calc(infinity * 1px);
 }

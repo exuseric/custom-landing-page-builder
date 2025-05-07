@@ -12,7 +12,7 @@ const { data } = Astro.props;
         <section class="small_cta">
             <h2 class="smal_cta__title">{data.title}</h2>
             <slot set:html={data.content} />
-            <a href="#contact-us" class="cta__link btn btn-md btn-primary">Get in Touch</a>
+            <a href="#contact" class="cta__link btn btn-md btn-primary">Get in Touch</a>
         </section>
     </Container>
 </div>

@@ -18,11 +18,13 @@ const props = Astro.props;
 
 const blackText =
     props.hero_style === "two column" || props.hero_style === "two square" || props.hero_style === "blocky";
----
 
+const fixedMenu = ["two column", "two square", "default"].includes(props.hero_style) ? true : false;
+console.log(props.hero_style, fixedMenu);
+---
 <StickyNav
     data={props}
-    fixedMenu={props.hero_style !== "two square" ? true : false}
+    fixedMenu={fixedMenu}
     blackText={blackText}
     country={props.country}
 />

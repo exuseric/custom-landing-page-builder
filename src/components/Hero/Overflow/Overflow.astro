@@ -18,8 +18,9 @@ const { title, excerpt, image } = Astro.props;
     <Container>
         <div class="overflow_hero__wrapper">
             <article class="overflow_hero__content">
-                <h1>{title}</h1>
+                <h1 set:html={title}></h1>
                 <p>{excerpt}</p>
+                <a href="#contact" class="btn btn-md btn-primary" style="margin-top: 0.825rem;">Let's Talk</a>
             </article>
         </div>
     </Container>

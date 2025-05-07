@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "dev:start": "astro dev",
+    "dev:preview": "astro preview",
     "test": "vitest",
+    "build": "astro build",
+    "build:test": "astro build && astro test",
+    "astro": "astro",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {

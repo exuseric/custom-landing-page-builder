@@ -1,5 +1,5 @@
 .content_section {
-    margin-block: var(--container-padding-block);
+    padding-block: var(--container-padding-block);
 }
 .content_section__content_wrapper {
     display: flex;
