@@ -1,5 +1,6 @@
 .content_section {
     padding-block: var(--container-padding-block);
+    content-visibility: auto;
 }
 .content_section__content_wrapper {
     display: flex;

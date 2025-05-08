@@ -18,40 +18,42 @@ import CustomImage from "@components/CustomImage.astro";
 const { cards, data } = Astro.props;
 ---
 
-<Container>
-    <div class="container">
-        <header class="two_column_stat__header content_section__header">
-            <h2>{data.title}</h2>
-            <slot class="simple-stats__description" set:html={data.content} />
-        </header>
-        <div class="two_column_stat__wrapper">
-            <div class="two_column_stat__image_wrapper">
-                {
-                    data.expand.image.map((image: any, idx: number) => (
-                        <CustomImage
-                            image={image}
-                            classlist={`two_column_stat__image two_column_stat__image_${idx}`}
-                            size="large"
-                            eager={false}
-                        />
-                    ))
-                }
-            </div>
-            <div class="two_column_stat__content_wrapper">
-                {
-                    cards.map((card: Card, idx: number) => (
-                        <div class="two_column_stat__content">
-                                <h3 class="two_column_stat__content_title">
-                                    {card.title}
-                                </h3>
-                            <slot
-                                class="two_column_stat__description"
-                                set:html={card.content}
+<div class="content_section" data-offscreen>
+    <Container>
+        <div class="container">
+            <header class="two_column_stat__header content_section__header">
+                <h2>{data.title}</h2>
+                <slot class="simple-stats__description" set:html={data.content} />
+            </header>
+            <div class="two_column_stat__wrapper">
+                <div class="two_column_stat__image_wrapper">
+                    {
+                        data.expand.image.map((image: any, idx: number) => (
+                            <CustomImage
+                                image={image}
+                                classlist={`two_column_stat__image two_column_stat__image_${idx}`}
+                                size="large"
+                                eager={false}
                             />
-                        </div>
-                    ))
-                }
+                        ))
+                    }
+                </div>
+                <div class="two_column_stat__content_wrapper">
+                    {
+                        cards.map((card: Card, idx: number) => (
+                            <div class="two_column_stat__content">
+                                    <h3 class="two_column_stat__content_title">
+                                        {card.title}
+                                    </h3>
+                                <slot
+                                    class="two_column_stat__description"
+                                    set:html={card.content}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
-    </div>
-</Container>
+    </Container>
+</div>

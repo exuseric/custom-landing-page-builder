@@ -663,3 +663,11 @@ button:disabled,
         grid-column: 1 / 2;
     }
 }
+
+.content_section {
+    padding-block: var(--container-padding-block);
+}
+
+[data-offscreen] {
+    content-visibility: auto;
+}

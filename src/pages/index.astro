@@ -24,7 +24,6 @@ const fonts: Record<string, string> = {
 		"https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
 	bold: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
 };
-
 const record = await getData();
 ---
 
@@ -40,11 +39,6 @@ const record = await getData();
 		<slot set:html={record.search_console} />
 
 		<link rel="sitemap" href="/sitemap.xml" />
-
-		<!-- <link rel="preconnect" href={record.url} />
-		<link rel="dns-prefetch" href={record.url} />
-		<link rel="preconnect" href={`${record.url}/assets`} />
-		<link rel="dns-prefetch" href={`${record.url}/assets`} /> -->
 
 		<link
 			rel="alternate"
@@ -105,12 +99,10 @@ const record = await getData();
 		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
 		<link rel="preconnect" href="https://www.googletagmanager.com" />
 		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-		<!-- <link rel="preconnect" href="/assets/" />
-		<link rel="dns-prefetch" href="/assets/" /> -->
 
 		<link rel="preload" as="style" href="/assets/index.min.css" />
-		<link rel="preload" as="font" type="font/woff2" href={fonts.regular} />
-		<link rel="preload" as="font" type="font/woff2" href={fonts.bold} />
+		<!-- <link rel="preload" as="font" type="font/woff2" href={fonts.regular} />
+		<link rel="preload" as="font" type="font/woff2" href={fonts.bold} /> -->
 
 		<AstroFont
 			config={[
@@ -123,7 +115,7 @@ const record = await getData();
 							path: fonts.regular,
 						},
 						{
-							style: "bold",
+							style: "normal",
 							weight: "700",
 							path: fonts.bold,
 						},
@@ -132,7 +124,18 @@ const record = await getData();
 					display: "swap",
 					selector: "body",
 					fallback: "sans-serif",
-				},
+				},{
+					name: "DM Serif Display",
+					src: [{
+						style: "normal",
+						weight: "400",
+						path: "https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap",
+					}],
+					preload: true,
+					display: "swap",
+					selector: "h1",
+					fallback: "serif",
+				}
 			]}
 		/>
 	</head>

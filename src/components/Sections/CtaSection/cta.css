@@ -1,6 +1,3 @@
-.cta {
-    padding: var(--container-padding-block) 0;
-}
 .cta__wrapper {
     display: grid;
     grid-template-columns: 1fr;
