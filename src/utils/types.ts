@@ -40,6 +40,12 @@ export type PageType = {
         contact_location: {
             [key: string]: string;
         };
+        social_links: {
+            [key: string]: string;
+        };
+        operating_hours: {
+            [key: string]: string;
+        };
         hero_grid?: {
             icon: string;
             title: string;

@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import type { CompanyType, CountryCode, ObjectType, PageType } from "@utils/types"
 
 const pb = new PocketBase("http://127.0.0.1:8090");
-const pageId = "598p7b4u097kqpk";
+const pageId = "7z181i204250wth";
 
 const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',
@@ -40,7 +40,7 @@ const getData = async () => {
         );
 
         const data = await pb.collection("landing_page").getOne<PageType>(pageId, {
-            expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location'
+            expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location,social_links,operating_hours',
         });
 
         const company: CompanyType['company'] = {

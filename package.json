@@ -24,6 +24,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@iconify-json/ri": "^1.2.5",
     "@iconify-json/fa-solid": "^1.2.0",
     "@iconify-json/mdi": "^1.2.1",
     "@iconify-json/mynaui": "^1.2.8",
