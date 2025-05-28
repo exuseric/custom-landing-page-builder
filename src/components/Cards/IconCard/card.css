@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     align-items: start;
     column-gap: var(--size-4);
-    row-gap: var(--size-8);
+    row-gap: var(--size-4);
     padding: var(--size-8) 0;
 }
 .icon_card__item {
@@ -13,9 +13,11 @@
     align-items: flex-start;
     justify-content: flex-start;
 
-    color: var(--clr-neutral-50);
-    background: var(--clr-primary-dark);
+    color: var(--clr-secondary-darker);
+    background: oklch(from var(--clr-secondary-darker) l c h / 5%);
     padding: var(--size-3);
+
+    height: 100%;
 }
 .icon_card__header {
     display: flex;
@@ -35,7 +37,7 @@
     height: 42px;
     font-size: 1.5em;
 
-    color: var(--clr-neutral-50);
-    background-color: var(--clr-primary-darker);
+    color: var(--clr-secondary-darker);
+    background-color: var(--clr-secondary-lighter);
     border-radius: calc(infinity * 1px);
 }

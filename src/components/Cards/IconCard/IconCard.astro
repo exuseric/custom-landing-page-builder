@@ -28,7 +28,7 @@ const { cards, direction = "row" } = Astro.props;
                             />
                         )}
                     </div>
-                    <h2 class="icon_card__title">{card.title}</h2>
+                    <h3 class="icon_card__title">{card.title}</h3>
                 </div>
                 <div>
                     <slot set:html={card.content} />

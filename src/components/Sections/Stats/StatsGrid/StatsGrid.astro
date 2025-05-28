@@ -1,6 +1,7 @@
 ---
 interface Props {
     cards: [];
+    highlight?: boolean;
     data: {
        [key: string]: any
     };
@@ -14,10 +15,10 @@ interface Card {
 import { Icon } from "astro-icon/components";
 import "./stats.css"
 import Container from "@components/Container.astro";
-const {cards, data} = Astro.props
+const {cards, data, highlight} = Astro.props
 ---
 
-<div class="content_section" data-offscreen>
+<div class="content_section" data-offscreen data-highlight={highlight}>
     <Container>
         <div class="stats_container">
             <div class="stats_grid">

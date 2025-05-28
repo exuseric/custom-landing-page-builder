@@ -8,17 +8,27 @@ interface Props {
     cards: Card[];
     direction?: "column" | "row";
 }
-import  "./card.css";
+import "./card.css";
 import { Icon } from "astro-icon/components";
 const { cards, direction = "row" } = Astro.props;
 ---
+
 <ul class="info_card" style={`--direction: ${direction};`}>
-   {cards.map((card: Card) => (
-      <li>
-         {card.icon_name && <Icon name={card.icon_name} aria-hidden="true" focusable="false" />}
-         <div>
-             <slot set:html={card.content} />
-         </div>
-      </li>
-   ))}
-</ul>  
+    {
+        cards.map((card: Card) => (
+            <li>
+                {card.icon_name && (
+                    <Icon
+                        name={card.icon_name}
+                        aria-hidden="true"
+                        focusable="false"
+                    />
+                )}
+                <div>
+                    <slot set:html={card.content} />
+                </div>
+            </li>
+        ))
+    }
+</ul>
+

@@ -34,7 +34,7 @@
 .stats_grid__card h2 {
     font-size: var(--heading-medium);
     font-weight: var(--heading-medium-weight);
-    color: var(--clr-tertiary);
+    /* color: var(--clr-secondary); */
     line-height: 1;
     margin: 0;
 }
@@ -42,18 +42,22 @@
 .stats_grid__card h3 {
     font-size: var(--heading-xsmall);
     font-weight: var(--heading-xsmall-weight);
-    color: var(--clr-tertiary);
+    color: var(--clr-secondary-darker);
     margin: 0;
+}
+
+[data-highlight="true"] h3{
+    color: currentColor;
 }
 .icon_wrapper {
     display: grid;
     place-content: center;
     border-radius: var(--size-2);
     padding: var(--size-2);
-    color: var(--clr-tertiary-dark);
-    background-image: linear-gradient(to bottom,var(--clr-tertiary-lighter), var(--clr-tertiary));
-    border: 2px solid var(--clr-tertiary-lighter);
-    box-shadow: var(--clr-tertiary-light) 0px 20px 25px -5px, var(--clr-tertiary-lighter) 0px 10px 10px -5px;
+    color: var(--clr-secondary-dark);
+    background-image: linear-gradient(to bottom,var(--clr-secondary-lighter), var(--clr-secondary));
+    border: 2px solid var(--clr-secondary-lighter);
+    box-shadow: var(--clr-secondary-light) 0px 20px 25px -5px, var(--clr-secondary-lighter) 0px 10px 10px -5px;
 }
 .icon {
     width: 1.5em;
