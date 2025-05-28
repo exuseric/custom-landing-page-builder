@@ -19,10 +19,27 @@ const languages: Record<string, string> = {
 	st: "pt-ST",
 };
 
-const fonts: Record<string, string> = {
-	regular:
-		"https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
-	bold: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
+const fonts = {
+	regular: {
+		name: "Atkinson Hyperlegible",
+		weight: "400",
+		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2"
+	},
+	bold: {
+		name: "Atkinson Hyperlegible",
+		weight: "700",
+		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2"
+	},
+	serif: {
+		name: "DM Serif Display",
+		weight: "400",
+		url: "https://fonts.gstatic.com/s/dmseriftext/v12/rnCu-xZa_krGokauCeNq1wWyWfSFXQ.woff2"
+	},
+	heading: {
+		name: "IBM Plex Sans Condensed",
+		weight: "700",
+		url:"https://fonts.gstatic.com/s/ibmplexsanscondensed/v14/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2"
+	}
 };
 const record = await getData();
 ---
@@ -107,17 +124,17 @@ const record = await getData();
 		<AstroFont
 			config={[
 				{
-					name: "Atkinson Hyperlegible",
+					name: fonts.regular.name,
 					src: [
 						{
 							style: "normal",
-							weight: "400",
-							path: fonts.regular,
+							weight: fonts.regular.weight,
+							path: fonts.regular.url,
 						},
 						{
 							style: "normal",
-							weight: "700",
-							path: fonts.bold,
+							weight: fonts.bold.weight,
+							path: fonts.bold.url,
 						},
 					],
 					preload: true,
@@ -125,16 +142,16 @@ const record = await getData();
 					selector: "body",
 					fallback: "sans-serif",
 				},{
-					name: "DM Serif Display",
+					name: fonts.heading.name,
 					src: [{
 						style: "normal",
-						weight: "400",
-						path: "https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap",
+						weight: fonts.heading.weight,
+						path: fonts.heading.url,
 					}],
 					preload: true,
 					display: "swap",
-					selector: "h1",
-					fallback: "serif",
+					selector: "h1,h2",
+					fallback: "sans-serif",
 				}
 			]}
 		/>
@@ -166,6 +183,8 @@ const record = await getData();
 				title={record.contact_title}
 				info={record.expand.contact_info}
 				location={record.expand.contact_location}
+				operating_hours={record.expand.operating_hours}
+				social_links={record.expand.social_links}
 				style={record.contact_style}
 			/>
 		</main> 

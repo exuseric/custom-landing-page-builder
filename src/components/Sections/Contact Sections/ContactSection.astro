@@ -3,12 +3,14 @@ import DefaultContact from "./DefaultContact/DefaultContact.astro"
 import TwoColumnContact from "./TwoColumnContact/TwoColumnContact.astro"
 import TwoLocation from "./TwoLocation/TwoLocation.astro"
 
-const {title, info, location, style} = Astro.props
+const {title, info, location, style, operating_hours, social_links} = Astro.props
 
 const contactProps = {
     title,
     info,
-    location
+    location,
+    operating_hours,
+    social_links
 }
 ---
 

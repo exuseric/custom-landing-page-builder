@@ -11,8 +11,10 @@ import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.ast
 import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro";
 import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro";
 import SmallCta from "./CtaSection/SmallCta/SmallCta.astro";
+import TestimonialCarousel from "./Testimonial/TestimonialCarousel/TestimonialCarousel.astro";
 const { sections, core_values } = Astro.props;
 ---
+
 {
     sections &&
         sections.map((section: any) => {
@@ -28,6 +30,7 @@ const { sections, core_values } = Astro.props;
                         <StatsGrid
                             data={section}
                             cards={section.expand.section_grid}
+                            highlight={section.highlight}
                         />
                     );
                 case "colorful stats":
@@ -68,13 +71,9 @@ const { sections, core_values } = Astro.props;
                         />
                     );
                 case "three image cta":
-                    return (
-                        <ThreeImageCta
-                            data={section}
-                        />
-                    );
+                    return <ThreeImageCta data={section} />;
                 case "small cta":
-                    return (<SmallCta data={section} />)
+                    return <SmallCta data={section} />;
                 default:
                     return <Section data={section} />;
             }
