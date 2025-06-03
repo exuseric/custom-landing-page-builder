@@ -1,0 +1,15 @@
+.horizontal_hero {
+  --bg: var(--clr-primary-darker);
+  --text: oklch(from(var(--bg)), calc(l + 0.92) c h);
+  color: var(--text);
+  background-color: var(--bg);
+}
+@media (min-width: 768px) {
+  .horizontal_hero__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: min(100vh, 400px);
+    gap: var(--size-4);
+    align-items: center;
+  }
+}

@@ -2,14 +2,15 @@
 import type { HeroProps } from "@utils/types";
 import BlackModern from "./BlackModern/BlackModern.astro";
 import Gradient from "./Gradient/Gradient.astro";
-import HorizontalWithImage from "./HorizontalWithImage/HorizontalWithImage.astro";
+import AlternateHorizontal from "./AlternateHorizontal/AlternateHorizontal.astro";
 import Overflow from "./Overflow/Overflow.astro";
 import TwoColumnHero from "./TwoColumnHero/TwoColumnHero.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import TwoSquares from "./TwoSquares/TwoSquares.astro";
-import BlockyHero from "./BlockyHero/BlockyHero.astro";
+import DefaultHorizontal from "./DefaultHorizontal/DefaultHorizontal.astro";
 import BigName from "./BigName/BigName.astro";
 import WavyHero from "./WavyHero/WavyHero.astro";
+import CenteredImage from "./CenteredImage/CenteredImage.astro";
 interface Props extends HeroProps {}
 const { title, excerpt, image, cover, type, cards } = Astro.props;
 const heroProps: HeroProps = {
@@ -21,13 +22,14 @@ const heroProps: HeroProps = {
 }
 ---
 {type === "wavy" && <WavyHero {...heroProps} />}
-{type === "blocky" && <BlockyHero {...heroProps} grid={cards}/>}
+{type === "default horizontal" && <DefaultHorizontal {...heroProps} grid={cards}/>}
 {type === "gradient" && (<Gradient {...heroProps} cards={cards} />)}
 {type === "black modern" && <BlackModern {...heroProps} />}
-{type === "horizontal with image" && <HorizontalWithImage {...heroProps} />}
-{type === "vertical with image" && <VerticalWithImage {...heroProps} />}
+{type === "alternate horizontal" && <AlternateHorizontal {...heroProps} />}
+{type === "alternate vertical" && <VerticalWithImage {...heroProps} />}
 {type === "two column" && <TwoColumnHero {...heroProps} />}
 {type === "two square" && <TwoSquares {...heroProps} />}
 {type === "big name" && <BigName {...heroProps} />}
+{type === "centered image" && <CenteredImage {...heroProps} />}
 {(!type || type === "default") && <Overflow {...heroProps} />}
 

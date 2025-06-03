@@ -20,7 +20,7 @@ const { cards, data } = Astro.props;
 
 <div class="content_section" data-offscreen>
     <Container>
-        <div class="container">
+        <div class="">
             <header class="two_column_stat__header content_section__header">
                 <h2>{data.title}</h2>
                 <slot class="simple-stats__description" set:html={data.content} />

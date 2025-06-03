@@ -7,11 +7,11 @@ interface Props extends HeroProps {}
 const { title, excerpt, image } = Astro.props;
 ---
 
-<header class="vertical_hero">
+<header class="vertical_hero content_section bg--primary-darker">
     <Container>
     <div class="vertical_hero__wrapper">
-            <article class="vertical_hero__content">
-                <h1>{title}</h1>
+            <article class="vertical_hero__content" data-direction="column">
+                <h1 class="text-primary">{title}</h1>
                 <div>
                     <p>{excerpt}</p>
                     <a

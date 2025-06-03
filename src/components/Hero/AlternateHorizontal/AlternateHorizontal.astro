@@ -1,29 +1,28 @@
 ---
 import Container from "@components/Container.astro";
 import "./hero.css";
-import CustomImage from "@components/CustomImage.astro";
 import type { HeroProps } from "@utils/types";
+import CustomImage from "@components/CustomImage.astro";
 interface Props extends HeroProps {}
-
 const { title, excerpt, image } = Astro.props;
 ---
 
-<div class="content_section">
+<header class='horizontal_hero content_section'>
     <Container>
-        <header class="two-square">
-            <article class="two-square__content">
+        <div class="horizontal_hero__wrapper">
+            <article class="horizontal_hero__content">
                 <h1>{title}</h1>
                 <p>{excerpt}</p>
             </article>
-            <div class="two-square__image-wrapper">
+
+            <div class="horizontal_hero__image_wrapper">
                 <CustomImage
                     image={image}
-                    classlist="two-square__image"
                     size="large"
+                    classlist="horizontal_hero__image"
                     eager={true}
                 />
             </div>
-        </header>
+        </div>
     </Container>
-</div>
-
+</header>

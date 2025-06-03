@@ -6,17 +6,17 @@ import CustomImage from "@components/CustomImage.astro";
 const { title, excerpt, image, grid } = Astro.props;
 ---
 
-<header class="blocky-hero">
+<header class="default-horizontal content_section">
     <Container>
-        <div class="blocky-hero__wrapper">
-            <div class="blocky-hero__content">
+        <div class="default-horizontal__wrapper">
+            <div class="default-horizontal__content">
                 <h1>{title}</h1>
                 <p>{excerpt}</p>
             </div>
-            <div class="blocky-hero__image">
+            <div class="default-horizontal__image">
                 <CustomImage
                     image={image}
-                    classlist="blocky-hero__image-image"
+                    classlist="default-horizontal__image-image"
                     size="large"
                     eager={false}
                 />

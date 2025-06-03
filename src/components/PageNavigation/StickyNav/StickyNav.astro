@@ -41,7 +41,6 @@ const pageLinks = links.map((link) =>
     data-is-active="false"
     data-fixed-menu={fixedMenu}
     data-black-text={blackText}
-    role="navigation"
     aria-label="page navigation"
 >
     <Container>
@@ -53,7 +52,7 @@ const pageLinks = links.map((link) =>
                     classlist="sticky-nav__logo-image"
                     size="small"
                 />
-                <!-- <span class="sticky-nav__logo-text">{title}</span> -->
+                <span class="sticky-nav__logo-text">{title}</span>
             </a>
             <menu class="sticky-nav__menu" data-menu data-is-active="false" aria-label="page menu" role="menu" aria-haspopup="true" aria-expanded="false">
                 {

@@ -14,17 +14,26 @@ interface Props {
 // import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
 import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
 import BlockyNav from "./BlockyNav/BlockyNav.astro";
+import SimpleNav from "./SimpleNav/SimpleNav.astro";
+import CenterNav from "./CenterNav/CenterNav.astro";
+import FloatingPill from "./FloatingPill/FloatingPill.astro";
 const props = Astro.props;
 
 const blackText =
     props.hero_style === "two column" || props.hero_style === "two square" || props.hero_style === "blocky";
 
-const fixedMenu = ["vertical with image", "two square", "default"].includes(props.hero_style) ? true : false;
+const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal"].includes(props.hero_style) ? true : false;
 console.log(props.hero_style, fixedMenu);
+
+const navProps = {
+    data: props,
+    fixedMenu: fixedMenu,
+    blackText: blackText,
+    country: props.country
+}
 ---
-<StickyNav
-    data={props}
-    fixedMenu={fixedMenu}
-    blackText={blackText}
-    country={props.country}
-/>
+<!-- <StickyNav {...navProps}/> -->
+
+<!-- <SimpleNav {...navProps}/> -->
+
+<FloatingPill {...navProps}/>

@@ -16,7 +16,7 @@
 .big_name_hero__content h1 {
     color: var(--clr-primary-darker);
     font-size: var(--heading-xl);
-    max-width: 50ch;
+    max-width: 15ch;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -28,7 +28,7 @@
 
     width: 100%;
     height: 100%;
-    background: hsl(90 15% 15% / 0);
+    background: hsl(90 0% 99% / 0.5);
 }
 
 .big_name_hero__image {

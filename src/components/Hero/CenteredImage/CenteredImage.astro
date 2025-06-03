@@ -1,0 +1,25 @@
+---
+import Container from "@components/Container.astro";
+import "./style.css";
+import CustomImage from "@components/CustomImage.astro";
+import type { HeroProps } from "@utils/types";
+interface Props extends HeroProps {}
+const { title, excerpt, image } = Astro.props;
+
+console.log(image);
+---
+
+<header class="centered_hero content_section">
+    <Container>
+        <div class="centered_hero__wrapper">
+            <h1>{title}</h1>
+            <p>{excerpt}</p>
+            <CustomImage
+                image={image}
+                classlist="centered_hero__image full-width full-height"
+                size="large"
+                eager={true}
+            />
+        </div>
+    </Container>
+</header>

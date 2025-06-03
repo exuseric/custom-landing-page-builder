@@ -18,9 +18,13 @@ location.length <= 1 && location.map((loc: any) => (loc = loc));
                 <address class="contact_info">
                     <InfoCard cards={info} />
                 </address>
-                <div class="social_links">
-                    <InfoCard cards={social_links} />
-                </div>
+                {
+                    social_links && (
+                        <div class="social_links">
+                            <InfoCard cards={social_links} />
+                        </div>
+                    )
+                }
                 <div class="working_hours">
                     <InfoCard cards={[operating_hours]} />
                 </div>

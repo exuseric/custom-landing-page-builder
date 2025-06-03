@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleActive(menu); // Toggle Menu
         toggleAria(menu); // Toggle Aria
         toggleActive(this); // Toggle Active
+        nav.dataset.menuToggled = String(!(nav.dataset.menuToggled === "true")); // Toggle Nav Bar
 
         for (const icon of toggleIcons) {
             toggleActive(icon); // Toggle Icons

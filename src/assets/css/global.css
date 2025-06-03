@@ -144,6 +144,38 @@
     --clr-neutral-700: hsl(0, 5%, 35%);
     --clr-neutral-800: hsl(0, 5%, 25%);
     --clr-neutral-900: hsl(0, 5%, 5%);
+
+    interpolate-size: allow-keywords;
+
+    /* Base timing values */
+    --duration-slow: 400ms;
+    --duration-medium: 200ms;
+    --duration-fast: 100ms;
+
+    /* Easing curves */
+    --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Complete transitions for common use cases */
+    --transition-enter-slow: var(--duration-slow) var(--ease-enter);
+    --transition-enter-medium: var(--duration-medium) var(--ease-enter);
+    --transition-enter-fast: var(--duration-fast) var(--ease-enter);
+
+    --transition-exit-slow: calc(var(--duration-slow) * 1.25) var(--ease-exit);
+    --transition-exit-medium: calc(var(--duration-medium) * 1.25) var(--ease-exit);
+    --transition-exit-fast: calc(var(--duration-fast) * 1.25) var(--ease-exit);
+
+    /* Property-specific transitions */
+    --transition-opacity: var(--duration-medium) var(--ease-standard);
+    --transition-transform: var(--duration-medium) var(--ease-enter);
+    --transition-colors: var(--duration-fast) var(--ease-standard);
+    --transition-layout: var(--duration-medium) var(--ease-standard);
+
+    /* Hover and interaction states */
+    --transition-hover: var(--duration-fast) var(--ease-standard);
+    --transition-focus: var(--duration-fast) var(--ease-standard);
 }
 
 @media(max-width: 768px) {
@@ -219,18 +251,15 @@ h1 {
 
 .content-grid {
     --padding-inline: 1rem;
-    --max-width: 120ch; /* Define content width */
-    --breakout-max-width: 125ch; /* Breakout should be wider than content */
+    --max-width: 120ch;
+    /* Define content width */
+    --breakout-max-width: 125ch;
+    /* Breakout should be wider than content */
     --breakout-size: calc((var(--breakout-max-width) - var(--max-width)) / 2);
 
     display: grid;
-    grid-template-columns: 
-        [full-width-start] minmax(var(--padding-inline), 1fr) 
-        [breakout-start] minmax(0, var(--breakout-size)) 
-        [content-start] min(100% - (var(--padding-inline) * 2), var(--max-width)) 
-        [content-end] minmax(0, var(--breakout-size)) 
-        [breakout-end] minmax(var(--padding-inline), 1fr) 
-        [full-width-end];
+    grid-template-columns:
+        [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
 }
 
 .content-grid> :not(.breakout, .full-width) {
@@ -256,18 +285,19 @@ svg {
 [data-highlight="true"] {
     --bg: var(--clr-primary-light);
     --text: oklch(from var(--bg) calc(l - .8) c h);
-    --heading: oklch(from var(--clr-secondary) calc(l - .3) c h)
-    color: var(--text);
+    --heading: oklch(from var(--clr-secondary) calc(l - .3) c h) color: var(--text);
     background-color: var(--bg);
 }
 
 [data-highlight="true"] a:not([class]) {
     color: currentColor;
 }
+
 [data-highlight="true"] * a:not([class]):hover {
     --text: oklch(from var(--bg) calc(l - .7) c calc(h - 110));
     color: var(--text);
 }
+
 [data-highlight="true"] button:hover {
     color: var(--clr-neutral-900);
     background-color: var(--clr-secondary-lighter);
@@ -276,10 +306,12 @@ svg {
 [data-highlight="true"] h2 {
     color: oklch(from var(--clr-secondary) calc(l - .6) c h);
 }
+
 [data-highlight="false"] h2 {
     color: var(--clr-primary-dark);
 
 }
+
 button {
     background-color: var(--clr-primary);
     color: var(--clr-neutral-900);
@@ -484,11 +516,15 @@ button:disabled,
 [data-toggle-icon][data-is-active="true"] {
     display: block;
     visibility: visible;
+    transition-behavior: allow-discrete;
+    transition: display var(--transition-enter-fast);
 }
 
 [data-toggle-icon][data-is-active="false"] {
     display: none;
     visibility: none;
+    transition-behavior: allow-discrete;
+    transition: display var(--transition-exit-medium);
 }
 
 [data-menu-toggle] {
@@ -820,6 +856,7 @@ Text colors that contrast well with background colors.
 .text-on-primary {
     color: oklch(from var(--clr-primary) calc(l - .50) c h);
 }
+
 .text-on-primary-lighter {
     color: oklch(from var(--clr-primary-lighter) calc(l - .50) c h);
 }
@@ -936,74 +973,92 @@ Text colors that contrast well with background colors.
     background-color: var(--clr-primary-lighter);
     color: oklch(from var(--clr-primary-lighter) calc(l - .50) c h);
 }
+
 .bg--primary-light {
     background-color: var(--clr-primary-light);
     color: oklch(from var(--clr-primary-light) calc(l - .50) c h);
 }
+
 .bg--secondary {
     background-color: var(--clr-secondary);
     color: oklch(from var(--clr-secondary) calc(l - .50) c h);
 }
+
 .bg--secondary-lighter {
     background-color: var(--clr-secondary-lighter);
     color: oklch(from var(--clr-secondary-lighter) calc(l - .50) c h);
 }
+
 .bg--secondary-light {
     background-color: var(--clr-secondary-light);
     color: oklch(from var(--clr-secondary-light) calc(l - .50) c h);
 }
+
 .bg--secondary-dark {
     background-color: var(--clr-secondary-dark);
     color: oklch(from var(--clr-secondary-dark) calc(l - .50) c h);
 }
+
 .bg--secondary-darker {
     background-color: var(--clr-secondary-darker);
     color: oklch(from var(--clr-secondary-darker) calc(l - .50) c h);
 }
+
 .bg--tertiary {
     background-color: var(--clr-tertiary);
     color: oklch(from var(--clr-tertiary) calc(l - .50) c h);
 }
+
 .bg--tertiary-lighter {
     background-color: var(--clr-tertiary-lighter);
     color: oklch(from var(--clr-tertiary-lighter) calc(l - .50) c h);
 }
+
 .bg--tertiary-light {
     background-color: var(--clr-tertiary-light);
     color: oklch(from var(--clr-tertiary-light) calc(l - .50) c h);
 }
+
 .bg--tertiary-dark {
     background-color: var(--clr-tertiary-dark);
     color: oklch(from var(--clr-tertiary-dark) calc(l - .50) c h);
 }
+
 .bg--tertiary-darker {
     background-color: var(--clr-tertiary-darker);
     color: oklch(from var(--clr-tertiary-darker) calc(l - .50) c h);
 }
+
 .bg--neutral {
     background-color: var(--clr-neutral);
     color: oklch(from var(--clr-neutral) calc(l - .50) c h);
 }
+
 .bg--neutral-light {
     background-color: var(--clr-neutral-light);
     color: oklch(from var(--clr-neutral-light) calc(l - .50) c h);
 }
+
 .bg--neutral-dark {
     background-color: var(--clr-neutral-dark);
     color: oklch(from var(--clr-neutral-dark) calc(l - .50) c h);
 }
+
 .bg--neutral-darker {
     background-color: var(--clr-neutral-darker);
     color: oklch(from var(--clr-neutral-darker) calc(l - .50) c h);
 }
+
 .bg--neutral-50 {
     background-color: var(--clr-neutral-50);
     color: oklch(from var(--clr-neutral-50) calc(l - .50) c h);
 }
+
 .bg--neutral-100 {
     background-color: var(--clr-neutral-100);
     color: oklch(from var(--clr-neutral-100) calc(l - .50) c h);
 }
+
 .bg--neutral-200 {
     background-color: var(--clr-neutral-200);
     color: oklch(from var(--clr-primary) calc(l - .50) c h);

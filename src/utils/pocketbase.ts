@@ -2,7 +2,7 @@ import PocketBase from 'pocketbase';
 import type { CompanyType, CountryCode, ObjectType, PageType } from "@utils/types"
 
 const pb = new PocketBase("http://127.0.0.1:8090");
-const pageId = "7z181i204250wth";
+const pageId = "3l12bgg1bb9p87h";
 
 const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',

@@ -23,23 +23,23 @@ const fonts = {
 	regular: {
 		name: "Atkinson Hyperlegible",
 		weight: "400",
-		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2"
+		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
 	},
 	bold: {
 		name: "Atkinson Hyperlegible",
 		weight: "700",
-		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2"
+		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
 	},
 	serif: {
 		name: "DM Serif Display",
 		weight: "400",
-		url: "https://fonts.gstatic.com/s/dmseriftext/v12/rnCu-xZa_krGokauCeNq1wWyWfSFXQ.woff2"
+		url: "https://fonts.gstatic.com/s/dmseriftext/v12/rnCu-xZa_krGokauCeNq1wWyWfSFXQ.woff2",
 	},
 	heading: {
 		name: "IBM Plex Sans Condensed",
 		weight: "700",
-		url:"https://fonts.gstatic.com/s/ibmplexsanscondensed/v14/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2"
-	}
+		url: "https://fonts.gstatic.com/s/ibmplexsanscondensed/v14/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2",
+	},
 };
 const record = await getData();
 ---
@@ -104,10 +104,13 @@ const record = await getData();
 				image: `${record.url}/assets/logo.webp`,
 			}}
 			extend={{
-				meta:[
-					{property: "og:description", content: record.meta_description},
-					{property: "og:site_name", content: record.title},
-				]
+				meta: [
+					{
+						property: "og:description",
+						content: record.meta_description,
+					},
+					{ property: "og:site_name", content: record.title },
+				],
 			}}
 		/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -141,43 +144,47 @@ const record = await getData();
 					display: "swap",
 					selector: "body",
 					fallback: "sans-serif",
-				},{
+				},
+				{
 					name: fonts.heading.name,
-					src: [{
-						style: "normal",
-						weight: fonts.heading.weight,
-						path: fonts.heading.url,
-					}],
+					src: [
+						{
+							style: "normal",
+							weight: fonts.heading.weight,
+							path: fonts.heading.url,
+						},
+					],
 					preload: true,
 					display: "swap",
 					selector: "h1,h2",
 					fallback: "sans-serif",
-				}
+				},
 			]}
 		/>
+		<script src="@utils/navigationEvents.ts"></script>
 	</head>
 	<body>
 		<PageNavigation
-		links={record.links}
-		logo={record.expand.logo}
-		title={record.title}
-		style={record.nav_style}
-		hero_style={record.hero_style}
-		country={record.country}
+			links={record.links}
+			logo={record.expand.logo}
+			title={record.title}
+			style={record.nav_style}
+			hero_style={record.hero_style}
+			country={record.country}
 		/>
 		<PageHero
-		image={record.expand.hero_image}
-		cover={record.expand?.hero_cover}
-		title={record.hero_title}
-		excerpt={record.hero_excerpt}
-		type={record.hero_style}
-		core_values={record.core_values}
-		cards={record.expand.hero_grid}
+			image={record.expand.hero_image}
+			cover={record.expand?.hero_cover}
+			title={record.hero_title}
+			excerpt={record.hero_excerpt}
+			type={record.hero_style}
+			core_values={record.core_values}
+			cards={record.expand.hero_grid}
 		/>
 		<main>
 			<Sections
-			sections={record.expand.sections}
-			core_values={record.core_values}
+				sections={record.expand.sections}
+				core_values={record.core_values}
 			/>
 			<ContactSection
 				title={record.contact_title}
@@ -187,9 +194,13 @@ const record = await getData();
 				social_links={record.expand.social_links}
 				style={record.contact_style}
 			/>
-		</main> 
-		<Footer company={record.company} title={record.title} style={record.footer_style} country={record.country}/>
+		</main>
+		<Footer
+			company={record.company}
+			title={record.title}
+			style={record.footer_style}
+			country={record.country}
+		/>
 	</body>
 </html>
-<style define:vars={{ themeColor: record.theme_color}} is:global></style>
-
+<style define:vars={{ themeColor: record.theme_color }} is:global></style>
