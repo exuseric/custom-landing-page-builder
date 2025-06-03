@@ -17,11 +17,12 @@ import ThreeColumns from "./ThreeColumns/ThreeColumns.astro";
 import IconCard from "./IconCard/IconCard.astro";
 import ShortGallery from "./ShortGallery/ShortGallery.astro";
 
-const { card_type, cards, isGallery } = Astro.props;
+const { card_type, cards, isGallery, direction } = Astro.props;
 
 const cardProps = {
     cards,
-    isGallery
+    isGallery,
+    direction
 }
 ---
 

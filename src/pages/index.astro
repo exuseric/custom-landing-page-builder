@@ -1,9 +1,9 @@
 ---
-import { getData } from "@src/utils/pocketbase";
+import { getData, getImageUrl } from "@src/utils/pocketbase";
 import { SEO } from "astro-seo";
 import { AstroFont } from "astro-font";
 import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
-
+import { getImage } from "astro:assets";
 import "@assets/css/reset.css";
 import "@assets/css/global.css";
 import PageHero from "@components/Hero/PageHero.astro";
@@ -40,8 +40,18 @@ const fonts = {
 		weight: "700",
 		url: "https://fonts.gstatic.com/s/ibmplexsanscondensed/v14/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2",
 	},
+	serif_modern: {
+		name: "Cormorant Garamond",
+		weight: "400",
+		url: "https://fonts.gstatic.com/s/cormorantgaramond/v20/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+	},
 };
 const record = await getData();
+
+const logoSrc = getImageUrl({
+	collection: record.expand.logo,
+	filename: record.expand.logo.file,
+});
 ---
 
 <!doctype html>
@@ -52,17 +62,31 @@ const record = await getData();
 		<meta name="color-scheme" content="light" />
 		<meta name="theme-color" content={record.theme_color} />
 		<meta name="robots" content="index, follow" />
-		<slot name="analytics" set:html={record.analytics_id} />
+
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://www.google-analytics.com" />
+		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+		<link rel="preconnect" href="https://www.googletagmanager.com" />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+		<link rel="preload" as="style" href="/assets/index.min.css" />
+
 		<slot set:html={record.search_console} />
 
 		<link rel="sitemap" href="/sitemap.xml" />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+			rel="stylesheet"
+		/>
 
 		<link
 			rel="alternate"
 			href={record.url}
 			hreflang={languages[record.country]}
 		/>
-		<link rel="alternate" href={record.url} hreflang="x-default" />
+		<link rel="alternate" href={record.finalUrl} hreflang="x-default" />
 
 		<link
 			rel="icon"
@@ -90,18 +114,18 @@ const record = await getData();
 			openGraph={{
 				basic: {
 					title: record.title,
-					image: `${record.url}/assets/logo.webp`,
+					image: `${record.finalUrl}${logoSrc}`,
 					type: "website",
 					url: record.url,
 				},
 			}}
 			twitter={{
-				site: record.url,
+				site: record.finalUrl,
 				card: "summary_large_image",
 				creator: "@yellowpages254",
 				title: record.title,
 				description: record.meta_description,
-				image: `${record.url}/assets/logo.webp`,
+				image: `${record.finalUrl}${logoSrc}`,
 			}}
 			extend={{
 				meta: [
@@ -113,16 +137,6 @@ const record = await getData();
 				],
 			}}
 		/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preconnect" href="https://www.google-analytics.com" />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.googletagmanager.com" />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-		<link rel="preload" as="style" href="/assets/index.min.css" />
-		<!-- <link rel="preload" as="font" type="font/woff2" href={fonts.regular} />
-		<link rel="preload" as="font" type="font/woff2" href={fonts.bold} /> -->
 
 		<AstroFont
 			config={[
@@ -150,8 +164,8 @@ const record = await getData();
 					src: [
 						{
 							style: "normal",
-							weight: fonts.heading.weight,
-							path: fonts.heading.url,
+							weight: fonts.serif_modern.weight,
+							path: fonts.serif_modern.url,
 						},
 					],
 					preload: true,
@@ -162,6 +176,7 @@ const record = await getData();
 			]}
 		/>
 		<script src="@utils/navigationEvents.ts"></script>
+		<slot name="analytics" set:html={record.analytics_id} />
 	</head>
 	<body>
 		<PageNavigation
@@ -171,6 +186,7 @@ const record = await getData();
 			style={record.nav_style}
 			hero_style={record.hero_style}
 			country={record.country}
+			social_links={record.expand.social_links}
 		/>
 		<PageHero
 			image={record.expand.hero_image}

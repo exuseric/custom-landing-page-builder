@@ -79,7 +79,8 @@ export type CompanyType = {
         url: string;
         companyName: string;
         rightsReserved: string;
-    }
+    },
+    finalUrl: string
 }
 
 // Add new but compatible types

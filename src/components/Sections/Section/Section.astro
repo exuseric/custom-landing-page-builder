@@ -22,6 +22,17 @@ const isGallery = data.expand.image?.length > 1;
                 </header>
                 <div class="content_section__content">
                     <slot set:html={data.content} />
+                    <!-- {
+                        data.expand.section_grid && data.expand.section_grid(
+                            <Cards
+                                card_type={data.grid_type}
+                                cards={data.expand.section_grid}
+                                data={data}
+                                isGallery={isGallery}
+                                direction="column"
+                            />
+                        )
+                    } -->
                 </div>
             </article>
             {
@@ -47,6 +58,7 @@ const isGallery = data.expand.image?.length > 1;
                     cards={data.expand.section_grid}
                     data={data}
                     isGallery={isGallery}
+                    direction="column"
                 />
             )
         }

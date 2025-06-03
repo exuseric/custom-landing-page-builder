@@ -1,13 +1,4 @@
 ---
-// interface Props {
-//     image: {
-//         [key: string]: string;
-//     };
-//     classlist: string;
-//     size: 'small' | 'medium' | 'large';
-//     eager: boolean;
-// }
-
 import { getImageUrl } from "@utils/pocketbase";
 import { Image, inferRemoteSize } from "astro:assets";
 const { image, classlist, size, eager } = Astro.props;
@@ -33,12 +24,9 @@ const sizes = size === 'small' ? `(max-width: 1366px) 350px, 500px` : size === '
     height={height}
     widths={widths}
     sizes={sizes}
-    quality={80}
+    quality={70}
     class={classlist}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}
-    data-eager={eager ? "true" : "false"}
     style={`object-position: ${image.position ? image.position : "center"}; object-fit: ${image.fit ? image.fit : "cover"}`}
-    data-src={src}
-    data-alt={image.title}
 />

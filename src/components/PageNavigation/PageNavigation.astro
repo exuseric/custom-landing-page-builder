@@ -8,6 +8,9 @@ interface Props {
     style: string;
     hero_style: string;
     country: string;
+    social_links: {
+        [key: string]: string
+    }
 }
 
 // import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";
@@ -15,25 +18,29 @@ interface Props {
 import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
 import BlockyNav from "./BlockyNav/BlockyNav.astro";
 import SimpleNav from "./SimpleNav/SimpleNav.astro";
-import CenterNav from "./CenterNav/CenterNav.astro";
+// import CenterNav from "./CenterNav/CenterNav.astro";
 import FloatingPill from "./FloatingPill/FloatingPill.astro";
 const props = Astro.props;
+const hero_style = props.hero_style
+
+console.log({hero_style});
 
 const blackText =
     props.hero_style === "two column" || props.hero_style === "two square" || props.hero_style === "blocky";
 
 const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal"].includes(props.hero_style) ? true : false;
-console.log(props.hero_style, fixedMenu);
+const showSimpleNav = ["alternate vertical", "default vertical"].includes(hero_style)
+const showPillNav = ["default"].includes(hero_style)
 
 const navProps = {
     data: props,
     fixedMenu: fixedMenu,
     blackText: blackText,
-    country: props.country
+    country: props.country,
 }
 ---
 <!-- <StickyNav {...navProps}/> -->
 
-<!-- <SimpleNav {...navProps}/> -->
+{showSimpleNav && <SimpleNav {...navProps}/>}
 
-<FloatingPill {...navProps}/>
+{showPillNav && <FloatingPill {...navProps}/>}

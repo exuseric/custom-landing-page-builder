@@ -15,9 +15,29 @@
     z-index: 9999;
     width: 100%;
     padding: var(--size-3) 0;
-    transition: background-color var(--transition-enter-fast), color var(--transition-enter-medium);
+    transform: translateY(0);
+    transition:
+        background-color var(--transition-enter-fast),
+        color var(--transition-enter-medium),
+        transform var(--nav-transition);
     background-color: var(--nav-bg);
     color: var(--nav-text);
+    overflow: hidden;
+}
+
+/* Hide navigation when scrolling down */
+[data-scroll-hidden="true"] {
+    transform: translateY(-100%);
+}
+
+/* Show navigation when scrolling up or at top */
+[data-scroll-hidden="false"] {
+    transform: translateY(0);
+}
+
+/* Ensure navigation stays visible when mobile menu is open */
+.simple-nav[data-menu-toggled="true"] {
+    transform: translateY(0) !important;
 }
 
 .simple-nav[data-fixed-menu="true"] {
@@ -28,7 +48,7 @@
     color: var(--nav-text);
 }
 
-.simple-nav[data-fixed-menu="true"][data-menu-toggled="true"]{
+.simple-nav[data-fixed-menu="true"][data-menu-toggled="true"] {
     --nav-bg: var(--clr-neutral-50);
     --nav-text: var(--clr-neutral-900);
 }
@@ -159,6 +179,7 @@
         background: none;
         box-shadow: none;
         padding: 0;
+        height: 100%;
     }
 
     .simple-nav__menu li {

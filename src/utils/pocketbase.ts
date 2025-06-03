@@ -1,8 +1,9 @@
 import PocketBase from 'pocketbase';
 import type { CompanyType, CountryCode, ObjectType, PageType } from "@utils/types"
+import { generateDomain } from '@utils/generatedomain';
 
 const pb = new PocketBase("http://127.0.0.1:8090");
-const pageId = "3l12bgg1bb9p87h";
+const pageId = "3m5kzk82m3sr5c7";
 
 const parentUrls: Record<CountryCode, string> = {
     ke: 'https://www.yellowpageskenya.com/',
@@ -28,7 +29,8 @@ const companyNames: ObjectType = {
     st: 'Páginas Amarelas São Tomé',
 };
 
-const enLang = ["ke, tz"]
+const enLang = ["ke", "tz"] // Fixed: removed comma inside string
+
 
 const getImageUrl = ({ collection, filename }: { collection: any, filename: string }) => pb.files.getUrl(collection, filename)
 
@@ -48,10 +50,17 @@ const getData = async () => {
             companyName: companyNames[data.country],
             rightsReserved: enLang.includes(data.country) ? 'All rights reserved' : 'Todos os direitos reservados',
         }
-        const finalUrl = `https://${data.title.split(' ').join('').toLocaleLowerCase()}.${parentDomains[data.country]}`
-        console.log(finalUrl)
-        const record = { ...data, company, finalUrl }
-        // setPageData(record)
+        
+        // Generate smart subdomain
+        const subdomain = generateDomain(data.title);
+        const finalUrl = `https://${subdomain}.${parentDomains[data.country]}`;
+        
+        console.log({
+            name: data.title,
+            finalUrl
+        })
+        
+        const record = { ...data, company, finalUrl } as PageType & CompanyType
         return record;
     } catch (error) {
         console.error('Failed to fetch data:', error);

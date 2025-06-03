@@ -9,27 +9,27 @@ const { title, excerpt, image } = Astro.props;
 
 <header class="vertical_hero content_section bg--primary-darker">
     <Container>
-    <div class="vertical_hero__wrapper">
-            <article class="vertical_hero__content" data-direction="column">
-                <h1 class="text-primary">{title}</h1>
-                <div>
-                    <p>{excerpt}</p>
-                    <a
-                        class="btn btn-secondary btn-md"
-                        href="#contact-us"
-                        style="margin-top: var(--size-3);"
-                        >Let's Work Together</a
-                    >
-                </div>
-            </article>
-            <div class="vertical_hero__image_wrapper breakout">
-                <CustomImage
-                    classlist="vertical_hero__image"
-                    eager={true}
-                    image={image}
-                    size="large"
-                />
+        <article class="vertical_hero__content" data-direction="column">
+            <h1 class="text-primary">{title}</h1>
+            <div>
+                <p>{excerpt}</p>
+                <a
+                    class="btn btn-secondary btn-md"
+                    href="#contact-us"
+                    style="margin-top: var(--size-3);"
+                    >Let's Work Together</a
+                >
             </div>
+        </article>
+        <!-- <div class="vertical_hero__wrapper">
+        </div> -->
+        <div class="vertical_hero__image_wrapper full-width">
+            <CustomImage
+                classlist="vertical_hero__image"
+                eager={true}
+                image={image}
+                size="large"
+            />
         </div>
     </Container>
 </header>

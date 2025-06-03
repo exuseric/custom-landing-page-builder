@@ -2,35 +2,24 @@
 import Container from "@components/Container.astro";
 import { Icon } from "astro-icon/components";
 import CustomImage from "@components/CustomImage.astro";
-import { translateNavItem } from '@utils/translations';
+import { translateNavItem } from "@utils/translations";
 import "./style.css";
-interface Props {
-    blackText: boolean;
-    fixedMenu: boolean;
-    data: {
-        links: [string];
-        logo: {
-            [key: string]: string;
-        };
-        title: string;
-    };
-    country: string;
-}
+import InfoCard from "@components/Cards/Info/InfoCard.astro";
 
 const {
-    data: { links, logo, title},
+    data: { links, logo, title, social_links },
     fixedMenu,
     blackText,
-    country
+    country,
 } = Astro.props;
 
-const pageLinks = links.map((link) =>
+const pageLinks = links.map((link: string) =>
     link === "home"
         ? { name: translateNavItem("home", country), href: "/" }
-        : { 
-            name: translateNavItem(link, country), 
-            href: `#${link.split(" ").join("-")}` 
-          }
+        : {
+              name: translateNavItem(link, country),
+              href: `#${link.split(" ").join("-")}`,
+          },
 );
 ---
 
@@ -45,6 +34,9 @@ const pageLinks = links.map((link) =>
     aria-label="page navigation"
 >
     <Container>
+        <!-- <div class="simple-nav__top-bar" data-topbar>
+            <InfoCard cards={social_links} />
+        </div> -->
         <div class="simple-nav__wrapper">
             <a class="simple-nav__logo" href="/" aria-label={title.trim()}>
                 <CustomImage
@@ -55,10 +47,18 @@ const pageLinks = links.map((link) =>
                 />
                 <span class="simple-nav__logo-text">{title}</span>
             </a>
-            
-            <menu class="simple-nav__menu" data-menu data-is-active="false" aria-label="page menu" role="menu" aria-haspopup="true" aria-expanded="false">
+
+            <menu
+                class="simple-nav__menu"
+                data-menu
+                data-is-active="false"
+                aria-label="page menu"
+                role="menu"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
                 {
-                    pageLinks.map((link, index) => (
+                    pageLinks.map((link: {href: string, name: string}, index: number) => (
                         <li>
                             <a
                                 title={link.href}
@@ -75,7 +75,7 @@ const pageLinks = links.map((link) =>
                     ))
                 }
             </menu>
-            
+
             <button
                 type="button"
                 class="simple-nav__toggle"

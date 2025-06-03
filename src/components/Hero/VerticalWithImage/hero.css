@@ -39,6 +39,8 @@
 .vertical_hero__image_wrapper {
     height: 100%;
     width: 100%;
+    max-height: 400px;
+    margin-top: var(--size-8);
 }
 
 .vertical_hero__image {

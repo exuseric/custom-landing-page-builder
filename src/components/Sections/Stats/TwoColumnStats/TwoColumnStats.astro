@@ -18,15 +18,17 @@ import CustomImage from "@components/CustomImage.astro";
 const { cards, data } = Astro.props;
 ---
 
-<div class="content_section" data-offscreen>
+<div class="content_section" data-highlight={data.highlight} data-offscreen>
     <Container>
         <div class="">
             <header class="two_column_stat__header content_section__header">
                 <h2>{data.title}</h2>
-                <slot class="simple-stats__description" set:html={data.content} />
             </header>
             <div class="two_column_stat__wrapper">
                 <div class="two_column_stat__image_wrapper">
+                    <div class="two_column_stat__description">
+                        <slot set:html={data.content} />
+                    </div>
                     {
                         data.expand.image.map((image: any, idx: number) => (
                             <CustomImage
@@ -42,9 +44,9 @@ const { cards, data } = Astro.props;
                     {
                         cards.map((card: Card, idx: number) => (
                             <div class="two_column_stat__content">
-                                    <h3 class="two_column_stat__content_title">
-                                        {card.title}
-                                    </h3>
+                                <h3 class="two_column_stat__content_title">
+                                    {card.title}
+                                </h3>
                                 <slot
                                     class="two_column_stat__description"
                                     set:html={card.content}
