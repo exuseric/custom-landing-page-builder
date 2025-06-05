@@ -28,9 +28,9 @@ console.log({hero_style});
 const blackText =
     props.hero_style === "two column" || props.hero_style === "two square" || props.hero_style === "blocky";
 
-const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal"].includes(props.hero_style) ? true : false;
-const showSimpleNav = ["alternate vertical", "default vertical"].includes(hero_style)
-const showPillNav = ["default"].includes(hero_style)
+const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal", "big name"].includes(props.hero_style) ? true : false;
+const showSimpleNav = ["alternate vertical", "default vertical", "two column"].includes(hero_style)
+const showPillNav = ["default", "big name"].includes(hero_style)
 
 const navProps = {
     data: props,

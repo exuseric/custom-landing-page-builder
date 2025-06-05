@@ -6,7 +6,7 @@
     flex-flow: var(--direction) wrap;
     align-items: flex-start;
     justify-content: start;
-    gap: var(--size-4);
+    gap: var(--size-2);
 }
 
 .info_card li {

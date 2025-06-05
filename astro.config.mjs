@@ -11,7 +11,7 @@ export default defineConfig({
   // outDir: process.cwd() + '\\build\\' + record.url.slice(8),
   //@ts-ignore
   outDir: process.cwd() + '\\build\\' + record.finalUrl.slice(8),
-  site: record.url,
+  site: record.finalUrl,
   build: {
     assets: 'assets',
     inlineStylesheets: 'never',

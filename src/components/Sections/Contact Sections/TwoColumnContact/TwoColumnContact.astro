@@ -4,7 +4,7 @@ import Container from "@components/Container.astro";
 import "./contact.css";
 import TopRightAnimatedSvg from "@components/TopRightAnimatedSvg.astro";
 
-const {info, location, title } = Astro.props;
+const { info, location, title } = Astro.props;
 ---
 
 <div class="two_column_contact container" id="contact" data-highlight="true">
@@ -14,12 +14,14 @@ const {info, location, title } = Astro.props;
             <h2>{title}</h2>
         </header>
         <div class="two_column_contact__content">
-            <adrress>
-                <!-- <slot set:html={location[0].content} /> -->
-                <InfoCard cards={[...location, ...info]} direction="column" />
-            </adrress>
-
+            <div class="two_column_contact__body">
+                <InfoCard cards={info} direction="column" />
+            </div>
+            
             <div class="two_column_contact__location">
+                <adrress>
+                    <slot set:html={location[0].content} />
+                </adrress>
                 {
                     location.map((location: any) => (
                         <div class="location">

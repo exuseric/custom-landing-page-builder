@@ -48,10 +48,12 @@ const fonts = {
 };
 const record = await getData();
 
-const logoSrc = getImageUrl({
+const logoSrc = new URL(getImageUrl({
 	collection: record.expand.logo,
 	filename: record.expand.logo.file,
-});
+})).pathname?.split('/')?.pop()?.split('.')[0];
+
+console.log(`${record.finalUrl}/assets/${logoSrc}.webp`,)
 ---
 
 <!doctype html>
@@ -77,13 +79,8 @@ const logoSrc = getImageUrl({
 		<link rel="sitemap" href="/sitemap.xml" />
 
 		<link
-			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
-			rel="stylesheet"
-		/>
-
-		<link
 			rel="alternate"
-			href={record.url}
+			href={record.finalUrl}
 			hreflang={languages[record.country]}
 		/>
 		<link rel="alternate" href={record.finalUrl} hreflang="x-default" />
@@ -114,9 +111,9 @@ const logoSrc = getImageUrl({
 			openGraph={{
 				basic: {
 					title: record.title,
-					image: `${record.finalUrl}${logoSrc}`,
+					image: `${record.finalUrl}/assets/${logoSrc}.webp`,
 					type: "website",
-					url: record.url,
+					url: record.finalUrl,
 				},
 			}}
 			twitter={{
@@ -125,7 +122,7 @@ const logoSrc = getImageUrl({
 				creator: "@yellowpages254",
 				title: record.title,
 				description: record.meta_description,
-				image: `${record.finalUrl}${logoSrc}`,
+				image: `${record.finalUrl}/assets/${logoSrc}.webp`,
 			}}
 			extend={{
 				meta: [
@@ -164,8 +161,8 @@ const logoSrc = getImageUrl({
 					src: [
 						{
 							style: "normal",
-							weight: fonts.serif_modern.weight,
-							path: fonts.serif_modern.url,
+							weight: fonts.heading.weight,
+							path: fonts.heading.url,
 						},
 					],
 					preload: true,

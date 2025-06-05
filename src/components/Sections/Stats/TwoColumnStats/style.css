@@ -59,6 +59,10 @@
 
     .two_column_stat__image_wrapper {
         grid-row: 1/-1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-4);
+
         max-width: 500px;
         height: 100%;
         max-height: 700px;
@@ -78,10 +82,10 @@
 
     .two_column_stat__content {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        /* grid-template-columns: repeat(2, 1fr); */
         grid-template-rows: 1fr;
         column-gap: var(--size-2);
-        align-items: start;
+        align-items: center;
         justify-items: space-between;
     }
 }
