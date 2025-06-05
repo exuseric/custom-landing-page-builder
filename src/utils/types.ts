@@ -2,6 +2,19 @@
 export type CountryCode = 'ke' | 'cv' | 'mz' | 'tz' | 'st';
 export type Language = 'en' | 'pt';
 
+
+export type LocationType = {
+    address_details: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    icon_name: string;
+    id: string;
+    iframe: string;
+    title: string;
+    updated: string;
+    operating_hours: string;
+}
 // Enhance existing PageType
 export type PageType = {
     title: string;
@@ -12,7 +25,7 @@ export type PageType = {
     country: CountryCode;
     analytics_id: string;
     search_console: string;
-    links: [string];
+    links: string[];
     nav_style: string;
     hero_title: string;
     hero_excerpt: string;
@@ -43,6 +56,10 @@ export type PageType = {
         social_links: {
             [key: string]: string;
         };
+        location: LocationType[];
+        social_details: {
+            [key: string]: string;
+        }
         operating_hours: {
             [key: string]: string;
         };
