@@ -42,7 +42,7 @@ const getData = async () => {
         );
 
         const data = await pb.collection("landing_page").getOne<PageType>(pageId, {
-            expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location,social_links,operating_hours',
+            expand: 'logo,hero_image,hero_cover,hero_grid,sections,sections.image,sections.section_grid,sections.section_grid.image,contact_info,contact_location,social_links,operating_hours,location,social_details',
         });
 
         const company: CompanyType['company'] = {

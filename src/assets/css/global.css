@@ -149,7 +149,7 @@
 
     /* Base timing values */
     --duration-slow: 400ms;
-    --duration-medium: 200ms;
+    --duration-medium: 1s;
     --duration-fast: 100ms;
 
     /* Easing curves */
@@ -157,6 +157,9 @@
     --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
     --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --ease-slide-elastic-out: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    --ease-slide-elastic-in: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     /* Complete transitions for common use cases */
     --transition-enter-slow: var(--duration-slow) var(--ease-enter);
@@ -166,6 +169,14 @@
     --transition-exit-slow: calc(var(--duration-slow) * 1.25) var(--ease-exit);
     --transition-exit-medium: calc(var(--duration-medium) * 1.25) var(--ease-exit);
     --transition-exit-fast: calc(var(--duration-fast) * 1.25) var(--ease-exit);
+    
+    --transition-enter-elastic-slow: var(--duration-slow) var(--ease-slide-elastic-in);
+    --transition-enter-elastic-medium: var(--duration-medium) var(--ease-slide-elastic-in);
+    --transition-enter-elastic-fast: var(--duration-fast) var(--ease-slide-elastic-in);
+
+    --transition-exit-elastic-slow: calc(var(--duration-slow) * 1.25) var(--ease-slide-elastic-out);
+    --transition-exit-elastic-medium: calc(var(--duration-medium) * 1.25) var(--ease-slide-elastic-out);
+    --transition-exit-elastic-fast: calc(var(--duration-fast) * 1.25) var(--ease-slide-elastic-out);
 
     /* Property-specific transitions */
     --transition-opacity: var(--duration-medium) var(--ease-standard);
@@ -314,7 +325,7 @@ button {
     background-color: var(--clr-primary);
     color: var(--clr-neutral-900);
     border: none;
-    border-radius: var(--size-1);
+    /* border-radius: var(--size-1); */
     padding: 0.5em 1em;
     font-size: 1rem;
     cursor: pointer;
@@ -1060,4 +1071,12 @@ Text colors that contrast well with background colors.
 .bg--neutral-200 {
     background-color: var(--clr-neutral-200);
     color: oklch(from var(--clr-primary) calc(l - .50) c h);
+}
+
+@media (prefers-reduced-motion) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

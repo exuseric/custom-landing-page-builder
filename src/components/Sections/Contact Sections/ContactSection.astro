@@ -1,19 +1,11 @@
 ---
 import DefaultContact from "./DefaultContact/DefaultContact.astro"
 import TwoColumnContact from "./TwoColumnContact/TwoColumnContact.astro"
-import TwoLocation from "./TwoLocation/TwoLocation.astro"
+import MultiLocation from "./MultiLocation/MultiLocation.astro"
 
-const {title, info, location, style, operating_hours, social_links} = Astro.props
-
-const contactProps = {
-    title,
-    info,
-    location,
-    operating_hours,
-    social_links
-}
+const props = Astro.props
 ---
 
-{style === "two column" && <TwoColumnContact {...contactProps} />}
-{style === "default" && <DefaultContact {...contactProps} />}
-{style === "two location" && <TwoLocation {...contactProps} />}
+{props.style === "two column" && <TwoColumnContact {...props} />}
+{props.style === "default" && <DefaultContact {...props} />}
+{props.style === "multi location" && <MultiLocation {...props} />}
