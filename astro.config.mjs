@@ -4,14 +4,16 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 // import purgecss from 'astro-purgecss';
 import { getData } from './src/utils/pocketbase';
-const record = await getData();
+import { fetchPage } from './src/utils/payload';
+// const record = await getData();
+const {url} = await fetchPage(1, ['url'])
 // https://astro.build/config
 export default defineConfig({
   output: "static",
   // outDir: process.cwd() + '\\build\\' + record.url.slice(8),
   //@ts-ignore
-  outDir: process.cwd() + '\\build\\' + record.finalUrl.slice(8),
-  site: record.finalUrl,
+  outDir: process.cwd() + '\\build\\' + url.slice(8),
+  site: url,
   build: {
     assets: 'assets',
     inlineStylesheets: 'never',
