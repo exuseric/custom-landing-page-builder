@@ -5,20 +5,27 @@ import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from "@utils/translations";
 import "./style.css";
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
-
+type Link = {
+    id: string;
+    name: string;
+    anchorId: string;
+    style: string;
+};
 const {
-    data: { links, logo, title, social_links },
+    navigation: { logo, menuItems },
     fixedMenu,
     blackText,
     country,
+    title,
 } = Astro.props;
 
-const pageLinks = links.map((link: string) =>
-    link === "home"
-        ? { name: translateNavItem("home", country), href: "/" }
+const pageLinks = menuItems.map((link: Link) =>
+    link.name === "home"
+        ? { ...link, name: translateNavItem("home", country), anchorId: "/" }
         : {
-              name: translateNavItem(link, country),
-              href: `#${link.split(" ").join("-")}`,
+              ...link,
+              name: translateNavItem(link.name, country),
+              anchorId: `#${link.anchorId.split(" ").join("-")}`,
           },
 );
 ---
@@ -43,28 +50,27 @@ const pageLinks = links.map((link: string) =>
                     eager={true}
                     image={logo}
                     classlist="simple-nav__logo-image"
-                    size="small"
+                    size="logo"
                 />
                 <span class="simple-nav__logo-text">{title}</span>
             </a>
 
             <menu
+                id="main-navigation-menu"
                 class="simple-nav__menu"
                 data-menu
                 data-is-active="false"
                 aria-label="page menu"
-                role="menu"
-                aria-haspopup="true"
-                aria-expanded="false"
+                role="navigation"
             >
                 {
-                    pageLinks.map((link: {href: string, name: string}, index: number) => (
+                    pageLinks.map((link: Link) => (
                         <li>
                             <a
-                                title={link.href}
-                                href={link.href}
+                                title={link.name}
+                                href={link.anchorId}
                                 class={
-                                    index === pageLinks?.length - 1
+                                    link.style !== "default"
                                         ? "simple-nav__link simple-nav__link--cta"
                                         : "simple-nav__link"
                                 }
@@ -82,6 +88,9 @@ const pageLinks = links.map((link: string) =>
                 data-menu-toggle
                 data-is-active="false"
                 aria-label="toggle page menu"
+                aria-controls="main-navigation-menu"
+                aria-haspopup="true"
+                aria-expanded="false"
             >
                 <Icon
                     name="mdi:menu"

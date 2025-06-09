@@ -1,32 +1,38 @@
 ---
-import { getImageUrl } from "@utils/pocketbase";
-import { Image, inferRemoteSize } from "astro:assets";
+import { Image } from "astro:assets";
 const { image, classlist, size, eager } = Astro.props;
-const { width, height } = await inferRemoteSize(
-    getImageUrl({
-        collection: image,
-        filename: image.file,
-    }),
-);
-const src = getImageUrl({
-    collection: image,
-    filename: image.file,
-});
-const widths = size === 'small' ? [350, 500] : size === 'medium' ? [500, 750] : size === 'large' ? [1000, width] : [width];
-const sizes = size === 'small' ? `(max-width: 1366px) 350px, 500px` : size === 'medium' ? `(max-width: 1366px) 500px, 750px` : size === 'large' ? `(max-width: 1366px) 1000px, ${width}px` : `${width}px`;
 
+const widths = size === 'logo' 
+  ? [200] 
+  : size === 'small' 
+    ? [350, 500] 
+  : size === 'medium' 
+    ? [500, 750] 
+  : size === 'large' 
+    ? [1000, Math.max(1000, image.width)] // Ensure width is at least 1000
+  : [image.width];
+
+const sizes = size === 'logo' 
+  ? `200px` 
+  : size === 'small' 
+    ? `(max-width: 1366px) 350px, 500px` 
+  : size === 'medium' 
+    ? `(max-width: 1366px) 500px, 750px` 
+  : size === 'large' 
+    ? `(max-width: 1366px) 1000px, ${image.width}px` 
+  : `${image.width}px`;
 ---
 <Image
-    src={src}
-    alt={image.title}
-    title={image.title}
-    width={width}
-    height={height}
+    src={`${import.meta.env.DATABASE_URL}${image.url}`}
+    alt={image.alt}
+    title={image.alt}
+    width={image.width}
+    height={image.height}
     widths={widths}
     sizes={sizes}
     quality={70}
     class={classlist}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}
-    style={`object-position: ${image.position ? image.position : "center"}; object-fit: ${image.fit ? image.fit : "cover"}`}
+    style={`object-position: ${image.focalX ? image.focalX + "% " + image.focalY + "%" : "center"}; object-fit: ${image.fit ? image.fit : "cover"}`}
 />
