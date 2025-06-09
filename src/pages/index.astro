@@ -1,6 +1,6 @@
 ---
 import { getData, getImageUrl } from "@src/utils/pocketbase";
-import { SEO } from "astro-seo";
+import { languages } from "@utils/translations";
 import { AstroFont } from "astro-font";
 import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
 import { getImage } from "astro:assets";
@@ -10,14 +10,8 @@ import PageHero from "@components/Hero/PageHero.astro";
 import Sections from "@components/Sections/Sections.astro";
 import ContactSection from "@components/Sections/Contact Sections/ContactSection.astro";
 import Footer from "@components/Footer/Footer.astro";
-
-const languages: Record<string, string> = {
-	ke: "en-KE",
-	cv: "pt-CV",
-	mz: "pt-MZ",
-	tz: "en-TZ",
-	st: "pt-ST",
-};
+import Head from "@components/Head.astro";
+import { fetchPage } from "@utils/payload";
 
 const fonts = {
 	regular: {
@@ -46,137 +40,28 @@ const fonts = {
 		url: "https://fonts.gstatic.com/s/cormorantgaramond/v20/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
 	},
 };
-const record = await getData();
 
-const logoSrc = new URL(getImageUrl({
-	collection: record.expand.logo,
-	filename: record.expand.logo.file,
-})).pathname?.split('/')?.pop()?.split('.')[0];
-
-console.log(`${record.finalUrl}/assets/${logoSrc}.webp`,)
+const { country, themeColor } = await fetchPage(1, [
+	"country",
+	"themeColor",
+]);
 ---
 
 <!doctype html>
-<html lang={languages[record.country]}>
+<html lang={languages[country]}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="color-scheme" content="light" />
-		<meta name="theme-color" content={record.theme_color} />
+		<meta name="theme-color" content={themeColor} />
 		<meta name="robots" content="index, follow" />
 
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preconnect" href="https://www.google-analytics.com" />
-		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
-		<link rel="preconnect" href="https://www.googletagmanager.com" />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+		<Head />
 
-		<link rel="preload" as="style" href="/assets/index.min.css" />
-
-		<slot set:html={record.search_console} />
-
-		<link rel="sitemap" href="/sitemap.xml" />
-
-		<link
-			rel="alternate"
-			href={record.finalUrl}
-			hreflang={languages[record.country]}
-		/>
-		<link rel="alternate" href={record.finalUrl} hreflang="x-default" />
-
-		<link
-			rel="icon"
-			type="image/jpg"
-			sizes="16x16"
-			href="/favicon/favicon-16x16.jpg"
-		/>
-		<link
-			rel="icon"
-			type="image/jpg"
-			sizes="32x32"
-			href="/favicon/favicon-32x32.jpg"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/favicon/apple-touch-icon.jpg"
-		/>
-		<link rel="icon" href="/favicon/favicon.ico" />
-		<link rel="manifest" href="/favicon/manifest.json" />
-
-		<SEO
-			title={record.meta_title}
-			description={record.meta_description}
-			openGraph={{
-				basic: {
-					title: record.title,
-					image: `${record.finalUrl}/assets/${logoSrc}.webp`,
-					type: "website",
-					url: record.finalUrl,
-				},
-			}}
-			twitter={{
-				site: record.finalUrl,
-				card: "summary_large_image",
-				creator: "@yellowpages254",
-				title: record.title,
-				description: record.meta_description,
-				image: `${record.finalUrl}/assets/${logoSrc}.webp`,
-			}}
-			extend={{
-				meta: [
-					{
-						property: "og:description",
-						content: record.meta_description,
-					},
-					{ property: "og:site_name", content: record.title },
-				],
-			}}
-		/>
-
-		<AstroFont
-			config={[
-				{
-					name: fonts.regular.name,
-					src: [
-						{
-							style: "normal",
-							weight: fonts.regular.weight,
-							path: fonts.regular.url,
-						},
-						{
-							style: "normal",
-							weight: fonts.bold.weight,
-							path: fonts.bold.url,
-						},
-					],
-					preload: true,
-					display: "swap",
-					selector: "body",
-					fallback: "sans-serif",
-				},
-				{
-					name: fonts.heading.name,
-					src: [
-						{
-							style: "normal",
-							weight: fonts.heading.weight,
-							path: fonts.heading.url,
-						},
-					],
-					preload: true,
-					display: "swap",
-					selector: "h1,h2",
-					fallback: "sans-serif",
-				},
-			]}
-		/>
 		<script src="@utils/navigationEvents.ts"></script>
-		<slot name="analytics" set:html={record.analytics_id} />
 	</head>
 	<body>
-		<PageNavigation
+		<!-- <PageNavigation
 			links={record.links}
 			logo={record.expand.logo}
 			title={record.title}
@@ -214,7 +99,7 @@ console.log(`${record.finalUrl}/assets/${logoSrc}.webp`,)
 			title={record.title}
 			style={record.footer_style}
 			country={record.country}
-		/>
+		/> -->
 	</body>
 </html>
-<style define:vars={{ themeColor: record.theme_color }} is:global></style>
+<style define:vars={{ themeColor }} is:global></style>

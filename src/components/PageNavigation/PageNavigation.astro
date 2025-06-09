@@ -1,18 +1,7 @@
 ---
-interface Props {
-    links: string[];
-    logo: {
-        [key: string]: string;
-    };
-    title: string;
-    style: string;
-    hero_style: string;
-    country: string;
-    social_links: {
-        [key: string]: string
-    }
-}
+import { fetchPage } from "@utils/payload";
 
+const {navigation} = await fetchPage(1, ["navigation"])
 // import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";
 // import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
 import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
@@ -41,6 +30,6 @@ const navProps = {
 ---
 <!-- <StickyNav {...navProps}/> -->
 
-{showSimpleNav && <SimpleNav {...navProps}/>}
+<!-- {showSimpleNav && <SimpleNav {...navProps}/>}
 
-{showPillNav && <FloatingPill {...navProps}/>}
+{showPillNav && <FloatingPill {...navProps}/>} -->
