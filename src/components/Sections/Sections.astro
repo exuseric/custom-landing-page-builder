@@ -5,6 +5,7 @@ import ContentWithGrid from "@components/Sections/ContentWithGrid/ContentWithGri
 import WhyChooseUsColumn from "@components/Sections/Stats/WhyChooseUsColumn/WhyChooseUsColumn.astro"
 import SimpleCallToAction from "@components/Sections/CtaSection/SimpleCallToAction/SimpleCallToAction.astro"
 import PageHero from "@components/Hero/PageHero.astro"
+import SimpleTestimonial from "@components/Sections/Testimonial/SimpleTestimonial/SimpleTestimonial.astro"
 
 const page = await fetchPage(1, ['blocks'])
 const blocks = page.blocks
@@ -24,6 +25,8 @@ console.log(blocks)
                 return <WhyChooseUsColumn {...block}/>
             case 'simple-call-to-action':
                 return <SimpleCallToAction {...block}/>
+            case 'simple-testimonial':
+                return <SimpleTestimonial {...block} />
             default:
                 break;
         }

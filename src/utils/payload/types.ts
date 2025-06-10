@@ -137,12 +137,13 @@ export type SimpleCallToActionBlock = {
 };
 
 // NEW: Testimonial block type
-export type TestimonialBlock = {
+export type SimpleTestimonialBlock = {
   id: string;
   blockType: "simple-testimonial";
   title: string;
   description: LexicalContent;
   blockName: string | null;
+  highlight?:boolean;
   testimonies: Array<{
     id: string;
     testimony: LexicalContent;
@@ -167,7 +168,7 @@ export type Block =
   | ContentBlock 
   | ContentWithGridBlock  // NEW
   | SimpleCallToActionBlock 
-  | TestimonialBlock      // NEW
+  | SimpleTestimonialBlock      // NEW
   | ContactBlock;
 
 /*

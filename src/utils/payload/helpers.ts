@@ -1,4 +1,4 @@
-import type { TestimonialBlock, ContentWithGridBlock, Block, LexicalContent } from "./types";
+import type { SimpleTestimonialBlock, ContentWithGridBlock, Block, LexicalContent } from "./types";
 
 // Helper function to extract text from Lexical content with HTML wrapping
 export function extractLexicalText(lexicalContent: LexicalContent | null | undefined): string {
@@ -60,7 +60,7 @@ export function getBlockById(blocks: Block[], id: string): Block | undefined {
  * @param testimonialBlock - The testimonial block to extract text from
  * @returns Array of testimonial texts as strings
  */
-export function getTestimonialText(testimonialBlock: TestimonialBlock): string[] {
+export function getTestimonialText(testimonialBlock: SimpleTestimonialBlock): string[] {
   return testimonialBlock.testimonies.map(t => extractLexicalText(t.testimony));
 }
 
@@ -69,7 +69,7 @@ export function getTestimonialText(testimonialBlock: TestimonialBlock): string[]
  * @param testimonialBlock - The testimonial block to extract data from
  * @returns Array of testimonial objects with title and text
  */
-export function getTestimonialData(testimonialBlock: TestimonialBlock) {
+export function getTestimonialData(testimonialBlock: SimpleTestimonialBlock) {
   return testimonialBlock.testimonies.map(testimony => ({
     id: testimony.id,
     title: testimony.title,
@@ -113,7 +113,7 @@ export function getCardGridData(contentGridBlock: ContentWithGridBlock) {
  * @param testimonialBlock - The testimonial block to summarize
  * @returns Object with block metadata and testimonial count
  */
-export function getTestimonialSummary(testimonialBlock: TestimonialBlock) {
+export function getTestimonialSummary(testimonialBlock: SimpleTestimonialBlock) {
   return {
     id: testimonialBlock.id,
     title: testimonialBlock.title,
