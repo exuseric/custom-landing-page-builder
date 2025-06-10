@@ -127,7 +127,7 @@ export type BasicCard = {
     body: LexicalContent;
 }
 
-export type CallToActionBlock = {
+export type SimpleCallToActionBlock = {
   id: string;
   blockType: "simple-call-to-action";
   heading: string;
@@ -166,7 +166,7 @@ export type Block =
   | WhyChooseUsColumnBlock 
   | ContentBlock 
   | ContentWithGridBlock  // NEW
-  | CallToActionBlock 
+  | SimpleCallToActionBlock 
   | TestimonialBlock      // NEW
   | ContactBlock;
 

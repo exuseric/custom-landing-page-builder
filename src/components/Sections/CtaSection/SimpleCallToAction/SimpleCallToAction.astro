@@ -1,0 +1,23 @@
+---
+import type {SimpleCallToActionBlock} from '@utils/payload/types'
+interface Props extends SimpleCallToActionBlock {}
+import Container from "@components/Container.astro";
+import "./cta.css"
+import { Icon } from "astro-icon/components";
+
+import CustomImage from "@components/CustomImage.astro";
+import Cards from "@components/Cards/Cards.astro";
+import { extractLexicalText } from '@utils/payload/helpers';
+const props = Astro.props;
+---
+<div class="content_section" data-offscreen>
+    <Container>
+        <section class="small_cta">
+            <h2 class="smal_cta__title">{props.heading}</h2>
+            <slot set:html={extractLexicalText(props.description)} />
+            <a href="#contact" class="cta__link btn btn-md btn-primary">
+                {props.buttonText}
+            </a>
+        </section>
+    </Container>
+</div>

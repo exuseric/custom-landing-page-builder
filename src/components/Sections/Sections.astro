@@ -2,7 +2,9 @@
 import { fetchPage } from "@utils/payload"
 import ContentWithMedia from "@components/Sections/ContentWithMedia/ContentWithMedia.astro"
 import ContentWithGrid from "@components/Sections/ContentWithGrid/ContentWithGrid.astro"
-import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro"
+import WhyChooseUsColumn from "@components/Sections/Stats/WhyChooseUsColumn/WhyChooseUsColumn.astro"
+import SimpleCallToAction from "@components/Sections/CtaSection/SimpleCallToAction/SimpleCallToAction.astro"
+import PageHero from "@components/Hero/PageHero.astro"
 
 const page = await fetchPage(1, ['blocks'])
 const blocks = page.blocks
@@ -12,12 +14,16 @@ console.log(blocks)
 {
     blocks.map(block => {
         switch (block.blockType) {
+            case 'simple-hero':
+                return <PageHero {...block}/>
             case 'content-with-media':
                 return <ContentWithMedia {...block}/>
             case 'content-with-grid':
                 return <ContentWithGrid {...block} />
             case 'why-choose-us-column':
-                return <TwoColumnStats {...block}/>
+                return <WhyChooseUsColumn {...block}/>
+            case 'simple-call-to-action':
+                return <SimpleCallToAction {...block}/>
             default:
                 break;
         }

@@ -1,15 +1,12 @@
 ---
 import type { HeroBlock } from "@utils/payload/types"
-import { fetchPage } from "@utils/payload"
-import { getBlocksByType } from "@utils/payload/helpers"
+interface Props extends HeroBlock {}
 
 import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
 
-const page = await fetchPage(1, ['blocks'])
-const [block] = getBlocksByType(page.blocks, 'simple-hero')
-const hero: HeroBlock = block
+const props = Astro.props
 ---
-{hero.type === "stylised horizontal" && <StylisedHorizontal {...hero} />}
+{props.type === "stylised horizontal" && <StylisedHorizontal {...props} />}
 
 
 <!-- ---
