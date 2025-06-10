@@ -1,16 +1,42 @@
 import type { TestimonialBlock, ContentWithGridBlock, Block, LexicalContent } from "./types";
 
-// Helper function to extract text from Lexical content
+// Helper function to extract text from Lexical content with HTML wrapping
 export function extractLexicalText(lexicalContent: LexicalContent | null | undefined): string {
   if (!lexicalContent?.root?.children) return "";
   
   try {
     return lexicalContent.root.children
-      .flatMap(paragraph => 
-        paragraph.children?.map(node => node.text) || []
-      )
+      .map(paragraph => {
+        if (!paragraph.children || paragraph.children.length === 0) return "";
+        
+        // Extract text from all child nodes
+        const text = paragraph.children
+          .map(node => node.text)
+          .filter(Boolean)
+          .join("");
+        
+        if (!text.trim()) return "";
+        
+        // Determine the appropriate HTML tag based on paragraph type
+        const paragraphType = paragraph.type;
+        const tag = paragraph.tag; // For heading elements like h3, h4, etc.
+        
+        if (paragraphType === "heading" && tag) {
+          // Use the specific heading tag (h1, h2, h3, etc.)
+          return `<${tag}>${text}</${tag}>`;
+        } else if (paragraphType === "heading") {
+          // Default to h2 if no specific tag is provided
+          return `<h2>${text}</h2>`;
+        } else if (paragraphType === "paragraph" || !paragraphType) {
+          // Default to paragraph for regular text
+          return `<p>${text}</p>`;
+        } else {
+          // For other types, wrap in paragraph as fallback
+          return `<p>${text}</p>`;
+        }
+      })
       .filter(Boolean)
-      .join("\n\n");
+      .join("\n");
   } catch (error) {
     console.warn('Failed to extract lexical text:', error);
     return "";

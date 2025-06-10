@@ -1,0 +1,37 @@
+---
+import type { ContentBlock } from "@utils/payload/types";
+interface Props extends ContentBlock {}
+import Container from "@components/Container.astro";
+import "./section.css";
+import CustomImage from "@components/CustomImage.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props;
+---
+
+<div
+    class="content-with-media page-section"
+    data-highlight={props.highlight}
+    id={props["anchor id"].split(" ").join("-")}
+    data-offscreen
+>
+    <Container>
+        <div class="content-with-media__content_wrapper">
+            <article class="content-with-media__article">
+                <header class="content-with-media__header">
+                    <h2>{props.title}</h2>
+                </header>
+                <div class="content-with-media__content">
+                    <slot set:html={extractLexicalText(props.body)} />
+                </div>
+            </article>
+            <div class="content-with-media__image_wrapper">
+                <CustomImage
+                    classlist="content-with-media__image"
+                    eager={false}
+                    size="medium"
+                    image={props.image}
+                />
+            </div>
+        </div>
+    </Container>
+</div>

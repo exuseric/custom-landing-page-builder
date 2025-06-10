@@ -1,4 +1,26 @@
 ---
+import { fetchPage } from "@utils/payload"
+import ContentWithMedia from "@components/Sections/ContentWithMedia/ContentWithMedia.astro"
+import ContentWithGrid from "@components/Sections/ContentWithGrid/ContentWithGrid.astro"
+
+const page = await fetchPage(1, ['blocks'])
+const blocks = page.blocks
+console.log(blocks)
+---
+
+{
+    blocks.map(block => {
+        switch (block.blockType) {
+            case 'content-with-media':
+                return <ContentWithMedia {...block}/>
+            case 'content-with-grid':
+                return <ContentWithGrid {...block} />
+            default:
+                break;
+        }
+    })
+}
+<!-- ---
 import Partners from "./Partners/Partners.astro";
 import PartnersGrid from "./Partners/PartnersGrid/PartnersGrid.astro";
 import CtaSection from "./CtaSection/CtaSection.astro";
@@ -78,4 +100,4 @@ const { sections, core_values } = Astro.props;
                     return <Section data={section} />;
             }
         })
-}
+} -->

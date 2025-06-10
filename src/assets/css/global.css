@@ -145,13 +145,15 @@
     --clr-neutral-800: hsl(0, 5%, 25%);
     --clr-neutral-900: hsl(0, 5%, 5%);
 
-    interpolate-size: allow-keywords;
-
+    --clr-section-highlight: var(--clr-primary-light);
+    --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l - 0.5) c h);
+    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h)
+    
     /* Base timing values */
     --duration-slow: 400ms;
     --duration-medium: 1s;
     --duration-fast: 100ms;
-
+    
     /* Easing curves */
     --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
@@ -160,12 +162,12 @@
     
     --ease-slide-elastic-out: cubic-bezier(0.6, 0.04, 0.98, 0.335);
     --ease-slide-elastic-in: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+    
     /* Complete transitions for common use cases */
     --transition-enter-slow: var(--duration-slow) var(--ease-enter);
     --transition-enter-medium: var(--duration-medium) var(--ease-enter);
     --transition-enter-fast: var(--duration-fast) var(--ease-enter);
-
+    
     --transition-exit-slow: calc(var(--duration-slow) * 1.25) var(--ease-exit);
     --transition-exit-medium: calc(var(--duration-medium) * 1.25) var(--ease-exit);
     --transition-exit-fast: calc(var(--duration-fast) * 1.25) var(--ease-exit);
@@ -215,6 +217,7 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -291,11 +294,28 @@ svg {
     color: currentColor;
 }
 
+.page-section {
+    padding-block: var(--container-padding-block);
+}
+
+.page-section__header h2 {
+    font-size: var(--heading-xl);
+    max-width: 40ch;
+    view-transition-name: "page-heading";
+}
+
+.page-section__header p {
+    max-width: 65ch;
+}
+
+[data-offscreen] {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+}
+
 [data-highlight="true"] {
-    --bg: var(--clr-primary-light);
-    --text: oklch(from var(--bg) calc(l - .8) c h);
-    --heading: oklch(from var(--clr-secondary) calc(l - .3) c h) color: var(--text);
-    background-color: var(--bg);
+    color: var(--clr-section-highlight-text);
+    background-color: var(--clr-section-highlight);
 }
 
 [data-highlight="true"] a:not([class]) {
@@ -303,7 +323,7 @@ svg {
 }
 
 [data-highlight="true"] * a:not([class]):hover {
-    --text: oklch(from var(--bg) calc(l - .7) c calc(h - 110));
+    --text: oklch(from var(--clr-section-highlight) calc(l - .7) c calc(h - 110));
     color: var(--text);
 }
 
@@ -313,7 +333,7 @@ svg {
 }
 
 [data-highlight="true"] h2 {
-    color: oklch(from var(--clr-secondary) calc(l - .6) c h);
+    color: var(--clr-section-highlight-heading);
 }
 
 [data-highlight="false"] h2 {
@@ -735,13 +755,7 @@ button:disabled,
     }
 }
 
-.content_section {
-    padding-block: var(--container-padding-block);
-}
 
-[data-offscreen] {
-    content-visibility: auto;
-}
 
 .text-primary {
     color: var(--clr-primary);
@@ -1073,10 +1087,28 @@ Text colors that contrast well with background colors.
     color: oklch(from var(--clr-primary) calc(l - .50) c h);
 }
 
+
+
 @media (prefers-reduced-motion) {
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation: none !important;
-  }
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    /* animation: none; */
+    mix-blend-mode: normal;
+    height: 100%;
+    overflow: clip;
+}
+
+::view-transition-new("page-heading"):only-child {
+    animation: var(--transition-enter-elastic-medium) both slide-in;
+}
+
+::view-transition-old("page-heading"):only-child {
+    animation: var(--transition-exit-elastic-fast) both slide-out;
 }

@@ -119,6 +119,13 @@ export type ContentWithGridBlock = {
   }>;
 };
 
+export type BasicCard = {
+    id: string;
+    image: Media;
+    title: string;
+    body: LexicalContent;
+}
+
 export type CallToActionBlock = {
   id: string;
   blockType: "simple-call-to-action";
