@@ -33,6 +33,7 @@ export type LexicalParagraph = {
   version: number;
   textFormat?: number;
   textStyle?: string;
+  tag?: string; // For heading elements like h3, h4, etc.
 };
 
 export type LexicalContent = {
@@ -78,13 +79,13 @@ export type WhyChooseUsBlock = {
   id: string;
   blockType: "why-choose-us-column";
   title: string;
-  description: string;
+  description: LexicalContent;
   image: Media;
   blockName: string | null;
   options: Array<{
     id: string;
     title: string;
-    description: string | null;
+    description: LexicalContent;
   }>;
 };
 
@@ -100,13 +101,45 @@ export type ContentBlock = {
   blockName: string | null;
 };
 
+// NEW: Content with Grid block type
+export type ContentWithGridBlock = {
+  id: string;
+  blockType: "content-with-grid";
+  title: string;
+  "anchor id": string;
+  body: LexicalContent;
+  highlight: boolean;
+  "card type": "basic" | string; // Add other card types as needed
+  blockName: string | null;
+  "card grid": Array<{
+    id: string;
+    image: Media;
+    title: string;
+    body: LexicalContent;
+  }>;
+};
+
 export type CallToActionBlock = {
   id: string;
   blockType: "simple-call-to-action";
   heading: string;
-  description: string;
+  description: LexicalContent;
   buttonText: string;
   blockName: string | null;
+};
+
+// NEW: Testimonial block type
+export type TestimonialBlock = {
+  id: string;
+  blockType: "simple-testimonial";
+  title: string;
+  description: LexicalContent;
+  blockName: string | null;
+  testimonies: Array<{
+    id: string;
+    testimony: LexicalContent;
+    title: string;
+  }>;
 };
 
 export type ContactBlock = {
@@ -119,7 +152,46 @@ export type ContactBlock = {
   location: LocationInfo;
 };
 
-export type Block = HeroBlock | WhyChooseUsBlock | ContentBlock | CallToActionBlock | ContactBlock;
+// Union type for all blocks - UPDATE THIS when adding new block types
+export type Block = 
+  | HeroBlock 
+  | WhyChooseUsBlock 
+  | ContentBlock 
+  | ContentWithGridBlock  // NEW
+  | CallToActionBlock 
+  | TestimonialBlock      // NEW
+  | ContactBlock;
+
+/*
+ * GUIDE FOR ADDING NEW BLOCK TYPES:
+ * 
+ * When the CMS adds new block types, follow these steps:
+ * 
+ * 1. Create a new type definition following the pattern above:
+ *    - Use the exact blockType string from the API
+ *    - Include all properties from the API response
+ *    - Use LexicalContent for rich text fields
+ *    - Use Media for image/file fields
+ * 
+ * 2. Add the new type to the Block union type above
+ * 
+ * 3. Update handle-response.ts to process the new block sections
+ *    if they come from separate API fields
+ * 
+ * 4. Consider adding helper functions in index.ts for the new block type
+ * 
+ * Example for a hypothetical "gallery" block:
+ * 
+ * export type GalleryBlock = {
+ *   id: string;
+ *   blockType: "gallery";
+ *   title: string;
+ *   images: Media[];
+ *   blockName: string | null;
+ * };
+ * 
+ * Then add GalleryBlock to the Block union type.
+ */
 
 export type SocialLink = {
   platform: string;

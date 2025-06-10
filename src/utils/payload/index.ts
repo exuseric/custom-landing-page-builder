@@ -1,4 +1,4 @@
-import type { ParsedPage, Block } from "./types";
+import type { ParsedPage } from "./types";
 import { parsePage } from "./handle-response";
 import type { PageKey } from "./page-keys";
 
@@ -56,35 +56,42 @@ export async function fetchPage<T extends PageKey>(
   }
 }
 
-// Helper functions for working with blocks
-export function getBlocksByType<T extends Block['blockType']>(
-  blocks: Block[],
-  blockType: T
-): Extract<Block, { blockType: T }>[] {
-  return blocks.filter(block => block.blockType === blockType) as Extract<Block, { blockType: T }>[];
-}
-
-export function getBlockById(blocks: Block[], id: string): Block | undefined {
-  return blocks.find(block => block.id === id);
-}
-
-
 // Usage examples:
 /*
 // Fetch specific page data
 const pageData = await fetchPage(
-  'https://api.example.com/page/1',
+  1,
   ['title', 'seo', 'blocks', 'navigation']
 );
 
 // Work with specific block types
 const heroBlocks = getBlocksByType(pageData.blocks, 'simple-hero');
 const contactBlocks = getBlocksByType(pageData.blocks, 'simple-contact');
+const testimonialBlocks = getBlocksByType(pageData.blocks, 'simple-testimonial'); // NEW
+const contentGridBlocks = getBlocksByType(pageData.blocks, 'content-with-grid'); // NEW
 
 // Access typed block properties
 heroBlocks.forEach(hero => {
   console.log(hero.heading); // ✅ TypeScript knows this exists
   console.log(hero.cover.alt); // ✅ TypeScript knows this exists
+});
+
+// Work with new testimonial blocks
+testimonialBlocks.forEach(testimonial => {
+  console.log(testimonial.title); // ✅ "What Clients Are Saying"
+  testimonial.testimonies.forEach(t => {
+    console.log(t.title); // ✅ Customer name
+    console.log(extractLexicalText(t.testimony)); // ✅ Testimonial text
+  });
+});
+
+// Work with content grid blocks
+contentGridBlocks.forEach(grid => {
+  console.log(grid.title); // ✅ Grid title
+  grid["card grid"].forEach(card => {
+    console.log(card.title); // ✅ Card title
+    console.log(extractLexicalText(card.body)); // ✅ Card description
+  });
 });
 
 // Extract text from lexical content in content blocks

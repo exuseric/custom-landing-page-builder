@@ -37,11 +37,30 @@ export function parsePage(raw: RawPageData): ParsedPage {
   };
 
   // Process all block sections - order matters for display
+  // NOTE: When new block sections are added to the CMS (Page.ts), add them here
   pushBlockArray(raw.hero);
   pushBlockArray(raw["why choose us"]);
   pushBlockArray(raw.content);
   pushBlockArray(raw["call to action"]);
   pushBlockArray(raw.contact);
+  
+  /*
+   * GUIDE FOR ADDING NEW BLOCK SECTIONS:
+   * 
+   * If the CMS adds new top-level block sections (like "testimonials", "gallery", etc.),
+   * add them to the processing above:
+   * 
+   * pushBlockArray(raw.testimonials);
+   * pushBlockArray(raw.gallery);
+   * 
+   * Also update the RawPageData type in types.ts to include the new optional fields:
+   * 
+   * testimonials?: Block[];
+   * gallery?: Block[];
+   * 
+   * The order of pushBlockArray calls determines the order blocks appear in the
+   * final blocks array, which affects display order on the frontend.
+   */
 
   return {
     id: raw.id,
