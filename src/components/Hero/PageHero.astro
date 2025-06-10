@@ -1,10 +1,24 @@
 ---
+import type { HeroBlock } from "@utils/payload/types"
+import { fetchPage } from "@utils/payload"
+import { getBlocksByType } from "@utils/payload/helpers"
+
+import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
+
+const page = await fetchPage(1, ['blocks'])
+const [block] = getBlocksByType(page.blocks, 'simple-hero')
+const hero: HeroBlock = block
+console.log(hero)
+---
+{hero.type === "stylised horizontal" && <StylisedHorizontal {...hero} />}
+
+
+<!-- ---
 import type { HeroProps } from "@utils/types";
 import BlackModern from "./BlackModern/BlackModern.astro";
 import Gradient from "./Gradient/Gradient.astro";
 import AlternateHorizontal from "./AlternateHorizontal/AlternateHorizontal.astro";
 import Overflow from "./Overflow/Overflow.astro";
-import TwoColumnHero from "./TwoColumnHero/TwoColumnHero.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import TwoSquares from "./TwoSquares/TwoSquares.astro";
 import DefaultHorizontal from "./DefaultHorizontal/DefaultHorizontal.astro";
@@ -27,9 +41,9 @@ const heroProps: HeroProps = {
 {type === "black modern" && <BlackModern {...heroProps} />}
 {type === "alternate horizontal" && <AlternateHorizontal {...heroProps} />}
 {type === "alternate vertical" && <VerticalWithImage {...heroProps} />}
-{type === "two column" && <TwoColumnHero {...heroProps} />}
+{type === "two column" && <StylisedHorizontal {...heroProps} />}
 {type === "two square" && <TwoSquares {...heroProps} />}
 {type === "big name" && <BigName {...heroProps} />}
 {type === "centered image" && <CenteredImage {...heroProps} />}
 {(!type || type === "default") && <Overflow {...heroProps} />}
-
+ -->
