@@ -2,7 +2,7 @@
     margin-bottom: var(--size-8);
 }
 
-.two_column_stat__header h2 {
+.two_column_stat__header p {
     max-width: 50ch;
 }
 
@@ -36,7 +36,8 @@
 .two_column_stat__image_wrapper>img {
     width: 100%;
     height: 100%;
-    max-height: 300px;
+    object-fit: cover;
+    /* max-height: 300px; */
 }
 .two_column_stat__image_wrapper {
     max-width: 500px;
@@ -66,10 +67,6 @@
         max-width: 500px;
         height: 100%;
         max-height: 700px;
-    }
-    .two_column_stat__image_wrapper>img {
-        width: 100%;
-        height: 100%;
     }
 
     .two_column_stat__content_wrapper {

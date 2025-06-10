@@ -301,7 +301,7 @@ svg {
 .page-section__header h2 {
     font-size: var(--heading-xl);
     max-width: 40ch;
-    view-transition-name: "page-heading";
+    view-transition-name: pageHeading;
 }
 
 .page-section__header p {
@@ -336,9 +336,9 @@ svg {
     color: var(--clr-section-highlight-heading);
 }
 
-[data-highlight="false"] h2 {
+[data-highlight="false"] h2,
+[data-highlight="false"] .page-section__header h2 {
     color: var(--clr-primary-dark);
-
 }
 
 button {
@@ -1105,10 +1105,10 @@ Text colors that contrast well with background colors.
     overflow: clip;
 }
 
-::view-transition-new("page-heading"):only-child {
+::view-transition-new(pageHeading):only-child {
     animation: var(--transition-enter-elastic-medium) both slide-in;
 }
 
-::view-transition-old("page-heading"):only-child {
+::view-transition-old(pageHeading):only-child {
     animation: var(--transition-exit-elastic-fast) both slide-out;
 }

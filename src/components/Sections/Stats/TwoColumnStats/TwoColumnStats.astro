@@ -1,60 +1,54 @@
 ---
-interface Props {
-    cards: [];
-    data: {
-        [key: string]: any;
-    };
-}
-interface Card {
-    title: string;
-    content: string;
-    icon_name: string;
-}
+import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
+interface Props extends WhyChooseUsColumnBlock {}
 
 import { Icon } from "astro-icon/components";
 import "./style.css";
 import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
-const { cards, data } = Astro.props;
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props;
 ---
 
-<div class="content_section" data-highlight={data.highlight} data-offscreen>
+<div
+    class="content_section page-section"
+    data-highlight={props.highlight ?? 'false'}
+    data-offscreen
+>
     <Container>
-        <div class="">
-            <header class="two_column_stat__header content_section__header">
-                <h2>{data.title}</h2>
-            </header>
-            <div class="two_column_stat__wrapper">
-                <div class="two_column_stat__image_wrapper">
-                    <div class="two_column_stat__description">
-                        <slot set:html={data.content} />
-                    </div>
-                    {
-                        data.expand.image.map((image: any, idx: number) => (
-                            <CustomImage
-                                image={image}
-                                classlist={`two_column_stat__image two_column_stat__image_${idx}`}
-                                size="large"
-                                eager={false}
+        <header class="two_column_stat__header page-section__header">
+            <h2>{props.title}</h2>
+            <slot set:html={extractLexicalText(props.description)} />
+        </header>
+        <div class="two_column_stat__wrapper">
+            <div class="two_column_stat__image_wrapper">
+                {
+                    props.image && (
+                        <CustomImage
+                            image={props.image}
+                            classlist={`two_column_stat__image two_column_stat__image_${props.id}`}
+                            size="large"
+                            eager={false}
+                        />
+                    )
+                }
+            </div>
+            <div class="two_column_stat__content_wrapper">
+                {
+                    props.options.map((option) => (
+                        <div class="two_column_stat__content">
+                            <h3 class="two_column_stat__content_title">
+                                {option.title}
+                            </h3>
+                            <slot
+                                class="two_column_stat__description"
+                                set:html={extractLexicalText(
+                                    option.description,
+                                )}
                             />
-                        ))
-                    }
-                </div>
-                <div class="two_column_stat__content_wrapper">
-                    {
-                        cards.map((card: Card, idx: number) => (
-                            <div class="two_column_stat__content">
-                                <h3 class="two_column_stat__content_title">
-                                    {card.title}
-                                </h3>
-                                <slot
-                                    class="two_column_stat__description"
-                                    set:html={card.content}
-                                />
-                            </div>
-                        ))
-                    }
-                </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     </Container>

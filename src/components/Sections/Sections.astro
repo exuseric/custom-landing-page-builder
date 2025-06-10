@@ -2,6 +2,7 @@
 import { fetchPage } from "@utils/payload"
 import ContentWithMedia from "@components/Sections/ContentWithMedia/ContentWithMedia.astro"
 import ContentWithGrid from "@components/Sections/ContentWithGrid/ContentWithGrid.astro"
+import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro"
 
 const page = await fetchPage(1, ['blocks'])
 const blocks = page.blocks
@@ -15,6 +16,8 @@ console.log(blocks)
                 return <ContentWithMedia {...block}/>
             case 'content-with-grid':
                 return <ContentWithGrid {...block} />
+            case 'why-choose-us-column':
+                return <TwoColumnStats {...block}/>
             default:
                 break;
         }

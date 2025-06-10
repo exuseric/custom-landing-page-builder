@@ -75,12 +75,13 @@ export type HeroBlock = {
   blockName: string | null;
 };
 
-export type WhyChooseUsBlock = {
+export type WhyChooseUsColumnBlock = {
   id: string;
   blockType: "why-choose-us-column";
   title: string;
   description: LexicalContent;
   image: Media;
+  highlight?:boolean;
   blockName: string | null;
   options: Array<{
     id: string;
@@ -162,7 +163,7 @@ export type ContactBlock = {
 // Union type for all blocks - UPDATE THIS when adding new block types
 export type Block = 
   | HeroBlock 
-  | WhyChooseUsBlock 
+  | WhyChooseUsColumnBlock 
   | ContentBlock 
   | ContentWithGridBlock  // NEW
   | CallToActionBlock 
