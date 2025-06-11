@@ -2,12 +2,12 @@
 import FloatingFooter from "./FloatingFooter/FloatingFooter.astro";
 import TinyFooter from "./TinyFooter/TinyFooter.astro";
 
-const {company, title, style, country} = Astro.props
+const {company, title, style, country, url} = Astro.props
 
 const footerProps = {
     title,
-    company_name: company.companyName,
-    parent_site_url: company.url,
+    company,
+    url,
     country
 }
 ---
