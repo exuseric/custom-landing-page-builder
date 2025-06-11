@@ -1,0 +1,44 @@
+---
+interface Props {
+    type: string;
+    text: string;
+    href: string;
+}
+import { fetchPage } from "@utils/payload";
+import { Icon } from "astro-icon/components";
+const props = Astro.props;
+
+const url: Record<string, string> = {
+    mobile: "tel:",
+    landline: "tel:",
+    whatsapp: "https://wa.me/",
+    email: "mailto:",
+};
+
+const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {
+    mobile: "mdi:cellphone",
+    landline: "mdi:phone",
+    whatsapp: "ri:whatsapp-fill",
+    email: "mdi:email",
+};
+---
+
+<a href={`${url[props.type]}${props.href}`} data-icon-link>
+    <Icon name={icons[props.type]} aria-hidden="true" focusable="false" />
+    <span>{props.text}</span>
+</a>
+
+<style>
+    a[data-icon-link] {
+        display: flex;
+        flex-flow: row wrap;
+        gap: var(--size-2);
+        align-items: center;
+        justify-content: flex-start;
+
+        text-decoration: none;
+        color: currentColor;
+
+        padding: var(--size-1) var(--size-2);
+    }
+</style>

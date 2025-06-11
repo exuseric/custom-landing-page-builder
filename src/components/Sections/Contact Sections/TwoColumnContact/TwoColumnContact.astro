@@ -1,35 +1,59 @@
 ---
+import type { ContactBlock } from "@utils/payload/types";
+interface Props extends ContactBlock {}
+
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
 import Container from "@components/Container.astro";
 import "./contact.css";
 import TopRightAnimatedSvg from "@components/TopRightAnimatedSvg.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+import IconLink from "@components/IconLink.astro";
 
-const { info, location, title } = Astro.props;
+const props = Astro.props;
+
+console.log(props.contact.email);
 ---
 
 <div class="two_column_contact container" id="contact" data-highlight="true">
-    <!-- <TopRightAnimatedSvg /> -->
-    <Container as="article">
+    <Container>
         <header class="content_section__header">
-            <h2>{title}</h2>
+            <h2>{props.title}</h2>
         </header>
         <div class="two_column_contact__content">
             <div class="two_column_contact__body">
-                <InfoCard cards={info} direction="column" />
-            </div>
-            
-            <div class="two_column_contact__location">
                 <adrress>
-                    <slot set:html={location[0].content} />
+                    <slot
+                        set:html={extractLexicalText(props.location.address)}
+                    />
                 </adrress>
-                {
-                    location.map((location: any) => (
-                        <div class="location">
-                            {/* <slot set:html={location.content} /> */}
-                            <slot set:html={location.title} />
-                        </div>
-                    ))
-                }
+                <div class="two_column_contact__phone">
+                    {
+                        props.contact.phone.map((phone) => (
+                            <IconLink
+                                href={phone.number}
+                                type={phone.type}
+                                text={phone.number}
+                            />
+                        ))
+                    }
+                </div>
+
+                <div class="two_column_contact__email">
+                    {
+                        props.contact.email.map((email) => (
+                            <IconLink
+                                href={email.email}
+                                type="email"
+                                text={email.email}
+                            />
+                        ))
+                    }
+                </div>
+                <!-- <InfoCard cards={info} direction="column" /> -->
+            </div>
+
+            <div class="two_column_contact__location">
+                <slot set:html={props.location.iframe} />
             </div>
         </div>
     </Container>
