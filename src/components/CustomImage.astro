@@ -1,33 +1,15 @@
 ---
+import {Image} from '@unpic/astro'
+// import { Image } from "astro:assets";
+
 import type { Media } from "@utils/payload/types";
 interface Props {
   image: Media;
   classlist: string;
-  size: 'logo' | 'small' | 'medium' | 'large';
   eager: boolean;
+  size: string;
 }
-import { Image } from "astro:assets";
 const { image, classlist, size, eager } = Astro.props;
-
-const widths = size === 'logo' 
-  ? [200] 
-  : size === 'small' 
-    ? [350, 500] 
-  : size === 'medium' 
-    ? [500, 750] 
-  : size === 'large' 
-    ? [1000, Math.max(1000, image.width ?? 1000)] // Ensure width is at least 1000
-  : [image.width ?? 1000];
-
-const sizes = size === 'logo' 
-  ? `200px` 
-  : size === 'small' 
-    ? `(max-width: 1366px) 350px, 500px` 
-  : size === 'medium' 
-    ? `(max-width: 1366px) 500px, 750px` 
-  : size === 'large' 
-    ? `(max-width: 1366px) 1000px, ${image.width}px` 
-  : `${image.width}px`;
 ---
 <Image
     src={`${import.meta.env.DATABASE_URL}${image.url}`}
@@ -38,5 +20,5 @@ const sizes = size === 'logo'
     class={classlist}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}
-    style={`object-position: ${image.focalX ? image.focalX + "% " + image.focalY + "%" : "center"};`}
+    placeholder="blurhash"
 />
