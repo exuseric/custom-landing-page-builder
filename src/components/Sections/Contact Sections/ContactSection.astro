@@ -4,8 +4,6 @@ import TwoColumnContact from "./TwoColumnContact/TwoColumnContact.astro"
 import MultiLocation from "./MultiLocation/MultiLocation.astro"
 
 const props = Astro.props
-
-console.log(props)
 ---
 
 {props.direction === "horizontal" && <TwoColumnContact {...props} />}

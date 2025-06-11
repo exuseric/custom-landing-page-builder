@@ -1,0 +1,23 @@
+---
+interface Props {
+    type: string;
+    text?: string;
+    href: string;
+}
+import { Icon } from "astro-icon/components";
+const props = Astro.props;
+
+const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {
+    'x (formerly twitter)': "ri:twitter-x-line",
+    linkedin: "ri:linkedin-box-fill",
+};
+---
+
+<a href={props.href} data-icon-link>
+    <Icon name={icons[props.type]} aria-hidden="true" focusable="false" />
+    <span>{props.text}</span>
+</a>
+
+<style>
+
+</style>

@@ -2,16 +2,12 @@
 import type { ContactBlock } from "@utils/payload/types";
 interface Props extends ContactBlock {}
 
-import InfoCard from "@components/Cards/Info/InfoCard.astro";
-import Container from "@components/Container.astro";
 import "./contact.css";
-import TopRightAnimatedSvg from "@components/TopRightAnimatedSvg.astro";
+import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 import IconLink from "@components/IconLink.astro";
 
 const props = Astro.props;
-
-console.log(props.contact.email);
 ---
 
 <div class="two_column_contact container" id="contact" data-highlight="true">

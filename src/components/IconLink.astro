@@ -27,18 +27,3 @@ const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {
     <Icon name={icons[props.type]} aria-hidden="true" focusable="false" />
     <span>{props.text}</span>
 </a>
-
-<style>
-    a[data-icon-link] {
-        display: flex;
-        flex-flow: row wrap;
-        gap: var(--size-2);
-        align-items: center;
-        justify-content: flex-start;
-
-        text-decoration: none;
-        color: currentColor;
-
-        padding: var(--size-1) var(--size-2);
-    }
-</style>

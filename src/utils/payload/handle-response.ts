@@ -1,20 +1,20 @@
 import type { ParsedPage, Block, RawPageData, LexicalContent } from './types';
-
-function extractLexicalText(lexicalContent: LexicalContent | null | undefined): string {
-  if (!lexicalContent?.root?.children) return "";
+import { extractLexicalText } from './helpers';
+// function extractLexicalText(lexicalContent: LexicalContent | null | undefined): string {
+//   if (!lexicalContent?.root?.children) return "";
   
-  try {
-    return lexicalContent.root.children
-      .flatMap(paragraph => 
-        paragraph.children?.map(node => node.text) || []
-      )
-      .filter(Boolean)
-      .join("\n\n");
-  } catch (error) {
-    console.warn('Failed to extract lexical text:', error);
-    return "";
-  }
-}
+//   try {
+//     return lexicalContent.root.children
+//       .flatMap(paragraph => 
+//         paragraph.children?.map(node => node.text) || []
+//       )
+//       .filter(Boolean)
+//       .join("\n\n");
+//   } catch (error) {
+//     console.warn('Failed to extract lexical text:', error);
+//     return "";
+//   }
+// }
 
 function isValidBlock(block: any): block is Block {
   return block && 

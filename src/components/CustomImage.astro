@@ -1,6 +1,6 @@
 ---
-import {Image} from '@unpic/astro'
-// import { Image } from "astro:assets";
+// import {Image} from '@unpic/astro'
+import { Image } from "astro:assets";
 
 import type { Media } from "@utils/payload/types";
 interface Props {
@@ -8,10 +8,12 @@ interface Props {
   classlist: string;
   eager: boolean;
   size: string;
+  id?: string;
 }
-const { image, classlist, size, eager } = Astro.props;
+const { image, classlist, size, eager, id } = Astro.props;
 ---
 <Image
+    id={id}
     src={`${import.meta.env.DATABASE_URL}${image.url}`}
     alt={image.alt as string}
     title={image.alt}
@@ -20,5 +22,4 @@ const { image, classlist, size, eager } = Astro.props;
     class={classlist}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}
-    placeholder="blurhash"
 />

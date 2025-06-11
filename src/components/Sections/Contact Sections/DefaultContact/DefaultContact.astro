@@ -1,44 +1,69 @@
 ---
-import InfoCard from "@components/Cards/Info/InfoCard.astro";
-import Container from "@components/Container.astro";
-import "./contact.css";
+import type { ContactBlock, SocialLink, LexicalContent } from "@utils/payload/types";
+interface Props extends ContactBlock {
+    socialLinks: SocialLink[];
+    operatingHours: LexicalContent;
+}
 
-const { title, info, location, operating_hours, social_links } = Astro.props;
-location.length <= 1 && location.map((loc: any) => (loc = loc));
+import "./contact.css";
+import Container from "@components/Container.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+import IconLink from "@components/IconLink.astro";
+import SocialLinkComponent from "@components/SocialLink.astro";
+
+const props = Astro.props;
 ---
 
 <div class="default_contact container" id="contact" data-highlight="true">
     <Container>
         <div
             class="default_contact__content"
-            data-two-column={location?.length <= 1 ? "true" : "false"}
         >
             <article>
-                <h2>{title}</h2>
-                <address class="contact_info">
-                    <InfoCard cards={info} />
-                </address>
+                <h2>{props.title}</h2>
+                <div class="two_column_contact__phone">
+                    {
+                        props.contact.phone.map((phone) => (
+                            <IconLink
+                                href={phone.number}
+                                type={phone.type}
+                                text={phone.number}
+                            />
+                        ))
+                    }
+                </div>
+
+                <div class="two_column_contact__email">
+                    {
+                        props.contact.email.map((email) => (
+                            <IconLink
+                                href={email.email}
+                                type="email"
+                                text={email.email}
+                            />
+                        ))
+                    }
+                </div>
                 {
-                    social_links && (
+                    props.socialLinks && (
                         <div class="social_links">
-                            <InfoCard cards={social_links} />
+                           {props.socialLinks.map((social) => (
+                            <SocialLinkComponent href={social.url} type={social.platform} text={social.title} />
+                           ))}
                         </div>
                     )
                 }
                 <div class="working_hours">
-                    <InfoCard cards={[operating_hours]} />
+                    <slot set:html={props.operatingHours} />
+                    <!-- <InfoCard cards={[operating_hours]} /> -->
                 </div>
             </article>
 
             <div class="default_contact__location">
-                {
-                    location.map((location: any) => (
-                        <div class="location">
-                            <address set:html={location.content} />
-                            <slot set:html={location.title} />
-                        </div>
-                    ))
-                }
+                <address>
+                    <slot set:html={extractLexicalText(props.location.address)} />
+                </address>
+                <slot set:html={props.location.iframe} />
             </div>
         </div>
     </Container>

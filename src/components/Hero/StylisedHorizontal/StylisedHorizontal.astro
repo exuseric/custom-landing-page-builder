@@ -1,11 +1,11 @@
 ---
 import type { HeroBlock } from "@utils/payload/types";
+interface Props extends HeroBlock {}
 
-import Container from "@components/Container.astro";
 import "./hero.css";
+import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
 
-interface Props extends HeroBlock {}
 const { heading, excerpt, cover } = Astro.props;
 ---
 

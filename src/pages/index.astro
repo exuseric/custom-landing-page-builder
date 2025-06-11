@@ -57,14 +57,12 @@ const companyNames: Record<string, string> = {
     st: 'Páginas Amarelas São Tomé',
 };
 
-const { country, themeColor, footerStyle, title} = await fetchPage(1, [
+const { country, themeColor, footerStyle, title} = await fetchPage(Number(import.meta.env.PAGE_ID), [
 	"country",
 	"themeColor",
 	"footerStyle",
 	"title"
 ]);
-
-console.log({footerStyle})
 ---
 
 <!doctype html>

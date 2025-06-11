@@ -5,34 +5,30 @@ import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from "@utils/translations";
 import "./style.css";
 
-interface Props {
-    blackText: boolean;
-    fixedMenu: boolean;
-    data: {
-        links: string[];
-        logo: {
-            [key: string]: string;
-        };
-        title: string;
-    };
-    country: string;
-}
-
+type Link = {
+    id: string;
+    name: string;
+    anchorId: string;
+    style: string;
+};
 const {
-    data: { links, logo, title },
+    navigation: { logo, menuItems },
     fixedMenu,
     blackText,
     country,
+    title,
 } = Astro.props;
 
-const pageLinks = links.map((link) =>
-    link === "home"
-        ? { name: translateNavItem("home", country), href: "/" }
+const pageLinks = menuItems.map((link: Link) =>
+    link.name === "home"
+        ? { ...link, name: translateNavItem("home", country), anchorId: "/" }
         : {
-              name: translateNavItem(link, country),
-              href: `#${link.split(" ").join("-")}`,
+              ...link,
+              name: translateNavItem(link.name, country),
+              anchorId: `#${link.anchorId.split(" ").join("-")}`,
           },
 );
+
 ---
 
 <nav
@@ -52,13 +48,13 @@ const pageLinks = links.map((link) =>
                 href="/"
                 aria-label={title.trim()}
             >
-                <CustomImage
+                <!-- {logo.url.length !== '' && <CustomImage
                     eager={true}
                     image={logo}
                     classlist="floating-pill-nav__logo-image"
                     size="small"
-                />
-                <!-- <span class="floating-pill-nav__logo-text">{title}</span> -->
+                />} -->
+                <span class="floating-pill-nav__logo-text">{title}</span>
             </a>
             <menu
                 class="floating-pill-nav__menu"
@@ -70,13 +66,13 @@ const pageLinks = links.map((link) =>
                 aria-expanded="false"
             >
                 {
-                    pageLinks.map((link, index) => (
+                    pageLinks.map((link: Link) => (
                         <li class="floating-pill-nav__menu-item">
                             <a
-                                title={link.href}
-                                href={link.href}
+                                title={link.name}
+                                href={link.anchorId}
                                 class={
-                                    index === pageLinks?.length - 1
+                                    link.style !== "default"
                                         ? "floating-pill-nav__link floating-pill-nav__link--cta"
                                         : "floating-pill-nav__link"
                                 }

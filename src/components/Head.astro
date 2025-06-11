@@ -6,7 +6,7 @@ import { AstroFont } from "astro-font";
 import { languages } from "@utils/translations";
 import { fonts } from "@utils/fonts";
 
-const { seo, title, url, country } = await fetchPage(1, [
+const { seo, title, url, country } = await fetchPage(Number(import.meta.env.PAGE_ID), [
     "seo",
     "title",
     "url",
