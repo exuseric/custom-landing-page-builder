@@ -1,0 +1,55 @@
+---
+import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
+interface Props extends WhyChooseUsColumnBlock {}
+
+import { Icon } from "astro-icon/components";
+import "./stats.css"
+import Container from "@components/Container.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props
+
+const cardStyles = [
+    { bg: 'var(--clr-primary-darker)' },
+    { bg: 'var(--clr-tertiary-darker)' },
+    { bg: 'var(--clr-secondary-darker)' },
+    { bg: 'var(--clr-tertiary-darker)' },
+    { bg: 'var(--clr-primary-darker)' },
+    { bg: 'var(--clr-secondary-darker)' },
+];
+
+console.log(props)
+---
+
+<div class="content_section" data-offscreen>
+    <Container>
+        <div class="simple-stats__container container">
+            <div class="simple-stats__grid">
+                <div class="simple-stats__header">
+                    <div class="simple-stats__header-content">
+                        <h2>{props.title}</h2>
+                        <slot class="simple-stats__description" set:html={extractLexicalText(props.description)} />
+                    </div>
+                </div>
+                {
+                    props.options.map((card, index: number) => {
+                        const style = cardStyles[index % cardStyles?.length];
+                        return (
+                            <div
+                                class="simple-stats__item"
+                                style={`background-color: ${style.bg};`}
+                            >
+                                <div class="simple-stats__icon-box">
+                                    <Icon class="simple-stats__icon" name={card.icon} aria-hidden="true" focusable="false" />
+                                </div>
+                                <div class="simple-stats__item-content">
+                                    <h3>{card.title}</h3>
+                                    <slot class="simple-stats__description" set:html={extractLexicalText(card.body)} />
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    </Container>
+</div>

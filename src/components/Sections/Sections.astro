@@ -8,10 +8,11 @@ import PageHero from "@components/Hero/PageHero.astro"
 import SimpleTestimonial from "@components/Sections/Testimonial/SimpleTestimonial/SimpleTestimonial.astro"
 import ContactSection from "./Contact Sections/ContactSection.astro"
 import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro"
+import WhyChooseUsGrid from "./Stats/WhyChooseUsGrid/WhyChooseUsGrid.astro"
 
 const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number(import.meta.env.PAGE_ID), ['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
 
-console.log(blocks)
+// console.log(blocks)
 ---
 
 {
@@ -25,6 +26,8 @@ console.log(blocks)
                 return <ContentWithGrid {...block} />
             case 'why-choose-us-column':
                 return <WhyChooseUsColumn {...block}/>
+            case 'why-choose-us-grid':
+                return <WhyChooseUsGrid {...block} /> 
             case 'simple-call-to-action':
                 return <SimpleCallToAction {...block}/>
             case 'image-grid-cta':

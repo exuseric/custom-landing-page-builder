@@ -77,7 +77,7 @@ export type HeroBlock = {
 
 export type WhyChooseUsColumnBlock = {
   id: string;
-  blockType: "why-choose-us-column";
+  blockType: "why-choose-us-column" | "why-choose-us-grid";
   title: string;
   description: LexicalContent;
   image: Media;
@@ -86,7 +86,9 @@ export type WhyChooseUsColumnBlock = {
   options: Array<{
     id: string;
     title: string;
-    description: LexicalContent;
+    description?: LexicalContent;
+    icon?: string;
+    body?: LexicalContent;
   }>;
 };
 
