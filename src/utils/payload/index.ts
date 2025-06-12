@@ -26,10 +26,12 @@ export class LandingPageError extends Error {
  */
 export async function fetchPage<T extends PageKey>(
   pageId: number | string,
-  keys: T[]
+  keys: T[],
+  server?: boolean
 ): Promise<Pick<ParsedPage, T>> {
   try {
-    const res = await fetch(`http://localhost:3000/api/page/${pageId}?depth=2&draft=false&locale=undefined`);
+    const id = server ? pageId : import.meta.env.PAGE_ID;
+    const res = await fetch(`http://localhost:3000/api/page/${id}?depth=2&draft=false&locale=undefined`);
     
     if (!res.ok) {
       throw new LandingPageError(

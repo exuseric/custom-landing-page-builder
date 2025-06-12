@@ -4,7 +4,7 @@ import icon from 'astro-icon';
 // import { imageService } from "@unpic/astro/service";
 
 import { fetchPage } from './src/utils/payload';
-const { url } = await fetchPage(1, ['url'])
+const { url } = await fetchPage(2, ['url'], true);
 // https://astro.build/config
 export default defineConfig({
   output: "static",

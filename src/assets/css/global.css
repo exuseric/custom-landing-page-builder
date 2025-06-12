@@ -300,6 +300,9 @@ svg {
 
 .page-section {
     padding-block: var(--container-padding-block);
+}
+
+.page-section[data-highlight="false"] {
     margin-block: var(--container-padding-lg);
 }
 
@@ -469,10 +472,14 @@ a[data-icon-link] svg {
 }
 
 /* Primary Button */
-.btn-primary {}
+.btn-primary {
+    --bg-color: var(--clr-primary);
+    --text-color: oklch(from var(--clr-primary) calc(l - 0.5) c h);
+}
 
 .btn-primary:hover {
     --bg-color: var(--clr-secondary);
+    --text-color: oklch(from var(--clr-secondary) calc(l - 0.5) c h);
 }
 
 .btn-primary:active {

@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const pageLinks = menuItems.map((link: Link) =>
-    link.name === "home"
+    link.name.toLocaleLowerCase() === "home"
         ? { ...link, name: translateNavItem("home", country), anchorId: "/" }
         : {
               ...link,
@@ -70,9 +70,11 @@ const pageLinks = menuItems.map((link: Link) =>
                                 title={link.name}
                                 href={link.anchorId}
                                 class={
-                                    link.style !== "default"
-                                        ? "simple-nav__link simple-nav__link--cta"
-                                        : "simple-nav__link"
+                                    link.style.toLocaleLowerCase() === "primary"
+                                        ? "simple-nav__link simple-nav__link--cta--primary"
+                                        : link.style.toLocaleLowerCase() === "secondary" ?
+                                        "simple-nav__link simple-nav__link--cta--secondary"
+                                        :"simple-nav__link"
                                 }
                             >
                                 {link.name}

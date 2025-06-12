@@ -16,8 +16,10 @@
 }
 
 .three_image_cta__content h2 {
-    font-size: var(--heading-2xl);
+    font-size: var(--heading-4xl);
     text-transform: uppercase;
+    max-width: 15ch;
+    margin-bottom: var(--size-4);
 }
 
 .three_image_cta__image_wrapper .three_image_cta___image,
@@ -69,7 +71,8 @@
         height: 100%;
 
         display: grid;
-        place-content: center;
+        align-items: center;
+        justify-content: start;
     }
 
     .three_image_cta__image_wrapper {

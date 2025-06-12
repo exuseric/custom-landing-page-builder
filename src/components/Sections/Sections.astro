@@ -7,8 +7,11 @@ import SimpleCallToAction from "@components/Sections/CtaSection/SimpleCallToActi
 import PageHero from "@components/Hero/PageHero.astro"
 import SimpleTestimonial from "@components/Sections/Testimonial/SimpleTestimonial/SimpleTestimonial.astro"
 import ContactSection from "./Contact Sections/ContactSection.astro"
+import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro"
 
-const {blocks, socialLinks, operatingHours} = await fetchPage(Number(import.meta.env.PAGE_ID), ['blocks', 'socialLinks', 'operatingHours'])
+const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number(import.meta.env.PAGE_ID), ['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
+
+console.log(blocks)
 ---
 
 {
@@ -24,6 +27,8 @@ const {blocks, socialLinks, operatingHours} = await fetchPage(Number(import.meta
                 return <WhyChooseUsColumn {...block}/>
             case 'simple-call-to-action':
                 return <SimpleCallToAction {...block}/>
+            case 'image-grid-cta':
+                return <ThreeImageCta {...block} {coreValues}/>
             case 'simple-testimonial':
                 return <SimpleTestimonial {...block} />
             case 'simple-contact':

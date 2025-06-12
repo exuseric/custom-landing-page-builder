@@ -1,46 +1,33 @@
 ---
-interface Props {
-    data: {
-        title: string;
-        content: string;
-        expand: {
-            image: [];
-        };
-        highlight: boolean;
-        core_values: string;
-    };
+import type { ImageGridCallToActionBlock, Media } from "@utils/payload/types";
+interface Props extends ImageGridCallToActionBlock {
+    coreValues: string;
 }
+
 import "./style.css";
 import { Icon } from "astro-icon/components";
 import CustomImage from "@components/CustomImage.astro";
 import Container from "@components/Container.astro";
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
-const { data } = Astro.props;
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props;
+
+console.log(props.images)
 // const info = data.core_values.split(",").map((value) => ({ icon_name: "mdi-check", content: value }))
-let info = data.core_values.split(",").map((value) => ({
-    icon_name: "mdi:check-circle",
-    content: value.trim(),
-}));
 // console.log(info);
 ---
 
-<div class="content_section" data-offscreen>
+<div class="content_section page-section" data-highlight="false" data-offscreen>
     <Container>
         <div
             class="three_image_cta__container "
-            data-highlight={data.highlight}
         >
             <div class="three_image_cta__content_wrapper">
                 <article class="three_image_cta__content">
-                    <header class="content_section__header">
-                        <InfoCard
-                            cards={info as unknown as Array<{
-                                [key: string]: { [key: string]: any };
-                            }>}
-                        />
-                        <h2>{data.title}</h2>
+                    <header class="page-section__header">
+                        <h2>{props.title}</h2>
                     </header>
-                    <slot set:html={data.content} />
+                    <slot set:html={extractLexicalText(props.body)} />
     
                     <div class="btn_wrapper">
                         <a href="#contact" class="btn btn-md btn-secondary btn-outline"
@@ -51,9 +38,9 @@ let info = data.core_values.split(",").map((value) => ({
             </div>
             <div class="three_image_cta__image_wrapper">
                 {
-                    data.expand.image.map((image: any, idx: number) => (
+                    props.images.map((image, idx: number) => (
                         <CustomImage
-                            image={image}
+                            image={image.image}
                             classlist={`three_image_cta___image three_image_cta___image_${idx}`}
                             size="medium"
                             eager={false}

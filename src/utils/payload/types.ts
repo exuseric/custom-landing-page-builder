@@ -136,6 +136,15 @@ export type SimpleCallToActionBlock = {
   blockName: string | null;
 };
 
+export type ImageGridCallToActionBlock = {
+  id: string;
+  title: string;
+  body: LexicalContent;
+  images: Media[];
+  blockType: "image-grid-cta";
+  blockName: string | null;
+}
+
 // NEW: Testimonial block type
 export type SimpleTestimonialBlock = {
   id: string;
@@ -166,9 +175,10 @@ export type Block =
   | HeroBlock 
   | WhyChooseUsColumnBlock 
   | ContentBlock 
-  | ContentWithGridBlock  // NEW
-  | SimpleCallToActionBlock 
-  | SimpleTestimonialBlock      // NEW
+  | ContentWithGridBlock
+  | SimpleCallToActionBlock
+  | ImageGridCallToActionBlock
+  | SimpleTestimonialBlock
   | ContactBlock;
 
 /*

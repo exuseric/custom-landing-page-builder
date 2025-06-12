@@ -21,7 +21,7 @@ const props = Astro.props;
         >
             <article>
                 <h2>{props.title}</h2>
-                <div class="two_column_contact__phone">
+                <address class="two_column_contact__phone">
                     {
                         props.contact.phone.map((phone) => (
                             <IconLink
@@ -31,9 +31,9 @@ const props = Astro.props;
                             />
                         ))
                     }
-                </div>
+                </address>
 
-                <div class="two_column_contact__email">
+                <address class="two_column_contact__email">
                     {
                         props.contact.email.map((email) => (
                             <IconLink
@@ -43,9 +43,9 @@ const props = Astro.props;
                             />
                         ))
                     }
-                </div>
+                </address>
                 {
-                    props.socialLinks && (
+                    props.socialLinks.length > 0 && (
                         <div class="social_links">
                            {props.socialLinks.map((social) => (
                             <SocialLinkComponent href={social.url} type={social.platform} text={social.title} />

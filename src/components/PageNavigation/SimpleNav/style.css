@@ -132,10 +132,15 @@
     color: var(--nav-hover-text);
 }
 
-.simple-nav__link--cta {
-    background-color: var(--nav-cta-bg);
-    color: var(--nav-cta-text);
-    margin-top: var(--size-1);
+.simple-nav__link--cta--primary {
+    background-color: var(--clr-primary);
+    color: oklch(from var(--clr-primary) calc(l - 0.5) c h);
+    /* margin-top: var(--size-1); */
+}
+.simple-nav__link--cta--secondary {
+    border: 2px solid var(--clr-secondary);
+    color: oklch(from var(--clr-secondary) calc(l - 0.5) c h);
+    /* margin-top: var(--size-1); */
 }
 
 .simple-nav__toggle {
