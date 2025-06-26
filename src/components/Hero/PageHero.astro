@@ -5,12 +5,14 @@ interface Props extends HeroBlock {}
 import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
 import Overflow from "./Overflow/Overflow.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
+import AlternateVertical from "./AlternateVertical/AlternateVertical.astro";
 
 const props = Astro.props
 ---
 {props.type === "stylised horizontal" && <StylisedHorizontal {...props} />}
 {props.type === "default" && <Overflow {...props} />}
 {props.type === "vertical" && <VerticalWithImage {...props} />}
+{props.type === "alternate vertical" && <AlternateVertical {...props} />}
 
 <!-- ---
 import type { HeroProps } from "@utils/types";

@@ -48,12 +48,12 @@ const pageLinks = menuItems.map((link: Link) =>
                 href="/"
                 aria-label={title.trim()}
             >
-                <!-- {logo.url.length !== '' && <CustomImage
+                <CustomImage
                     eager={true}
                     image={logo}
                     classlist="floating-pill-nav__logo-image"
                     size="small"
-                />} -->
+                />
                 <span class="floating-pill-nav__logo-text">{title}</span>
             </a>
             <menu
