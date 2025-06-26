@@ -38,36 +38,33 @@ const pageLinks = menuItems.map((link: Link) =>
     data-menu-toggled="false"
     data-fixed-menu={fixedMenu}
     data-black-text={blackText}
-    aria-label="page navigation"
+    aria-label="Main navigation"
 >
     <Container>
-        <!-- <div class="simple-nav__top-bar" data-topbar>
-            <InfoCard cards={social_links} />
-        </div> -->
         <div class="simple-nav__wrapper">
-            <a class="simple-nav__logo" href="/" aria-label={title.trim()}>
+            <a class="simple-nav__logo" href="/" aria-label={`${title.trim()} - Go to homepage`}>
                 <CustomImage
                     eager={true}
                     image={logo}
                     classlist="simple-nav__logo-image"
                     size="logo"
+                    alt={`${title.trim()} logo`}
                 />
                 <span class="simple-nav__logo-text">{title}</span>
             </a>
 
-            <menu
+            <ul
                 id="main-navigation-menu"
                 class="simple-nav__menu"
                 data-menu
                 data-is-active="false"
-                aria-label="page menu"
-                role="navigation"
+                aria-label="Main menu"
+                role="menubar"
             >
                 {
                     pageLinks.map((link: Link) => (
-                        <li>
+                        <li role="none">
                             <a
-                                title={link.name}
                                 href={link.anchorId}
                                 class={
                                     link.style.toLocaleLowerCase() === "primary"
@@ -76,24 +73,34 @@ const pageLinks = menuItems.map((link: Link) =>
                                         "simple-nav__link simple-nav__link--cta--secondary"
                                         :"simple-nav__link"
                                 }
+                                role="menuitem"
+                                aria-describedby={link.description ? `${link.name.toLowerCase().replace(/\s+/g, '-')}-desc` : undefined}
                             >
                                 {link.name}
+                                {link.description && (
+                                    <span 
+                                        id={`${link.name.toLowerCase().replace(/\s+/g, '-')}-desc`}
+                                        class="sr-only"
+                                    >
+                                        {link.description}
+                                    </span>
+                                )}
                             </a>
                         </li>
                     ))
                 }
-            </menu>
+            </ul>
 
             <button
                 type="button"
                 class="simple-nav__toggle"
                 data-menu-toggle
                 data-is-active="false"
-                aria-label="toggle page menu"
+                aria-label="Open main menu"
                 aria-controls="main-navigation-menu"
-                aria-haspopup="true"
                 aria-expanded="false"
             >
+                <span class="sr-only">Menu</span>
                 <Icon
                     name="mdi:menu"
                     aria-hidden="true"
