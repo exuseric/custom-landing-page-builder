@@ -22,7 +22,7 @@
         transform var(--nav-transition);
     background-color: var(--nav-bg);
     color: var(--nav-text);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* Hide navigation when scrolling down */
