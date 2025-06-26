@@ -1,9 +1,10 @@
 .alternate_horizontal_hero__wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 500px;
+  grid-template-rows: 1fr 460px;
   align-items: center;
   gap: var(--size-4);
+  overflow: hidden;
 }
 .alternate_horizontal_hero__content {
   padding-block: var(--size-4);
@@ -37,6 +38,7 @@
   width: 100%;
   height: 100%;
   background-image: url('/src/assets/boxy-grid-small-screen-overlay.svg');
+  background-size: contain;
 }
 @media (min-width: 768px) {
   .alternate_horizontal_hero__wrapper {

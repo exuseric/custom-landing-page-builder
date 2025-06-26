@@ -48,7 +48,6 @@ const pageLinks = menuItems.map((link: Link) =>
                     image={logo}
                     classlist="simple-nav__logo-image"
                     size="logo"
-                    alt={`${title.trim()} logo`}
                 />
                 <span class="simple-nav__logo-text">{title}</span>
             </a>
@@ -74,17 +73,8 @@ const pageLinks = menuItems.map((link: Link) =>
                                         :"simple-nav__link"
                                 }
                                 role="menuitem"
-                                aria-describedby={link.description ? `${link.name.toLowerCase().replace(/\s+/g, '-')}-desc` : undefined}
                             >
                                 {link.name}
-                                {link.description && (
-                                    <span 
-                                        id={`${link.name.toLowerCase().replace(/\s+/g, '-')}-desc`}
-                                        class="sr-only"
-                                    >
-                                        {link.description}
-                                    </span>
-                                )}
                             </a>
                         </li>
                     ))
