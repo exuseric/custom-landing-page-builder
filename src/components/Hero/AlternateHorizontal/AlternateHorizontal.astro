@@ -7,19 +7,19 @@ interface Props extends HeroBlock {}
 const { heading, excerpt, cover } = Astro.props;
 ---
 
-<header class='horizontal_hero content_section'>
+<header class='alternate_horizontal_hero content_section'>
     <Container>
-        <div class="horizontal_hero__wrapper">
-            <article class="horizontal_hero__content">
+        <div class="alternate_horizontal_hero__wrapper">
+            <article class="alternate_horizontal_hero__content">
                 <h1>{heading}</h1>
                 <p>{excerpt}</p>
             </article>
 
-            <div class="horizontal_hero__image_wrapper">
+            <div class="alternate_horizontal_hero__image_wrapper">
                 <CustomImage
                     image={cover}
                     size="large"
-                    classlist="horizontal_hero__image"
+                    classlist="alternate_horizontal_hero__image"
                     eager={true}
                 />
             </div>
