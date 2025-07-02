@@ -1,14 +1,61 @@
 ---
-import Container from "@components/Container.astro";
-import "./vertical_cta.css";
+import type { TwoImageCallToActionBlock, Media } from "@utils/payload/types";
+interface Props extends TwoImageCallToActionBlock {
+    coreValues: string;
+}
+
+import "./style.css";
 import { Icon } from "astro-icon/components";
 import CustomImage from "@components/CustomImage.astro";
-import VerticalImages from "@components/Sections/VerticalImages/VerticalImages.astro";
-const { data, core_values } = Astro.props;
+import Container from "@components/Container.astro";
+import InfoCard from "@components/Cards/Info/InfoCard.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props;
+
+// console.log(props);
 ---
 
-<div class="vertical_cta content_section" data-offscreen>
+<div
+    class="vertical_cta content_section page-section"
+    data-offscreen
+>
     <Container>
-        <VerticalImages data={data} core_values={core_values} />
+        <!-- <VerticalImages data={data} core_values={core_values} /> -->
+        <div class="col-grid-12">
+            <div class="vertical-section__wrapper">
+                <div class="vertical-section__images">
+                    {
+                        props.images.map((image: any, idx: number) => (
+                            <CustomImage
+                                image={image.image as Media}
+                                classlist={`vertical-section__image vertical-section__image_${idx}`}
+                                size="small"
+                                eager={false}
+                            />
+                        ))
+                    }
+                </div>
+                <div class="vertical-section__content">
+                    <!-- {
+                        core_values && (
+                            <ul class="vertical-section__core_values">
+                                {core_values.split(",").map((value: any) => (
+                                    <li>
+                                        <Icon
+                                            name="mdi:check-bold"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        {value.trim()}
+                                    </li>
+                                ))}
+                            </ul>
+                        )
+                    } -->
+                    <h2>{props.title}</h2>
+                    <slot set:html={extractLexicalText(props.body)} />
+                </div>
+            </div>
+        </div>
     </Container>
 </div>

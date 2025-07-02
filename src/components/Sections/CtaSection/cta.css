@@ -1,9 +1,10 @@
+
 .cta__wrapper {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--size-4);
     
-    padding: var(--size-8) var(--size-8);
+    padding: var(--size-8);
     border-radius: var(--size-4);
     border: 2px solid hsl(var(--clr-primary-hsl) / 0.15);
     background-color: hsl(var(--clr-primary-hsl) / 0.02);

@@ -1,5 +1,5 @@
 ---
-import { getData, getImageUrl } from "@src/utils/pocketbase";
+// import { getData, getImageUrl } from "@src/utils/pocketbase";
 import { languages } from "@utils/translations";
 import { AstroFont } from "astro-font";
 import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
@@ -84,45 +84,6 @@ const { country, themeColor, footerStyle, title} = await fetchPage(Number(import
 			<Sections />
 		</main>
 		<Footer title={title} style={footerStyle} country={country} company={companyNames[country]} url={parentUrls[country]} />
-		<!-- <PageNavigation
-			links={record.links}
-			logo={record.expand.logo}
-			title={record.title}
-			style={record.nav_style}
-			hero_style={record.hero_style}
-			country={record.country}
-			social_links={record.expand.social_links}
-		/>
-		<PageHero
-			image={record.expand.hero_image}
-			cover={record.expand?.hero_cover}
-			title={record.hero_title}
-			excerpt={record.hero_excerpt}
-			type={record.hero_style}
-			core_values={record.core_values}
-			cards={record.expand.hero_grid}
-		/>
-		<main>
-			<Sections
-				sections={record.expand.sections}
-				core_values={record.core_values}
-			/>
-			<ContactSection
-				title={record.contact_title}
-				info={record.expand.contact_info}
-				location={record.expand.contact_location}
-				operating_hours={record.expand.operating_hours}
-				social_links={record.expand.social_links}
-				style={record.contact_style}
-				location_info={record.expand.location}
-			/>
-		</main>
-		<Footer
-			company={record.company}
-			title={record.title}
-			style={record.footer_style}
-			country={record.country}
-		/> -->
 	</body>
 </html>
 <style define:vars={{ themeColor }} is:global></style>

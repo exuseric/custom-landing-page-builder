@@ -6,13 +6,13 @@ import WhyChooseUsColumn from "@components/Sections/Stats/WhyChooseUsColumn/WhyC
 import SimpleCallToAction from "@components/Sections/CtaSection/SimpleCallToAction/SimpleCallToAction.astro"
 import PageHero from "@components/Hero/PageHero.astro"
 import SimpleTestimonial from "@components/Sections/Testimonial/SimpleTestimonial/SimpleTestimonial.astro"
-import ContactSection from "./Contact Sections/ContactSection.astro"
-import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro"
-import WhyChooseUsGrid from "./Stats/WhyChooseUsGrid/WhyChooseUsGrid.astro"
+import ContactSection from "@components/Sections/Contact Sections/ContactSection.astro"
+import ThreeImageCta from "@components/Sections/CtaSection/ThreeImageCta/ThreeImageCta.astro"
+import WhyChooseUsGrid from "@components/Sections/Stats/WhyChooseUsGrid/WhyChooseUsGrid.astro"
+import VerticalImageCta from "@components/Sections/CtaSection/VerticalImageCta/VerticalImageCta.astro"
+import WhyChooseUsInteractive from "@components/Sections/Stats/WhyChooseUsInteractive/WhyChooseUsInteractive.astro"
 
 const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number(import.meta.env.PAGE_ID), ['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
-
-// console.log(blocks)
 ---
 
 {
@@ -27,11 +27,15 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number
             case 'why-choose-us-column':
                 return <WhyChooseUsColumn {...block}/>
             case 'why-choose-us-grid':
-                return <WhyChooseUsGrid {...block} /> 
+                return <WhyChooseUsGrid {...block} />
+            case 'why-choose-us-interactive':
+                return <WhyChooseUsInteractive {...block} />
             case 'simple-call-to-action':
                 return <SimpleCallToAction {...block}/>
             case 'image-grid-cta':
                 return <ThreeImageCta {...block} {coreValues}/>
+            case 'two-image-cta':
+                return <VerticalImageCta {...block} {coreValues}/>
             case 'simple-testimonial':
                 return <SimpleTestimonial {...block} />
             case 'simple-contact':
@@ -41,84 +45,3 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number
         }
     })
 }
-<!-- ---
-import Partners from "./Partners/Partners.astro";
-import PartnersGrid from "./Partners/PartnersGrid/PartnersGrid.astro";
-import CtaSection from "./CtaSection/CtaSection.astro";
-import Section from "./Section/Section.astro";
-import ColorfulStats from "./Stats/ColorfulStats/ColorfulStats.astro";
-import StatsGrid from "./Stats/StatsGrid/StatsGrid.astro";
-import TestimonialDefault from "./Testimonial/TestimonialDefault.astro";
-import TestimonialWithStats from "./Testimonial/TestimonialWithStats/TestimonialWithStats.astro";
-import VerticalImageCta from "./CtaSection/VerticalImageCta/VerticalImageCta.astro";
-import ThreeImageCta from "./CtaSection/ThreeImageCta/ThreeImageCta.astro";
-import TwoColumnStats from "./Stats/TwoColumnStats/TwoColumnStats.astro";
-import SmallCta from "./CtaSection/SmallCta/SmallCta.astro";
-import TestimonialCarousel from "./Testimonial/TestimonialCarousel/TestimonialCarousel.astro";
-const { sections, core_values } = Astro.props;
----
-
-{
-    sections &&
-        sections.map((section: any) => {
-            switch (section.type) {
-                case "cta":
-                    return (
-                        <CtaSection data={section} core_values={core_values} />
-                    );
-                case "default testimonial":
-                    return <TestimonialDefault data={section} />;
-                case "stats grid":
-                    return (
-                        <StatsGrid
-                            data={section}
-                            cards={section.expand.section_grid}
-                            highlight={section.highlight}
-                        />
-                    );
-                case "colorful stats":
-                    return (
-                        <ColorfulStats
-                            data={section}
-                            cards={section.expand.section_grid}
-                        />
-                    );
-                case "two column stats":
-                    return (
-                        <TwoColumnStats
-                            data={section}
-                            cards={section.expand.section_grid}
-                        />
-                    );
-                case "testimonial with stats":
-                    return <TestimonialWithStats data={section} />;
-                case "partners":
-                    return (
-                        <Partners
-                            data={section}
-                            cards={section.expand.section_grid}
-                        />
-                    );
-                case "partners grid":
-                    return (
-                        <PartnersGrid
-                            data={section}
-                            cards={section.expand.section_grid}
-                        />
-                    );
-                case "vertical image cta":
-                    return (
-                        <VerticalImageCta
-                            data={section}
-                            core_values={core_values}
-                        />
-                    );
-                case "three image cta":
-                    return <ThreeImageCta data={section} />;
-                case "small cta":
-                    return <SmallCta data={section} />;
-                default:
-                    return <Section data={section} />;
-            }
-        })
-} -->

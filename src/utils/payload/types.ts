@@ -92,6 +92,20 @@ export type WhyChooseUsColumnBlock = {
   }>;
 };
 
+export type WhyChooseUsInteractiveBlock = {
+  id: string;
+  blockType: "why-choose-us-interactive";
+  title: string;
+  description: LexicalContent;
+  blockName: string | null;
+  options: Array<{
+    id: string;
+    title: string;
+    description?: LexicalContent;
+    image: Media;
+  }>;
+};
+
 export type ContentBlock = {
   id: string;
   blockType: "content-with-media";
@@ -147,6 +161,18 @@ export type ImageGridCallToActionBlock = {
   blockName: string | null;
 }
 
+export type TwoImageCallToActionBlock = {
+  id: string;
+  blockType: "two-image-cta";
+  title: string;
+  body: LexicalContent;
+  blockName: string | null;
+  images: Array<{
+    id: string;
+    image: Media;
+  }>;
+}
+
 // NEW: Testimonial block type
 export type SimpleTestimonialBlock = {
   id: string;
@@ -176,10 +202,12 @@ export type ContactBlock = {
 export type Block = 
   | HeroBlock 
   | WhyChooseUsColumnBlock 
+  | WhyChooseUsInteractiveBlock 
   | ContentBlock 
   | ContentWithGridBlock
   | SimpleCallToActionBlock
   | ImageGridCallToActionBlock
+  | TwoImageCallToActionBlock
   | SimpleTestimonialBlock
   | ContactBlock;
 

@@ -31,7 +31,9 @@ export async function fetchPage<T extends PageKey>(
 ): Promise<Pick<ParsedPage, T>> {
   try {
     const id = server ? pageId : import.meta.env.PAGE_ID;
-    const res = await fetch(`http://localhost:3000/api/page/${id}?depth=2&draft=false&locale=undefined`);
+    const url = server ? 'http://127.0.0.1:3000' : import.meta.env.DATABASE_URL;
+    
+    const res = await fetch(`http://127.0.0.1:3000/api/page/${id}?depth=2&draft=false&locale=undefined`);
     
     if (!res.ok) {
       throw new LandingPageError(

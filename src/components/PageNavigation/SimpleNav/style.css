@@ -134,13 +134,17 @@
 
 .simple-nav__link--cta--primary {
     background-color: var(--clr-primary);
-    color: oklch(from var(--clr-primary) calc(l - 0.5) c h);
-    /* margin-top: var(--size-1); */
+    color: oklch(from var(--clr-primary) calc(l + 0.9) c h);
 }
+
 .simple-nav__link--cta--secondary {
     border: 2px solid var(--clr-secondary);
-    color: oklch(from var(--clr-secondary) calc(l - 0.5) c h);
-    /* margin-top: var(--size-1); */
+    color: var(--clr-secondary);
+}
+
+.simple-nav__link--cta--secondary {
+    color: inherit;
+    border: 2px solid currentColor;
 }
 
 .simple-nav__toggle {

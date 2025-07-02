@@ -17,7 +17,7 @@ const { heading, excerpt, cover } = Astro.props;
                 <p>{excerpt}</p>
             </article>
 
-            <div class="two_column_hero__image_wrapper">
+            <div class="two_column_hero__image_wrapper" data-glow="true">
                 <CustomImage image={cover} classlist="two_column_hero__image" size="large" eager={true} />
             </div>
         </div>

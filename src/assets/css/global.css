@@ -1,3 +1,19 @@
+/* Enhanced reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --snappy-bounce-ease: linear;
+        --transition-hover: none;
+        --transition-colors: none;
+        --transition-transform: none;
+    }
+
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 @media (min-width: 768px) {
     :root {
         --heading-4xl: 96px;
@@ -152,9 +168,11 @@
 
     --clr-section-highlight: var(--clr-primary-light);
     --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l - 0.5) c h);
-    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h)
-        /* Base timing values */
-        --duration-slow: 400ms;
+    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h);
+    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h);
+
+    /* Base timing values */
+    --duration-slow: 400ms;
     --duration-medium: 1s;
     --duration-fast: 100ms;
 
@@ -267,18 +285,20 @@ h1 {
     font-size: var(--heading-xl);
 }
 
+/* Add CSS logical properties for better RTL support */
 .content-grid {
     --padding-inline: 1rem;
     --min-width: calc(100% - (var(--padding-inline) * 2));
     --max-width: 120ch;
     --breakout-max-width: 125ch;
     --breakout-size: calc((var(--breakout-max-width) - var(--max-width)) / 2);
+
     display: grid;
     grid-template-columns:
         [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(var(--min-width), var(--max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
 
-    max-width: calc(var(--max-width) * 1.5);
-    margin: 0 auto;
+    max-inline-size: calc(var(--max-width) * 1.5);
+    margin-inline: auto;
 }
 
 .content-grid> :not(.breakout, .full-width) {
@@ -352,15 +372,18 @@ svg {
     color: var(--clr-primary-dark);
 }
 
+/* Enhanced button transitions with better performance */
 button {
     background-color: var(--clr-primary);
     color: oklch(from var(--clr-primary) calc(l + .50) c h);
     border: none;
-    /* border-radius: var(--size-1); */
     padding: 0.5em 1em;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-colors),
+        color var(--transition-colors),
+        transform var(--transition-hover);
+    will-change: background-color, color, transform;
 }
 
 button:hover {
@@ -644,11 +667,24 @@ button:disabled,
     }
 }
 
+/* Enhanced color contrast utilities */
+.text-contrast-auto {
+    color: light-dark(var(--clr-neutral-900), var(--clr-neutral-50));
+}
+
+.bg-contrast-auto {
+    background-color: light-dark(var(--clr-neutral-50), var(--clr-neutral-900));
+    color: light-dark(var(--clr-neutral-900), var(--clr-neutral-50));
+}
+
+/* Improved alternating card layout with container queries */
 .alternating-card-grid {
+    container-type: inline-size;
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-start;
     gap: var(--size-4);
+    content-visibility: auto;
 }
 
 .alternating-card {
@@ -661,6 +697,10 @@ button:disabled,
     width: 100%;
 }
 
+.alternating-card {
+    contain: layout style paint;
+}
+
 .alternating-card ul {
     /* list-style: none; */
     padding: 0;
@@ -668,34 +708,10 @@ button:disabled,
 
 }
 
-/* .alternating-card:nth-child(even) {
-    color: var(--clr-neutral-900);
-}
-.alternating-card:nth-child(odd) {
-    color: var(--clr-neutral-900);
-    background-color: var(--clr-neutral-50);
-    border: 1px solid var(--clr-neutral-200);
-} */
-
 .alternating-card[data-has-background] {
     color: var(--clr-neutral-900);
     background-color: var(--clr-neutral-50);
 }
-
-/* [data-highlight="true"] .alternating-card:nth-child(even) {
-    background-color: var(--clr-secondary);
-}
-
-[data-highlight="true"] .alternating-card:nth-child(odd) {
-    background-color: var(--clr-tertiary);
-}
-[data-highlight="false"] .alternating-card:nth-child(even) {
-    background-color: var(--clr-secondary);
-}
-
-[data-highlight="false"] .alternating-card:nth-child(odd) {
-    background-color: var(--clr-tertiary);
-} */
 
 .alternating-card h3 {
     margin-bottom: var(--size-2);
@@ -742,7 +758,7 @@ button:disabled,
 
     .alternating-card:nth-child(even)>.alternating-card__image-wrapper {
         grid-column: 2 / -1;
-        margin-right: calc(var(--size-8) * -4.5);
+        margin-inline-end: calc(var(--size-8) * -4.5);
     }
 
     .alternating-card:nth-child(odd)>.alternating-card__image-wrapper {
@@ -750,7 +766,22 @@ button:disabled,
     }
 }
 
+/* Enhanced CSS Container Queries for better responsive design */
+@container (min-width: 768px) {
+    .alternating-card {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 400px;
+    }
+}
 
+/* Add CSS Grid subgrid support where available */
+@supports (grid-template-rows: subgrid) {
+    .alternating-card {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+    }
+}
 
 .text-primary {
     color: var(--clr-primary);
@@ -1396,4 +1427,67 @@ Text colors that contrast well with background colors.
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+@property --glow-deg {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: -90deg;
+}
+
+[data-glow="true"] {
+    --glow-surface: var(--clr-neutral-50, Canvas);
+    --glow-color: conic-gradient(from var(--glow-deg), var(--clr-primary-light), var(--clr-tertiary-light), var(--clr-secondary-light), var(--clr-primary-light));
+    --glow-size: 0.5rem;
+    --glow-intensity: 0.5;
+    --border-size: 3px;
+    position: relative;
+    isolation: isolate;
+
+    border-radius: var(--size-0);
+    border: var(--border-size) solid transparent;
+    background:
+        linear-gradient(var(--glow-surface, white) 0 0) padding-box,
+        var(--glow-color) border-box;
+
+    /* transform: skew(5deg, 5deg); */
+    overflow: visible;
+    animation: glow 10s infinite;
+}
+
+a[data-glow="true"],
+button[data-glow="true"] {
+    --glow-size: 0.15rem;
+    --glow-intensity: 0.15;
+    --border-size:2px;
+}
+
+[data-glow="true"]::before,
+[data-glow="true"]::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+}
+
+[data-glow="true"]::after {
+    background: var(--glow-color);
+    inset: -0.25rem;
+    /* these should match */
+    z-index: -2;
+    filter: blur(var(--glow-size, 0.5rem));
+    opacity: var(--glow-intensity, 0.5);
+}
+
+[data-glow="true"]::before {
+    background: var(--glow-surface, white);
+    inset: 0.25rem;
+    /* these should match */
+    z-index: -1;
+    filter: blur(var(--glow-size, 0.5rem));
+}
+
+@keyframes glow {
+    100% {
+        --glow-deg: 270deg;
+    }
 }
