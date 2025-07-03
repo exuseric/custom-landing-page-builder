@@ -2,7 +2,7 @@
 import { fetchPage } from "@utils/payload";
 import type { HeroBlock } from "@utils/payload/types";
 
-const {navigation, blocks, country, title} = await fetchPage(1, ["navigation", "blocks", "country", "title"])
+const {navigation, blocks, country, title} = await fetchPage(["navigation", "blocks", "country", "title"])
 const hero: HeroBlock = blocks.find(block => block.blockType === 'simple-hero') || {} as HeroBlock
 console.log(`Hero Type: ${hero.type}`);
 // import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";

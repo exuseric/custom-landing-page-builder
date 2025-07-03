@@ -1,6 +1,7 @@
 import type { ParsedPage } from "./types";
 import { parsePage } from "./handle-response";
 import type { PageKey } from "./page-keys";
+import {PAGE_ID, DATABASE_URL} from "astro:env/server";
 
 export class LandingPageError extends Error {
   constructor(message: string, public status?: number) {
@@ -25,15 +26,10 @@ export class LandingPageError extends Error {
  * ```
  */
 export async function fetchPage<T extends PageKey>(
-  pageId: number | string,
   keys: T[],
-  server?: boolean
 ): Promise<Pick<ParsedPage, T>> {
   try {
-    const id = server ? pageId : import.meta.env.PAGE_ID;
-    const url = server ? 'http://127.0.0.1:3000' : import.meta.env.DATABASE_URL;
-    
-    const res = await fetch(`http://127.0.0.1:3000/api/page/${id}?depth=2&draft=false&locale=undefined`);
+    const res = await fetch(`${DATABASE_URL}/api/page/${PAGE_ID}?depth=2&draft=false&locale=undefined`);
     
     if (!res.ok) {
       throw new LandingPageError(
@@ -44,7 +40,8 @@ export async function fetchPage<T extends PageKey>(
     
     const json = await res.json();
     const parsed = parsePage(json);
-
+    console.log(parsed);
+    
     // Build result object with only requested keys
     const result = {} as Pick<ParsedPage, T>;
     for (const key of keys) {

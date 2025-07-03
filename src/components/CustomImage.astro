@@ -1,7 +1,7 @@
 ---
 // import {Image} from '@unpic/astro'
 import { Image } from "astro:assets";
-
+import {DATABASE_URL} from "astro:env/server";
 import type { Media } from "@utils/payload/types";
 interface Props {
   image: Media;
@@ -10,11 +10,12 @@ interface Props {
   size: string;
   id?: string;
 }
+
 const { image, classlist, size, eager, id } = Astro.props;
 ---
 <Image
     id={id}
-    src={`${import.meta.env.DATABASE_URL}${image.url}`}
+    src={`${DATABASE_URL}${image.url}`}
     alt={image.alt as string}
     title={image.alt}
     width={image.width}

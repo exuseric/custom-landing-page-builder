@@ -12,7 +12,7 @@ import WhyChooseUsGrid from "@components/Sections/Stats/WhyChooseUsGrid/WhyChoos
 import VerticalImageCta from "@components/Sections/CtaSection/VerticalImageCta/VerticalImageCta.astro"
 import WhyChooseUsInteractive from "@components/Sections/Stats/WhyChooseUsInteractive/WhyChooseUsInteractive.astro"
 
-const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(Number(import.meta.env.PAGE_ID), ['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
+const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
 ---
 
 {
