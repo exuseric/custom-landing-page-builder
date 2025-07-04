@@ -1,6 +1,7 @@
 .floating_footer {
     color: var(--clr-neutral-50);
-    padding: var(--size-4) 0;
+    /* padding: var(--size-4) 0; */
+    padding-top: 0;
     background-color: var(--clr-neutral-50);
 }
 .floating_footer__content {
@@ -11,7 +12,7 @@
     gap: var(--size-4);
     
     padding: var(--size-4) var(--size-6);
-    background-color: var(--clr-primary-darker);
+    background-color: var(--clr-primary);
 }
 
 .floating_footer__logo-image {
@@ -30,9 +31,6 @@
     
 }
 @media (min-width: 768px) {
-    .floating_footer {
-        padding: var(--size-4) 0;
-    }
     .floating_footer__content {
         padding: var(--size-4) var(--size-8);
     }
