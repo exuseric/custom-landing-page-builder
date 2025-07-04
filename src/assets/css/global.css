@@ -119,34 +119,51 @@
     --clr-primary: var(--themeColor);
     --clr-primary-text: oklch(from var(--clr-primary) calc(l + .99) c h);
 
-    --clr-primary-lighter: oklch(from var(--clr-primary) 95% c h);
+    --clr-primary-lighter: oklch(from var(--clr-primary) calc(l + .95) c h);
     --clr-primary-lighter-text: oklch(from var(--clr-primary-lighter) calc(l - .60) c h);
 
-    --clr-primary-light: oklch(from var(--clr-primary) 85% c h);
+    --clr-primary-light: oklch(from var(--clr-primary) calc(l +.90) c h);
     --clr-primary-light-text: oklch(from var(--clr-primary-light) calc(l - .60) c h);
 
-    --clr-primary-dark: oklch(from var(--clr-primary) 45% c h);
+    --clr-primary-dark: oklch(from var(--clr-primary) calc(l - .30) c h);
     --clr-primary-dark-text: oklch(from var(--clr-primary-dark) calc(l + .60) c h);
 
-    --clr-primary-darker: oklch(from var(--clr-primary) 35% c h);
-    /* --clr-primary-darker-text: oklch(from var(--clr-primary-darker) calc(l + .60) c h); */
+    --clr-primary-darker: oklch(from var(--clr-primary) calc(l - .50) c h);
+    --clr-primary-darker-text: oklch(from var(--clr-primary-darker) calc(l + .80) c h);
 
-
-    /* Secondary Color - Complementary Contrast (Olive Green) */
+    /* Secondary Color - Complementary Contrast */
     --clr-secondary-hsl: 60 50% 40%;
     --clr-secondary: oklch(from var(--themeColor) l c calc(h - 180));
-    --clr-secondary-lighter: oklch(from var(--clr-secondary) 75% c h);
-    --clr-secondary-light: oklch(from var(--clr-secondary) 65% c h);
-    --clr-secondary-dark: oklch(from var(--clr-secondary) 45% c h);
-    --clr-secondary-darker: oklch(from var(--clr-secondary) 35% c h);
+    --clr-secondary-text: oklch(from var(--clr-secondary) calc(l + .99) c h);
 
-    /* Tertiary Color - Analogous Harmony (Dark Orange) */
+    --clr-secondary-lighter: oklch(from var(--clr-secondary) calc(l + .95) c h);
+    --clr-secondary-lighter-text: oklch(from var(--clr-secondary-lighter) calc(l - .60) c h);
+
+    --clr-secondary-light: oklch(from var(--clr-secondary) calc(l + .90) c h);
+    --clr-secondary-light-text: oklch(from var(--clr-secondary-light) calc(l - .60) c h);
+
+    --clr-secondary-dark: oklch(from var(--clr-secondary) calc(l - .30) c h);
+    --clr-secondary-dark-text: oklch(from var(--clr-secondary-dark) calc(l + .60) c h);
+
+    --clr-secondary-darker: oklch(from var(--clr-secondary) calc(l - .50) c h);
+    --clr-secondary-darker-text: oklch(from var(--clr-secondary-darker) calc(l + .80) c h);
+
+    /* Tertiary Color - Analogous Harmony */
     --clr-tertiary-hsl: 30 90% 45%;
     --clr-tertiary: oklch(from var(--themeColor) l c calc(h + 110));
-    --clr-tertiary-lighter: oklch(from var(--clr-tertiary) 75% c h);
-    --clr-tertiary-light: oklch(from var(--clr-tertiary) 65% c h);
-    --clr-tertiary-dark: oklch(from var(--clr-tertiary) 45% c h);
-    --clr-tertiary-darker: oklch(from var(--clr-tertiary) 35% c h);
+    --clr-tertiary-text: oklch(from var(--clr-tertiary) calc(l + .99) c h);
+
+    --clr-tertiary-lighter: oklch(from var(--clr-tertiary) calc(l + .95) c h);
+    --clr-tertiary-lighter-text: oklch(from var(--clr-tertiary-lighter) calc(l - .60) c h);
+
+    --clr-tertiary-light: oklch(from var(--clr-tertiary) calc(l + .90) c h);
+    --clr-tertiary-light-text: oklch(from var(--clr-tertiary-light) calc(l - .60) c h);
+
+    --clr-tertiary-dark: oklch(from var(--clr-tertiary) calc(l - .30) c h);
+    --clr-tertiary-dark-text: oklch(from var(--clr-tertiary-dark) calc(l + .60) c h);
+
+    --clr-tertiary-darker: oklch(from var(--clr-tertiary) calc(l - .50) c h);
+    --clr-tertiary-darker-text: oklch(from var(--clr-tertiary-darker) calc(l + .80) c h);
 
     /* Neutral Colors - Warm Tints */
     --clr-neutral-light: hsl(0, 20%, 98%);
@@ -166,10 +183,9 @@
     --clr-neutral-800: hsl(0, 5%, 25%);
     --clr-neutral-900: hsl(0, 5%, 5%);
 
-    --clr-section-highlight: var(--clr-primary-light);
-    --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l - 0.5) c h);
-    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h);
-    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h);
+    --clr-section-highlight: var(--clr-primary);
+    --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l + 0.5) c h);
+    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l + 0.9) c h);
 
     /* Base timing values */
     --duration-slow: 400ms;
@@ -369,7 +385,7 @@ svg {
 
 [data-highlight="false"] h2,
 [data-highlight="false"] .page-section__header h2 {
-    color: var(--clr-primary-dark);
+    color: var(--clr-primary);
 }
 
 /* Enhanced button transitions with better performance */
@@ -435,6 +451,10 @@ a:not([class]):active {
 [data-highlight="true"] a:not([class]):visited,
 [data-highlight="true"] a:not([class]):active {
     color: var(--clr-tertiary-lighter);
+}
+
+[data-highlight="true"] a:not([class]):hover {
+    color: var(--clr-secondary-lighter);
 }
 
 button:not([class]),
@@ -1459,7 +1479,7 @@ a[data-glow="true"],
 button[data-glow="true"] {
     --glow-size: 0.15rem;
     --glow-intensity: 0.15;
-    --border-size:2px;
+    --border-size: 2px;
 }
 
 [data-glow="true"]::before,

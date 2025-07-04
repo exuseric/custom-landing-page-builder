@@ -1,0 +1,82 @@
+---
+import "./contact.css";
+import Container from "@components/Container.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+import IconLink from "@components/IconLink.astro";
+import SocialLinkComponent from "@components/SocialLink.astro";
+
+const props = Astro.props;
+---
+
+<div class="page-section" id="contact">
+    <Container>
+        <div class="overflow-contact__map" data-glow="true">
+            <slot set:html={props.location.iframe} />
+        </div>
+    </Container>
+
+    <div class="overlap-contact__content full-width" data-highlight="true">
+        <Container>
+            <div class="overlap-contact__top-row">
+                <div>
+                    <h3>Location</h3>
+                    <address>
+                        <slot
+                            set:html={extractLexicalText(
+                                props.location.address,
+                            )}
+                        />
+                    </address>
+                </div>
+                <div>
+                    <slot set:html={props.operatingHours} />
+                </div>
+            </div>
+
+            <div class="overlap-contact__bottom-row">
+                <div>
+                    <h3>Phone Numbers</h3>
+                    <address>
+                        {
+                            props.contact.phone.map((phone: any) => (
+                                <IconLink
+                                    href={phone.number}
+                                    type={phone.type}
+                                    text={phone.number}
+                                />
+                            ))
+                        }
+                    </address>
+                </div>
+                <div>
+                    <h3>Email Address</h3>
+                    <address class="two_column_contact__email">
+                        {
+                            props.contact.email.map((email: any) => (
+                                <IconLink
+                                    href={email.email}
+                                    type="email"
+                                    text={email.email}
+                                />
+                            ))
+                        }
+                    </address>
+                </div>
+                {
+                    props.socialLinks.length > 0 && (
+                        <div>
+                            <h3>Social Links</h3>
+                            {props.socialLinks.map((social: any) => (
+                                <SocialLinkComponent
+                                    href={social.url}
+                                    type={social.platform}
+                                    text={social.title}
+                                />
+                            ))}
+                        </div>
+                    )
+                }
+            </div>
+        </Container>
+    </div>
+</div>

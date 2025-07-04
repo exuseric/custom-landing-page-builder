@@ -1,7 +1,4 @@
 ---
-import type { ContactBlock } from "@utils/payload/types";
-interface Props extends ContactBlock {}
-
 import "./contact.css";
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
@@ -24,7 +21,7 @@ const props = Astro.props;
                 </adrress>
                 <div class="two_column_contact__phone">
                     {
-                        props.contact.phone.map((phone) => (
+                        props.contact.phone.map((phone: any) => (
                             <IconLink
                                 href={phone.number}
                                 type={phone.type}
@@ -36,7 +33,7 @@ const props = Astro.props;
 
                 <div class="two_column_contact__email">
                     {
-                        props.contact.email.map((email) => (
+                        props.contact.email.map((email: any) => (
                             <IconLink
                                 href={email.email}
                                 type="email"
@@ -45,7 +42,6 @@ const props = Astro.props;
                         ))
                     }
                 </div>
-                <!-- <InfoCard cards={info} direction="column" /> -->
             </div>
 
             <div class="two_column_contact__location">
