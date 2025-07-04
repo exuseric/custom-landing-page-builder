@@ -9,4 +9,4 @@ const props = Astro.props
 {props.direction === "horizontal" && <TwoColumnContact {...props} />}
 {props.direction === "vertical" && <DefaultContact {...props} />}
 {props.style === "multi location" && <MultiLocation {...props} />}
-{props.style === "overlap" && <OverlapContact {...props} />}
+{props.direction === "overlap" && <OverlapContact {...props} />}

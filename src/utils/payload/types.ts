@@ -227,7 +227,7 @@ export type ContactBlock = {
   id: string;
   blockType: "simple-contact";
   title: string;
-  direction: "vertical" | "horizontal";
+  direction: "vertical" | "horizontal" | "overlap";
   blockName: string | null;
   contact: ContactInfo;
   location: LocationInfo;

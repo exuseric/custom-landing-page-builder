@@ -8,7 +8,7 @@ import SocialLinkComponent from "@components/SocialLink.astro";
 const props = Astro.props;
 ---
 
-<div class="page-section" id="contact">
+<div class="page-section" id="contact" style="padding-bottom: 0;">
     <Container>
         <div class="overflow-contact__map" data-glow="true">
             <slot set:html={props.location.iframe} />
