@@ -1,18 +1,42 @@
-export type Media = {
-  id?: number;
-  url: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-  filename?: string;
-  mimeType?: string;
-  filesize?: number;
-  focalX?: number;
-  focalY?: number;
+export interface FolderInterface {
+  id: number;
+  name: string;
+  folder?: (number | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+        relationTo?: 'payload-folders';
+        value: number | FolderInterface;
+      }
+      | {
+        relationTo?: 'media';
+        value: number | Media;
+      }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Media {
+  id: number;
+  alt: string;
+  aspect?: ('landscape' | 'portrait' | 'square') | null;
+  prefix?: string | null;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
   thumbnailURL?: string | null;
-  updatedAt?: string;
-  createdAt?: string;
-};
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
 
 export type LexicalNode = {
   detail: number;
@@ -64,15 +88,26 @@ export type LocationInfo = {
   iframe: string;
 };
 
-// Block type definitions based on actual API response
+// Block type definitions
 export type HeroBlock = {
-  id: string;
-  blockType: "simple-hero";
   heading: string;
   excerpt: string;
-  cover: Media;
-  type: string;
-  blockName: string | null;
+  cover: number | Media;
+  type?:
+  | (
+    | 'default'
+    | 'horizontal'
+    | 'vertical'
+    | 'stylised horizontal'
+    | 'alternate vertical'
+    | 'fullscreen'
+    | 'alternate fullscreen'
+    | 'split'
+  )
+  | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'simple-hero';
 };
 
 export type WhyChooseUsColumnBlock = {
@@ -81,7 +116,7 @@ export type WhyChooseUsColumnBlock = {
   title: string;
   description: LexicalContent;
   image: Media;
-  highlight?:boolean;
+  highlight?: boolean;
   blockName: string | null;
   options: Array<{
     id: string;
@@ -106,16 +141,16 @@ export type WhyChooseUsInteractiveBlock = {
   }>;
 };
 
-export type ContentBlock = {
+export type ContentWithMediaBlock = {
   id: string;
   blockType: "content-with-media";
   title: string;
-  "anchor id": string;
-  body: LexicalContent;
+  'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
   image: Media;
-  "text position": "left" | "right";
+  position?: ('left' | 'right' | 'bottom' | 'top') | null;
   highlight: boolean;
   blockName: string | null;
+  body: LexicalContent;
 };
 
 // NEW: Content with Grid block type
@@ -123,10 +158,10 @@ export type ContentWithGridBlock = {
   id: string;
   blockType: "content-with-grid";
   title: string;
-  "anchor id": string;
+  'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
   body: LexicalContent;
   highlight: boolean;
-  "card type": "basic" | string; // Add other card types as needed
+  'card type'?: ('basic' | 'alternating' | 'alternating basic') | null;
   blockName: string | null;
   "card grid": Array<{
     id: string;
@@ -137,10 +172,10 @@ export type ContentWithGridBlock = {
 };
 
 export type BasicCard = {
-    id: string;
-    image: Media;
-    title: string;
-    body: LexicalContent;
+  id: string;
+  image: Media;
+  title: string;
+  body: LexicalContent;
 }
 
 export type SimpleCallToActionBlock = {
@@ -155,10 +190,10 @@ export type SimpleCallToActionBlock = {
 export type ImageGridCallToActionBlock = {
   id: string;
   title: string;
-  body: LexicalContent;
   images: Media[];
   blockType: "image-grid-cta";
   blockName: string | null;
+  body: LexicalContent;
 }
 
 export type TwoImageCallToActionBlock = {
@@ -180,7 +215,7 @@ export type SimpleTestimonialBlock = {
   title: string;
   description: LexicalContent;
   blockName: string | null;
-  highlight?:boolean;
+  highlight?: boolean;
   testimonies: Array<{
     id: string;
     testimony: LexicalContent;
@@ -199,11 +234,11 @@ export type ContactBlock = {
 };
 
 // Union type for all blocks - UPDATE THIS when adding new block types
-export type Block = 
-  | HeroBlock 
-  | WhyChooseUsColumnBlock 
-  | WhyChooseUsInteractiveBlock 
-  | ContentBlock 
+export type Block =
+  | HeroBlock
+  | WhyChooseUsColumnBlock
+  | WhyChooseUsInteractiveBlock
+  | ContentWithMediaBlock
   | ContentWithGridBlock
   | SimpleCallToActionBlock
   | ImageGridCallToActionBlock
