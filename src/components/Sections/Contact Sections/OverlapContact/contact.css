@@ -5,7 +5,7 @@
 
     margin-bottom: -5.5rem;
 
-    border-radius: var(--size-2);
+    /* border-radius: var(--size-2); */
 
     background: var(--clr-primary) border-box;
     overflow: hidden;
@@ -49,7 +49,7 @@
 
         margin-bottom: -8rem;
 
-        border-radius: var(--size-3);
+        /* border-radius: var(--size-3); */
 
         background: linear-gradient(white 0 0) padding-box, var(--clr-primary) border-box;
         overflow: hidden;
