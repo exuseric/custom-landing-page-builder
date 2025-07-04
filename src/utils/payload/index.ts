@@ -1,7 +1,7 @@
 import type { ParsedPage } from "./types";
 import { parsePage } from "./handle-response";
 import type { PageKey } from "./page-keys";
-import {PAGE_ID, DATABASE_URL} from "astro:env/server";
+// import { PAGE_ID, DATABASE_URL } from "astro:env/server";
 
 export class LandingPageError extends Error {
   constructor(message: string, public status?: number) {
@@ -13,14 +13,12 @@ export class LandingPageError extends Error {
 /**
  * Fetches and parses a landing page from the API, returning only the specified keys.
  * 
- * @param pageId - The Id to fetch the page data for
  * @param keys - Array of page keys to include in the response
  * @returns Promise resolving to an object containing only the requested page properties
  * 
  * @example
  * ```typescript
  * const pageData = await fetchPage(
- *   1,
  *   ['title', 'seo', 'blocks', 'navigation']
  * );
  * ```
@@ -29,25 +27,26 @@ export async function fetchPage<T extends PageKey>(
   keys: T[],
 ): Promise<Pick<ParsedPage, T>> {
   try {
+    const DATABASE_URL = "https://landing-cms-payload.onrender.com"
+    const PAGE_ID = 1
     const res = await fetch(`${DATABASE_URL}/api/page/${PAGE_ID}?depth=2&draft=false&locale=undefined`);
-    
+
     if (!res.ok) {
       throw new LandingPageError(
         `Failed to fetch landing page: ${res.status} ${res.statusText}`,
         res.status
       );
     }
-    
+
     const json = await res.json();
     const parsed = parsePage(json);
-    console.log(parsed);
-    
+
     // Build result object with only requested keys
     const result = {} as Pick<ParsedPage, T>;
     for (const key of keys) {
       result[key] = parsed[key];
     }
-    
+
     return result;
   } catch (error) {
     if (error instanceof LandingPageError) {
@@ -61,7 +60,6 @@ export async function fetchPage<T extends PageKey>(
 /*
 // Fetch specific page data
 const pageData = await fetchPage(
-  1,
   ['title', 'seo', 'blocks', 'navigation']
 );
 
