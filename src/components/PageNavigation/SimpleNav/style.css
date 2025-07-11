@@ -123,7 +123,6 @@
     text-decoration: none;
     text-transform: capitalize;
     font-weight: var(--heading-large-weight);
-    border-radius: var(--size-1);
     transition: color var(--transition-enter-fast);
 }
 

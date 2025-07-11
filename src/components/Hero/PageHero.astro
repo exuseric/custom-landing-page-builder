@@ -7,6 +7,7 @@ import Overflow from "./Overflow/Overflow.astro";
 import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
 import AlternateVertical from "./AlternateVertical/AlternateVertical.astro";
 import AlternateHorizontal from "./AlternateHorizontal/AlternateHorizontal.astro";
+import BubbleImages from "./BubbleImages/BubbleImages.astro";
 
 const props = Astro.props
 ---
@@ -15,7 +16,7 @@ const props = Astro.props
 {props.type === "vertical" && <VerticalWithImage {...props} />}
 {props.type === "alternate vertical" && <AlternateVertical {...props} />}
 {props.type === "horizontal" && <AlternateHorizontal {...props} />}
-
+<!-- <BubbleImages {...props} /> -->
 <!-- ---
 import type { HeroProps } from "@utils/types";
 import BlackModern from "./BlackModern/BlackModern.astro";

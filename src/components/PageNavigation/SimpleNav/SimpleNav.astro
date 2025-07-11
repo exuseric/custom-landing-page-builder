@@ -67,9 +67,9 @@ const pageLinks = menuItems.map((link: Link) =>
                                 href={link.anchorId}
                                 class={
                                     link.style.toLocaleLowerCase() === "primary"
-                                        ? "simple-nav__link simple-nav__link--cta--primary"
+                                        ? "simple-nav__link btn btn-md btn-primary"
                                         : link.style.toLocaleLowerCase() === "secondary" ?
-                                        "simple-nav__link simple-nav__link--cta--secondary"
+                                        "simple-nav__link btn btn-md btn-secondary"
                                         :"simple-nav__link"
                                 }
                                 role="menuitem"

@@ -12,7 +12,6 @@
     gap: var(--size-4);
     
     padding: var(--size-4) var(--size-6);
-    background-color: var(--clr-primary);
 }
 
 .floating_footer__logo-image {
