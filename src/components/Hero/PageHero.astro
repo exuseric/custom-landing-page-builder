@@ -2,20 +2,25 @@
 import type { HeroBlock } from "@utils/payload/types"
 interface Props extends HeroBlock {}
 
-import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
-import Overflow from "./Overflow/Overflow.astro";
-import VerticalWithImage from "./VerticalWithImage/VerticalWithImage.astro";
-import AlternateVertical from "./AlternateVertical/AlternateVertical.astro";
-import AlternateHorizontal from "./AlternateHorizontal/AlternateHorizontal.astro";
+import HorizontalHero from "./HorizontalHero/HorizontalHero.astro";
+import DefaultHero from "./DefaultHero/DefaultHero.astro";
+import VerticalHero from "./VerticalHero/VerticalHero.astro";
+import AlternateVerticalHero from "./AlternateVerticalHero/AlternateVerticalHero.astro";
+import StylisedHorizontalHero from "./StylisedHorizontalHero/StylisedHorizontalHero.astro";
 import BubbleImages from "./BubbleImages/BubbleImages.astro";
+import WavyHero from "./WavyHero/WavyHero.astro";
+import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
 
 const props = Astro.props
 ---
-{props.type === "stylised horizontal" && <StylisedHorizontal {...props} />}
-{props.type === "default" && <Overflow {...props} />}
-{props.type === "vertical" && <VerticalWithImage {...props} />}
-{props.type === "alternate vertical" && <AlternateVertical {...props} />}
-{props.type === "horizontal" && <AlternateHorizontal {...props} />}
+{props.type === "default" && <DefaultHero {...props} />}
+{props.type === "horizontal" && <HorizontalHero {...props} />}
+{props.type === "vertical" && <VerticalHero {...props} />}
+{props.type === "stylised horizontal" && <StylisedHorizontalHero {...props} />}
+{props.type === "alternate vertical" && <AlternateVerticalHero {...props} />}
+{props.type === "bubble" && <BubbleImages {...props} />}
+{props.type === "split" && <SplitHero {...props} />}
+
 <!-- <BubbleImages {...props} /> -->
 <!-- ---
 import type { HeroProps } from "@utils/types";

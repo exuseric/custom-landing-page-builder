@@ -1,12 +1,13 @@
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
-import { AstroPurgeCssPlugin } from 'astro-purgecss-static';
+// import { AstroPurgeCssPlugin } from 'astro-purgecss-static';
 import favicons from "astro-favicons";
 
 // import { imageService } from "@unpic/astro/service";
 import { fetchPage } from './src/utils/payload';
-const { url, title } = await fetchPage(['url', 'title']);
+import purgecss from 'astro-purgecss';
+const { url, title, themeColor } = await fetchPage(['url', 'title', 'themeColor']);
 // https://astro.build/config
 export default defineConfig({
   output: "static",
@@ -15,13 +16,13 @@ export default defineConfig({
   env: {
     schema: {
       PAGE_ID: envField.string({
-        context: 'server', 
-        description: 'The ID of the page to fetch from Payload CMS', 
+        context: 'server',
+        description: 'The ID of the page to fetch from Payload CMS',
         default: '1',
         access: 'secret'
       }),
       DATABASE_URL: envField.string({
-        context: 'server', 
+        context: 'server',
         description: 'The URL of the Payload CMS instance',
         access: 'secret'
       }),
@@ -45,13 +46,30 @@ export default defineConfig({
 
   },
   compressHTML: false,
-  integrations: [sitemap(), icon(),favicons({
+  integrations: [sitemap(), icon(), favicons({
     input: {
       favicons: [
         "public/yellow-pages-logo.webp"
       ]
     },
+    icons: {
+      yandex: false,
+      windows: false,
+      appleStartup: false,
+      android: true,
+      favicons: true
+    },
+    themes: [themeColor],
+    output: {
+      assetsPrefix: "/favicon/",
+      html: true,
+      images: true
+    },
     name: title,
     short_name: title,
-  }),AstroPurgeCssPlugin()]
+  }), purgecss({
+    variables: false,
+    keyframes: true,
+    fontFace: true
+  })]
 });

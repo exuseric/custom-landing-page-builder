@@ -103,6 +103,7 @@ export type HeroBlock = {
     | 'fullscreen'
     | 'alternate fullscreen'
     | 'split'
+    | 'bubble'
   )
   | null;
   id?: string | null;

@@ -12,7 +12,6 @@ const { seo, title, url, country } = await fetchPage([
     "url",
     "country",
 ]);
-
 ---
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,7 +46,7 @@ const { seo, title, url, country } = await fetchPage([
     href="/favicon/apple-touch-icon.jpg"
 />
 <link rel="icon" href="/favicon/favicon.ico" />
-<link rel="manifest" href="/favicon/manifest.json" />
+<link rel="manifest" href="/favicon/manifest.webmanifest.json" />
 
 <SEO
     title={seo.metaTitle}
