@@ -315,6 +315,7 @@ h1 {
 
     max-inline-size: calc(var(--max-width) * 1.5);
     margin-inline: auto;
+    width: 100%;
 }
 
 .content-grid> :not(.breakout, .full-width) {

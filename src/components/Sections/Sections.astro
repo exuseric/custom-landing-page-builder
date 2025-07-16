@@ -11,6 +11,7 @@ import ThreeImageCta from "@components/Sections/CtaSection/ThreeImageCta/ThreeIm
 import WhyChooseUsGrid from "@components/Sections/Stats/WhyChooseUsGrid/WhyChooseUsGrid.astro"
 import VerticalImageCta from "@components/Sections/CtaSection/VerticalImageCta/VerticalImageCta.astro"
 import WhyChooseUsInteractive from "@components/Sections/Stats/WhyChooseUsInteractive/WhyChooseUsInteractive.astro"
+import SymbioticAbout from "@components/Sections/SymbioticAbout/SymbioticAbout.astro"
 
 const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
 ---
@@ -24,6 +25,8 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['bloc
                 return <ContentWithMedia {...block}/>
             case 'content-with-grid':
                 return <ContentWithGrid {...block} />
+            case 'symbiotic-about':
+                return <SymbioticAbout {...block} />
             case 'why-choose-us-column':
                 return <WhyChooseUsColumn {...block}/>
             case 'why-choose-us-grid':

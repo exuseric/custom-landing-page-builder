@@ -233,6 +233,21 @@ export type ContactBlock = {
   location: LocationInfo;
 };
 
+export type SymbioticAboutBlock = {
+  title: string;
+  /**
+   * The ID of the section this menu item links to (without the # symbol)
+   */
+  'anchor id' ?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
+  excerpt:LexicalContent;
+  body: LexicalContent;
+  image: Media;
+  highlight ?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'symbiotic-about';
+}
+
 // Union type for all blocks - UPDATE THIS when adding new block types
 export type Block =
   | HeroBlock
@@ -244,6 +259,7 @@ export type Block =
   | ImageGridCallToActionBlock
   | TwoImageCallToActionBlock
   | SimpleTestimonialBlock
+  | SymbioticAboutBlock
   | ContactBlock;
 
 /*
@@ -252,8 +268,8 @@ export type Block =
  * When the CMS adds new block types, follow these steps:
  * 
  * 1. Create a new type definition following the pattern above:
- *    - Use the exact blockType string from the API
- *    - Include all properties from the API response
+ *    - Run pnpm generate:types in the payload codebase
+ *    - Copy the type(s) for the new block(s)
  *    - Use LexicalContent for rich text fields
  *    - Use Media for image/file fields
  * 

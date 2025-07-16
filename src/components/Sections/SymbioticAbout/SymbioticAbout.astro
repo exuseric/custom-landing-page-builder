@@ -1,0 +1,46 @@
+---
+import type { SymbioticAboutBlock } from "@utils/payload/types";
+interface Props extends SymbioticAboutBlock {}
+import Container from "@components/Container.astro";
+import "./style.css";
+import CustomImage from "@components/CustomImage.astro";
+import { extractLexicalText } from "@utils/payload/helpers";
+const props = Astro.props;
+console.log(props);
+---
+
+<div
+    class="symbiotic-about page-section"
+    data-highlight={props.highlight}
+    id={props["anchor id"]?.split(" ").join("-")}
+    data-offscreen
+>
+    <Container>
+        <div class="symbiotic-about__top-section">
+            <CustomImage
+                classlist="symbiotic-about__image"
+                eager={false}
+                size="large"
+                image={props.image}
+            />
+            <Container>
+                <h2 class="symbiotic-about__title">
+                    {props.title}
+                </h2>
+                <div class="symbiotic-about__excerpt">
+                    <slot set:html={extractLexicalText(props.excerpt)} />
+                </div>
+            </Container>
+        </div>
+    </Container>
+
+    <Container>
+        <div class="symbiotic-about__bottom-section">
+            <div class="symbiotic-about__content">
+                <article>
+                    <slot set:html={extractLexicalText(props.body)} />
+                </article>
+            </div>
+        </div>
+    </Container>
+</div>
