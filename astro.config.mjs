@@ -1,9 +1,12 @@
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
+import { AstroPurgeCssPlugin } from 'astro-purgecss-static';
+import favicons from "astro-favicons";
+
 // import { imageService } from "@unpic/astro/service";
 import { fetchPage } from './src/utils/payload';
-const { url } = await fetchPage(['url']);
+const { url, title } = await fetchPage(['url', 'title']);
 // https://astro.build/config
 export default defineConfig({
   output: "static",
@@ -24,21 +27,31 @@ export default defineConfig({
       }),
     }
   },
-  experimental: {
-    responsiveImages: true
-  },
+  // experimental: {
+  //   responsiveImages: true
+  // },
   build: {
     assets: 'assets',
     inlineStylesheets: 'never',
   },
   image: {
     domains: ["127.0.0.1", "landing-cms-payload.onrender.com"],
-    experimentalLayout: 'responsive',
+    responsiveStyles: true,
+    layout: 'constrained'
+    // experimentalLayout: 'responsive',
     // service: imageService({
     //   placeholder: "blurhash",
     // }),
 
   },
   compressHTML: false,
-  integrations: [sitemap(), icon()]
+  integrations: [sitemap(), icon(),favicons({
+    input: {
+      favicons: [
+        "public/yellow-pages-logo.webp"
+      ]
+    },
+    name: title,
+    short_name: title,
+  }),AstroPurgeCssPlugin()]
 });
