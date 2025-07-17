@@ -1,7 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import "./cta.css"
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 
 import CustomImage from "@components/CustomImage.astro";
 import Cards from "@components/Cards/Cards.astro";
@@ -34,7 +34,7 @@ const { data } = Astro.props;
                     {data.expand.section_grid && (
                         <Cards card_type={data.grid_type} cards={data.expand.section_grid} data={data} />
                     )}
-                    <a href="#contact-us" class="cta__link btn btn-md btn-primary">Get in Touch</a>
+                    <a href="#contact-us" class="cta__link btn  btn--primary">Get in Touch</a>
                 </div>
             </div>
 

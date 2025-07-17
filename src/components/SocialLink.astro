@@ -4,7 +4,7 @@ interface Props {
     text?: string;
     href: string;
 }
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 const props = Astro.props;
 
 const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {

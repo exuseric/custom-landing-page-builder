@@ -92,7 +92,7 @@ export type LocationInfo = {
 export type HeroBlock = {
   heading: string;
   excerpt: string;
-  cover: number | Media;
+  cover: Media;
   type?:
   | (
     | 'default'

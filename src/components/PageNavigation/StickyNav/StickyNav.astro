@@ -1,6 +1,6 @@
 ---
 import Container from "@components/Container.astro";
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 import "./nav.css";
 import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from '@utils/translations';
@@ -63,7 +63,7 @@ const pageLinks = links.map((link) =>
                                 href={link.href}
                                 class={
                                     index === pageLinks?.length - 1
-                                        ? "sticky-nav__link btn-primary"
+                                        ? "sticky-nav__link btn--primary"
                                         : "sticky-nav__link"
                                 }
                             >
@@ -78,7 +78,7 @@ const pageLinks = links.map((link) =>
                 <button
                     type="button"
                     id="sticky_nav__toggle"
-                    class="sticky_nav__toggle btn btn-primary btn--icon"
+                    class="sticky_nav__toggle btn btn--primary btn---icon"
                     data-menu-toggle
                     data-is-active="false"
                     aria-label="toggle page menu"

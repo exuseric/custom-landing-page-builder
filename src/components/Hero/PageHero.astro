@@ -8,6 +8,7 @@ import VerticalHero from "./VerticalHero/VerticalHero.astro";
 import AlternateVerticalHero from "./AlternateVerticalHero/AlternateVerticalHero.astro";
 import StylisedHorizontalHero from "./StylisedHorizontalHero/StylisedHorizontalHero.astro";
 import BubbleImages from "./BubbleImages/BubbleImages.astro";
+import SplitHero from "./SplitHero/SplitHero.astro";
 import WavyHero from "./WavyHero/WavyHero.astro";
 import StylisedHorizontal from "./StylisedHorizontal/StylisedHorizontal.astro";
 
@@ -20,8 +21,6 @@ const props = Astro.props
 {props.type === "alternate vertical" && <AlternateVerticalHero {...props} />}
 {props.type === "bubble" && <BubbleImages {...props} />}
 {props.type === "split" && <SplitHero {...props} />}
-
-<!-- <BubbleImages {...props} /> -->
 <!-- ---
 import type { HeroProps } from "@utils/types";
 import BlackModern from "./BlackModern/BlackModern.astro";

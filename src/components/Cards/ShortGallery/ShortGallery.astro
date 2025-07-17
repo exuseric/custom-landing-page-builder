@@ -6,7 +6,7 @@ interface Card {
 }
 import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 import "./style.css";
 const { cards } = Astro.props;
 
@@ -39,7 +39,7 @@ for (let i = 0; i < cards.length; i += 4) {
 
         <div class="view-more-container">
             <button
-                class="btn btn-md btn-primary"
+                class="btn  btn--primary"
                 id="view-more-btn"
                 aria-expanded="false"
                 aria-controls="gallery-container"

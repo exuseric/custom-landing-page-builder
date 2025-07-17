@@ -1,10 +1,8 @@
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
-// import { AstroPurgeCssPlugin } from 'astro-purgecss-static';
 import favicons from "astro-favicons";
 
-// import { imageService } from "@unpic/astro/service";
 import { fetchPage } from './src/utils/payload';
 import purgecss from 'astro-purgecss';
 const { url, title, themeColor } = await fetchPage(['url', 'title', 'themeColor']);
@@ -28,9 +26,6 @@ export default defineConfig({
       }),
     }
   },
-  // experimental: {
-  //   responsiveImages: true
-  // },
   build: {
     assets: 'assets',
     inlineStylesheets: 'never',
@@ -39,11 +34,6 @@ export default defineConfig({
     domains: ["127.0.0.1", "landing-cms-payload.onrender.com"],
     responsiveStyles: true,
     layout: 'constrained'
-    // experimentalLayout: 'responsive',
-    // service: imageService({
-    //   placeholder: "blurhash",
-    // }),
-
   },
   compressHTML: false,
   integrations: [sitemap(), icon(), favicons({

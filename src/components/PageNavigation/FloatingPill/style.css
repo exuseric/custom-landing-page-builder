@@ -58,19 +58,6 @@
     box-shadow: var(--nav-pill-shadow);
 }
 
-.glass {
-    background-color: var(--nav-pill-bg);
-    border: 1px solid transparent;
-
-    border-radius: 50px;
-
-
-    transition: var(--nav-transition);
-
-    backdrop-filter: var(--nav-backdrop-blur);
-    -webkit-backdrop-filter: var(--nav-backdrop-blur);
-}
-
 .floating-pill-nav__logo {
     display: flex;
     align-items: center;
@@ -131,8 +118,6 @@
 .floating-pill-nav__menu[data-is-active="true"] {
     position: absolute;
     top: 100%;
-
-    /* transform: translateY(-50%); */
 
     display: flex;
     flex-flow: column nowrap;

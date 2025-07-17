@@ -3,8 +3,8 @@ import Container from "@components/Container.astro";
 import { Icon } from "astro-iconify";
 import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from "@utils/translations";
-import "./style.css";
-import InfoCard from "@components/Cards/Info/InfoCard.astro";
+import s from "./style.module.css";
+
 type Link = {
     id: string;
     name: string;
@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const pageLinks = menuItems.map((link: Link) =>
-    link.name.toLocaleLowerCase() === "home"
+    link.name === "home"
         ? { ...link, name: translateNavItem("home", country), anchorId: "/" }
         : {
               ...link,
@@ -31,48 +31,42 @@ const pageLinks = menuItems.map((link: Link) =>
 ---
 
 <nav
-    class="simple-nav"
+    class={s["nav"]}
     data-nav-bar
     data-nav
     data-is-active="false"
     data-menu-toggled="false"
     data-fixed-menu={fixedMenu}
     data-black-text={blackText}
-    aria-label="Main navigation"
+    aria-label="page navigation"
 >
     <Container>
-        <div class="simple-nav__wrapper">
-            <a class="simple-nav__logo" href="/" aria-label={`${title.trim()} - Go to homepage`}>
+        <div class={s["nav__wrapper"]}>
+            <a class={s["nav__logo"]} href="/" aria-label={title.trim()}>
                 <CustomImage
                     eager={true}
                     image={logo}
-                    classlist="simple-nav__logo-image"
-                    size="logo"
+                    classlist={s["nav__logo-image"]}
+                    size="small"
                 />
-                <span class="simple-nav__logo-text">{title}</span>
+                <span class={s["nav__logo-text"]}>{title}</span>
             </a>
-
             <ul
-                id="main-navigation-menu"
-                class="simple-nav__menu"
+                class={s["nav__menu"]}
+                data-glass
                 data-menu
                 data-is-active="false"
-                aria-label="Main menu"
-                role="menubar"
+                aria-label="page menu"
+                aria-haspopup="true"
+                aria-expanded="false"
             >
                 {
                     pageLinks.map((link: Link) => (
-                        <li role="none">
+                        <li class={s["nav__menu-item"]}>
                             <a
+                                title={link.name}
                                 href={link.anchorId}
-                                class={
-                                    link.style.toLocaleLowerCase() === "primary"
-                                        ? "simple-nav__link btn  btn--primary"
-                                        : link.style.toLocaleLowerCase() === "secondary" ?
-                                        "simple-nav__link btn  btn--secondary"
-                                        :"simple-nav__link"
-                                }
-                                role="menuitem"
+                                class:list={[s["nav__link"], "btn btn--text"]}
                             >
                                 {link.name}
                             </a>
@@ -80,17 +74,13 @@ const pageLinks = menuItems.map((link: Link) =>
                     ))
                 }
             </ul>
-
             <button
                 type="button"
-                class="simple-nav__toggle"
+                class:list={[s["nav__toggle"], "btn btn--icon"]}
                 data-menu-toggle
                 data-is-active="false"
-                aria-label="Open main menu"
-                aria-controls="main-navigation-menu"
-                aria-expanded="false"
+                aria-label="toggle page menu"
             >
-                <span class="sr-only">Menu</span>
                 <Icon
                     name="mdi:menu"
                     aria-hidden="true"

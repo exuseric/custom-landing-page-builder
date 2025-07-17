@@ -1,6 +1,6 @@
 ---
 import Container from "@components/Container.astro";
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 import "./testimonial.css";
 
 // Dummy testimonial data for now
@@ -87,7 +87,7 @@ const {
     <div class="testimonial_carousel">
       <section class="testimonial_carousel__controls">
         <button
-          class="btn btn--icon testimonial_carousel__control testimonial_carousel__control--prev-btn"
+          class="btn btn---icon testimonial_carousel__control testimonial_carousel__control--prev-btn"
           aria-label="Previous testimonial"
           data-action="testimonial-action-btn"
           data-action-type="previous"
@@ -95,7 +95,7 @@ const {
           <Icon name="mdi:chevron-left" aria-hidden="true" focusable="false" />
         </button>
         <button
-          class="btn btn--icon testimonial_carousel__control testimonial_carousel__control--next-btn"
+          class="btn btn---icon testimonial_carousel__control testimonial_carousel__control--next-btn"
           aria-label="Next testimonial"
           data-action="testimonial-action-btn"
           data-action-type="next"
