@@ -11,7 +11,7 @@ const props = Astro.props;
 <header class="split-hero">
     <Container>
         <div class="split-hero__wrapper">
-            <article class="split-hero__content">
+            <article class="split-hero__content" data-animate="fade-slide-load" data-animate-children-only="true">
                 <h1 class="split-hero__title">{props.heading}</h1>
                 <p>{props.excerpt}</p>
                 <a
@@ -25,6 +25,7 @@ const props = Astro.props;
                 image={props.cover}
                 size="large"
                 classlist="split-hero__image"
+                data-animate="blur-load"
             />
         </div>
     </Container>

@@ -13,6 +13,7 @@ const props = Astro.props;
     data-highlight={props.highlight}
     id={props["anchor id"]?.split(" ").join("-")}
     data-offscreen
+    data-animate="fade-slide"
 >
     <Container>
         <div class="content-with-media__content_wrapper" data-position={props.position}>
@@ -30,6 +31,7 @@ const props = Astro.props;
                     eager={false}
                     size="medium"
                     image={props.image}
+                    data-animate="slide-left"
                 />
             </div>
         </div>

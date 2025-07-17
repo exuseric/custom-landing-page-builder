@@ -49,25 +49,6 @@
     max-width: 65ch;
 }
 
-@supports (animation-timeline: scroll()) {
-    .page-section[data-animate="fade-slide"] {
-        animation: fade-slide 1s linear both;
-        animation-timeline: scroll();
-        animation-range: 10vh 90vh;
-    }
-}
-
-@keyframes fade-slide {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* Page Section Enhancements */
 [data-offscreen] {

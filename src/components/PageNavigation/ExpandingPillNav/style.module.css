@@ -24,7 +24,7 @@
 
     background-color: var(--nav-bg);
     color: var(--nav-text);
-    transition: background-color var(--transition-enter-elastic-slow), color var(--transition-enter-elastic-medium);
+    transition: background-color var(--transition-enter-slow), color var(--transition-enter-medium);
 }
 
 .nav__logo {
@@ -53,7 +53,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    transition: all var(--transition-enter-elastic-slow);
+    transition: all var(--transition-enter-slow);
 }
 
 /* Mobile Menu */
@@ -79,12 +79,12 @@
 
 .nav__menu[data-is-active="false"] {
     translate: 0 -200%;
-    transition: all var(--transition-exit-elastic-fast);
+    transition: all var(--transition-exit-fast);
 }
 
 .nav__menu[data-is-active="true"] {
     translate: 0 0;
-    transition: all var(--transition-enter-elastic-medium);
+    transition: all var(--transition-enter-medium);
 }
 
 button.nav__toggle {
@@ -129,12 +129,12 @@ button.nav__toggle {
 
     .nav[data-is-active="false"] .nav__wrapper {
         --row-height: 100px;
-        transition: all var(--transition-exit-elastic-fast);
+        transition: all var(--transition-exit-fast);
     }
 
     .nav[data-is-active="true"] .nav__wrapper {
         --row-height: 60px;
-        transition: all var(--transition-enter-elastic-medium);
+        transition: all var(--transition-enter-medium);
     }
 
     .nav[data-is-active="false"] .nav__menu {
@@ -181,6 +181,6 @@ button.nav__toggle {
     .nav__menu[data-is-active="true"],
     .nav__menu[data-is-active="false"] {
         translate: 0 0;
-        transition: all var(--transition-enter-elastic-medium);
+        transition: all var(--transition-enter-medium);
     }
 }

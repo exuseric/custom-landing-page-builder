@@ -5,6 +5,7 @@
 @import url("./base.css") layer(base);
 @import url("./container.css") layer(components);
 @import url("./buttons-and-links.css") layer(components);
+@import url("./animations.css") layer(components);
 @import url("./utilities.css") layer(utilities);
 
 @-webkit-keyframes fade-in {
