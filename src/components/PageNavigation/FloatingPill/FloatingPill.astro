@@ -3,7 +3,7 @@ import Container from "@components/Container.astro";
 import { Icon } from "astro-iconify";
 import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from "@utils/translations";
-import "./style.css";
+import s from "./style.module.css";
 
 type Link = {
     id: string;
@@ -32,7 +32,7 @@ const pageLinks = menuItems.map((link: Link) =>
 ---
 
 <nav
-    class="floating-pill-nav"
+    class={s["floating-pill-nav"]}
     data-nav-bar
     data-nav
     data-is-active="false"
@@ -42,22 +42,22 @@ const pageLinks = menuItems.map((link: Link) =>
     aria-label="page navigation"
 >
     <Container>
-        <div class="floating-pill-nav__wrapper glass">
+        <div class:list={[s["floating-pill-nav__wrapper"], "glass"]}>
             <a
-                class="floating-pill-nav__logo"
+                class={s["floating-pill-nav__logo"]}
                 href="/"
                 aria-label={title.trim()}
             >
                 <CustomImage
                     eager={true}
                     image={logo}
-                    classlist="floating-pill-nav__logo-image"
+                    classlist={s["floating-pill-nav__logo-image"]}
                     size="small"
                 />
-                <span class="floating-pill-nav__logo-text">{title}</span>
+                <span class={s["floating-pill-nav__logo-text"]}>{title}</span>
             </a>
             <menu
-                class="floating-pill-nav__menu"
+                class={s["floating-pill-nav__menu"]}
                 data-menu
                 data-is-active="false"
                 aria-label="page menu"
@@ -67,15 +67,11 @@ const pageLinks = menuItems.map((link: Link) =>
             >
                 {
                     pageLinks.map((link: Link) => (
-                        <li class="floating-pill-nav__menu-item">
+                        <li class={s["floating-pill-nav__menu-item"]}>
                             <a
                                 title={link.name}
                                 href={link.anchorId}
-                                class={
-                                    link.style !== "default"
-                                        ? "floating-pill-nav__link floating-pill-nav__link--cta"
-                                        : "floating-pill-nav__link"
-                                }
+                                class:list={[s["floating-pill-nav__link"], "btn",link.style !== "default" && "btn--primary"]}
                             >
                                 {link.name}
                             </a>
@@ -86,7 +82,7 @@ const pageLinks = menuItems.map((link: Link) =>
 
             <button
                 type="button"
-                class="floating-pill-nav__toggle"
+                class={s["floating-pill-nav__toggle"]}
                 data-menu-toggle
                 data-is-active="false"
                 aria-label="toggle page menu"

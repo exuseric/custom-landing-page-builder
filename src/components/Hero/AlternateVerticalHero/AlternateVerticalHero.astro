@@ -3,24 +3,25 @@ import type { HeroBlock } from "@utils/payload/types";
 interface Props extends HeroBlock {}
 
 import Container from "@components/Container.astro";
-import "./hero.css";
+import s from "./style.module.css";
+
 import CustomImage from "@components/CustomImage.astro";
 
 const props = Astro.props;
 ---
 
-<header class="alternate_vertical_hero content_section bg--primary-darker">
+<header class:list={[s["alternate_vertical_hero"], s["content_section"], s["bg--primary-darker"]]}>
     <Container>
-        <div class="alternate_vertical_hero__image_wrapper full-width">
+        <div class:list={[s["alternate_vertical_hero__image_wrapper"], "full-width"]}>
             <CustomImage
-                classlist="alternate_vertical_hero__image"
+                classlist={s["alternate_vertical_hero__image"]}
                 eager={true}
                 image={props.cover}
                 size="large"
             />
         </div>
         <article
-            class="alternate_vertical_hero__content"
+            class={s["alternate_vertical_hero__content"]}
             data-direction="column"
         >
             <h1>{props.heading}</h1>

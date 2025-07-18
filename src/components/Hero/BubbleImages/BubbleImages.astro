@@ -1,37 +1,38 @@
 ---
 import type { HeroBlock } from "@utils/payload/types";
 import Container from "@components/Container.astro";
-import "./style.css";
+import s from "./style.module.css";
+
 import CustomImage from "@components/CustomImage.astro";
 interface Props extends HeroBlock {}
 const { heading, excerpt, cover } = Astro.props;
 ---
 
-<header class="bubble_images content_section">
+<header class={s["bubble_images__header"]}>
     <Container>
-        <div class="bubble_images__wrapper">
-            <article class="bubble_images__content">
+        <div class={s["bubble_images__wrapper"]}>
+            <article class={s["bubble_images__content"]}>
                 <h1>{heading}</h1>
                 <p>{excerpt}</p>
             </article>
 
-            <div class="bubble_images__image_wrapper">
+            <div class={s["bubble_images__image_wrapper"]}>
                 <CustomImage
                     image={cover}
                     size="large"
-                    classlist="bubble_images__image"
+                    classlist={s["bubble_images__image"]}
                     eager={true}
                 />
                 <CustomImage
                     image={cover}
                     size="large"
-                    classlist="bubble_images__image"
+                    classlist={s["bubble_images__image"]}
                     eager={true}
                 />
                 <CustomImage
                     image={cover}
                     size="large"
-                    classlist="bubble_images__image"
+                    classlist={s["bubble_images__image"]}
                     eager={true}
                 />
             </div>

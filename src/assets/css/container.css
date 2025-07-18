@@ -118,7 +118,7 @@
 }
 
 [data-glow="true"] {
-    --glow-surface: var(--clr-neutral-50, Canvas);
+    --glow-surface: var(--clr-neutral-50);
     --glow-color: conic-gradient(from var(--glow-deg), var(--clr-primary-light), var(--clr-tertiary-light), var(--clr-secondary-light), var(--clr-primary-light));
     --glow-size: 0.5rem;
     --glow-intensity: 0.5;

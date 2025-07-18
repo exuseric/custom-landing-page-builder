@@ -334,10 +334,6 @@
     /* Soft inset shadows */
     --shadow-inset-sm: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-inset-md: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-
-    /* Soft glow effects */
-    --glow-subtle: 0 0 0 1px rgba(255, 255, 255, 0.05);
-    --glow-soft: 0 0 20px rgba(0, 0, 0, 0.04);
 }
 
 @media(max-width: 768px) {

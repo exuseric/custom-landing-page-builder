@@ -1,43 +1,11 @@
 ---
 import { languages } from "@utils/translations";
-import { AstroFont } from "astro-font";
 import PageNavigation from "@components/PageNavigation/PageNavigation.astro";
-import { getImage } from "astro:assets";
 import "@assets/css/global.css";
-import PageHero from "@components/Hero/PageHero.astro";
 import Sections from "@components/Sections/Sections.astro";
-import ContactSection from "@components/Sections/Contact Sections/ContactSection.astro";
 import Footer from "@components/Footer/Footer.astro";
 import Head from "@components/Head.astro";
 import { fetchPage } from "@utils/payload";
-
-const fonts = {
-	regular: {
-		name: "Atkinson Hyperlegible",
-		weight: "400",
-		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt23C1KxNDXMspQ1lPyU89-1h6ONRlW45G04pIo.woff2",
-	},
-	bold: {
-		name: "Atkinson Hyperlegible",
-		weight: "700",
-		url: "https://fonts.gstatic.com/s/atkinsonhyperlegible/v11/9Bt73C1KxNDXMspQ1lPyU89-1h6ONRlW45G8Wbc9dCWP.woff2",
-	},
-	serif: {
-		name: "DM Serif Display",
-		weight: "400",
-		url: "https://fonts.gstatic.com/s/dmseriftext/v12/rnCu-xZa_krGokauCeNq1wWyWfSFXQ.woff2",
-	},
-	heading: {
-		name: "IBM Plex Sans Condensed",
-		weight: "700",
-		url: "https://fonts.gstatic.com/s/ibmplexsanscondensed/v14/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2",
-	},
-	serif_modern: {
-		name: "Cormorant Garamond",
-		weight: "400",
-		url: "https://fonts.gstatic.com/s/cormorantgaramond/v20/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
-	},
-};
 
 const parentUrls: Record<string, string> = {
     ke: 'https://www.yellowpageskenya.com/',

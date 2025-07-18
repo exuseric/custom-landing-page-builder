@@ -4,40 +4,38 @@ interface Props extends ImageGridCallToActionBlock {
     coreValues: string;
 }
 
-import "./style.css";
-import { Icon } from "astro-iconify";
+import s from "./style.module.css";
 import CustomImage from "@components/CustomImage.astro";
 import Container from "@components/Container.astro";
-import InfoCard from "@components/Cards/Info/InfoCard.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 const props = Astro.props;
 ---
 
-<div class="content_section page-section" data-highlight="false" data-offscreen>
+<div class:list={[s["content_section"], "page-section"]} data-highlight="false" data-offscreen>
     <Container>
         <div
-            class="three_image_cta__container "
+            class={s["three_image_cta__container"]}
         >
-            <div class="three_image_cta__content_wrapper">
-                <article class="three_image_cta__content">
+            <div class={s["three_image_cta__content_wrapper"]}>
+                <article class={s["three_image_cta__content"]}>
                     <header class="page-section__header">
                         <h2>{props.title}</h2>
                     </header>
                     <slot set:html={extractLexicalText(props.body)} />
     
                     <div class="btn_wrapper">
-                        <a href="#contact" class="btn  btn--secondary btn--outline"
-                            >Let's Talk</a
-                        >
+                        <a href="#contact" class="btn btn--secondary btn--outline">
+                            Let's Talk
+                        </a>
                     </div>
                 </article>
             </div>
-            <div class="three_image_cta__image_wrapper">
+            <div class={s["three_image_cta__image_wrapper"]}>
                 {
                     props.images.map((image, idx: number) => (
                         <CustomImage
                             image={image.image}
-                            classlist={`three_image_cta___image three_image_cta___image_${idx}`}
+                            classlist={s["three_image_cta___image"]}
                             size="medium"
                             eager={false}
                         />

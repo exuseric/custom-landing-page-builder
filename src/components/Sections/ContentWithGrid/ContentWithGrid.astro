@@ -1,5 +1,5 @@
 ---
-import "./style.css";
+import s from "./style.module.css";
 import type { ContentWithGridBlock } from "@utils/payload/types";
 interface Props extends ContentWithGridBlock {}
 import Container from "@components/Container.astro";
@@ -10,18 +10,18 @@ const props = Astro.props;
 ---
 
 <div
-    class="content-with-grid page-section"
+    class:list={[s["content-with-grid"], "page-section"]}
     data-highlight={props.highlight}
-    id={props["anchor id"].split(" ").join("-")}
+    id={props["anchor id"]?.split(" ").join("-")}
     data-offscreen
 >
     <Container>
-        <header class="content-with-grid__header page-section__header">
+        <header class:list={[s["content-with-grid__header"], "page-section__header"]}>
             <h2>{props.title}</h2>
             <slot set:html={extractLexicalText(props.body)} />
         </header>
 
-        <div class="content-with-grid__grid-wrapper">
+        <div class={s["content-with-grid__grid-wrapper"]}>
             {props['card type'] === 'basic' && <Basic cards={props['card grid']}/>}
         </div>
     </Container>

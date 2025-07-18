@@ -1,6 +1,6 @@
 ---
 import Container from "@components/Container.astro";
-import "./partners.css";
+import s from "./style.module.css";
 import CustomImage from "@components/CustomImage.astro";
 const { data } = Astro.props;
 
@@ -19,18 +19,18 @@ const cards = data.expand.section_grid;
 
 ---
 
-<div class="partners container content_section" data-offscreen>
+<div class={s["partners"]} data-offscreen>
     <Container> 
         <!-- <h2 class="partners__title">{data.title}</h2> -->
-        <div class="partners-scroll-wrapper">
-            <div class="partners-scroll-content">
-                <div class="partners-row">
+        <div class={s["partners-scroll-wrapper"]}>
+            <div class={s["partners-scroll-content"]}>
+                <div class={s["partners-row"]}>
                     {
                         cards?.map((card: Card) => (
                             <div class="partner">
                                 <CustomImage
                                     image={card.expand.image}
-                                    classlist="partner__image_component"
+                                    classlist={s["partner__image_component"]}
                                     size="small"
                                     eager={false}
                                 />
@@ -38,13 +38,13 @@ const cards = data.expand.section_grid;
                         ))
                     }
                 </div>
-                <div class="partners-row" aria-hidden="true">
+                <div class={s["partners-row"]} aria-hidden="true">
                     {
                         cards?.map((card: Card) => (
                             <div class="partner">
                                 <CustomImage
                                     image={card.expand.image}
-                                    classlist="partner__image_component"
+                                    classlist={s["partner__image_component"]}
                                     size="small"
                                     eager={false}
                                 />

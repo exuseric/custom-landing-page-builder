@@ -9,21 +9,22 @@ interface Props {
 }
 
 import Container from "@components/Container.astro";
-import "./tiny_footer.css";
+import s from "./style.module.css";
+
 import { Image } from "astro:assets";
 const { title, company, url, country } = Astro.props;
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
 ---
 
-<footer class="full-width footer">
+<footer class={s["full-width footer"]}>
     <Container>
-        <div class="footer__content">
+        <div class={s["footer__content"]}>
             <p>
                 &copy; {new Date().getFullYear()}
                 {title.split("|")[0].trim()}. {copyright}
             </p>
-            <p class="footer__logo">
+            <p class={s["footer__logo"]}>
                 <Image
                     src="/yellow-pages-logo.webp"
                     alt="yellow pages logo"

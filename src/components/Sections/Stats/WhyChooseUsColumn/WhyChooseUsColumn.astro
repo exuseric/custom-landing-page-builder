@@ -3,7 +3,8 @@ import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
 interface Props extends WhyChooseUsColumnBlock {}
 
 import { Icon } from "astro-iconify";
-import "./style.css";
+import s from "./style.module.css";
+
 import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
@@ -11,37 +12,37 @@ const props = Astro.props;
 ---
 
 <div
-    class="content_section page-section"
+    class={s["page-section"]}
     data-highlight={props.highlight ?? 'false'}
     data-offscreen
 >
     <Container>
-        <header class="two_column_stat__header page-section__header">
+        <header class:list={[s["two_column_stat__header"], "page-section__header"]}>
             <h2>{props.title}</h2>
             <slot set:html={extractLexicalText(props.description)} />
         </header>
-        <div class="two_column_stat__wrapper">
-            <div class="two_column_stat__image_wrapper">
+        <div class={s["two_column_stat__wrapper"]}>
+            <div class={s["two_column_stat__image_wrapper"]}>
                 {
                     props.image && (
                         <CustomImage
                             image={props.image}
-                            classlist={`two_column_stat__image two_column_stat__image_${props.id}`}
+                            classlist={s[`two_column_stat__image`]}
                             size="large"
                             eager={false}
                         />
                     )
                 }
             </div>
-            <div class="two_column_stat__content_wrapper">
+            <div class={s["two_column_stat__content_wrapper"]}>
                 {
                     props.options.map((option) => (
-                        <div class="two_column_stat__content">
-                            <h3 class="two_column_stat__content_title">
+                        <div class={s["two_column_stat__content"]}>
+                            <h3 class={s["two_column_stat__content_title"]}>
                                 {option.title}
                             </h3>
                             <slot
-                                class="two_column_stat__description"
+                                class={s["two_column_stat__description"]}
                                 set:html={extractLexicalText(
                                     option.description,
                                 )}

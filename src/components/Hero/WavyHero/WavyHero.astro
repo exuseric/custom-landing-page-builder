@@ -2,48 +2,48 @@
 import type { HeroProps } from "@utils/types";
 import Container from "@components/Container.astro";
 interface Props extends HeroProps {}
-import "./style.css";
+import s from "./style.module.css";
 import CustomImage from "@components/CustomImage.astro";
 const { title, image, cover, excerpt } = Astro.props;
 ---
 
-<div class="content_section">
+<div>
     <Container>
-        <header class="wavy_hero">
-            <div class="wavy_hero__cover_wrapper">
+        <header class={s["wavy_hero"]}>
+            <div class={s["wavy_hero__cover_wrapper"]}>
                 {
                     cover && (
                         <CustomImage
-                        image={cover}
-                        classlist="wavy_hero__cover_image"
-                        size="large"
-                        eager={true}
+                            image={cover}
+                            classlist={s["wavy_hero__cover_image"]}
+                            size="large"
+                            eager={true}
                         />
                     )
                 }
             </div>
-            <div class="wavy_hero__content_wrapper">
-                <h1 class="wavy_hero__content_title">{title}</h1>
-                <p class="wavy_hero__content_excerpt">{excerpt}</p>
-                <div class="wavy_hero__btn_wrapper">
+            <div class={s["wavy_hero__content_wrapper"]}>
+                <h1 class={s["wavy_hero__content_title"]}>{title}</h1>
+                <p class={s["wavy_hero__content_excerpt"]}>{excerpt}</p>
+                <div class={s["wavy_hero__btn_wrapper"]}>
                     <a
                         href="#contact"
-                        class="btn btn--primary  wavy_hero__cta"
+                        class:list={[s["wavy_hero__cta"], "btn btn--primary"]}
                     >
                         Let's Work Together
                     </a>
                     <a
                         href="#product"
-                        class="btn btn--outline  wavy_hero__cta"
+                        class:list={[s["wavy_hero__cta"], "btn btn--outline"]}
                     >
                         Explore what we offer
                     </a>
                 </div>
             </div>
-            <div class="wavy_hero__image_wrapper">
+            <div class={s["wavy_hero__image_wrapper"]}>
                 <CustomImage
                     image={image}
-                    classlist="wavy_hero__image"
+                    classlist={s["wavy_hero__image"]}
                     size="large"
                     eager={true}
                 />

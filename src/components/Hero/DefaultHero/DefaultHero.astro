@@ -3,23 +3,24 @@ import type { HeroBlock } from "@utils/payload/types";
 interface Props extends HeroBlock {}
 
 import Container from "@components/Container.astro";
-import "./hero.css";
+import s from "./style.module.css";
+
 import CustomImage from "@components/CustomImage.astro";
 const props = Astro.props;
 ---
 
-<header class="overflow_hero">
+<header class={s["overflow_hero"]}>
     <CustomImage
-        id="overflow_hero__image"
+        id={s["overflow_hero__image"]}
         image={props.cover}
-        classlist="overflow_hero__image"
+        classlist={s["overflow_hero__image"]}
         size="large"
         eager={true}
     />
-    <div class="overflow_hero__overlay"></div>
+    <div class={s["overflow_hero__overlay"]}></div>
     <Container>
-        <div class="overflow_hero__wrapper">
-            <article class="overflow_hero__content">
+        <div class={s["overflow_hero__wrapper"]}>
+            <article class={s["overflow_hero__content"]}>
                 <h1 set:html={props.heading} />
                 <p>{props.excerpt}</p>
                 <a

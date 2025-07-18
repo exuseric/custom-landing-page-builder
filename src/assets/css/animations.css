@@ -424,11 +424,6 @@
    animation: pulse 4s ease-in-out infinite;
 }
 
-/* === GLOW ANIMATIONS === */
-[data-animate="glow"] {
-   animation: glow 2s ease-in-out infinite alternate;
-}
-
 /* === KEYFRAMES === */
 @keyframes fade-slide {
    0% {
@@ -767,15 +762,6 @@
    }
    50% {
        opacity: 0.5;
-   }
-}
-
-@keyframes glow {
-   from {
-       text-shadow: 0 0 5px currentColor;
-   }
-   to {
-       text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
    }
 }
 
