@@ -12,7 +12,7 @@ const props = Astro.props;
         <section class={s["small_cta"]} data-animate="slide-up" data-animate-children-only="true">
             <h2 class={s["smal_cta__title"]}>{props.heading}</h2>
             <slot set:html={extractLexicalText(props.description)} />
-            <a href="#contact" class:list={[s["cta__link btn"], "btn--primary"]}>
+            <a href="#contact" class:list={[s["cta__link"], "btn btn--primary"]}>
                 {props.buttonText}
             </a>
         </section>

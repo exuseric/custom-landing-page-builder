@@ -24,6 +24,8 @@
 
 .btn:hover:not(:disabled) {
     filter: brightness(1.1);
+    color: var(--clr-secondary-text);
+    background-color: var(--clr-secondary);
 }
 
 .btn:disabled {

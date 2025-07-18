@@ -6,10 +6,10 @@ import { extractLexicalText } from '@utils/payload/helpers';
 const {cards} = Astro.props;
 ---
 
-<div class={s["basic_card"]}>
+<div class={s["basic_card"]} data-animate="slide-up" data-animate-children-only="true">
     {
         cards.map((card: BasicCard) => (
-            <article data-animate="slide-up">
+            <article>
                 {card.image && (
                     <div class={s["basic_card__image-wrapper"]}>
                         <CustomImage eager={false} image={card.image} size="medium" classlist={s["basic_card__image_component"]} />

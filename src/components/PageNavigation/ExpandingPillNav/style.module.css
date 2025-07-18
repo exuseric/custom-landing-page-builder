@@ -37,6 +37,7 @@
     text-decoration: none;
     color: currentColor;
     width: max-content;
+    max-width: 150px;
 }
 
 .nav-wrapper {

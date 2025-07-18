@@ -15,3 +15,7 @@
 .smal_cta__title {
     /* color: var(--clr-); */
 }
+
+.cta__link {
+    text-transform: capitalize;
+}
