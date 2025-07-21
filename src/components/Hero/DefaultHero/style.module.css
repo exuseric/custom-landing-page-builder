@@ -1,4 +1,4 @@
-.overflow_hero {
+.hero {
     --col-count: 6;
     --max-height: 600px;
     display: grid;
@@ -6,17 +6,17 @@
     grid-template-rows: repeat(var(--col-count), calc(var(--max-height) / var(--col-count)));
 }
 
-.overflow_hero__content h1 {
+.hero__content h1 {
     color: var(--clr-primary-lighter);
     font-size: var(--heading-4xl);
     max-width: 25ch;
 }
 
-.overflow_hero__content {
+.hero__content {
     color: var(--clr-neutral-50);
 }
 
-.overflow_hero__overlay {
+.hero__overlay {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
     z-index: 2;
@@ -29,7 +29,7 @@
         radial-gradient(ellipse at 0% 80%, oklch(from var(--clr-primary-darker) l c h), transparent);
 }
 
-img#overflow_hero__image.overflow_hero__image {
+.hero__image {
     position: relative;
     isolation: isolate;
 
@@ -43,7 +43,7 @@ img#overflow_hero__image.overflow_hero__image {
     z-index: -1;
 }
 
-.overflow_hero>.content-grid {
+.hero-container {
     grid-column: 1 / -1;
     grid-row: -4 / -1;
 
@@ -54,7 +54,7 @@ img#overflow_hero__image.overflow_hero__image {
     z-index: 3;
 }
 
-.overflow_hero__content {
+.hero__content {
     max-width: 65ch;
 }
 

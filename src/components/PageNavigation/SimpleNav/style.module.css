@@ -1,9 +1,9 @@
 .simple-nav {
     --nav-bg: var(--clr-neutral-50);
-    --nav-text: var(--clr-neutral-900);
+    --nav-text: var(--clr-neutral-50);
     --nav-active-bg: var(--clr-neutral-50);
     --nav-active-text: oklch(from var(--nav-active-bg) calc(l - 0.8) c h);
-    --nav-hover-bg: var(--clr-secondary-dark);
+    --nav-hover-bg: var(--clr-secondary);
     --nav-hover-text: var(--clr-neutral-50);
     --nav-cta-bg: var(--clr-primary);
     --nav-cta-text: var(--clr-neutral-50);

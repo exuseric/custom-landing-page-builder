@@ -1,5 +1,5 @@
-.default_contact__content h2 {
-    margin-bottom: var(--container-padding-block);
+.default_contact__content {
+    padding-top: var(--size-8);
 }
 
 .default_contact__content[data-two-column="true"] {

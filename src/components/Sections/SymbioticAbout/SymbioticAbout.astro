@@ -5,6 +5,7 @@ import Container from "@components/Container.astro";
 import s from "./style.module.css";
 import CustomImage from "@components/CustomImage.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
+import Gallery from "../Gallery/Gallery.astro";
 const props = Astro.props;
 ---
 
@@ -15,7 +16,10 @@ const props = Astro.props;
     data-offscreen
 >
     <Container>
-        <div class={s["symbiotic-about__top-section"]} data-animate="fade-slide">
+        <div
+            class={s["symbiotic-about__top-section"]}
+            data-animate="fade-slide"
+        >
             <CustomImage
                 classlist={s["symbiotic-about__image"]}
                 eager={false}

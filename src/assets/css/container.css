@@ -119,7 +119,7 @@
 
 [data-glow="true"] {
     --glow-surface: var(--clr-neutral-50);
-    --glow-color: conic-gradient(from var(--glow-deg), var(--clr-primary-light), var(--clr-tertiary-light), var(--clr-secondary-light), var(--clr-primary-light));
+    --glow-color: conic-gradient(from var(--glow-deg), var(--clr-primary), var(--clr-tertiary), var(--clr-secondary), var(--clr-primary));
     --glow-size: 0.5rem;
     --glow-intensity: 0.5;
     --border-size: 3px;

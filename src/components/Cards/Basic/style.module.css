@@ -7,6 +7,10 @@
     max-width: 100%;
 }
 
+.basic_card ul {
+    margin-left: var(--size-3);
+}
+
 /* Mobile first approach */
 @media (min-width: 640px) {
     .basic_card {
