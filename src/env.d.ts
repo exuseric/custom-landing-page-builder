@@ -1,11 +1,6 @@
 /// <reference path="../.astro/types.d.ts" />
 
 interface ImportMetaEnv {
-    readonly DATABASE_URL: string;
-    readonly PAGE_ID: string;
-    readonly POCKETBASE_EMAIL: string;
-    readonly POCKETBASE_PASSWORD: string;
-    readonly LANDING_PAGE_ID: string;
     // more env variables...
 }
 
