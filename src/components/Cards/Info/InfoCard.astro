@@ -8,12 +8,12 @@ interface Props {
     cards: Card[];
     direction?: "column" | "row";
 }
-import "./card.css";
-import { Icon } from "astro-icon/components";
+import s from "./style.module.css";
+import { Icon } from "astro-iconify";
 const { cards, direction = "row" } = Astro.props;
 ---
 
-<ul class="info_card" style={`--direction: ${direction};`}>
+<ul class={s["info_card"]} style={`--direction: ${direction};`}>
     {
         cards.map((card: Card) => (
             <li>

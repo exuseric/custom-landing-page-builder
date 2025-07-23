@@ -1,28 +1,29 @@
 ---
-import "./style.css";
+import s from "./style.module.css";
+
 import type { LocationType } from "@utils/types";
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
 import Container from "@components/Container.astro";
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 const props = Astro.props;
 ---
 
-<div class="two_location container" id="contact" data-highlight="true">
+<div class:list={[s["two_location"], "page-section"]} id={s["contact"]} data-highlight="true">
     <Container>
-        <div class="two_location__content">
+        <div class={s["two_location__content"]}>
             <article>
                 <h2>{props.title}</h2>
                 <InfoCard cards={props.info} />
             </article>
         </div>
 
-        <div class="two_location__tab">
-            <div class="two_location__tab-controls">
+        <div class={s["two_location__tab"]}>
+            <div class={s["two_location__tab-controls"]}>
                 {
                     props.location_info.map(
                         (location: LocationType, idx: number) => (
                             <button
-                                class="two_location__tab-control"
+                                class={s["two_location__tab-control"]}
                                 data-is-active={`${idx === 0 ? "true" : "false"}`}
                                 data-id={location.id}
                                 data-tab-controls={location.id}
@@ -34,19 +35,19 @@ const props = Astro.props;
                 }
             </div>
 
-            <div class="two_location__tab-items">
+            <div class={s["two_location__tab-items"]}>
                 {
                     props.location_info.map(
                         (location: LocationType, idx: number) => (
                             <div
-                                class="two_location__tab-item"
+                                class={s["two_location__tab-item"]}
                                 data-is-active={`${idx === 0 ? "true" : "false"}`}
                                 data-tab-item={location.id}
                             >
                                 <article>
                                     <slot set:html={location.address_details} />
                                 </article>
-                                <div class="two_location__working-hours">
+                                <div class={s["two_location__working-hours"]}>
                                     <Icon
                                         name="mdi:clock"
                                         aria-hidden="true"

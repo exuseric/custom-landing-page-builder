@@ -2,7 +2,8 @@
 import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
 
-import "./PartnersGrid.css"; // Import the new CSS file
+import s from "./style.module.css";
+
 const { data, cards } = Astro.props;
 interface Card {
   expand: {
@@ -16,20 +17,20 @@ interface Card {
 }
 ---
 
-<div class="partners-grid content_section" data-offscreen>
+<div class:list={[s["partners-grid"], "page-section"]} data-offscreen>
   <Container>
-    <div class="partners-grid__wrapper">
-      <div class="content">
+    <div class={s["partners-grid__wrapper"]}>
+      <div class={s["content"]}>
         <h2>{data.title}</h2>
       </div>
-      <div class="partners-grid__image-grid">
+      <div class={s["partners-grid__image-grid"]}>
         {
           cards.map((card: Card) => (
-            <div class="partners-grid__image_wrapper">
+            <div class={s["partners-grid__image_wrapper"]}>
               {card.expand.image && (
                 <CustomImage
                   image={card.expand.image}
-                  classlist="partners-grid__image_component"
+                  classlist={s["partners-grid__image_component"]}
                   size="small"
                   eager={false}
                 />

@@ -1,27 +1,22 @@
 ---
 import type {BasicCard} from '@utils/payload/types'
-// interface Props extends BasicCard {}
-// interface Card {
-//     [key: string]: {
-//         [key: string]: any;
-//     };
-// }
-import "./basic.css";
+import s from "./style.module.css";
 import CustomImage from "@components/CustomImage.astro";
 import { extractLexicalText } from '@utils/payload/helpers';
 const {cards} = Astro.props;
+// console.log(cards);
 ---
 
-<div class="basic_card">
+<div class={s["basic_card"]} data-animate="slide-up" data-animate-children-only="true">
     {
         cards.map((card: BasicCard) => (
-            <article data-animate-on-scroll>
+            <article>
                 {card.image && (
-                    <div class="basic_card__image-wrapper">
-                        <CustomImage eager={false} image={card.image} size="medium" classlist="basic_card__image_component" />
+                    <div class={s["basic_card__image-wrapper"]}>
+                        <CustomImage eager={false} image={card.image} size="medium" classlist={s["basic_card__image_component"]} />
                     </div>
                 )}
-                <div class="basic_card__content">
+                <div class={s["basic_card__content"]}>
                     <h3>{card.title}</h3>
                     <slot set:html={extractLexicalText(card.body)} />
                 </div>

@@ -2,8 +2,8 @@
 import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
 interface Props extends WhyChooseUsColumnBlock {}
 
-import { Icon } from "astro-icon/components";
-import "./stats.css"
+import { Icon } from "astro-iconify";
+import s from "./style.module.css"
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 const props = Astro.props
@@ -16,18 +16,16 @@ const cardStyles = [
     { bg: 'var(--clr-primary-darker)' },
     { bg: 'var(--clr-secondary-darker)' },
 ];
-
-// console.log(props)
 ---
 
-<div class="content_section" data-offscreen>
+<div class="page-section" data-offscreen>
     <Container>
-        <div class="simple-stats__container container">
-            <div class="simple-stats__grid">
-                <div class="simple-stats__header">
-                    <div class="simple-stats__header-content">
+        <div class={s["simple-stats__container"]}>
+            <div class={s["simple-stats__grid"]} data-animate="slide-up" data-animate-children-only="true">
+                <div class={s["simple-stats__header"]}>
+                    <div class={s["simple-stats__header-content"]}>
                         <h2>{props.title}</h2>
-                        <slot class="simple-stats__description" set:html={extractLexicalText(props.description)} />
+                        <slot class={s["simple-stats__description"]} set:html={extractLexicalText(props.description)} />
                     </div>
                 </div>
                 {
@@ -35,14 +33,14 @@ const cardStyles = [
                         const style = cardStyles[index % cardStyles?.length];
                         return (
                             <div
-                                class="simple-stats__item"
+                                class={s["simple-stats__item"]}
                             >
-                                <div class="simple-stats__icon-box">
-                                    <Icon class="simple-stats__icon" name={card.icon} aria-hidden="true" focusable="false" />
+                                <div class={s["simple-stats__icon-box"]}>
+                                    <Icon class={s["simple-stats__icon"]} name={card.icon} aria-hidden="true" focusable="false" />
                                 </div>
-                                <div class="simple-stats__item-content">
+                                <div class={s["simple-stats__item-content"]}>
                                     <h3>{card.title}</h3>
-                                    <slot class="simple-stats__description" set:html={extractLexicalText(card.body)} />
+                                    <slot class={s["simple-stats__description"]} set:html={extractLexicalText(card.body)} />
                                 </div>
                             </div>
                         )

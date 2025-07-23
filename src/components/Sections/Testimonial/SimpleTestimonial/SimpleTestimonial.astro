@@ -3,31 +3,31 @@ import type {SimpleTestimonialBlock} from '@utils/payload/types'
 interface Props extends SimpleTestimonialBlock {}
 
 import Container from "@components/Container.astro";
-import "./testimonial.css";
+import s from "./style.module.css";
 import { extractLexicalText } from '@utils/payload/helpers';
 
 const props = Astro.props;
 ---
 
 <section
-  class="content_section testimonial-section page-section"
+  class:list={[s["testimonial-section"], "page-section"]}
   data-highlight={props.highlight ?? 'false'}
   data-offscreen
 >
   <Container>
-    <div class="testimonial-container">
-      <header class="content_section__header page-section__header">
-        <h2 class="testimonial-title">{props.title}</h2>
+    <div class={s["testimonial-container"]}>
+      <header class:list={[["content_section__header"], "page-section__header"]}>
+        <h2 class={s["testimonial-title"]}>{props.title}</h2>
       </header>
-      <div class="testimonial-grid">
+      <div class={s["testimonial-grid"]}>
         {
           props.testimonies.map((testimony) => (
-            <div class="testimonial-card">
-              <div class="testimonial-content">
+            <div class={s["testimonial-card"]}>
+              <div class={s["testimonial-content"]}>
                 <slot set:html={extractLexicalText(testimony.testimony)} />
               </div>
-              <div class="testimonial-author">
-                <div class="author-info">
+              <div class={s["testimonial-author"]}>
+                <div class={s["author-info"]}>
                   <h3>{testimony.title}</h3>
                 </div>
               </div>

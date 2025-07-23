@@ -6,8 +6,9 @@ interface Card {
 }
 import Container from "@components/Container.astro";
 import CustomImage from "@components/CustomImage.astro";
-import { Icon } from "astro-icon/components";
-import "./style.css";
+import { Icon } from "astro-iconify";
+import s from "./style.module.css";
+
 const { cards } = Astro.props;
 
 const groupedCards = [];
@@ -16,31 +17,31 @@ for (let i = 0; i < cards.length; i += 4) {
 }
 ---
 
-<section class="gallery-section" id="gallery" aria-label="Image gallery">
-    <div class="gallery-container">
+<section class={s["gallery-section"]} id="gallery" aria-label="Image gallery">
+    <div class={s["gallery-container"]}>
 
         {groupedCards.map(card => (
-            <div class="gallery-row" aria-label="Gallery row">
-                <div class="gallery-grid">
+            <div class={s["gallery-row"]} aria-label="Gallery row">
+                <div class={s["gallery-grid"]}>
                     {card.map((item: Card) => (
-                        <figure class="gallery-item" data-type={item.type}>
+                        <figure class={s["gallery-item"]} data-type={item.type}>
                             <CustomImage
                                 eager={false}
                                 image={item}
                                 size="medium"
-                                classlist="gallery-card__image"
+                                classlist={s["gallery-card__image"]}
                             />
-                            <figcaption class="gallery-caption">{item.title}</figcaption>
+                            <figcaption class={s["gallery-caption"]}>{item.title}</figcaption>
                         </figure>
                     ))}
                 </div>
             </div>
         ))}
 
-        <div class="view-more-container">
+        <div class={s["view-more-container"]}>
             <button
-                class="btn btn-md btn-primary"
-                id="view-more-btn"
+                class={s["btn  btn--primary"]}
+                id={s["view-more-btn"]}
                 aria-expanded="false"
                 aria-controls="gallery-container"
                 data-action="view-more"

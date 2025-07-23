@@ -1,5 +1,4 @@
 ---
-// import {Image} from '@unpic/astro'
 import { Image } from "astro:assets";
 import {DATABASE_URL} from "astro:env/server";
 import type { Media } from "@utils/payload/types";
@@ -15,12 +14,13 @@ const { image, classlist, size, eager, id } = Astro.props;
 ---
 <Image
     id={id}
-    src={`${DATABASE_URL}${image.url}`}
-    alt={image.alt as string}
+    src={`${DATABASE_URL}${image?.url}`}
+    alt={image.alt}
     title={image.alt}
-    width={image.width}
-    height={image.height}
-    class={classlist}
+    width={image.width as number}
+    height={image.height as number}
+    class:list={[classlist]}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}
+    priority={eager}
 />

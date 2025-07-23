@@ -1,5 +1,5 @@
 ---
-import "./contact.css";
+import s from "./style.module.css";
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 import IconLink from "@components/IconLink.astro";
@@ -10,16 +10,16 @@ const props = Astro.props;
 
 <div class="page-section" id="contact" style="padding-bottom: 0;">
     <Container>
-        <div class="overflow-contact__map" data-glow="true">
+        <div class={s["overflow-contact__map"]} data-glow="true">
             <slot set:html={props.location.iframe} />
         </div>
     </Container>
 
-    <div class="overlap-contact__content full-width" data-highlight="true">
+    <div class:list={[s["overlap-contact__content"], "full-width"]} data-highlight="true">
         <Container>
-            <div class="overlap-contact__top-row">
+            <div class={s["overlap-contact__top-row"]}>
                 <div>
-                    <h3>Location</h3>
+                    <h3>Localização</h3>
                     <address>
                         <slot
                             set:html={extractLexicalText(
@@ -33,9 +33,9 @@ const props = Astro.props;
                 </div>
             </div>
 
-            <div class="overlap-contact__bottom-row">
+            <div class={s["overlap-contact__bottom-row"]}>
                 <div>
-                    <h3>Phone Numbers</h3>
+                    <h3>Número de telefone</h3>
                     <address>
                         {
                             props.contact.phone.map((phone: any) => (
@@ -49,8 +49,8 @@ const props = Astro.props;
                     </address>
                 </div>
                 <div>
-                    <h3>Email Address</h3>
-                    <address class="two_column_contact__email">
+                    <h3>E-mail</h3>
+                    <address class={s["two_column_contact__email"]}>
                         {
                             props.contact.email.map((email: any) => (
                                 <IconLink

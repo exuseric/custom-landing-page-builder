@@ -4,18 +4,17 @@ import type { HeroBlock } from "@utils/payload/types";
 
 const {navigation, blocks, country, title} = await fetchPage(["navigation", "blocks", "country", "title"])
 const hero: HeroBlock = blocks.find(block => block.blockType === 'simple-hero') || {} as HeroBlock
-console.log(`Hero Type: ${hero.type}`);
 // import BasicFLoatingNav from "@components/PageNavigation/Navigation/FixedNav/FixedNav.astro";
-import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
-import StickyNav from "@components/PageNavigation/StickyNav/StickyNav.astro";
-import BlockyNav from "./BlockyNav/BlockyNav.astro";
-import SimpleNav from "./SimpleNav/SimpleNav.astro";
 // import CenterNav from "./CenterNav/CenterNav.astro";
+import FloatingPill from "@components/PageNavigation/FloatingPill/FloatingPill.astro";
+import ExpandingPillNav from "./ExpandingPillNav/ExpandingPillNav.astro";
+import SimpleNav from "./SimpleNav/SimpleNav.astro";
 const props = Astro.props;
 
-const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal", "big name"].includes(hero.type) ? true : false;
-const showSimpleNav = ["vertical", , "alternate vertical", "default", "default vertical", "two column", "stylised horizontal", "horizontal"].includes(hero.type)
-const showPillNav = ["big name"].includes(hero.type)
+const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal", "big name"].includes(hero.type as string) ? true : false;
+const showSimpleNav = ["vertical", , "alternate vertical", "default", "default vertical", "two column", "stylised horizontal", "horizontal"].includes(hero.type as string)
+const showPillNav = ["big name"].includes(hero.type as string)
+const expandingNav = ["split"].includes(hero.type as string)
 
 const navProps = {
     title,
@@ -24,9 +23,8 @@ const navProps = {
     fixedMenu: fixedMenu,
 }
 
-// console.log('Navigation Props:', navProps)
 ---
-<!-- <StickyNav {...navProps}/> -->
-
 {showSimpleNav && <SimpleNav {...navProps}/>}
 {showPillNav && <FloatingPill {...navProps}/>}
+
+{expandingNav && <ExpandingPillNav {...navProps}/>}

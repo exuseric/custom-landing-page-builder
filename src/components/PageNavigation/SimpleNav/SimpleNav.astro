@@ -1,9 +1,10 @@
 ---
 import Container from "@components/Container.astro";
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 import CustomImage from "@components/CustomImage.astro";
 import { translateNavItem } from "@utils/translations";
-import "./style.css";
+import s from "./style.module.css";
+
 import InfoCard from "@components/Cards/Info/InfoCard.astro";
 type Link = {
     id: string;
@@ -31,7 +32,7 @@ const pageLinks = menuItems.map((link: Link) =>
 ---
 
 <nav
-    class="simple-nav"
+    class={s["simple-nav"]}
     data-nav-bar
     data-nav
     data-is-active="false"
@@ -41,12 +42,12 @@ const pageLinks = menuItems.map((link: Link) =>
     aria-label="Main navigation"
 >
     <Container>
-        <div class="simple-nav__wrapper">
-            <a class="simple-nav__logo" href="/" aria-label={`${title.trim()} - Go to homepage`}>
+        <div class={s["simple-nav__wrapper"]}>
+            <a class={s["simple-nav__logo"]} href="/" aria-label={`${title.trim()} - Go to homepage`}>
                 <CustomImage
                     eager={true}
                     image={logo}
-                    classlist="simple-nav__logo-image"
+                    classlist={s["simple-nav__logo-image"]}
                     size="logo"
                 />
                 <span class="simple-nav__logo-text">{title}</span>
@@ -54,7 +55,7 @@ const pageLinks = menuItems.map((link: Link) =>
 
             <ul
                 id="main-navigation-menu"
-                class="simple-nav__menu"
+                class={s["simple-nav__menu"]}
                 data-menu
                 data-is-active="false"
                 aria-label="Main menu"
@@ -65,13 +66,7 @@ const pageLinks = menuItems.map((link: Link) =>
                         <li role="none">
                             <a
                                 href={link.anchorId}
-                                class={
-                                    link.style.toLocaleLowerCase() === "primary"
-                                        ? "simple-nav__link btn btn-md btn-primary"
-                                        : link.style.toLocaleLowerCase() === "secondary" ?
-                                        "simple-nav__link btn btn-md btn-secondary"
-                                        :"simple-nav__link"
-                                }
+                                class:list={[s["simple-nav__link"], "btn", link.style.toLocaleLowerCase() === "primary" ? "btn--primary" : link.style.toLocaleLowerCase() === "secondary" ? "btn--secondary" : "btn--text"]}
                                 role="menuitem"
                             >
                                 {link.name}
@@ -83,7 +78,7 @@ const pageLinks = menuItems.map((link: Link) =>
 
             <button
                 type="button"
-                class="simple-nav__toggle"
+                class={s["simple-nav__toggle"]}
                 data-menu-toggle
                 data-is-active="false"
                 aria-label="Open main menu"

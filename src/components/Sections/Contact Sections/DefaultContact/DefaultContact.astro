@@ -1,5 +1,5 @@
 ---
-import "./contact.css";
+import s from "./style.module.css";
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 import IconLink from "@components/IconLink.astro";
@@ -8,14 +8,16 @@ import SocialLinkComponent from "@components/SocialLink.astro";
 const props = Astro.props;
 ---
 
-<div class="default_contact container" id="contact" data-highlight="true">
+<div class:list={[s["default_contact"], 'page-section']} id="contact" data-highlight="true">
     <Container>
+        <header class="page-section__header">
+            <h2>{props.title}</h2>
+        </header>
         <div
-            class="default_contact__content"
+            class={s["default_contact__content"]}
         >
-            <article>
-                <h2>{props.title}</h2>
-                <address class="two_column_contact__phone">
+            <div>
+                <address class={s["two_column_contact__phone"]}>
                     {
                         props.contact.phone.map((phone: any) => (
                             <IconLink
@@ -27,7 +29,7 @@ const props = Astro.props;
                     }
                 </address>
 
-                <address class="two_column_contact__email">
+                <address class={s["two_column_contact__email"]}>
                     {
                         props.contact.email.map((email: any) => (
                             <IconLink
@@ -40,19 +42,19 @@ const props = Astro.props;
                 </address>
                 {
                     props.socialLinks.length > 0 && (
-                        <div class="social_links">
+                        <div class={s["social_links"]}>
                            {props.socialLinks.map((social: any) => (
                             <SocialLinkComponent href={social.url} type={social.platform} text={social.title} />
                            ))}
                         </div>
                     )
                 }
-                <div class="working_hours">
+                <div class={s["working_hours"]}>
                     <slot set:html={props.operatingHours} />
                 </div>
-            </article>
+            </div>
 
-            <div class="default_contact__location">
+            <div class={s["default_contact__location"]}>
                 <address>
                     <slot set:html={extractLexicalText(props.location.address)} />
                 </address>

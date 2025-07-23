@@ -1,5 +1,5 @@
 ---
-import "./contact.css";
+import s from "./style.module.css";
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
 import IconLink from "@components/IconLink.astro";
@@ -7,19 +7,19 @@ import IconLink from "@components/IconLink.astro";
 const props = Astro.props;
 ---
 
-<div class="two_column_contact container" id="contact" data-highlight="true">
+<div class:list={[s["two_column_contact"], "page-section"]} id="contact" data-highlight="true">
     <Container>
-        <header class="content_section__header">
+        <header class={s["content_section__header"]}>
             <h2>{props.title}</h2>
         </header>
-        <div class="two_column_contact__content">
-            <div class="two_column_contact__body">
+        <div class={s["two_column_contact__content"]}>
+            <div class={s["two_column_contact__body"]}>
                 <adrress>
                     <slot
                         set:html={extractLexicalText(props.location.address)}
                     />
                 </adrress>
-                <div class="two_column_contact__phone">
+                <div class={s["two_column_contact__phone"]}>
                     {
                         props.contact.phone.map((phone: any) => (
                             <IconLink
@@ -31,7 +31,7 @@ const props = Astro.props;
                     }
                 </div>
 
-                <div class="two_column_contact__email">
+                <div class={s["two_column_contact__email"]}>
                     {
                         props.contact.email.map((email: any) => (
                             <IconLink
@@ -44,7 +44,7 @@ const props = Astro.props;
                 </div>
             </div>
 
-            <div class="two_column_contact__location">
+            <div class={s["two_column_contact__location"]}>
                 <slot set:html={props.location.iframe} />
             </div>
         </div>
