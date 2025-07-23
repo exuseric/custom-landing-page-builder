@@ -30,10 +30,10 @@ export const COUNTRY_LANGUAGE_MAP: Record<CountryCode, string> = {
   cv: "pt-CV",
   mz: "pt-MZ",
   tz: "en-TZ",
-  st: "pt-ST",
+  stm: "pt-ST",
 } as const;
 
-const PORTUGUESE_COUNTRIES: ReadonlySet<CountryCode> = new Set(['cv', 'mz', 'st']);
+const PORTUGUESE_COUNTRIES: ReadonlySet<CountryCode> = new Set(['cv', 'mz', 'stm']);
 
 /**
  * Determines the language based on country code

@@ -12,10 +12,13 @@ import Container from "@components/Container.astro";
 import s from "./style.module.css";
 
 import { Image } from "astro:assets";
+import { fetchPage } from '@utils/payload';
 const { title, company, url, country } = Astro.props;
 
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
+const { companyName, companyUrl, footerStyle } = await fetchPage(['companyName', 'companyUrl', 'footerStyle']);
+console.log(companyName, companyUrl, footerStyle);
 ---
 
 <footer class:list={[s["floating_footer"], "page-section"]}>
@@ -25,7 +28,7 @@ const designedByText = translateFooterItem('designed_by', country);
                 &copy; {new Date().getFullYear()} {title.split("|")[0].trim()}. {copyright}
             </p>
             <a
-                href={url}
+                href={companyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 class={s["floating_footer__logo"]}
@@ -38,7 +41,7 @@ const designedByText = translateFooterItem('designed_by', country);
                     class={s["floating_footer__logo-image"]}
                 />
                 <span class={s["floating_footer__logo-text"]}
-                    >{designedByText} {company}</span
+                    >{designedByText} {companyName}</span
                 >
             </a>
         </div>

@@ -327,6 +327,8 @@ export type ParsedPage = {
   socialLinks: SocialLink[];
   blocks: Block[];
   footerStyle: string;
+  companyUrl: string;
+  companyName: string;
   updatedAt: string;
   createdAt: string;
 };
@@ -362,6 +364,8 @@ export type RawPageData = {
   "call to action"?: Block[];
   contact?: Block[];
   "footer style": string;
+  "Company url": string;	
+  "Company Name": string;
   updatedAt: string;
   createdAt: string;
 };

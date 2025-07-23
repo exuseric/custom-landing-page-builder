@@ -1,5 +1,5 @@
 export type SupportedLanguage = 'en' | 'pt';
-export type CountryCode = 'ke' | 'cv' | 'mz' | 'tz' | 'st';
+export type CountryCode = 'ke' | 'cv' | 'mz' | 'tz' | 'stm';
 
 export interface NavigationTranslations {
   home: string;

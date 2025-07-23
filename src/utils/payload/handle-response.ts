@@ -91,6 +91,8 @@ export function parsePage(raw: RawPageData): ParsedPage {
     socialLinks: raw["social links"] || [],
     blocks,
     footerStyle: raw["footer style"] || 'default',
+    companyUrl: raw["Company url"] || '',
+    companyName: raw["Company Name"] || '',
     updatedAt: raw.updatedAt,
     createdAt: raw.createdAt,
   };
