@@ -11,9 +11,10 @@ import { extractLexicalText } from "@utils/payload/helpers";
 const props = Astro.props;
 ---
 
-<div
+<section
     class:list={[s["vertical_cta content_section"], "page-section"]}
     data-offscreen
+    aria-labelledby={props.id}
 >
     <Container>
         <div class="col-grid-12">
@@ -31,10 +32,10 @@ const props = Astro.props;
                     }
                 </div>
                 <div class={s["vertical-section__content"]}>
-                    <h2>{props.title}</h2>
+                    <h2 id={props.id}>{props.title}</h2>
                     <slot set:html={extractLexicalText(props.body)} />
                 </div>
             </div>
         </div>
     </Container>
-</div>
+</section>
