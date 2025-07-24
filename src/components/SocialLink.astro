@@ -16,7 +16,7 @@ const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {
 };  
 ---
 
-<a href={props.href} data-icon-link>
+<a href={props.href} data-icon-link target="_blank">
     <Icon name={icons[props.type]} aria-hidden="true" focusable="false" />
     <span>{props.text}</span>
 </a>
