@@ -239,14 +239,28 @@ export type SymbioticAboutBlock = {
   /**
    * The ID of the section this menu item links to (without the # symbol)
    */
-  'anchor id' ?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
-  excerpt:LexicalContent;
+  'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
+  excerpt: LexicalContent;
   body: LexicalContent;
   image: Media;
-  highlight ?: boolean | null;
+  highlight?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'symbiotic-about';
+}
+
+export type TestimonialCarousel = {
+  title: string;
+  description?: LexicalContent | null;
+  highlight?: boolean | null;
+  testimonies?: {
+    testimony: LexicalContent;
+    title: string;
+    id?: string | null;
+  }[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel-testimonial';
 }
 
 // Union type for all blocks - UPDATE THIS when adding new block types
@@ -261,6 +275,7 @@ export type Block =
   | TwoImageCallToActionBlock
   | SimpleTestimonialBlock
   | SymbioticAboutBlock
+  | TestimonialCarousel
   | ContactBlock;
 
 /*
@@ -364,7 +379,7 @@ export type RawPageData = {
   "call to action"?: Block[];
   contact?: Block[];
   "footer style": string;
-  "Company url": string;	
+  "Company url": string;
   "Company Name": string;
   updatedAt: string;
   createdAt: string;

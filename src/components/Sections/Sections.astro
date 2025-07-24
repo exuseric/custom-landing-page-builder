@@ -13,6 +13,7 @@ import VerticalImageCta from "@components/Sections/CtaSection/VerticalImageCta/V
 import WhyChooseUsInteractive from "@components/Sections/Stats/WhyChooseUsInteractive/WhyChooseUsInteractive.astro"
 import SymbioticAbout from "@components/Sections/SymbioticAbout/SymbioticAbout.astro"
 import RoundedAbout from "@components/Sections/RoundedAbout/RoundedAbout.astro"
+import TestimonialCarousel from "./Testimonial/TestimonialCarousel/TestimonialCarousel.astro"
 
 const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
 ---
@@ -27,8 +28,9 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['bloc
             case 'content-with-grid':
                 return <ContentWithGrid {...block} />
             case 'symbiotic-about':
-                // return <SymbioticAbout {...block} />
-                return <RoundedAbout {...block} />
+                return <SymbioticAbout {...block} />
+            // case 'rounded-about':
+            //     return <RoundedAbout {...block} />
             case 'why-choose-us-column':
                 return <WhyChooseUsColumn {...block}/>
             case 'why-choose-us-grid':
@@ -43,6 +45,8 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['bloc
                 return <VerticalImageCta {...block} {coreValues}/>
             case 'simple-testimonial':
                 return <SimpleTestimonial {...block} />
+            // case 'carousel-testimonial':
+            //     return <TestimonialCarousel {...block} />
             case 'simple-contact':
                 return <ContactSection {...block} {socialLinks} {operatingHours}/>
             default:

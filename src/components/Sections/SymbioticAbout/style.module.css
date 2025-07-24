@@ -52,6 +52,7 @@
     grid-column: 1 / -1;
     grid-row: 2 / -2;
     padding-block: var(--container-padding-block);
+    text-align: left;
 }
 
 .symbiotic-about__content::before,
