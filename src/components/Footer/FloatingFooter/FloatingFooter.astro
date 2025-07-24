@@ -13,15 +13,13 @@ import Container from "@components/Container.astro";
 import s from "./style.module.css";
 
 import { Image } from "astro:assets";
+import { fetchPage } from '@utils/payload';
 const { title, company, url, country } = Astro.props;
 
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
-
-const { companyUrl, companyName } = await fetchPage([
-	"companyUrl",
-	"companyName",
-]);
+const { companyName, companyUrl, footerStyle } = await fetchPage(['companyName', 'companyUrl', 'footerStyle']);
+console.log(companyName, companyUrl, footerStyle);
 ---
 
 <footer class:list={[s["floating_footer"], "page-section"]}>

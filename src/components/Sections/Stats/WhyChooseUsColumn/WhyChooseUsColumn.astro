@@ -2,7 +2,7 @@
 import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
 interface Props extends WhyChooseUsColumnBlock {}
 
-import { Icon } from "astro-iconify";
+// import { Icon } from "astro-iconify";
 import s from "./style.module.css";
 
 import Container from "@components/Container.astro";
@@ -11,14 +11,15 @@ import { extractLexicalText } from "@utils/payload/helpers";
 const props = Astro.props;
 ---
 
-<div
+<section
     class={s["page-section"]}
     data-highlight={props.highlight ?? 'false'}
     data-offscreen
+    aria-labelledby={props.id}
 >
     <Container>
         <header class:list={[s["two_column_stat__header"], "page-section__header"]}>
-            <h2>{props.title}</h2>
+            <h2 id={props.id}>{props.title}</h2>
             <slot set:html={extractLexicalText(props.description)} />
         </header>
         <div class={s["two_column_stat__wrapper"]}>
@@ -53,4 +54,4 @@ const props = Astro.props;
             </div>
         </div>
     </Container>
-</div>
+</section>

@@ -11,6 +11,8 @@ export const pageKeys = [
   "socialLinks",
   "blocks",
   "footerStyle",
+  "companyUrl",
+  "companyName",
   "updatedAt",
   "createdAt",
   "companyUrl",

@@ -28,9 +28,8 @@ export async function fetchPage<T extends PageKey>(
 ): Promise<Pick<ParsedPage, T>> {
   try {
     const DATABASE_URL = "https://landing-cms-payload.onrender.com"
-    const PAGE_ID = 7
+    const PAGE_ID = 8
     const res = await fetch(`${DATABASE_URL}/api/page/${PAGE_ID}?depth=2&draft=false&locale=undefined`);
-
     if (!res.ok) {
       throw new LandingPageError(
         `Failed to fetch landing page: ${res.status} ${res.statusText}`,
@@ -40,6 +39,7 @@ export async function fetchPage<T extends PageKey>(
 
     const json = await res.json();
     const parsed = parsePage(json);
+    // console.log(parsed);
 
     // Build result object with only requested keys
     const result = {} as Pick<ParsedPage, T>;

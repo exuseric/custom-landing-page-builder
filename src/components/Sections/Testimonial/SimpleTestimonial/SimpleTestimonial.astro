@@ -13,11 +13,12 @@ const props = Astro.props;
   class:list={[s["testimonial-section"], "page-section"]}
   data-highlight={props.highlight ?? 'false'}
   data-offscreen
+  aria-labelledby={props.id}
 >
   <Container>
     <div class={s["testimonial-container"]}>
       <header class:list={[["content_section__header"], "page-section__header"]}>
-        <h2 class={s["testimonial-title"]}>{props.title}</h2>
+        <h2 id={props.id} class={s["testimonial-title"]}>{props.title}</h2>
       </header>
       <div class={s["testimonial-grid"]}>
         {

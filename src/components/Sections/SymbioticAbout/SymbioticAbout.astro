@@ -9,11 +9,12 @@ import Gallery from "../Gallery/Gallery.astro";
 const props = Astro.props;
 ---
 
-<div
+<section
     class:list={[s["symbiotic-about"], "page-section"]}
     data-highlight={props.highlight}
     id={props["anchor id"]?.split(" ").join("-")}
     data-offscreen
+    aria-labelledby={props.id}
 >
     <Container>
         <div
@@ -27,7 +28,7 @@ const props = Astro.props;
                 image={props.image}
             />
             <Container>
-                <h2 class={s["symbiotic-about__title"]}>
+                <h2 id={props.id} class={s["symbiotic-about__title"]}>
                     {props.title}
                 </h2>
                 <div class={s["symbiotic-about__excerpt"]}>
@@ -46,4 +47,4 @@ const props = Astro.props;
             </div>
         </div>
     </Container>
-</div>
+</section>

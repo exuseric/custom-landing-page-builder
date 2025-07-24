@@ -1,4 +1,5 @@
 ---
+import { fetchPage } from '@utils/payload';
 import { translateFooterItem } from '@utils/translations';
 import { fetchPage } from "@utils/payload";
 
@@ -16,10 +17,8 @@ import { Image } from "astro:assets";
 const { title, company, url, country } = Astro.props;
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
-const { companyUrl, companyName } = await fetchPage([
-	"companyUrl",
-	"companyName",
-]);
+const { companyName, companyUrl, footerStyle } = await fetchPage(['companyName', 'companyUrl', 'footerStyle']);
+console.log(companyName, companyUrl, footerStyle);
 ---
 
 <footer class:list={[s["footer"], "full-width"]}>

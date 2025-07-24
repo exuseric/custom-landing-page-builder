@@ -8,10 +8,10 @@ import SocialLinkComponent from "@components/SocialLink.astro";
 const props = Astro.props;
 ---
 
-<div class:list={[s["default_contact"], 'page-section']} id="contact" data-highlight="true">
+<section class:list={[s["default_contact"], 'page-section']} id="contact" data-highlight="true" aria-labelledby={props.id}>
     <Container>
         <header class="page-section__header">
-            <h2>{props.title}</h2>
+            <h2 id={props.id}>{props.title}</h2>
         </header>
         <div
             class={s["default_contact__content"]}
@@ -62,4 +62,4 @@ const props = Astro.props;
             </div>
         </div>
     </Container>
-</div>
+</section>
