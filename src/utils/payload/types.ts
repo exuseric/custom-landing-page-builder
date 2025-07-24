@@ -327,6 +327,8 @@ export type ParsedPage = {
   socialLinks: SocialLink[];
   blocks: Block[];
   footerStyle: string;
+  companyUrl: string;
+  companyName: string;
   updatedAt: string;
   createdAt: string;
 };

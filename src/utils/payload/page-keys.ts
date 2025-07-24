@@ -12,7 +12,9 @@ export const pageKeys = [
   "blocks",
   "footerStyle",
   "updatedAt",
-  "createdAt"
+  "createdAt",
+  "companyUrl",
+  "companyName"
 ] as const;
 
 export type PageKey = typeof pageKeys[number];

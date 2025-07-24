@@ -1,5 +1,6 @@
 ---
 import { translateFooterItem } from '@utils/translations';
+import { fetchPage } from "@utils/payload";
 
 interface Props {
     title: string;
@@ -16,6 +17,11 @@ const { title, company, url, country } = Astro.props;
 
 const copyright = translateFooterItem('copyright', country);
 const designedByText = translateFooterItem('designed_by', country);
+
+const { companyUrl, companyName } = await fetchPage([
+	"companyUrl",
+	"companyName",
+]);
 ---
 
 <footer class:list={[s["floating_footer"], "page-section"]}>
@@ -25,7 +31,7 @@ const designedByText = translateFooterItem('designed_by', country);
                 &copy; {new Date().getFullYear()} {title.split("|")[0].trim()}. {copyright}
             </p>
             <a
-                href={url}
+                href={companyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 class={s["floating_footer__logo"]}
@@ -38,7 +44,7 @@ const designedByText = translateFooterItem('designed_by', country);
                     class={s["floating_footer__logo-image"]}
                 />
                 <span class={s["floating_footer__logo-text"]}
-                    >{designedByText} {company}</span
+                    >{designedByText} {companyName}</span
                 >
             </a>
         </div>
