@@ -11,10 +11,10 @@ import ExpandingPillNav from "./ExpandingPillNav/ExpandingPillNav.astro";
 import SimpleNav from "./SimpleNav/SimpleNav.astro";
 const props = Astro.props;
 
-const fixedMenu = ["horizontal with image", "black modern", "gradient", "default", "default horizontal", "big name"].includes(hero.type as string) ? true : false;
-const showSimpleNav = ["alternate vertical", , "vertical", "default", "default vertical", "two column", "stylised horizontal", "horizontal"].includes(hero.type as string)
+const fixedMenu = ["horizontal with image", "black modern", "gradient", "default horizontal", "big name"].includes(hero.type as string) ? true : false;
+const showSimpleNav = ["vertical","alternate vertical", "default vertical", "two column", "stylised horizontal", "horizontal"].includes(hero.type as string)
 const showPillNav = ["big name"].includes(hero.type as string)
-const expandingNav = ["split"].includes(hero.type as string)
+const expandingNav = ["split","default"].includes(hero.type as string)
 
 const navProps = {
     title,

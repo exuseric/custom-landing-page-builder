@@ -27,6 +27,7 @@ const props = Astro.props;
         <div class={s["content-with-grid__grid-wrapper"]}>
             {props['card type'] === 'basic' && <Basic cards={props['card grid']}/>}
             {props['card type'] === 'alternating basic' && (<AlternatingBasic cards={props['card grid']} />)}
+            {props['card type'] === 'alternating' && (<Alternating cards={props['card grid']} />)}
         </div>
     </Container>
 </section>

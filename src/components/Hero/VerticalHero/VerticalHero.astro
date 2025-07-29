@@ -13,8 +13,8 @@ const props = Astro.props;
 <header class:list={[s["vertical_hero content_section"], "bg--primary-darker"]}>
     <Container>
         <article class={s["vertical_hero__content"]} data-direction="column">
-            <h1>{props.heading}</h1>
-            <div>
+            <h1 data-animate="fade-slide-load">{props.heading}</h1>
+            <div data-animate="fade-slide-load" data-animate-children="true">
                 <p>{props.excerpt}</p>
                 <a
                     class="btn btn--primary "
@@ -25,7 +25,7 @@ const props = Astro.props;
             </div>
         </article>
 
-        <div class:list={[s["vertical_hero__image_wrapper"], "breakout"]}>
+        <div class:list={[s["vertical_hero__image_wrapper"], "breakout"]} data-animate="fade-slide-load">
             <CustomImage
                 classlist={s["vertical_hero__image"]}
                 eager={true}

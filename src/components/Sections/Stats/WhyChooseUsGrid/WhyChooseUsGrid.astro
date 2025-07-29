@@ -2,7 +2,7 @@
 import type { WhyChooseUsColumnBlock } from "@utils/payload/types";
 interface Props extends WhyChooseUsColumnBlock {}
 
-// import { Icon } from "astro-iconify";
+import { Icon } from "astro-iconify";
 import s from "./style.module.css"
 import Container from "@components/Container.astro";
 import { extractLexicalText } from "@utils/payload/helpers";
@@ -21,9 +21,9 @@ const cardStyles = [
 <section class="page-section" data-offscreen aria-labelledby={props.id}>
     <Container>
         <div class={s["simple-stats__container"]}>
-            <div class={s["simple-stats__grid"]} data-animate="slide-up" data-animate-children-only="true">
+            <div class={s["simple-stats__grid"]}>
                 <div class={s["simple-stats__header"]}>
-                    <div class={s["simple-stats__header-content"]}>
+                    <div class={s["simple-stats__header-content"]} data-animate="fade-slide" data-animate-children="true" data-animate-children-only="true">
                         <h2 id={props.id}>{props.title}</h2>
                         <slot class={s["simple-stats__description"]} set:html={extractLexicalText(props.description)} />
                     </div>
@@ -34,9 +34,10 @@ const cardStyles = [
                         return (
                             <div
                                 class={s["simple-stats__item"]}
+                                data-animate="fade-slide" data-animate-children="true" data-animate-children-only="true"
                             >
                                 <div class={s["simple-stats__icon-box"]}>
-                                    {/* <Icon class={s["simple-stats__icon"]} name={card.icon} aria-hidden="true" focusable="false" /> */}
+                                    <Icon class={s["simple-stats__icon"]} name={card.icon} aria-hidden="true" focusable="false" />
                                 </div>
                                 <div class={s["simple-stats__item-content"]}>
                                     <h3>{card.title}</h3>

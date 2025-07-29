@@ -93,7 +93,7 @@
 }
 
 .simple-nav[data-is-active="false"] .simple-nav__logo-image {
-    max-height: 150px;
+    max-height: 50px;
 }
 
 .simple-nav[data-fixed-menu="true"][data-is-active="false"] .simple-nav__logo,

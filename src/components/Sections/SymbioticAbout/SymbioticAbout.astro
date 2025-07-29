@@ -19,6 +19,8 @@ const props = Astro.props;
         <div
             class={s["symbiotic-about__top-section"]}
             data-animate="fade-slide"
+            data-animate-children="true"
+            data-animate-children-only="true"
         >
             <CustomImage
                 classlist={s["symbiotic-about__image"]}
@@ -40,7 +42,7 @@ const props = Astro.props;
     <Container>
         <div class={s["symbiotic-about__bottom-section"]}>
             <div class={s["symbiotic-about__content"]}>
-                <article class={s["symbiotic-about__content-article"]}>
+                <article class={s["symbiotic-about__content-article"]} data-animate="fade-slide" data-animate-children="true" data-animate-children-only="true">
                     <slot set:html={extractLexicalText(props.body)} />
                 </article>
             </div>

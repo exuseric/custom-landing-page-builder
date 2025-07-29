@@ -7,16 +7,16 @@ const {cards} = Astro.props;
 // console.log(cards);
 ---
 
-<div class={s["basic_card"]} data-animate="slide-up" data-animate-children-only="true">
+<div class={s["basic_card"]}>
     {
         cards.map((card: BasicCard) => (
-            <article>
+            <article data-animate="fade-slide" data-animate-children="true" data-animate-children-only="true">
                 {card.image && (
                     <div class={s["basic_card__image-wrapper"]}>
                         <CustomImage eager={false} image={card.image} size="medium" classlist={s["basic_card__image_component"]} />
                     </div>
                 )}
-                <div class={s["basic_card__content"]}>
+                <div class={s["basic_card__content"]} data-animate="fade-slide" data-animate-children="true" data-animate-children-only="true">
                     <h3>{card.title}</h3>
                     <slot set:html={extractLexicalText(card.body)} />
                 </div>
