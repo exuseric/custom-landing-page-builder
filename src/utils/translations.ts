@@ -2,13 +2,13 @@ import navigationTranslations from './lang/navigation.json';
 import type { CountryCode, FooterTranslations, NavigationTranslations, SupportedLanguage, Translations } from './types';
 export const languages: Record<string, string> = {
 	ke: "en-KE",
-	cv: "pt-CV",
+	cbv: "pt-cbv",
 	mz: "pt-MZ",
 	tz: "en-TZ",
 	st: "pt-ST",
 };
 // export function getLanguageFromCountry(country: string): 'en' | 'pt' {
-//     const ptCountries = ['cv', 'mz', 'st'];
+//     const ptCountries = ['cbv', 'mz', 'st'];
 //     return ptCountries.includes(country) ? 'pt' : 'en';
 // }
 
@@ -27,17 +27,17 @@ export const languages: Record<string, string> = {
 // i18n.ts
 export const COUNTRY_LANGUAGE_MAP: Record<CountryCode, string> = {
   ke: "en-KE",
-  cv: "pt-CV",
+  cbv: "pt-cbv",
   mz: "pt-MZ",
   tz: "en-TZ",
   stm: "pt-ST",
 } as const;
 
-const PORTUGUESE_COUNTRIES: ReadonlySet<CountryCode> = new Set(['cv', 'mz', 'stm']);
+const PORTUGUESE_COUNTRIES: ReadonlySet<CountryCode> = new Set(['cbv', 'mz', 'stm']);
 
 /**
  * Determines the language based on country code
- * @param country - The country code (e.g., 'ke', 'cv', 'mz', 'tz', 'st')
+ * @param country - The country code (e.g., 'ke', 'cbv', 'mz', 'tz', 'st')
  * @returns The language code ('en' or 'pt')
  * @throws Error if country code is not supported
  */
@@ -132,7 +132,7 @@ export function translateFooterItem(item: string, country: string): string {
 /**
  * Gets the full locale string for a country
  * @param country - The country code
- * @returns The full locale string (e.g., 'en-KE', 'pt-CV')
+ * @returns The full locale string (e.g., 'en-KE', 'pt-cbv')
  */
 export function getLocaleFromCountry(country: string): string {
   if (!isValidCountryCode(country)) {

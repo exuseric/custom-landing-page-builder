@@ -78,13 +78,35 @@
     font-size: var(--body-large);
     font-weight: var(--body-medium-weight);
     text-decoration: none;
-    color: currentColor;
     cursor: pointer;
 }
 
-.simple-nav__logo-image {
+.simple-nav__logo-image,
+.simple-nav__logo-text {
     width: auto;
+    /* max-height: 150px; */
+    transition: all var(--transition-enter-elastic-fast);
+}
+
+.simple-nav[data-is-active="true"] .simple-nav__logo-image {
     max-height: 50px;
+}
+
+.simple-nav[data-is-active="false"] .simple-nav__logo-image {
+    max-height: 150px;
+}
+
+.simple-nav[data-fixed-menu="true"][data-is-active="false"] .simple-nav__logo,
+.simple-nav[data-fixed-menu="true"][data-is-active="false"] .simple-nav__link {
+    color: currentColor;
+}
+
+.simple-nav[data-is-active="false"] .simple-nav__logo-text {
+    opacity: 0;
+}
+
+.simple-nav[data-is-active="true"] .simple-nav__logo-text {
+    opacity: 1;
 }
 
 .simple-nav__logo-text {
@@ -92,28 +114,32 @@
 }
 
 .simple-nav__menu {
-    display: none;
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 0;
+    height: max-content;
+    /* height: 0; */
+    translate: 0 -250%;
     overflow: hidden;
     transition-behavior: allow-discrete;
-    transition: display var(--transition-exit-fast), height var(--transition-exit-medium);
+    transition: display var(--transition-exit-fast), height var(--transition-exit-medium), translate var(--transition-complex-elastic-fast);
 }
 
 .simple-nav__menu[data-is-active="true"] {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: max-content;
+
+    translate: 0 0;
     background-color: var(--nav-bg);
     box-shadow: var(--nav-shadow);
     padding: var(--size-2);
-    transition: display var(--transition-enter-fast) height var(--transition-enter-slow);
+    transition-behavior: allow-discrete;
+    transition: display var(--transition-exit-fast), height var(--transition-exit-medium), translate var(--transition-complex-elastic-fast);
 }
 
 .simple-nav__link {
@@ -188,6 +214,7 @@
         box-shadow: none;
         padding: 0;
         height: 100%;
+        translate: 0 0;
     }
 
     .simple-nav__menu li {

@@ -7,22 +7,6 @@ import Footer from "@components/Footer/Footer.astro";
 import Head from "@components/Head.astro";
 import { fetchPage } from "@utils/payload";
 
-const parentUrls: Record<string, string> = {
-    ke: 'https://www.yellowpageskenya.com/',
-    cv: 'https://www.paginasamarelas.cv/',
-    mz: 'https://www.paginasamarelas.co.mz/',
-    tz: 'https://www.yellow.co.tz/',
-    st: 'https://www.paginasamarelas.st/',
-};
-
-const companyNames: Record<string, string> = {
-    ke: 'Yellow Pages Kenya',
-    cv: 'Páginas Amarelas de Cabo Verde',
-    mz: 'Páginas Amarelas Moçambique',
-    tz: 'Yellow Tanzania',
-    st: 'Páginas Amarelas São Tomé',
-};
-
 const { country, themeColor, footerStyle, title} = await fetchPage([
 	"country",
 	"themeColor",
@@ -49,7 +33,7 @@ const { country, themeColor, footerStyle, title} = await fetchPage([
 		<main>
 			<Sections />
 		</main>
-		<Footer title={title} style={footerStyle} country={country} company={companyNames[country]} url={parentUrls[country]} />
+		<Footer title={title} style={footerStyle}/>
 	</body>
 </html>
 <style define:vars={{ themeColor }} is:global></style>

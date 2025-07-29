@@ -13,7 +13,6 @@ import Container from "@components/Container.astro";
 import s from "./style.module.css";
 
 import { Image } from "astro:assets";
-import { fetchPage } from '@utils/payload';
 const { title, company, url, country } = Astro.props;
 
 const copyright = translateFooterItem('copyright', country);

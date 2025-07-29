@@ -14,7 +14,7 @@ const dom = new JSDOM(htmlContent);
 const document = dom.window.document;
 const languages: Record<string, string> = {
 	ke: "en-KE",
-	cv: "pt-CV",
+	cbv: "pt-cbv",
 	mz: "pt-MZ",
 	tz: "en-TZ",
 	st: "pt-ST",

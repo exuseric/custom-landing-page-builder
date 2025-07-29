@@ -15,10 +15,10 @@ const { image, classlist, size, eager, id } = Astro.props;
 <Image
     id={id}
     src={`${DATABASE_URL}${image?.url}`}
-    alt={image.alt}
+    alt={image.alt || ""}
     title={image.alt}
-    width={image.width as number}
-    height={image.height as number}
+    width={image.width as number || 1000}
+    height={image.height as number || 1000}
     class:list={[classlist]}
     loading={eager ? "eager" : "lazy"}
     decoding={eager ? "sync" : "async"}

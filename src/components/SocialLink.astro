@@ -7,12 +7,16 @@ interface Props {
 import { Icon } from "astro-iconify";
 const props = Astro.props;
 
-const icons: Record<string, `mdi:${string}` | `ri:${string}`> = {
+const icons: Record<string, `mdi:${string}` | `ri:${string}` | `ic:${string}`> = {
     'x (formerly twitter)': "ri:twitter-x-line",
     linkedin: "ri:linkedin-box-fill",
     facebook: "ri:facebook-box-fill",
     instagram: "ri:instagram-fill",
     youtube: "ri:youtube-fill",
+    tiktok: "ic:baseline-tiktok",
+    telegram: "ic:baseline-telegram",
+    whatsapp: "ri:whatsapp-fill",
+    pinterest: "mdi:pinterest",
 };  
 ---
 

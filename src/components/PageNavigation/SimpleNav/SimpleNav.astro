@@ -29,6 +29,8 @@ const pageLinks = menuItems.map((link: Link) =>
               anchorId: `#${link.anchorId.split(" ").join("-")}`,
           },
 );
+
+// console.log(logo, "logo in simple nav");
 ---
 
 <nav
@@ -43,14 +45,16 @@ const pageLinks = menuItems.map((link: Link) =>
 >
     <Container>
         <div class={s["simple-nav__wrapper"]}>
-            <a class={s["simple-nav__logo"]} href="/" aria-label={`${title.trim()} - Go to homepage`}>
-                <CustomImage
+            <a class:list={[s["simple-nav__logo"], "btn btn--text"]} href="/" aria-label={`${title.trim()} - Go to homepage`}>
+               {logo.url.length > 0 && <CustomImage
                     eager={true}
                     image={logo}
                     classlist={s["simple-nav__logo-image"]}
                     size="logo"
                 />
-                <span class="simple-nav__logo-text">{title}</span>
+                }
+                
+                <span class={s["simple-nav__logo-text"]}>{title}</span>
             </a>
 
             <ul

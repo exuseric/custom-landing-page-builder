@@ -36,7 +36,7 @@
 .two_column_stat__image_wrapper>img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     /* max-height: 300px; */
 }
 

@@ -42,7 +42,7 @@
 
     height: 100%;
     width: 100%;
-    max-height: 300px;
+    max-height: 400px;
     /* margin-top: var(--size-8); */
     margin-bottom: var(--size-8);
 }
@@ -64,7 +64,7 @@
     height: 100%;
     max-width: 100% !important;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
 
     /* border-radius: var(--size-8); */
     overflow: hidden;
