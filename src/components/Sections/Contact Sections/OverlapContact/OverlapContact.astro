@@ -20,12 +20,10 @@ const props = Astro.props;
         <Container>
             <div class={s["overlap-contact__top-row"]}>
                 <div>
-                    <h3 id={props.id}>Localização</h3>
+                    <h3 id={props.id}>Location</h3>
                     <address>
                         <slot
-                            set:html={extractLexicalText(
-                                props.location.address,
-                            )}
+                            set:html={props.location.address_html}
                         />
                     </address>
                 </div>
@@ -36,7 +34,7 @@ const props = Astro.props;
 
             <div class={s["overlap-contact__bottom-row"]}>
                 <div>
-                    <h3>Número de telefone</h3>
+                    <h3>Phone Number</h3>
                     <address>
                         {
                             props.contact.phone.map((phone: any) => (

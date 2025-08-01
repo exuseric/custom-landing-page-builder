@@ -176,9 +176,9 @@
     --clr-neutral-800: hsl(0, 5%, 25%);
     --clr-neutral-900: hsl(0, 5%, 5%);
 
-    --clr-section-highlight: var(--clr-primary-lighter);
-    --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l - 0.5) c h);
-    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) calc(l - 0.9) c h);
+    --clr-section-highlight: var(--clr-primary);
+    --clr-section-highlight-heading: oklch(from var(--clr-section-highlight) calc(l + 0.5) c h);
+    --clr-section-highlight-text: oklch(from var(--clr-section-highlight) 98% c h);
 
     /* Base timing values */
     --duration-slow: 500ms;

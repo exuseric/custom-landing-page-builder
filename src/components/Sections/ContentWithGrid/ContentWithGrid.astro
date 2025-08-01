@@ -21,7 +21,7 @@ const props = Astro.props;
     <Container>
         <header class:list={[s["content-with-grid__header"], "page-section__header"]}>
             <h2 id={props.id}>{props.title}</h2>
-            <slot set:html={extractLexicalText(props.body)} />
+            <slot set:html={props.body_html} />
         </header>
 
         <div class={s["content-with-grid__grid-wrapper"]}>

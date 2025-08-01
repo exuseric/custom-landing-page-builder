@@ -16,7 +16,7 @@ const props = Astro.props;
             <div class={s["two_column_contact__body"]}>
                 <adrress>
                     <slot
-                        set:html={extractLexicalText(props.location.address)}
+                        set:html={props.location.address_html}
                     />
                 </adrress>
                 <div class={s["two_column_contact__phone"]}>

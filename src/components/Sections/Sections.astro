@@ -14,6 +14,7 @@ import WhyChooseUsInteractive from "@components/Sections/Stats/WhyChooseUsIntera
 import SymbioticAbout from "@components/Sections/SymbioticAbout/SymbioticAbout.astro"
 import RoundedAbout from "@components/Sections/RoundedAbout/RoundedAbout.astro"
 import TestimonialCarousel from "./Testimonial/TestimonialCarousel/TestimonialCarousel.astro"
+import HeroWithSlideshow from "@components/Hero/HeroWithSlideshow/HeroWithSlideshow.astro"
 
 const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['blocks', 'socialLinks', 'operatingHours', 'coreValues'])
 ---
@@ -23,14 +24,16 @@ const {blocks, socialLinks, operatingHours, coreValues} = await fetchPage(['bloc
         switch (block.blockType) {
             case 'simple-hero':
                 return <SimpleHero {...block}/>
+            case 'slideshow-hero':
+                return <HeroWithSlideshow {...block}/>
             case 'content-with-media':
                 return <ContentWithMedia {...block}/>
             case 'content-with-grid':
                 return <ContentWithGrid {...block} />
             case 'symbiotic-about':
                 return <SymbioticAbout {...block} />
-            // case 'symbiotic-about':
-            //     return <RoundedAbout {...block} />
+            case 'rounded-about':
+                return <RoundedAbout {...block} />
             case 'why-choose-us-column':
                 return <WhyChooseUsColumn {...block}/>
             case 'why-choose-us-grid':

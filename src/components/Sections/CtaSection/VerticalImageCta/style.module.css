@@ -79,7 +79,7 @@
     }
 
     .vertical_cta__content h2 {
-        color: var(--clr-primary-dark);
+        color: var(--clr-section-highlight-heading);
         font-size: var(--heading-large);
     }
 
@@ -106,8 +106,8 @@
     height: 100%;
 }
 .vertical-section__content {
-    color: var(--clr-primary-lighter-text);
-    background-color: var(--clr-primary-lighter);
+    color: var(--clr-section-highlight-text);
+    background-color: var(--clr-section-highlight);
 }
 .vertical-section__content h2 {
     font-size: var(--heading-medium);

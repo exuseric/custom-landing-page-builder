@@ -56,7 +56,8 @@ const props = Astro.props;
 
             <div class={s["default_contact__location"]}>
                 <address>
-                    <slot set:html={extractLexicalText(props.location.address)} />
+                    <!-- <slot set:html={extractLexicalText(props.location.address)} /> -->
+                    <slot set:html={props.location.address_html} />
                 </address>
                 <slot set:html={props.location.iframe} />
             </div>

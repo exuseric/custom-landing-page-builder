@@ -85,6 +85,7 @@ export type ContactInfo = {
 
 export type LocationInfo = {
   address: LexicalContent;
+  address_html: string;
   iframe: string;
 };
 
@@ -116,6 +117,7 @@ export type WhyChooseUsColumnBlock = {
   blockType: "why-choose-us-column" | "why-choose-us-grid";
   title: string;
   description: LexicalContent;
+  description_html: string;
   image: Media;
   highlight?: boolean;
   blockName: string | null;
@@ -123,8 +125,10 @@ export type WhyChooseUsColumnBlock = {
     id: string;
     title: string;
     description?: LexicalContent;
+    description_html: string;
     icon?: string;
     body?: LexicalContent;
+    body_html: string;
   }>;
 };
 
@@ -133,11 +137,13 @@ export type WhyChooseUsInteractiveBlock = {
   blockType: "why-choose-us-interactive";
   title: string;
   description: LexicalContent;
+  description_html: string;
   blockName: string | null;
   options: Array<{
     id: string;
     title: string;
     description?: LexicalContent;
+    description_html: string;
     image: Media;
   }>;
 };
@@ -152,6 +158,7 @@ export type ContentWithMediaBlock = {
   highlight: boolean;
   blockName: string | null;
   body: LexicalContent;
+  body_html: string;
 };
 
 // NEW: Content with Grid block type
@@ -161,6 +168,7 @@ export type ContentWithGridBlock = {
   title: string;
   'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
   body: LexicalContent;
+  body_html: string;
   highlight: boolean;
   'card type'?: ('basic' | 'alternating' | 'alternating basic') | null;
   blockName: string | null;
@@ -169,6 +177,7 @@ export type ContentWithGridBlock = {
     image: Media;
     title: string;
     body: LexicalContent;
+    body_html: string;
   }>;
 };
 
@@ -177,6 +186,7 @@ export type BasicCard = {
   image: Media;
   title: string;
   body: LexicalContent;
+  body_html: string;
 }
 
 export type SimpleCallToActionBlock = {
@@ -184,6 +194,7 @@ export type SimpleCallToActionBlock = {
   blockType: "simple-call-to-action";
   heading: string;
   description: LexicalContent;
+  description_html: string;
   buttonText: string;
   blockName: string | null;
 };
@@ -195,6 +206,7 @@ export type ImageGridCallToActionBlock = {
   blockType: "image-grid-cta";
   blockName: string | null;
   body: LexicalContent;
+  body_html: string;
 }
 
 export type TwoImageCallToActionBlock = {
@@ -202,6 +214,7 @@ export type TwoImageCallToActionBlock = {
   blockType: "two-image-cta";
   title: string;
   body: LexicalContent;
+  body_html: string;
   blockName: string | null;
   images: Array<{
     id: string;
@@ -215,11 +228,13 @@ export type SimpleTestimonialBlock = {
   blockType: "simple-testimonial";
   title: string;
   description: LexicalContent;
+  description_html: string;
   blockName: string | null;
   highlight?: boolean;
   testimonies: Array<{
     id: string;
     testimony: LexicalContent;
+    testimony_html: string;
     title: string;
   }>;
 };
@@ -236,12 +251,10 @@ export type ContactBlock = {
 
 export type SymbioticAboutBlock = {
   title: string;
-  /**
-   * The ID of the section this menu item links to (without the # symbol)
-   */
   'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
   excerpt: LexicalContent;
   body: LexicalContent;
+  body_html: string;
   image: Media;
   highlight?: boolean | null;
   id?: string | null;
@@ -252,6 +265,7 @@ export type SymbioticAboutBlock = {
 export type TestimonialCarousel = {
   title: string;
   description?: LexicalContent | null;
+  description_html: string;
   highlight?: boolean | null;
   testimonies?: {
     testimony: LexicalContent;
@@ -261,6 +275,42 @@ export type TestimonialCarousel = {
   id?: string | null;
   blockName?: string | null;
   blockType: 'carousel-testimonial';
+}
+
+export type RoundedAbout = {
+  title: string;
+  'anchor id'?: ('home' | 'about' | 'services' | 'contact' | 'products') | null;
+  excerpt: LexicalContent;
+  body: LexicalContent;
+  body_html: string;
+  image: Media;
+  highlight?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rounded-about';
+}
+
+export type SlideshowHero = {
+  heading: string;
+  excerpt: string;
+  slides?:{
+    cover: Media;
+    id?: string | null;
+  }[];
+  type?:(
+    | 'default'
+    | 'horizontal'
+    | 'vertical'
+    | 'stylised horizontal'
+    | 'alternate vertical'
+    | 'fullscreen'
+    | 'alternate fullscreen'
+    | 'split'
+  )
+  | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'slideshow-hero';
 }
 
 // Union type for all blocks - UPDATE THIS when adding new block types
@@ -276,7 +326,9 @@ export type Block =
   | SimpleTestimonialBlock
   | SymbioticAboutBlock
   | TestimonialCarousel
-  | ContactBlock;
+  | ContactBlock
+  | RoundedAbout
+  | SlideshowHero;
 
 /*
  * GUIDE FOR ADDING NEW BLOCK TYPES:

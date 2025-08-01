@@ -84,7 +84,7 @@
 .simple-nav__logo-image,
 .simple-nav__logo-text {
     width: auto;
-    /* max-height: 150px; */
+    max-height: 150px;
     transition: all var(--transition-enter-elastic-fast);
 }
 
@@ -93,7 +93,7 @@
 }
 
 .simple-nav[data-is-active="false"] .simple-nav__logo-image {
-    max-height: 50px;
+    max-height: 80px;
 }
 
 .simple-nav[data-fixed-menu="true"][data-is-active="false"] .simple-nav__logo,
