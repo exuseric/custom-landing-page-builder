@@ -28,7 +28,7 @@
     margin-bottom: -1.25rem;
 }
 
-.about__content-article {
+.about__content-article > div{
     display: flex;
     flex-direction: column;
     justify-content: center;
