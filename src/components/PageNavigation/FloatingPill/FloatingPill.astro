@@ -42,7 +42,7 @@ const pageLinks = menuItems.map((link: Link) =>
     aria-label="page navigation"
 >
     <Container>
-        <div class:list={[s["floating-pill-nav__wrapper"], "glass"]}>
+        <div class:list={[s["floating-pill-nav__wrapper"], "glass"]} data-glass>
             <a
                 class={s["floating-pill-nav__logo"]}
                 href="/"
@@ -71,7 +71,7 @@ const pageLinks = menuItems.map((link: Link) =>
                             <a
                                 title={link.name}
                                 href={link.anchorId}
-                                class:list={[s["floating-pill-nav__link"], "btn",link.style !== "default" && "btn--primary"]}
+                                class:list={[s["floating-pill-nav__link"], "btn btn--text",link.style !== "default" && "btn--primary"]}
                             >
                                 {link.name}
                             </a>

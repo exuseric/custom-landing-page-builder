@@ -52,7 +52,7 @@
     color: var(--clr-primary-darker);
 } */
 
-.floating-pill-nav[data-is-active="true"] .glass {
+.floating-pill-nav[data-is-active="true"][data-glass] {
     border-color: var(--nav-pill-border);
 
     box-shadow: var(--nav-pill-shadow);
