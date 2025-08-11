@@ -7,17 +7,17 @@ interface Props {
 import { Icon } from "astro-iconify";
 const props = Astro.props;
 
-const icons: Record<string, `mdi:${string}` | `ri:${string}` | `ic:${string}`> = {
+const icons: Record<string, string> = {
     'x (formerly twitter)': "ri:twitter-x-line",
     linkedin: "ri:linkedin-box-fill",
     facebook: "ri:facebook-box-fill",
-    instagram: "ri:instagram-fill",
+    instagram: "mingcute:instagram-fill",
     youtube: "ri:youtube-fill",
     tiktok: "ic:baseline-tiktok",
     telegram: "ic:baseline-telegram",
     whatsapp: "ri:whatsapp-fill",
     pinterest: "mdi:pinterest",
-};  
+};
 ---
 
 <a href={props.href} data-icon-link target="_blank">

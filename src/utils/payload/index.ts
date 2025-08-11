@@ -28,7 +28,7 @@ export async function fetchPage<T extends PageKey>(
 ): Promise<Pick<ParsedPage, T>> {
   try {
     const DATABASE_URL = "https://landing-cms-payload.onrender.com"
-    const PAGE_ID = 15
+    const PAGE_ID = 16
     const res = await fetch(`${DATABASE_URL}/api/page/${PAGE_ID}?depth=2&draft=false&locale=undefined`);
     if (!res.ok) {
       throw new LandingPageError(
